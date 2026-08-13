@@ -6,6 +6,7 @@ export default defineConfig({
 		rollupOptions: {
 			input: {
 				main: resolve(__dirname, './index.html'),
+				'tela-vagas': resolve(__dirname, './tela-vagas/index.html'),
 			},
 		},
 	},
