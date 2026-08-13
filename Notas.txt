@@ -1,0 +1,7 @@
+REGRAS:
+nome das variáveis sempre em minusculo,
+nome das constante sempre em maiusculo,
+Salvar as contantes no arquivo .env
+Nome das funçôes precisam ser mais direto de acordo com o objetivo da função,
+Manter as boa práticas de programação
+e ao temminar subir o projeto no Git.
