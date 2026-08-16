@@ -1,0 +1,6 @@
+/Backend/.env
+/.history
+node_modules/
+.vscode/
+package.json
+package-lock.json
