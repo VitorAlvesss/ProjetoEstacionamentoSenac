@@ -16,14 +16,19 @@
   --texto-destaque: #cbd5e1;
 
   /* Cores de ícones em modo escuro */
-  --fundo-azul: rgba(59, 130, 246, 0.15);   --cor-azul: #3b82f6;
-  --fundo-verde: rgba(34, 197, 94, 0.15);   --cor-verde: #22c55e;
-  --fundo-vermelho: rgba(239, 68, 68, 0.15);--cor-vermelho: #ef4444;
-  --fundo-amarelo: rgba(234, 179, 8, 0.15); --cor-amarelo: #eab308;
-  --fundo-roxo: rgba(168, 85, 247, 0.15);   --cor-roxo: #a855f7;
+  --fundo-azul: rgba(59, 130, 246, 0.15);
+  --cor-azul: #3b82f6;
+  --fundo-verde: rgba(34, 197, 94, 0.15);
+  --cor-verde: #22c55e;
+  --fundo-vermelho: rgba(239, 68, 68, 0.15);
+  --cor-vermelho: #ef4444;
+  --fundo-amarelo: rgba(234, 179, 8, 0.15);
+  --cor-amarelo: #eab308;
+  --fundo-roxo: rgba(168, 85, 247, 0.15);
+  --cor-roxo: #a855f7;
 
   /* IMG */
-  --opacidade-esp32: 0.05;
+  --opacidade-esp32: 0.08;
 
 }
 
@@ -35,7 +40,7 @@ body.light-theme {
   --bg-item-vaga: #f1f5f9;
   --borda: #cbd5e1;
   --sombra: rgba(0, 0, 0, 0.05);
- 
+
 
   --texto-principal: #0f172a;
   --texto-secundario: #1e293b;
@@ -44,11 +49,16 @@ body.light-theme {
   --texto-destaque: #334155;
 
   /* Cores de ícones em modo claro */
-  --fundo-azul: #eff6ff;   --cor-azul: #2563eb;
-  --fundo-verde: #f0fdf4;  --cor-verde: #16a34a;
-  --fundo-vermelho: #fef2f2;--cor-vermelho: #dc2626;
-  --fundo-amarelo: #fefce8; --cor-amarelo: #ca8a04;
-  --fundo-roxo: #faf5ff;   --cor-roxo: #9333ea;
+  --fundo-azul: #eff6ff;
+  --cor-azul: #2563eb;
+  --fundo-verde: #f0fdf4;
+  --cor-verde: #16a34a;
+  --fundo-vermelho: #fef2f2;
+  --cor-vermelho: #dc2626;
+  --fundo-amarelo: #fefce8;
+  --cor-amarelo: #ca8a04;
+  --fundo-roxo: #faf5ff;
+  --cor-roxo: #9333ea;
 
   /* IMG */
   --opacidade-esp32: 0.3;
@@ -83,7 +93,8 @@ body {
   box-shadow: 0 4px 12px var(--sombra);
 }
 
-#hora-atual,#data-atual{
+#hora-atual,
+#data-atual {
 
   color: #dde0e3;
 }
@@ -192,7 +203,13 @@ body {
 .detalhes-usuario {
   display: flex;
   flex-direction: column;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
+}
+
+#avatar {
+
+  font-size: 1.6rem;
+  color: var(--text-muted);
 }
 
 .nome-usuario {
@@ -200,9 +217,9 @@ body {
   font-weight: 600;
 }
 
-.status-online {
-  color: #4ade80;
-  font-size: 0.7rem;
+#status-usuario {
+  font-size: 0.65rem;
+  color: rgb(49, 247, 0);
 }
 
 /* 4. CARDS DE MÉTRICAS */
@@ -255,11 +272,30 @@ body {
   font-size: 1.35rem;
 }
 
-.fundo-azul     { background-color: var(--fundo-azul);     color: var(--cor-azul); }
-.fundo-verde    { background-color: var(--fundo-verde);    color: var(--cor-verde); }
-.fundo-vermelho { background-color: var(--fundo-vermelho); color: var(--cor-vermelho); }
-.fundo-amarelo  { background-color: var(--fundo-amarelo);  color: var(--cor-amarelo); }
-.fundo-roxo     { background-color: var(--fundo-roxo);     color: var(--cor-roxo); }
+.fundo-azul {
+  background-color: var(--fundo-azul);
+  color: var(--cor-azul);
+}
+
+.fundo-verde {
+  background-color: var(--fundo-verde);
+  color: var(--cor-verde);
+}
+
+.fundo-vermelho {
+  background-color: var(--fundo-vermelho);
+  color: var(--cor-vermelho);
+}
+
+.fundo-amarelo {
+  background-color: var(--fundo-amarelo);
+  color: var(--cor-amarelo);
+}
+
+.fundo-roxo {
+  background-color: var(--fundo-roxo);
+  color: var(--cor-roxo);
+}
 
 .info-card {
   display: flex;
@@ -309,7 +345,8 @@ body {
   }
 }
 
-.coluna-esquerda, .coluna-direita {
+.coluna-esquerda,
+.coluna-direita {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -343,7 +380,7 @@ body {
   color: var(--texto-principal);
   font-weight: 700;
   letter-spacing: 0.4px;
-  margin: 0; 
+  margin: 0;
 }
 
 .legenda-mini {
@@ -366,9 +403,17 @@ body {
   display: inline-block;
 }
 
-.led-livre { background-color: #22c55e; }
-.led-ocupado { background-color: #ef4444; }
-.led-reservado { background-color: #eab308; }
+.led-livre {
+  background-color: #22c55e;
+}
+
+.led-ocupado {
+  background-color: #ef4444;
+}
+
+.led-reservado {
+  background-color: #eab308;
+}
 
 .divisor-linha {
   height: 1px;
@@ -428,9 +473,17 @@ body {
   color: var(--texto-destaque);
 }
 
-.status-livre .texto-vaga strong { color: #4ade80; }
-.status-ocupado .texto-vaga strong { color: #f87171; }
-.status-reservado .texto-vaga strong { color: #facc15; }
+.status-livre .texto-vaga strong {
+  color: #4ade80;
+}
+
+.status-ocupado .texto-vaga strong {
+  color: #f87171;
+}
+
+.status-reservado .texto-vaga strong {
+  color: #facc15;
+}
 
 .texto-vaga small {
   color: var(--texto-suave);
@@ -629,7 +682,7 @@ body {
 }
 
 .icone-header {
- 
+
   color: var(--cor-verde);
 }
 
@@ -671,9 +724,17 @@ body {
 }
 
 /* Cores específicas dos valores */
-.txt-verde { color: var(--cor-verde); }
-.txt-azul { color: var(--cor-azul); }
-.txt-vermelho { color: var(--cor-vermelho); }
+.txt-verde {
+  color: var(--cor-verde);
+}
+
+.txt-azul {
+  color: var(--cor-azul);
+}
+
+.txt-vermelho {
+  color: var(--cor-vermelho);
+}
 
 /* ESTRUTURA SISTEMA IOT */
 #iot {
@@ -692,13 +753,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: fit-content; 
+  width: fit-content;
 }
 
 .item-iot {
   display: flex;
   align-items: center;
-  gap: 30px; 
+  gap: 30px;
   font-size: 0.75rem;
 }
 
@@ -709,8 +770,13 @@ body {
   flex-shrink: 0;
 }
 
-.led-online { background-color: var(--cor-verde); }
-.led-offline { background-color: var(--cor-vermelho); }
+.led-online {
+  background-color: var(--cor-verde);
+}
+
+.led-offline {
+  background-color: var(--cor-vermelho);
+}
 
 .nome-dispositivo {
   color: var(--texto-mutado);
@@ -718,7 +784,7 @@ body {
 }
 
 .status-iot {
-  margin-left: 40px; 
+  margin-left: 40px;
   font-size: 0.72rem;
   font-weight: 600;
 }
@@ -733,22 +799,17 @@ body {
   position: absolute;
   width: 80px;
 }
+
 .card-sistema-iot {
   position: relative;
-  overflow: hidden; 
-}
-.icone-sinal-wifi {
-  font-size: 1.8rem;
-  color: var(--cor-azul);
-  margin-bottom: -5px;
-  opacity: 0.8;
+  overflow: hidden;
 }
 
 .img-esp32 {
-  width: 500px;         
+  width: 500px;
   height: auto;
-  opacity: var(--opacidade-esp32);        
-  margin-right: -550px;  
+  opacity: var(--opacidade-esp32);
+  margin-right: -550px;
 }
 
 /* Rodapé */
