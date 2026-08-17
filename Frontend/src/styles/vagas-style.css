@@ -1,0 +1,271 @@
+.box_shadow {
+	box-shadow: 0px 0px 7px 1px rgba(0,0,0,0.05);
+}
+
+.dropdown-select {
+	border: 1px solid #D2D2D2;
+	border-radius: 5px;
+	background-color: white;
+	padding: 8px;
+}
+
+.btn {
+	border: 1px solid #D2D2D2;
+	border-radius: 5px;
+}
+
+.btn-purple-outline:hover {
+	color: white;
+	background-color: #6C35B1;
+}
+
+.btn-purple-outline:active {
+	color: white;
+	background-color: #6C35B1;
+}
+
+.btn-purple-outline {
+	border: 1px solid #D2D2D2;
+	border-radius: 5px;
+	background-color: white;
+	
+}
+
+.btn-purple {
+	border: none;
+	background-color: #6C35B1;
+	color: white;
+}
+
+.btn-purple:hover {
+	color: white;
+	background-color: #5C2B98;
+}
+
+.btn-purple:active {
+	background-color: #542D84;
+}
+
+.strong {
+	font-weight: 600;
+}
+
+.bg-white {
+	background-color: white;
+}
+
+.bg-green {
+	background-color: green;
+}
+
+.bg-red {
+	background-color: red;
+}
+
+.bg-orange {
+	background-color: orange;
+}
+.bg-grey {
+	background-color: grey;
+}
+
+.green-color {
+	color: green;
+}
+
+.red-color {
+	color: red;
+}
+
+.orange-color {
+	color: orange;
+}
+
+#top-horizontal-container {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.card {
+	width: 110px;
+}
+
+.c {
+	display: flex;
+	min-width: 300px;
+	border: 1px solid #D2D2D2;
+	border-radius: 10px;
+}
+
+.card-right-side {
+	padding: 10px 0px;
+}
+
+.card-right-side p {
+	margin: 0px;
+}
+
+.card-left-side {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px;
+}
+
+.img-circle {
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+}
+
+main {
+	background-color: #F7F7F9;
+	margin: 0px;
+	padding: 10px;
+}
+
+
+.mid-horizontal-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.mid-card {
+	padding: 10px;
+	border-radius: 15px;
+	margin: 10px 0 ;
+}
+
+#right-side-containers {
+	padding: 10px;
+	margin-top: 10px;
+	min-width: 1200px;
+	}
+
+#left-side-containers {
+	min-width:300px;
+	}
+
+#form-options {
+	display: flex;
+	flex-direction: column;
+}
+
+
+
+form div {
+	padding: 10px;
+}
+
+#info-vagas-container {
+	min-width: 300px;
+}
+
+.container-header {
+	padding: 10px;
+}
+
+#info-card-center {
+	border-radius: 10px;
+	border: 1px solid #D2D2D2;
+}
+
+#center-body {
+	padding: 10px;
+}
+
+
+#center-header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	border: 5px solid #F7F8FA;
+	background-color: #F7F8FA;
+}
+
+#center-header div p {
+	margin: 0;
+}
+
+#center-body-text-section {
+	display: flex;
+}
+
+#center-body-text-section div {
+	width: 100%;
+}
+
+#vagas-value-text-container {
+	text-align: end;
+}
+
+#btnRegistrar {
+	width: 100%;
+}
+
+#estacionamento-mapa {
+	display: flex;
+	justify-content: center;
+	border: 1px solid #D2D2D2;
+	border-radius: 10px;
+	padding: 5px;
+	margin: 10px;
+}
+
+.card-car {
+	min-width: 100px;
+	margin: 10px;
+}
+
+.card-car p {
+	text-align: center;
+}
+
+#street {
+	min-height: 100px;
+	margin: 5px;
+}
+
+.mapa-direcao {
+	display: flex;
+	align-items: center;
+}
+
+.horizontal-car-list {
+	display: flex;
+}
+
+
+#mapa-header {
+	display: flex;
+	justify-content: space-between;
+}
+
+#mapa-header-info {
+	display: flex;
+	padding: 10px;
+}
+
+#mapa-header-info div {
+	display: flex;
+	
+	gap: 5px;
+	margin: 0 10px;
+}
+
+#table-page-controller-container {
+	display: flex;
+	justify-content: center;
+	}
+
+#vagas-lista-container {
+	border-radius: 15px;
+	padding: 10px;
+	margin: 10px;
+}
+
+#estacionamento-mapa-container {
+	border-radius: 15px;
+	padding: 10px;
+}
