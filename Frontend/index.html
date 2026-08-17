@@ -1,11 +1,506 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>projeto-estacionamento</title>
-  </head>
-  <body>
 
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=notifications,directions_car,local_parking,car_crash,finance_mode,payments,person,account_circle,routine,paid,schedule,swap_horiz,no_crash,bigtop_updates,refresh" /> -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/Frontend/src/styles/menu.css" />
+  <link rel="stylesheet" href="/Frontend/src/styles/index-css.css" />
+  <title>Goiabinha & CIA - Estacionamento</title>
+  <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
+</head>
+
+<body>
+
+  <aside id="sidebar" class="sidebar collapsed">
+
+    <div class="sidebar-header">
+
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu">
+      </i>
+
+
+    </div>
+
+    </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+      <ul id="sidebarNav"></ul>
+    </nav>
+
+
+    <div class="quick-summary">
+
+      <div class="quick-summary-title">
+        RESUMO RÁPIDO
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas totais</span>
+        <span class="val">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas livres</span>
+        <span class="val green">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas ocupadas</span>
+        <span class="val red">0</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Taxa de ocupação</span>
+        <span class="val">0%</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Faturamento hoje</span>
+        <span class="val green">R$ 0,00</span>
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-copyright">
+
+      © 2024 Goiabinha&CIA<br>
+      Todos os direitos reservados.
+
+    </div>
+
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho-principal">
+
+      <!-- Lado Esquerdo: Apenas a Logo -->
+      <div class="cabecalho-esquerda">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu">
+        </i>
+        <div class="brand-logo">
+          <img src="/Frontend/public/logo.png" alt="Goiabinha & CIA" class="img-logo">
+        </div>
+      </div>
+
+      <!-- Centro: Título e Subtítulo Centralizados -->
+      <div class="titulos-cabecalho centralizado">
+
+        <h1 id="pageTitle">
+          Dashboard
+        </h1>
+
+        <h2 id="pageSubtitle">
+          Visão geral do estacionamento
+        </h2>
+
+      </div>
+
+      <!-------------------------- Lado Direito: Informações e Notificação ------------------->
+      <div class="info-cabecalho">
+
+        <!--Alternar o tema -->
+        <button id="btnTema" class="btn-tema" title="Alternar Tema">
+          <span class="material-symbols-outlined">routine</span>
+
+        </button>
+
+        <!--Data e Hora-->
+        <div id="data-hora">
+          <span id="hora-atual">--:--:--</span>
+          <small id="data-atual">--/--/----</small>
+        </div>
+
+        <!-- Notificação -->
+        <div id="notificacao" class="botao-icone">
+          <span class="material-symbols-outlined">notifications</span>
+
+          <span class="emblema" id="qtd-notificacoes">0</span>
+        </div>
+
+        <!-- Ususario -->
+        <div id="usuario-logado">
+          <span class="material-symbols-outlined">
+            account_circle
+          </span>
+
+          <div class="detalhes-usuario">
+            <strong id="nome-usuario">----</strong>
+            <span class="status-online" id="status-usuario">--</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    <main class="conteiner-dashboard">
+
+      <div id="screen-dashboard" class="screen active">
+        <section class="grade-card">
+
+          <!-- VAGAS TOTAIS -->
+          <div class="card">
+            <div class="icone-card fundo-azul">
+              <span class="material-symbols-outlined">directions_car</span>
+            </div>
+            <div class="info-card">
+              <span class="titulo-card">VAGAS TOTAIS</span>
+              <strong class="valor-card" id="vagas-totais">--</strong>
+              <span class="subtitulo-card">Cadastradas</span>
+            </div>
+          </div>
+
+          <!-- VAGAS LIVRES -->
+          <div class="card">
+            <div class="icone-card fundo-verde">
+              <span class="material-symbols-outlined">local_parking</span>
+            </div>
+            <div class="info-card">
+              <span class="titulo-card">VAGAS LIVRES</span>
+              <strong class="valor-card" id="vagas-livres">--</strong>
+              <span class="subtitulo-card">Disponíveis</span>
+            </div>
+          </div>
+
+          <!-- VAGAS OCUPADAS -->
+          <div class="card">
+            <div class="icone-card fundo-vermelho">
+              <span class="material-symbols-outlined">car_crash</span>
+            </div>
+            <div class="info-card">
+              <span class="titulo-card">VAGAS OCUPADAS</span>
+              <strong class="valor-card" id="vagas-ocupadas">--</strong>
+              <span class="subtitulo-card">Em uso</span>
+            </div>
+          </div>
+
+          <!-- TAXA DE OCUPAÇÃO -->
+          <div class="card">
+            <div class="icone-card fundo-amarelo">
+              <span class="material-symbols-outlined">finance_mode</span>
+            </div>
+            <div class="info-card">
+              <span class="titulo-card">TAXA DE OCUPAÇÃO</span>
+              <strong class="valor-card" id="taxa-ocupacao">--%</strong>
+              <span class="subtitulo-card" id="detalhe-taxa">-- de -- vagas</span>
+            </div>
+          </div>
+
+          <!-- FATURAMENTO HOJE -->
+          <div class="card">
+            <div class="icone-card fundo-roxo">
+              <span class="material-symbols-outlined">payments</span>
+            </div>
+            <div class="info-card">
+              <span class="titulo-card">FATURAMENTO HOJE</span>
+              <strong class="valor-card" id="faturamento-hoje">R$ 487,50</strong>
+              <span class="subtitulo-card" id="qtd-veiculos-hoje">32 veículos</span>
+            </div>
+          </div>
+
+        </section>
+
+
+
+        <!-- GRADE GERAL DO DASHBOARD -->
+        <div class="painel-principal">
+
+          <!---------------------------- COLUNA DA ESQUERDA ---------------------------->
+          <div class="coluna-esquerda">
+
+            <!-- Bloco: STATUS FUNCIONAMENTO -->
+            <div class="bloco-conteudo mapa-container">
+
+              <div class="mapa-header-mini">
+                <h3>STATUS DO ESTACIONAMENTO</h3>
+                <div class="legenda-mini">
+                  <span><i class="led led-livre"></i> Livre</span>
+                  <span><i class="led led-ocupado"></i> Ocupado</span>
+                  <span><i class="led led-reservado"></i> Reservada</span>
+                </div>
+              </div>
+
+              <div class="divisor-linha"></div>
+
+              <div class="vagas-lista-grid">
+                <!-- Vaga 1 -->
+                <div class="item-vaga status-livre">
+                  <span class="led-status"></span>
+                  <span class="texto-vaga">Vaga 01 - <strong class="info-status">Livre</strong></span>
+                </div>
+
+                <!-- Vaga 2 -->
+                <div class="item-vaga status-ocupado">
+                  <span class="led-status"></span>
+                  <span class="texto-vaga">Vaga 02 - <strong>ABC-1D23</strong> <small>(35m)</small></span>
+                </div>
+
+                <!-- Vaga 3 -->
+                <div class="item-vaga status-livre">
+                  <span class="led-status"></span>
+                  <span class="texto-vaga">Vaga 03 - <strong class="info-status">Livre</strong></span>
+                </div>
+
+                <!-- Vaga 4 -->
+                <div class="item-vaga status-ocupado">
+                  <span class="led-status"></span>
+                  <span class="texto-vaga">Vaga 04 - <strong>DEF-4G56</strong> <small>(1h12m)</small></span>
+                </div>
+
+                <!-- Vaga 5 -->
+                <div class="item-vaga status-livre">
+                  <span class="led-status"></span>
+                  <span class="texto-vaga">Vaga 05 - <strong class="info-status">Livre</strong></span>
+                </div>
+
+                <!-- Vaga 6 -->
+                <div class="item-vaga status-reservado">
+                  <span class="led-status"></span>
+                  <span class="texto-vaga">Vaga 06 - <strong class="info-status">Reservada</strong></span>
+                </div>
+              </div>
+
+            </div>
+            <!-- Bloco 2: ÚLTIMAS MOVIMENTAÇÕES -->
+            <div class="bloco-conteudo card-movimentacoes">
+              <div class="header-movimentacoes">
+                <h3>ÚLTIMAS MOVIMENTAÇÕES</h3>
+                <button id="btnAtualizarMovimentacoes" class="btn-refresh-tabela" title="Atualizar dados">
+                  <span class="material-symbols-outlined">refresh</span>
+                </button>
+              </div>
+
+              <div class="container-tabela">
+                <table class="tabela-movimentacoes">
+                  <thead>
+                    <tr>
+                      <th>Placa</th>
+                      <th>Tipo</th>
+                      <th>Entrada</th>
+                      <th>Saída</th>
+                      <th>Permanência</th>
+                      <th>Valor</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="txt-bold">ABC-1D23</td>
+                      <td><span class="badge-tipo tipo-professor">Professor</span></td>
+                      <td>20/05 12:40</td>
+                      <td>—</td>
+                      <td>01h27min</td>
+                      <td>—</td>
+                      <td><span class="badge-status status-em-aberto">Em aberto</span></td>
+                    </tr>
+                    <tr>
+                      <td class="txt-bold">DEF-4G56</td>
+                      <td><span class="badge-tipo tipo-visitante">Visitante</span></td>
+                      <td>20/05 11:15</td>
+                      <td>20/05 13:02</td>
+                      <td>01h47min</td>
+                      <td>R$ 14,00</td>
+                      <td><span class="badge-status status-finalizado">Finalizado</span></td>
+                    </tr>
+                    <tr>
+                      <td class="txt-bold">GHI-7J89</td>
+                      <td><span class="badge-tipo tipo-aluno">Aluno</span></td>
+                      <td>20/05 12:10</td>
+                      <td>20/05 12:55</td>
+                      <td>00h45min</td>
+                      <td>R$ 8,00</td>
+                      <td><span class="badge-status status-finalizado">Finalizado</span></td>
+                    </tr>
+                    <tr>
+                      <td class="txt-bold">JKL-9M01</td>
+                      <td><span class="badge-tipo tipo-funcionario">Funcionário</span></td>
+                      <td>20/05 11:45</td>
+                      <td>—</td>
+                      <td>02h20min</td>
+                      <td>—</td>
+                      <td><span class="badge-status status-em-aberto">Em aberto</span></td>
+                    </tr>
+                    <tr>
+                      <td class="txt-bold">MNO-2P34</td>
+                      <td><span class="badge-tipo tipo-visitante">Visitante</span></td>
+                      <td>20/05 10:05</td>
+                      <td>20/05 11:20</td>
+                      <td>01h15min</td>
+                      <td>R$ 12,00</td>
+                      <td><span class="badge-status status-finalizado">Finalizado</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="rodape-tabela">
+                <a href="#" class="link-ver-todas">Ver todas as movimentações</a>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!----------------- COLUNA DA DIREITA ---------------->
+          <div class="coluna-direita">
+
+
+            <!-- Bloco 1: Financeiro Hoje -->
+
+            <div class="bloco-conteudo card-financeiro-painel">
+              <div class="header-financeiro">
+                <span id="paid" class="material-symbols-outlined">
+                  paid
+                </span>
+                <h3>FINANCEIRO HOJE</h3>
+              </div>
+
+              <div class="corpo-financeiro">
+                <!-- Lado Esquerdo: Valores e Estatísticas -->
+                <div class="dados-financeiro">
+                  <strong class="valor-financeiro">R$ 487,50</strong>
+                  <span class="sub-financeiro">32 veículos atendidos</span>
+                  <small class="ticket-medio">Ticket médio: <span>R$ 15,23</span></small>
+                </div>
+
+                <!-- Lado Direito: Gráfico de Tendência -->
+                <div class="container-grafico-linha">
+                  <canvas id="graficoFaturamento"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================================================================================================ -->
+
+
+            <!-- Bloco 2: Tempo / Movimento -->
+            <div class="bloco-conteudo card-tempo-movimento">
+              <div class="header-bloco">
+                <span class="material-symbols-outlined icone-header">schedule</span>
+                <h3>TEMPO / MOVIMENTO</h3>
+              </div>
+
+              <div class="lista-metricas-tempo">
+                <!-- Item 1: Tempo médio -->
+                <div class="item-metrica">
+                  <div class="info-metrica-esquerda">
+                    <span class="material-symbols-outlined">schedule</span>
+                    <span>Tempo médio de permanência</span>
+                  </div>
+                  <strong class="valor-metrica">01h42min</strong>
+                </div>
+
+                <!-- Item 2: Entradas hoje -->
+                <div class="item-metrica">
+                  <div class="info-metrica-esquerda">
+                    <span class="material-symbols-outlined">no_crash</span>
+                    <span>Entradas hoje</span>
+                  </div>
+                  <strong class="valor-metrica txt-verde">32 veículos</strong>
+                </div>
+
+                <!-- Item 3: Saídas hoje -->
+                <div class="item-metrica">
+                  <div class="info-metrica-esquerda">
+                    <span class="material-symbols-outlined">swap_horiz</span>
+                    <span>Saídas hoje</span>
+                  </div>
+                  <strong class="valor-metrica txt-azul">25 veículos</strong>
+                </div>
+
+                <!-- Item 4: Permanecem no momento -->
+                <div class="item-metrica">
+                  <div class="info-metrica-esquerda">
+                    <span class="material-symbols-outlined">directions_car </span>
+                    <span>Permanecem no momento</span>
+                  </div>
+                  <strong class="valor-metrica txt-vermelho">13 veículos</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================================================================================================ -->
+
+            <!-- Bloco 3: Sistema IoT -->
+            <div class="bloco-conteudo card-sistema-iot">
+              <div class="header-bloco">
+                <span id="iot" class="material-symbols-outlined">bigtop_updates</span>
+                <h3>SISTEMA IOT</h3>
+              </div>
+
+              <div class="corpo-iot">
+                <!-- Lado Esquerdo: Lista de Dispositivos -->
+                <div class="lista-dispositivos">
+                  <div class="item-iot">
+                    <span class="led-iot led-online"></span>
+                    <span class="nome-dispositivo">ESP32 Principal</span>
+                    <strong class="status-iot txt-verde">Online</strong>
+                  </div>
+
+                  <div class="item-iot">
+                    <span class="led-iot led-online"></span>
+                    <span class="nome-dispositivo">Sensor Vaga 01</span>
+                    <strong class="status-iot txt-verde">Online</strong>
+                  </div>
+
+                  <div class="item-iot">
+                    <span class="led-iot led-online"></span>
+                    <span class="nome-dispositivo">Sensor Vaga 02</span>
+                    <strong class="status-iot txt-verde">Online</strong>
+                  </div>
+
+                  <div class="item-iot">
+                    <span class="led-iot led-offline"></span>
+                    <span class="nome-dispositivo">Sensor Vaga 03</span>
+                    <strong class="status-iot txt-vermelho">Offline</strong>
+                  </div>
+
+                  <div class="item-iot">
+                    <span class="led-iot led-online"></span>
+                    <span class="nome-dispositivo">Cancela Entrada</span>
+                    <strong class="status-iot txt-verde">Online</strong>
+                  </div>
+
+                  <div class="item-iot">
+                    <span class="led-iot led-online"></span>
+                    <span class="nome-dispositivo">Cancela Saída</span>
+                    <strong class="status-iot txt-verde">Online</strong>
+                  </div>
+                </div>
+
+                <!-- Lado Direito: Imagem e Sinal IoT -->
+                <div class="container-imagem-iot">
+                  <img src="/Frontend/public/IoT.png" alt="Placa ESP32 IoT" class="img-esp32">
+                </div>
+              </div>
+
+              <!-- Rodapé com Última Atualização -->
+              <div class="rodape-iot">
+                <small>Última atualização: <span id="data-iot">20/05/2024 14:06:32</span></small>
+                <button id="btnAtualizarIot" class="btn-refresh" title="Atualizar">
+                  <span class="material-symbols-outlined">refresh</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+    </main>
+  </div>
+
+  <script type="module" src="./src/assets/js/imports.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</body>
+
 </html>

@@ -1,0 +1,782 @@
+/*1. DEFINIÇÃO DE VARIÁVEIS DE CORES*/
+
+/* TEMA ESCURO (PADRÃO) */
+:root {
+  --bg-body: #0b0f19;
+  --bg-cabecalho: #0f172a;
+  --bg-card: #0f172a;
+  --bg-item-vaga: #162032;
+  --borda: #1e293b;
+  --sombra: rgba(0, 0, 0, 0.2);
+
+  --texto-principal: #ffffff;
+  --texto-secundario: #f1f5f9;
+  --texto-mutado: #94a3b8;
+  --texto-suave: #64748b;
+  --texto-destaque: #cbd5e1;
+
+  /* Cores de ícones em modo escuro */
+  --fundo-azul: rgba(59, 130, 246, 0.15);   --cor-azul: #3b82f6;
+  --fundo-verde: rgba(34, 197, 94, 0.15);   --cor-verde: #22c55e;
+  --fundo-vermelho: rgba(239, 68, 68, 0.15);--cor-vermelho: #ef4444;
+  --fundo-amarelo: rgba(234, 179, 8, 0.15); --cor-amarelo: #eab308;
+  --fundo-roxo: rgba(168, 85, 247, 0.15);   --cor-roxo: #a855f7;
+
+  /* IMG */
+  --opacidade-esp32: 0.05;
+
+}
+
+/* TEMA CLARO (ATIVADO COM A CLASSE .light-theme) */
+body.light-theme {
+  --bg-body: #f8fafc;
+  --bg-cabecalho: #11225a;
+  --bg-card: #ffffff;
+  --bg-item-vaga: #f1f5f9;
+  --borda: #cbd5e1;
+  --sombra: rgba(0, 0, 0, 0.05);
+ 
+
+  --texto-principal: #0f172a;
+  --texto-secundario: #1e293b;
+  --texto-mutado: #64748b;
+  --texto-suave: #94a3b8;
+  --texto-destaque: #334155;
+
+  /* Cores de ícones em modo claro */
+  --fundo-azul: #eff6ff;   --cor-azul: #2563eb;
+  --fundo-verde: #f0fdf4;  --cor-verde: #16a34a;
+  --fundo-vermelho: #fef2f2;--cor-vermelho: #dc2626;
+  --fundo-amarelo: #fefce8; --cor-amarelo: #ca8a04;
+  --fundo-roxo: #faf5ff;   --cor-roxo: #9333ea;
+
+  /* IMG */
+  --opacidade-esp32: 0.3;
+}
+
+/* 2. CONFIGURAÇÕES GERAIS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: var(--bg-body);
+  color: var(--texto-secundario);
+  padding: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/*3. CABEÇALHO*/
+.cabecalho-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-cabecalho);
+  color: #ffffff;
+  padding: 14px 24px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 1px solid var(--borda);
+  box-shadow: 0 4px 12px var(--sombra);
+}
+
+#hora-atual,#data-atual{
+
+  color: #dde0e3;
+}
+
+.cabecalho-esquerda {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+}
+
+.img-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+}
+
+.titulos-cabecalho.centralizado {
+  text-align: center;
+  flex: 1;
+}
+
+.titulos-cabecalho h1 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.titulos-cabecalho h2 {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.info-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  flex: 1;
+}
+
+#btnTema {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+#btnTema:hover {
+  transform: scale(1.1);
+}
+
+#data-hora {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.78rem;
+  color: var(--texto-mutado);
+}
+
+.botao-icone {
+  position: relative;
+  cursor: pointer;
+  color: var(--texto-mutado);
+  transition: color 0.2s;
+}
+
+.botao-icone:hover {
+  color: var(--texto-principal);
+}
+
+.botao-icone .emblema {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.62rem;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+#usuario-logado {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detalhes-usuario {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.78rem;
+}
+
+.nome-usuario {
+  color: var(--texto-principal);
+  font-weight: 600;
+}
+
+.status-online {
+  color: #4ade80;
+  font-size: 0.7rem;
+}
+
+/* 4. CARDS DE MÉTRICAS */
+
+.grade-card {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1200px) {
+  .grade-card {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grade-card {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grade-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--borda);
+  box-shadow: 0 2px 8px var(--sombra);
+  min-height: 90px;
+}
+
+.icone-card {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.35rem;
+}
+
+.fundo-azul     { background-color: var(--fundo-azul);     color: var(--cor-azul); }
+.fundo-verde    { background-color: var(--fundo-verde);    color: var(--cor-verde); }
+.fundo-vermelho { background-color: var(--fundo-vermelho); color: var(--cor-vermelho); }
+.fundo-amarelo  { background-color: var(--fundo-amarelo);  color: var(--cor-amarelo); }
+.fundo-roxo     { background-color: var(--fundo-roxo);     color: var(--cor-roxo); }
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.titulo-card {
+  font-size: 0.68rem;
+  color: var(--texto-mutado);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.valor-card {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--texto-principal);
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -0.4px;
+}
+
+.subtitulo-card {
+  font-size: 0.72rem;
+  color: var(--texto-suave);
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/*5. ESTRUTURA E BLOCOS DO DASHBOARD*/
+.painel-principal {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .painel-principal {
+    grid-template-columns: 1fr;
+  }
+}
+
+.coluna-esquerda, .coluna-direita {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bloco-conteudo {
+  background-color: var(--bg-card);
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid var(--borda);
+  box-shadow: 0 1px 3px var(--sombra);
+}
+
+.bloco-conteudo h3 {
+  font-size: 0.85rem;
+  color: var(--texto-principal);
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+/*6. MAPA DO ESTACIONAMENTO E VAGAS*/
+.mapa-header-mini {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.mapa-header-mini h3 {
+  font-size: 0.85rem;
+  color: var(--texto-principal);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  margin: 0; 
+}
+
+.legenda-mini {
+  display: flex;
+  gap: 12px;
+  font-size: 0.75rem;
+  color: var(--texto-mutado);
+}
+
+.legenda-mini span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.led-livre { background-color: #22c55e; }
+.led-ocupado { background-color: #ef4444; }
+.led-reservado { background-color: #eab308; }
+
+.divisor-linha {
+  height: 1px;
+  background-color: var(--borda);
+  margin-bottom: 16px;
+}
+
+/* GRID DE VAGAS */
+.vagas-lista-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+/* CARD DA VAGA BASE */
+.item-vaga {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--borda);
+  font-size: 0.82rem;
+  pointer-events: none;
+  user-select: none;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* OCULTA O PONTO LED INDIVIDUAL */
+.led-status {
+  display: none;
+}
+
+/* CORES DE FUNDO TRANSLÚCIDO E BORDAS */
+.status-livre {
+  background-color: rgba(34, 197, 94, 0.12);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.status-ocupado {
+  background-color: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.status-reservado {
+  background-color: rgba(234, 179, 8, 0.12);
+  border-color: rgba(234, 179, 8, 0.3);
+}
+
+/* TEXTOS E DESTAQUES */
+.texto-vaga {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  color: var(--texto-destaque);
+}
+
+.status-livre .texto-vaga strong { color: #4ade80; }
+.status-ocupado .texto-vaga strong { color: #f87171; }
+.status-reservado .texto-vaga strong { color: #facc15; }
+
+.texto-vaga small {
+  color: var(--texto-suave);
+  font-size: 0.72rem;
+  margin-left: 0;
+}
+
+
+/* ULTIMAS MOVIMENTAÇÕES */
+
+/* TABELA */
+.header-movimentacoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.btn-refresh-tabela {
+  background: transparent;
+  border: none;
+  color: var(--texto-mutado);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.btn-refresh-tabela:hover {
+  color: var(--texto-principal);
+}
+
+.container-tabela {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tabela-movimentacoes {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.tabela-movimentacoes th {
+  color: var(--texto-mutado);
+  font-weight: 500;
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela-movimentacoes td {
+  padding: 10px 6px;
+  color: var(--texto-principal);
+  border-bottom: 1px solid var(--borda);
+}
+
+.txt-bold {
+  font-weight: 600;
+}
+
+/* TIPO (PROFESSOR, VISITANTE, ALUNO) */
+.badge-tipo {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.tipo-professor {
+  background-color: rgba(147, 51, 234, 0.15);
+  color: #a855f7;
+}
+
+.tipo-visitante {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+}
+
+.tipo-aluno {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+.tipo-funcionario {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+/* STATUS (EM ABERTO, FINALIZADO) */
+.badge-status {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-em-aberto {
+  background-color: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.status-finalizado {
+  background-color: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+/* RODAPÉ LINK VER TODAS */
+.rodape-tabela {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.link-ver-todas {
+  color: var(--cor-azul);
+  font-size: 0.75rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-ver-todas:hover {
+  text-decoration: underline;
+}
+
+
+
+
+/* COLUNA DA DIREITA DADOS */
+
+/* ESTRUTURA DO BLOCO FINANCEIRO HOJE */
+.card-financeiro-painel .header-financeiro {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+#paid {
+  color: var(--cor-verde);
+
+}
+
+.corpo-financeiro {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.dados-financeiro {
+  display: flex;
+  flex-direction: column;
+}
+
+.valor-financeiro {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--texto-principal);
+  line-height: 1.1;
+}
+
+.sub-financeiro {
+  font-size: 0.78rem;
+  color: var(--texto-mutado);
+  margin-top: 4px;
+}
+
+.ticket-medio {
+  font-size: 0.72rem;
+  color: var(--texto-suave);
+  margin-top: 6px;
+}
+
+.ticket-medio span {
+  color: var(--cor-azul);
+  font-weight: 600;
+}
+
+/* Área reservada para a linha do gráfico */
+.container-grafico-linha {
+  width: 140px;
+  height: 65px;
+  position: relative;
+}
+
+/* ESTRUTURA TEMPO / MOVIMENTO */
+.card-tempo-movimento .header-bloco {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.icone-header {
+ 
+  color: var(--cor-verde);
+}
+
+.lista-metricas-tempo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-metrica {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.item-metrica:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.info-metrica-esquerda {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--texto-mutado);
+}
+
+.info-metrica-esquerda .material-symbols-outlined {
+  font-size: 1rem;
+}
+
+.valor-metrica {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+}
+
+/* Cores específicas dos valores */
+.txt-verde { color: var(--cor-verde); }
+.txt-azul { color: var(--cor-azul); }
+.txt-vermelho { color: var(--cor-vermelho); }
+
+/* ESTRUTURA SISTEMA IOT */
+#iot {
+  color: var(--cor-verde);
+}
+
+.corpo-iot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.lista-dispositivos {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: fit-content; 
+}
+
+.item-iot {
+  display: flex;
+  align-items: center;
+  gap: 30px; 
+  font-size: 0.75rem;
+}
+
+.led-iot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.led-online { background-color: var(--cor-verde); }
+.led-offline { background-color: var(--cor-vermelho); }
+
+.nome-dispositivo {
+  color: var(--texto-mutado);
+  flex: 1;
+}
+
+.status-iot {
+  margin-left: 40px; 
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+/* Área Imagem IoT*/
+
+.container-imagem-iot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 80px;
+}
+.card-sistema-iot {
+  position: relative;
+  overflow: hidden; 
+}
+.icone-sinal-wifi {
+  font-size: 1.8rem;
+  color: var(--cor-azul);
+  margin-bottom: -5px;
+  opacity: 0.8;
+}
+
+.img-esp32 {
+  width: 500px;         
+  height: auto;
+  opacity: var(--opacidade-esp32);        
+  margin-right: -550px;  
+}
+
+/* Rodapé */
+.rodape-iot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px solid var(--borda);
+  font-size: 0.7rem;
+  color: var(--texto-suave);
+}
+
+.btn-refresh {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--texto-mutado);
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.btn-refresh:hover {
+  color: var(--texto-principal);
+}
+
+.btn-refresh .material-symbols-outlined {
+  font-size: 0.9rem;
+}
