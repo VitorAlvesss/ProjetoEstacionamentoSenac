@@ -1,0 +1,11 @@
+Padronização de Nomes de tabelas e variáveis
+
+Exemplo: 
+
+CREATE TABLE tbl_exemplo
+(
+   id INT PRIMARY KEY AUTO_INCREMENT,
+   nome VARCHAR(100),
+   data_nascimento DATE,
+   ...
+)
