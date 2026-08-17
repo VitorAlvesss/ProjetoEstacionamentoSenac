@@ -81,6 +81,22 @@
 	color: orange;
 }
 
+
+.green-color p {
+	color: green;
+}
+
+.red-color p {
+	color: red;
+}
+
+.orange-color p {
+	color: orange;
+}
+
+
+
+
 #top-horizontal-container {
 	display: flex;
 	justify-content: space-between;
@@ -152,6 +168,10 @@ main {
 	flex-direction: column;
 }
 
+#form-options label {
+	color: black;
+}
+
 
 
 form div {
@@ -194,6 +214,11 @@ form div {
 
 #center-body-text-section div {
 	width: 100%;
+}
+
+
+#center-body-text-section div p {
+	margin: 5px;
 }
 
 #vagas-value-text-container {
@@ -268,4 +293,14 @@ form div {
 #estacionamento-mapa-container {
 	border-radius: 15px;
 	padding: 10px;
+}
+
+.simbolo-wifi  {
+
+	color: rgb(24, 24, 24);
+
+}
+
+body p {
+	color: black;
 }
