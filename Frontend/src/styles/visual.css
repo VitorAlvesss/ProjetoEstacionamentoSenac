@@ -1,0 +1,572 @@
+
+
+
+:root {
+  --bg-dark: #070a12;
+  --card-bg: #0d121d;
+  --border-color: #1a202c;
+  --text-main: #ffffff;
+  --text-muted: #8c9ba5;
+
+  --purple-primary: #581c4a;
+  --purple-btn: #6b21a8;
+
+  --green-accent: #00e676;
+  --pink-accent: #ff4081;
+  --orange-accent: #f97316;
+  --blue-accent: #3b82f6;
+  --red-accent: #ef4444;
+  --teal-accent: #14b8a6;
+}
+
+
+
+body {
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
+
+.main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  width: 100%;
+}
+
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* Círculo que representa o ícone da logo */
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    #ff5252,
+    #e91e63
+  );
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+
+/* Pequeno detalhe verde da logo */
+.logo-icon::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  right: 2px;
+  width: 7px;
+  height: 7px;
+  background-color: var(--green-accent);
+  border-radius: 50%;
+}
+
+
+/* Nome "Goiabinha&CIA" */
+.brand-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+
+/* Cor da palavra "Goiabinha" */
+.brand-name .pink {
+  color: var(--pink-accent);
+}
+
+
+/* Cor da palavra "&CIA" */
+.brand-name .green {
+  color: var(--green-accent);
+}
+
+
+/* Texto abaixo do nome da empresa */
+.brand-subtitle {
+  font-size: 0.5rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+
+/* O JavaScript usa essa classe para abrir e fechar o menu*/
+
+.sidebar {
+  width: 250px;
+  background-color: var(--card-bg);
+  border-right: 1px solid var(--border-color);
+
+  display: flex;
+  flex-direction: column;
+
+  flex-shrink: 0;
+
+  transition:
+    transform 0.3s ease,
+    margin-left 0.3s ease;
+
+  z-index: 100;
+}
+
+
+/* Quando o JavaScript adiciona a classe "collapsed" à sidebar,ela é movida para fora da tela */
+
+.sidebar.collapsed {
+  margin-left: -250px;
+}
+
+.sidebar-header {
+  padding: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hamburger-icon {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+
+  transition: background 0.2s;
+}
+
+
+.hamburger-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+
+.sidebar-nav {
+  padding: 12px 8px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+
+.sidebar-nav ul {
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+
+/* 
+Esses elementos são criados automaticamente pelo js.Por isso, não é necessário criar um "<li class="nav-item"></li>" manualmente no HTML.
+*/
+.nav-item a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 10px 12px;
+
+  color: var(--text-muted);
+  text-decoration: none;
+
+  font-size: 0.82rem;
+  font-weight: 500;
+
+  border-radius: 6px;
+
+  transition: all 0.2s;
+}
+
+
+/* Ícone de cada item do menu */
+.nav-item a i {
+  width: 16px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+
+/* Efeito ao passar o mouse */
+.nav-item a:hover {
+  color: var(--text-main);
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.nav-item.active a {
+  background-color: var(--purple-primary);
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+
+/* Se não precisar dessa área, ela pode ser removida do CSS*/
+
+.quick-summary {
+  margin: 12px 8px;
+  padding: 12px;
+
+  background-color: rgba(255, 255, 255, 0.02);
+
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+
+.quick-summary-title {
+  font-size: 0.65rem;
+  font-weight: 700;
+
+  color: var(--text-muted);
+
+  letter-spacing: 0.5px;
+
+  margin-bottom: 10px;
+}
+
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 0.72rem;
+
+  margin-bottom: 6px;
+
+  color: var(--text-muted);
+}
+
+
+.summary-row span.val {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.summary-row span.val.green {
+  color: var(--green-accent);
+}
+
+.summary-row span.val.red {
+  color: var(--red-accent);
+}
+
+.sidebar-copyright {
+  padding: 12px 16px;
+
+  font-size: 0.62rem;
+  color: #4a5568;
+
+  border-top: 1px solid var(--border-color);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.top-header .logo-container,
+.top-header #topHeaderToggleBtn {
+  display: none;
+}
+
+.sidebar.collapsed ~ .main-wrapper .top-header .logo-container {
+  display: flex;
+}
+
+.sidebar.collapsed ~ .main-wrapper .top-header #topHeaderToggleBtn {
+  display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+<!--minha-->
+
+   :root {
+     --bg-main: #f1f5f9;
+     --sidebar-bg: #0f172a;
+     --card-bg: #ffffff;
+     --text-color: #334155;
+     --text-muted: #64748b;
+     --verde: #22c55e;
+     --vermelho: #ef4444;
+     --laranja: #f97316;
+     --azul: #3b82f6;
+     --roxo: #8b5cf6;
+     --border: #e2e8f0;
+   }
+   * {
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+     font-family: system-ui, -apple-system, sans-serif;
+   }
+   body {
+     display: flex;
+     background-color: var(--bg-main);
+     color: var(--text-color);
+     min-height: 100vh;
+     overflow-x: hidden;
+   }
+   /* Menu Lateral */
+   .sidebar {
+     width: 260px;
+     background: var(--sidebar-bg);
+     color: #fff;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     padding: 20px 0;
+     flex-shrink: 0;
+     transition: all 0.3s ease;
+   }
+   @media (min-width: 769px) {
+     .sidebar.collapsed { margin-left: -260px; }
+   }
+   @media (max-width: 768px) {
+     .sidebar {
+       position: fixed;
+       top: 0; bottom: 0; left: -260px;
+       z-index: 999;
+       height: 100vh;
+     }
+     .sidebar.active { left: 0; }
+   }
+   .logo-area {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     padding: 0 20px 20px;
+     font-weight: 700;
+     font-size: 1.1rem;
+     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+   }
+   .logo-icon {
+     width: 32px;
+     height: 32px;
+     background: #ec4899;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+   }
+   .nav-links {
+     list-style: none;
+     margin-top: 15px;
+   }
+   .nav-links a {
+     display: flex;
+     align-items: center;
+     gap: 12px;
+     padding: 12px 20px;
+     color: #94a3b8;
+     text-decoration: none;
+     font-size: 0.9rem;
+     transition: 0.2s;
+   }
+   .nav-links li.active a,
+   .nav-links a:hover {
+     background: rgba(139, 92, 246, 0.15);
+     color: #fff;
+     border-left: 4px solid var(--roxo);
+   }
+   /* Area Principal */
+   .content {
+     flex: 1;
+     display: flex;
+     flex-direction: column;
+     min-width: 0;
+   }
+   .topbar {
+     background: var(--card-bg);
+     padding: 15px 25px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border-bottom: 1px solid var(--border);
+   }
+   .top-left {
+     display: flex;
+     align-items: center;
+     gap: 15px;
+   }
+   .btn-toggle {
+     background: none;
+     border: none;
+     font-size: 1.2rem;
+     cursor: pointer;
+     color: var(--text-muted);
+   }
+   .wrapper {
+     padding: 20px;
+     display: flex;
+     flex-direction: column;
+     gap: 20px;
+   }
+   /* 3 Cards Grandes em Destaque */
+   .hero-cards-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+     gap: 20px;
+   }
+   .card-hero {
+     background: var(--card-bg);
+     border-radius: 12px;
+     padding: 22px;
+     border: 1px solid var(--border);
+     position: relative;
+     overflow: hidden;
+     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+   }
+   .card-hero::before {
+     content: '';
+     position: absolute;
+     top: 0; left: 0; right: 0;
+     height: 4px;
+   }
+   .card-hero.entradas::before { background: var(--verde); }
+   .card-hero.saidas::before { background: var(--vermelho); }
+   .card-hero.reservas::before { background: var(--laranja); }
+   .card-hero-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 15px;
+   }
+   .card-hero-title {
+     font-size: 0.85rem;
+     font-weight: 700;
+     text-transform: uppercase;
+     letter-spacing: 0.5px;
+     color: var(--text-muted);
+   }
+   .card-hero-icon {
+     width: 46px;
+     height: 46px;
+     border-radius: 10px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 1.3rem;
+     color: #fff;
+   }
+   .card-hero-body {
+     display: flex;
+     align-items: baseline;
+     gap: 12px;
+   }
+   .card-hero-value {
+     font-size: 2.2rem;
+     font-weight: 800;
+     line-height: 1;
+   }
+   .card-hero-footer {
+     margin-top: 12px;
+     padding-top: 12px;
+     border-top: 1px dashed var(--border);
+     font-size: 0.78rem;
+     color: var(--text-muted);
+     display: flex;
+     justify-content: space-between;
+   }
+   /* Secão Principal da Tabela */
+   .box {
+     background: var(--card-bg);
+     border-radius: 8px;
+     padding: 20px;
+     border: 1px solid var(--border);
+   }
+   .box-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 18px;
+     flex-wrap: wrap;
+     gap: 10px;
+   }
+   .btn {
+     padding: 10px 16px;
+     border-radius: 6px;
+     border: none;
+     font-size: 0.85rem;
+     cursor: pointer;
+     font-weight: 600;
+     display: inline-flex;
+     align-items: center;
+     gap: 8px;
+     transition: opacity 0.2s;
+   }
+   .btn:hover { opacity: 0.9; }
+   .btn-main { background: var(--roxo); color: #fff; }
+   .btn-checkout { background: var(--vermelho); color: #fff; padding: 5px 10px; font-size: 0.75rem; }
+   .table-responsive { overflow-x: auto; }
+   table {
+     width: 100%;
+     border-collapse: collapse;
+     font-size: 0.85rem;
+     text-align: left;
+   }
+   th, td {
+     padding: 12px 10px;
+     border-bottom: 1px solid var(--border);
+   }
+   th {
+     color: var(--text-muted);
+     font-size: 0.75rem;
+     text-transform: uppercase;
+   }
+   .badge {
+     padding: 4px 10px;
+     border-radius: 20px;
+     font-size: 0.7rem;
+     font-weight: 700;
+     display: inline-block;
+   }
+   .badge-estacionado { background: #dcfce7; color: #15803d; }
+   .badge-saiu { background: #fee2e2; color: #b91c1c; }
+   .badge-reserva { background: #ffedd5; color: #c2410c; }
+   /* Modal */
+   .modal-backdrop {
+     position: fixed;
+     top: 0; left: 0; width: 100vw; height: 100vh;
+     background: rgba(15, 23, 42, 0.6);
+     display: none;
+     align-items: center;
+     justify-content: center;
+     z-index: 1000;
+   }
+   .modal-backdrop.show { display: flex; }
+   .modal-content {
+     background: var(--card-bg);
+     border-radius: 8px;
+     width: 100%;
+     max-width: 420px;
+     padding: 22px;
+   }
+   .form-group { margin-bottom: 14px; }
+   .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; }
+   .form-group input, .form-group select {
+     width: 100%; padding: 9px; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; outline: none;
+   }
