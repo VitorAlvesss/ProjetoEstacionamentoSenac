@@ -14,6 +14,11 @@
 	border-radius: 5px;
 }
 
+#btnApagarFiltros:hover {
+	color: black;
+	border: 1px solid #D2D2D2;
+}
+
 .btn-purple-outline:hover {
 	color: white;
 	background-color: #6C35B1;
