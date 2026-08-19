@@ -293,6 +293,10 @@ body {
 	font-weight: 600;
 }
 
+.bg-blue {
+	background-color: #3458eb;
+}
+
 .bg-white {
 	background-color: white;
 }
@@ -351,6 +355,12 @@ body {
 	width: 110px;
 	border: 1px solid var(--borda);
 	border-radius: 10px
+}
+
+#card-tempo {
+	width: 100%;
+	text-align: left;
+	padding-left: 25px;
 }
 
 .c {
