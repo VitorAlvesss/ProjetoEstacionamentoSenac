@@ -1,0 +1,280 @@
+/* --- CARD CONTAINER --- */
+.iot-card {
+  width: 100%; /* Faz o card ocupar toda a largura disponível da tela */
+  max-width: none; /* Garante que não haja limite de largura */
+  box-sizing: border-box; /* Inclui padding no cálculo do tamanho */
+  background-color: #111827; 
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 20px;
+  color: #e5e7eb; /* Cor clara padrão para todo o texto interno */
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* --- HEADER --- */
+.iot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1f2937;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.iot-icon-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iot-icon-title h3 {
+  color: #f9fafb;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.iot-subtitle {
+  font-size: 0.8rem;
+  color: #9ca3af; /* Tom mais claro para melhor visibilidade */
+  display: block;
+  margin-top: 2px;
+}
+
+.iot-badge-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.1);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+/* --- METRICS GRID --- */
+.iot-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.metric-box {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+.metric-value {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f3f4f6;
+  margin-top: 4px;
+}
+
+/* --- TABELA DE DISPOSITIVOS --- */
+.iot-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 18px;
+}
+
+.iot-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.iot-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #9ca3af; /* Cor clara para os cabeçalhos das colunas */
+  padding: 12px 10px;
+  border-bottom: 1px solid #374151;
+  background-color: #1a2234; /* Fundo suave para o cabeçalho */
+}
+
+/* Correção da visibilidade do texto nas células */
+.iot-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #1f2937;
+  font-size: 0.875rem;
+  color: #e5e7eb; /* Garante que 'Leitura' e 'Bateria' fiquem bem visíveis */
+}
+
+.device-name {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.device-type {
+  color: #9ca3af;
+  font-size: 0.8rem;
+}
+
+/* Status Colors & Dots */
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.status-dot.online { background-color: #22c55e; }
+.status-dot.occupied { background-color: #f59e0b; }
+.status-dot.offline { background-color: #ef4444; }
+
+.text-green { color: #4ade80 !important; font-weight: 600; }
+.text-yellow { color: #fbbf24 !important; font-weight: 600; }
+.text-red { color: #f87171 !important; font-weight: 600; }
+
+/* --- BOTÕES DE AÇÃO --- */
+.iot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.btn-iot {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-iot.primary {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.btn-iot.primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-iot.secondary {
+  background-color: #374151;
+  color: #f3f4f6;
+  border-color: #4b5563;
+}
+
+.btn-iot.secondary:hover {
+  background-color: #4b5563;
+}
+
+.btn-iot.danger {
+  background-color: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.btn-iot.danger:hover {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+/* --- CARD CONTAINER --- */
+.iot-card {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  /* Altere a cor do card para a mesma cor do fundo do container/tabela */
+  background-color: #111827; 
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 20px;
+  color: #e5e7eb;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* --- TABELA DE DISPOSITIVOS --- */
+.iot-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 18px;
+  /* Garante que o container da tabela tenha o mesmo fundo */
+  background-color: #111827; 
+}
+
+.iot-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  /* Garante que a tabela use o mesmo fundo da tela */
+  background-color: #111827; 
+}
+
+/* Cabeçalho da tabela */
+.iot-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #9ca3af;
+  padding: 12px 10px;
+  border-bottom: 1px solid #374151;
+  /* Se você quiser o cabeçalho idêntico ao fundo, use #111827.
+     Se quiser um pequeno destaque, use #1a2234 */
+  background-color: #111827; 
+}
+
+/* Células da tabela */
+.iot-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #1f2937;
+  font-size: 0.875rem;
+  color: #e5e7eb;
+  background-color: #111827; /* Fundo uniforme */
+}
+/* --- FUNDO DA PÁGINA (BODY) --- */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh; /* Garante que o fundo ocupe 100% da altura da tela */
+  background-color: #111827 !important; /* Mesma cor do card/tabela */
+  color: #e5e7eb;
+}
+
+/* --- CONTAINER PRINCIPAL DO DASHBOARD --- */
+.dashboard-container, .main-content, main {
+  background-color: #111827;
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- CARD IOT --- */
+.iot-card {
+  width: 100%;
+  background-color: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+  padding: 20px;
+  box-sizing: border-box;
+}
