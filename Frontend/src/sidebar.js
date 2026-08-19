@@ -1,3 +1,20 @@
+const btnTema = document.getElementById("btnTema");
+
+// Carrega o tema salvo
+if (localStorage.getItem("tema") === "light") {
+  document.body.classList.add("light-theme");
+}
+
+// Se o botão existir na tela atual, adiciona o evento de clique
+if (btnTema) {
+  btnTema.addEventListener("click", () => {
+    document.body.classList.toggle("light-theme");
+    const isLight = document.body.classList.contains("light-theme");
+    localStorage.setItem("tema", isLight ? "light" : "dark");
+  });
+}
+
+
 
 /* Caso precisar adicionar uma nova tela: Adicione um novo objeto dentro do array SCREENS.
    Estrutura:

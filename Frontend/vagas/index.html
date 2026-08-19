@@ -8,108 +8,134 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel='stylesheet' href='/src/styles/menu.css'>
     <link rel='stylesheet' href='/src/styles/vagas-style.css'>
-	<link rel='stylesheet' href='/src/styles/menu.css'>
+	
 	<script src="/src/sidebar.js" defer></script>
     <title>Vagas</title>
 </head>
 <body>
 
 	<aside id="sidebar" class="sidebar collapsed">
+
     <div class="sidebar-header">
-      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
- 
-      <div class="logo-container">
-        <div class="logo-icon"></div>
-        <div>
-          <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
-          <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
-        </div>
-      </div>
+
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu">
+      </i>
     </div>
- 
-    <!--
-      NAVEGAÇÃO GERADA PELO JAVASCRIPT (ver array SCREENS no bloco de script abaixo).
-      Para adicionar uma nova tela ao menu, não edite esta lista diretamente:
-      basta adicionar um item ao array SCREENS.
-    -->
+    </div>
+    </div>
+
     <nav class="sidebar-nav">
       <ul id="sidebarNav"></ul>
     </nav>
- 
+
+
     <div class="quick-summary">
-      <div class="quick-summary-title">RESUMO RÁPIDO</div>
-      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
-      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
-      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
-      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
-      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$ 0,00</span></div>
+
+      <div class="quick-summary-title">
+        RESUMO RÁPIDO
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas totais</span>
+        <span class="val">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas livres</span>
+        <span class="val green">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas ocupadas</span>
+        <span class="val red">0</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Taxa de ocupação</span>
+        <span class="val">0%</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Faturamento hoje</span>
+        <span class="val green">R$ 0,00</span>
+      </div>
+
     </div>
- 
+
+
     <div class="sidebar-copyright">
-      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+
+      © 2024 Goiabinha&CIA<br>
+      Todos os direitos reservados.
+
     </div>
+
   </aside>
- 
-  <!-- CONTEÚDO PRINCIPAL -->
+
   <div class="main-wrapper">
- 
-    <!-- HEADER SUPERIOR -->
-    <header class="top-header">
-      <div class="header-left">
-        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
- 
-        <div class="logo-container">
-          <div class="logo-icon"></div>
-          <div>
-            <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
-            <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
-          </div>
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho-principal">
+
+      <!-- Lado Esquerdo: Apenas a Logo -->
+      <div class="cabecalho-esquerda">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu">
+        </i>
+        <div class="brand-logo">
+          <img src="/Frontend/public/logo.png" alt="Goiabinha & CIA" class="img-logo">
         </div>
       </div>
- 
-      <!-- TÍTULO NO MEIO DA PÁGINA (atualizado via JS ao trocar de tela) -->
-      <div class="page-title">
-        <h1 id="pageTitle">Veículos / Usuários</h1>
-        <p id="pageSubtitle">Cadastre e gerencie veículos e usuários do estacionamento</p>
+
+      <!-- Centro: Título e Subtítulo Centralizados -->
+      <div class="titulos-cabecalho centralizado">
+
+        <h1 id="pageTitle">
+          Dashboard
+        </h1>
+
+        <h2 id="pageSubtitle">
+          Visão geral do estacionamento
+        </h2>
+
       </div>
- 
-      <div class="header-actions">
-        <!-- SELETOR DE MUDAR TEMA -->
-        <section class="mudarTema">
-          <button id="btnConfig" class="btnTema" title="Mudar Tema">
-            <i class="fa-solid fa-circle-half-stroke"></i>
-          </button>
- 
-          <div id="menuTema">
-            <button type="button" onclick="mudarTema('claro')">
-              <i class="fa-solid fa-sun"></i> Tema Claro
-            </button>
-            <button type="button" onclick="mudarTema('escuro')">
-              <i class="fa-solid fa-moon"></i> Tema Escuro
-            </button>
-          </div>
-        </section>
- 
-        <div class="datetime">
-          <i class="fa-regular fa-clock"></i> <span id="clockTime">00:00:00</span><br>
-          <span style="font-size: 0.65rem;" id="clockDate">--/--/----</span>
+
+      <!-------------------------- Lado Direito: Informações e Notificação ------------------->
+      <div class="info-cabecalho">
+
+        <!--Alternar o tema -->
+        <button id="btnTema" class="btn-tema" title="Alternar Tema">
+          <span class="material-symbols-outlined">routine</span>
+
+        </button>
+
+        <!--Data e Hora-->
+        <div id="data-hora">
+          <span id="hora-atual">--:--:--</span>
+          <small id="data-atual">--/--/----</small>
         </div>
- 
-        <div class="notification-btn">
-          <i class="fa-regular fa-bell"></i>
-          <span class="notification-badge">0</span>
+
+        <!-- Notificação -->
+        <div id="notificacao" class="botao-icone">
+          <span class="material-symbols-outlined">notifications</span>
+
+          <span class="emblema" id="qtd-notificacoes">0</span>
         </div>
- 
-        <div class="user-profile-top">
-          <i class="fa-solid fa-circle-user avatar"></i>
+
+        <!-- Ususario -->
+        <div id="usuario-logado">
+          <i id="avatar" class="fa-solid fa-circle-user avatar"></i>
           <div class="user-details">
-            <span style="font-weight: 600;">Administrador</span>
-            <span class="status">Online</span>
+
+            <div class="detalhes-usuario">
+              <span id="nome-usuario" style="font-weight: 600;">Administrador</span>
+              <!-- <strong id="nome-usuario">----</strong> -->
+              <span id="status-usuario" class="status">Online</span>
+              <!-- <span class="status-online" id="status-usuario">--</span> -->
+            </div>
           </div>
-          <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; color: var(--text-muted);"></i>
         </div>
-      </div>
     </header>
 
 
@@ -123,7 +149,7 @@
 	<main>
 		
 		<div id='top-horizontal-container'>
-			<div class='c box_shadow bg-white'>
+			<div class='c box_shadow'>
 				<div class='card-left-side'>
 					<div class='img-circle'></div>
 				</div>
@@ -134,7 +160,7 @@
 				</div>
 			</div>
 			
-			<div class='c box_shadow bg-white'>
+			<div class='c box_shadow'>
 				<div class='card-left-side'>
 					<div class='img-circle'></div>
 				</div>
@@ -145,7 +171,7 @@
 				</div>
 			</div>
 			
-			<div class='c box_shadow bg-white'>
+			<div class='c box_shadow'>
 				<div class='card-left-side'>
 					<div class='img-circle'></div>
 				</div>
@@ -156,7 +182,7 @@
 				</div>
 			</div>
 			
-			<div class='c box_shadow bg-white'>
+			<div class='c box_shadow'>
 				<div class='card-left-side'>
 					<div class='img-circle'></div>
 				</div>
@@ -167,7 +193,7 @@
 				</div>
 			</div>
 			
-			<div class='c box_shadow bg-white'>
+			<div class='c box_shadow'>
 				<div class='card-left-side'>
 					<div class='img-circle'></div>
 				</div>
@@ -181,7 +207,7 @@
 		</div>
 		<div class='mid-horizontal-container'>
 			<div id='right-side-containers'>
-				<div id='estacionamento-mapa-container' class='box_shadow bg-white'>
+				<div id='estacionamento-mapa-container' class='box_shadow'>
 					<div id='mapa-header'>
 						<div class='container-header'>
 							<p class='strong'>MAPA DO ESTACIONAMENTO</p>
@@ -288,11 +314,11 @@
 						
 					</div>
 				</div>
-				<div id='vagas-lista-container' class='box_shadow bg-white'>
+				<div id='vagas-lista-container' class='box_shadow'>
 					<div class='container-header'>
 						<p class='strong'>LISTA DE VAGAS</p>
 					</div>
-					<table class='table'>
+					<table id='lista-vagas' class='table'>
 						<thead>
 							<tr>
 								<th>Nº DA VAGA</th>
@@ -341,23 +367,15 @@
 				</div>
 			</div>
 			<div id='left-side-containers'>
-				<div id='filtros-container' class='mid-card box_shadow bg-white'>
+				<div id='filtros-container' class='mid-card box_shadow'>
 					<form>
 						<div>
 							<p class='strong'>FILTROS</p>
 						</div>
 						<div id='form-options'>
-							<label>Setor</label>
-							<select class='dropdown-select'>
-								<option value="all">Todos os setores</option>
-							</select>
 							<label>Status</label>
 							<select class='dropdown-select'>
 								<option value="all">Todos os status</option>
-							</select>
-							<label>Tipo de usuário</label>
-							<select class='dropdown-select'>
-								<option value="all">Todos os tipos</option>
 							</select>
 						</div>
 						<div id='form-buttons'>
@@ -366,7 +384,7 @@
 						</div>
 					</form>
 				</div>
-				<div id='info-vaga-container' class='mid-card box_shadow bg-white'>
+				<div id='info-vaga-container' class='mid-card box_shadow'>
 					<div class='container-header'>
 						<p class='strong'>INFORMAÇÕES DA VAGA</p>
 					</div>
