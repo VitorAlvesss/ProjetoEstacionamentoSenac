@@ -29,24 +29,29 @@ async function buscarDashboard(){
 
 }
 
-async function registro_vagasOcupadas(){
+async function registro_vagasOcupadas() {
+
     const [resultado] = await db.query(`
         SELECT
-        v.id AS id_vaga,
+            v.id AS id_vaga,
             v.codigo_vaga,
             v.vaga_especial,
+            v.ocupada,
             c.placa,
             r.data_entrada
         FROM tbl_vaga v
-        INNER JOIN tbl_registro_ocupacao r
+
+        LEFT JOIN tbl_registro_ocupacao r
             ON r.id_vaga = v.id
-        INNER JOIN tbl_carro c
+            AND r.data_saida IS NULL
+
+        LEFT JOIN tbl_carro c
             ON c.id = r.id_carro
-        WHERE v.ocupada = TRUE
-          AND r.data_saida IS NULL
-        ORDER BY v.codigo_vaga 
-        `);
-        return resultado;
+
+        ORDER BY v.codigo_vaga
+    `);
+
+    return resultado;
 }
 
 async function registro_ocupacao(){
@@ -98,6 +103,20 @@ async function permanecem() {
         return resultado.total;
 }
 
+async function financeiroHoje() {
+    const [resultado] = await db.query(`
+        SELECT
+            COALESCE(SUM(total_pago), 0) AS faturamento,
+            COUNT(*) AS veiculos,
+            COALESCE(AVG(total_pago), 0) AS ticket_medio
+        FROM tbl_registro_ocupacao
+        WHERE DATE(data_saida) = CURDATE()
+          AND data_saida IS NOT NULL
+    `);
+
+    return resultado[0];
+}
+
 module.exports = {
     buscarDashboard, 
     registro_ocupacao,
@@ -105,5 +124,6 @@ module.exports = {
     saidasHoje,
     permanecem,
     buscarDispositivoIOT,
-    registro_vagasOcupadas
+    registro_vagasOcupadas,
+    financeiroHoje
 };

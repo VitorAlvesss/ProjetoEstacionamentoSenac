@@ -150,7 +150,7 @@
             </div>
             <div class="info-card">
               <span class="titulo-card">VAGAS TOTAIS</span>
-              <strong class="valor-card" id="vagas-totais">--</strong>
+              <strong class="valor-card" id="vagas-totais"></strong>
               <span class="subtitulo-card">Cadastradas</span>
             </div>
           </div>
@@ -162,7 +162,7 @@
             </div>
             <div class="info-card">
               <span class="titulo-card">VAGAS LIVRES</span>
-              <strong class="valor-card" id="vagas-livres">--</strong>
+              <strong class="valor-card" id="vagas-livres"></strong>
               <span class="subtitulo-card">Disponíveis</span>
             </div>
           </div>
@@ -174,7 +174,7 @@
             </div>
             <div class="info-card">
               <span class="titulo-card">VAGAS OCUPADAS</span>
-              <strong class="valor-card" id="vagas-ocupadas">--</strong>
+              <strong class="valor-card" id="vagas-ocupadas"></strong>
               <span class="subtitulo-card">Em uso</span>
             </div>
           </div>
@@ -186,8 +186,8 @@
             </div>
             <div class="info-card">
               <span class="titulo-card">TAXA DE OCUPAÇÃO</span>
-              <strong class="valor-card" id="taxa-ocupacao">--%</strong>
-              <span class="subtitulo-card" id="detalhe-taxa">-- de -- vagas</span>
+              <strong class="valor-card" id="taxa-ocupacao"></strong>
+              <span class="subtitulo-card" id="detalhe-taxa"></span>
             </div>
           </div>
 
@@ -198,8 +198,8 @@
             </div>
             <div class="info-card">
               <span class="titulo-card">FATURAMENTO HOJE</span>
-              <strong class="valor-card" id="faturamento-hoje">R$ 487,50</strong>
-              <span class="subtitulo-card" id="qtd-veiculos-hoje">32 veículos</span>
+              <strong class="valor-card" id="faturamento-hoje"></strong>
+              <span class="subtitulo-card" id="qtd-veiculos-hoje"></span>
             </div>
           </div>
 
@@ -363,9 +363,9 @@
               <div class="corpo-financeiro">
                 <!-- Lado Esquerdo: Valores e Estatísticas -->
                 <div class="dados-financeiro">
-                  <strong class="valor-financeiro">R$ 487,50</strong>
-                  <span class="sub-financeiro">32 veículos atendidos</span>
-                  <small class="ticket-medio">Ticket médio: <span>R$ 15,23</span></small>
+                  <strong class="valor-financeiro" id="valor-financeiro"></strong>
+                  <span class="sub-financeiro" id="sub-financeiro"></span>
+                  <small class="ticket-medio">Ticket médio: <span id="ticket-medio"></span></small>
                 </div>
 
                 <!-- Lado Direito: Gráfico de Tendência -->
@@ -401,7 +401,7 @@
                     <span class="material-symbols-outlined">no_crash</span>
                     <span>Entradas hoje</span>
                   </div>
-                  <strong class="valor-metrica txt-verde">32 veículos</strong>
+                  <strong class="valor-metrica txt-verde" id="entradas-hoje"></strong>
                 </div>
 
                 <!-- Item 3: Saídas hoje -->
@@ -410,7 +410,7 @@
                     <span class="material-symbols-outlined">swap_horiz</span>
                     <span>Saídas hoje</span>
                   </div>
-                  <strong class="valor-metrica txt-azul">25 veículos</strong>
+                  <strong class="valor-metrica txt-azul" id="saidas-hoje"></strong>
                 </div>
 
                 <!-- Item 4: Permanecem no momento -->
@@ -419,7 +419,7 @@
                     <span class="material-symbols-outlined">directions_car </span>
                     <span>Permanecem no momento</span>
                   </div>
-                  <strong class="valor-metrica txt-vermelho">13 veículos</strong>
+                  <strong class="valor-metrica txt-vermelho" id="permanecem"></strong>
                 </div>
               </div>
             </div>
@@ -516,6 +516,7 @@
 
   <script type="module" src="./src/assets/js/imports.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="view/vagasView.js" defer></script>
 
 </body>
 
