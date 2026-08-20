@@ -5,13 +5,14 @@ const dashboardRepository = require("../Repositories/dashboradRepository");
 async function buscarDash(req, res){
     
     try{
-            const [vagas, registro, entradasHoje, saidasHoje, permanecem, dispositivos] = await Promise.all([
+            const [vagas, registro, entradasHoje, saidasHoje, permanecem, dispositivos, vagasOcupadas] = await Promise.all([
             dashboardRepository.buscarDashboard(),
             dashboardRepository.registro_ocupacao(),
             dashboardRepository.entradasHoje(),
             dashboardRepository.saidasHoje(),
             dashboardRepository.permanecem(),
             dashboardRepository.buscarDispositivoIOT(),
+            dashboardRepository.registro_vagasOcupadas()
         ]);
         res.status(200).json({
             vagas: {
@@ -25,7 +26,8 @@ async function buscarDash(req, res){
                 permanecem: permanecem,
                 movimentacoes: registro,
             },
-            dispositivos: dispositivos
+            vagasOcupadas,
+            dispositivos
         });
     }catch(erro){
         console.error(erro);

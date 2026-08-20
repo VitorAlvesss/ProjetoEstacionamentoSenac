@@ -29,6 +29,26 @@ async function buscarDashboard(){
 
 }
 
+async function registro_vagasOcupadas(){
+    const [resultado] = await db.query(`
+        SELECT
+        v.id AS id_vaga,
+            v.codigo_vaga,
+            v.vaga_especial,
+            c.placa,
+            r.data_entrada
+        FROM tbl_vaga v
+        INNER JOIN tbl_registro_ocupacao r
+            ON r.id_vaga = v.id
+        INNER JOIN tbl_carro c
+            ON c.id = r.id_carro
+        WHERE v.ocupada = TRUE
+          AND r.data_saida IS NULL
+        ORDER BY v.codigo_vaga 
+        `);
+        return resultado;
+}
+
 async function registro_ocupacao(){
     const [resultado] = await db.query(`
         SELECT 
@@ -38,10 +58,14 @@ async function registro_ocupacao(){
 
             r.data_entrada,
             r.data_saida,
-            r.tempo_uso
+            r.tempo_uso,
+            r.tempo_pago,
+            r.pago
         FROM tbl_registro_ocupacao r 
         INNER JOIN tbl_carro c 
             ON r.id_carro = c.id
+        ORDER BY r.data_entrada DESC
+        LIMIT 10
         `);
     return resultado;
 }
@@ -53,7 +77,7 @@ async function entradasHoje(){
         WHERE DATE(data_entrada) = CURDATE()
         `);
 
-        return resultado[0].total;
+        return resultado.total;
 }
 
 async function saidasHoje(){
@@ -62,7 +86,7 @@ async function saidasHoje(){
         FROM tbl_registro_ocupacao
         WHERE DATE(data_saida) = CURDATE()        
         `);
-        return resultado[0].total;
+        return resultado.total;
 }
 
 async function permanecem() {
@@ -71,7 +95,7 @@ async function permanecem() {
         FROM tbl_registro_ocupacao
         WHERE data_saida IS NULL        
         `);
-        return resultado[0].total;
+        return resultado.total;
 }
 
 module.exports = {
@@ -80,5 +104,6 @@ module.exports = {
     entradasHoje,
     saidasHoje,
     permanecem,
-    buscarDispositivoIOT
+    buscarDispositivoIOT,
+    registro_vagasOcupadas
 };
