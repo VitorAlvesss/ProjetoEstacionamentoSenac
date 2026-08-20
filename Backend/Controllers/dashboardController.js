@@ -1,14 +1,16 @@
 const dashboardRepository = require("../Repositories/dashboradRepository");
 
-const vagas = await dashboardRepository.buscarDashboard();
-const registro = await dashboardRepository.registro_ocupacao();
-const entradasHoje = await dashboardRepository.entradasHoje();
-const saidasHoje = await dashboardRepository.saidasHoje();
-const permanecem = await dashboardRepository.permanecem();
-const dispositivos = await dashboardRepository.buscarDispositivoIOT();
+
 
 async function buscarDash(req, res){
     
+    const vagas = await dashboardRepository.buscarDashboard();
+    const registro = await dashboardRepository.registro_ocupacao();
+    const entradasHoje = await dashboardRepository.entradasHoje();
+    const saidasHoje = await dashboardRepository.saidasHoje();
+    const permanecem = await dashboardRepository.permanecem();
+    const dispositivos = await dashboardRepository.buscarDispositivoIOT();
+
     try{
         
         res.status(200).json({
@@ -34,7 +36,6 @@ async function buscarDash(req, res){
 }
 
 module.exports = {
-    buscarDash,
-    buscarDispositivoIOT
+    buscarDash
 };
 

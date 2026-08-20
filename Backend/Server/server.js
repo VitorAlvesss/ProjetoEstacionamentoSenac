@@ -4,6 +4,10 @@ const express = require ("express");// biblioteca que esta criando o servidor we
 const app = express(); // esta iniciando o servidor e guarda na variavel.
 const db = require('../Connection/db');
 const dashboardroutes = require("../Routes/testeDash");
+const routes = express.Router();
+const dashboardController = require("../Controllers/dashboardController");
+const router = require('../Routes/testeDash');
+
 //traz o caminho que criei
 //const rotasDeUsuarios = require ('../Routes/usuarioRoutes');
  
@@ -20,6 +24,10 @@ app.get('/teste-conexao', async (req, res)=>{
 
 
 });
+//isso vai ficar aqui temporariamente
+router.get("/dashboard", dashboardController.buscarDash)
+module.exports = router;
+
 app.use("/", dashboardroutes)
 app.use(express.json());
  
