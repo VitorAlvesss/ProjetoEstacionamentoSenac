@@ -1,0 +1,1 @@
+Arquivos .js que serão reaproveitados em outras telas, como navbar, sidebar etc. 

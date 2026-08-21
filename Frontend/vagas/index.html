@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/x-icon" href="/public/icon-guia.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel='stylesheet' href='/src/styles/menu.css'>
+    <link rel='stylesheet' href='/src/styles/vagas-style.css'>
+	
+	<script src="/src/sidebar.js" defer></script>
+	<script src="../vagasView.js" defer></script>
+	<script src="../adicionarBolinhas.js" defer></script>
+    <title>Vagas</title>
+</head>
+<body>
+
+	<aside id="sidebar" class="sidebar collapsed">
+
+    <div class="sidebar-header">
+
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu">
+      </i>
+    </div>
+    </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul id="sidebarNav"></ul>
+    </nav>
+
+
+    <div class="quick-summary">
+
+      <div class="quick-summary-title">
+        RESUMO RÁPIDO
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas totais</span>
+        <span class="val">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas livres</span>
+        <span class="val green">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas ocupadas</span>
+        <span class="val red">0</span>
+      </div>
+
+      <!-- <div class="summary-row">
+        <span>Taxa de ocupação</span>
+        <span class="val">0%</span>
+      </div> -->
+
+      <div class="summary-row">
+        <span>Faturamento hoje</span>
+        <span class="val green">R$ 0,00</span>
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-copyright">
+
+      © 2024 Goiabinha&CIA<br>
+      Todos os direitos reservados.
+
+    </div>
+
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho-principal">
+
+      <!-- Lado Esquerdo: Apenas a Logo -->
+      <div class="cabecalho-esquerda">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu">
+        </i>
+        <div class="brand-logo">
+          <img src="/src/assets/Logo 2.png" alt="Goiabinha & CIA" class="img-logo">
+        </div>
+      </div>
+
+      <!-- Centro: Título e Subtítulo Centralizados -->
+      <div class="titulos-cabecalho centralizado">
+
+        <h1 id="pageTitle">
+          Dashboard
+        </h1>
+
+        <h2 id="pageSubtitle">
+          Visão geral do estacionamento
+        </h2>
+
+      </div>
+
+      <!-------------------------- Lado Direito: Informações e Notificação ------------------->
+      <div class="info-cabecalho">
+
+        <!--Alternar o tema -->
+        <button id="btnTema" class="btn-tema" title="Alternar Tema">
+          <span class="material-symbols-outlined">routine</span>
+
+        </button>
+
+        <!--Data e Hora-->
+        <div id="data-hora">
+          <span id="hora-atual">--:--:--</span>
+          <small id="data-atual">--/--/----</small>
+        </div>
+
+        <!-- Notificação -->
+        <div id="notificacao" class="botao-icone">
+          <span class="material-symbols-outlined">notifications</span>
+
+          <span class="emblema" id="qtd-notificacoes">0</span>
+        </div>
+
+        <!-- Ususario -->
+        <div id="usuario-logado">
+          <i id="avatar" class="fa-solid fa-circle-user avatar"></i>
+          <div class="user-details">
+
+            <div class="detalhes-usuario">
+              <span id="nome-usuario" style="font-weight: 600;">Administrador</span>
+              <!-- <strong id="nome-usuario">----</strong> -->
+              <span id="status-usuario" class="status">Online</span>
+              <!-- <span class="status-online" id="status-usuario">--</span> -->
+            </div>
+          </div>
+        </div>
+    </header>
+
+
+
+
+	
+
+	
+
+
+	<main>
+		
+		<div id='top-horizontal-container'>
+			<div class='c box_shadow'>
+				<div class='card-left-side'>
+					<div class='img-circle bg-blue'></div>
+				</div>
+				<div class='card-right-side'>
+					<p>VAGAS TOTAIS</p>
+					<p id="totalVaga" class='strong'></p>
+					<p>Cadastradas</p>
+				</div>
+			</div>
+			
+			<div class='c box_shadow'>
+				<div class='card-left-side'>
+					<div class='img-circle bg-green'></div>
+				</div>
+				<div class='card-right-side'>
+					<p>VAGAS LIVRES</p>
+					<p id ="vagasLivres"class='strong'></p>
+					<p>Disponíveis</p>
+				</div>
+			</div>
+			
+			<div class='c box_shadow'>
+				<div class='card-left-side'>
+					<div class='img-circle bg-red'></div>
+				</div>
+				<div class='card-right-side'>
+					<p>VAGAS OCUPADAS</p>
+					<p id= "vagasOcupadas" class='strong'></p>
+					<p>Em uso</p>
+				</div>
+			</div>
+			
+			<div class='c box_shadow'>
+				<div class='card-left-side'>
+					<div class='img-circle bg-orange'></div>
+				</div>
+				<div class='card-right-side'>
+					<p>TAXA DE OCUPAÇÃO</p>
+					<p id= "taxaOcupacao" class='strong'></p>
+					<p id="taxaOcupacaoComplementar">-- de -- vagas</p>
+				</div>
+			</div>
+			
+			<!-- <div class='c box_shadow'>
+			
+				<div id='card-tempo' class='card-right-side'>
+					<p>TEMPO MÉDIO</p>
+					<p class='strong'>--</p>
+					<p>De permanência</p>
+				</div>
+			</div> -->
+			
+		</div>
+
+
+		<div class='mid-horizontal-container'>
+			<div id='right-side-containers'>
+				<div id='estacionamento-mapa-container' class='box_shadow'>
+					<div id='mapa-header'>
+						<div class='container-header'>
+							<p class='strong'>MAPA DO ESTACIONAMENTO</p>
+						</div>
+						<div style='width:100px;'></div>
+						<div id='mapa-header-info'>
+							<div class='green-color'>
+								<span class='material-symbols-outlined'>no_crash</span>
+								<p>Livre</p>
+							</div>
+							<div class='red-color'>
+								<span class='material-symbols-outlined'>cancel</span>
+								<p>Ocupada</p>
+							</div>
+							
+						</div>
+					</div>
+					<div id='estacionamento-mapa'>
+						<table id="tabelaVagas">
+
+							<tbody id="corpoTabela">
+
+							</tbody>
+							
+						</table>
+						
+						
+					</div>
+
+
+
+				</div>
+				<div id='vagas-lista-container'>
+					<div class='container-header'>
+						<p class='strong'>CLIQUE EM UMA DAS BOLAS PARA ACESSAR AS INFORMAÇÕES DA VAGA.</p>
+					</div>
+					<table id='lista-vagas' class='table'>
+						<thead>
+							<tr>
+
+							</tr>							
+						</thead>
+						<tbody>
+							<tr>
+
+							</tr>
+							<tr>
+
+							</tr>
+						</tbody>
+					</table>
+					<div id='table-page-controller-container'>
+						<div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id='left-side-containers'>
+				<!-- <div id='filtros-container' class='mid-card box_shadow'>
+					<form>
+						<div>
+							<p class='strong'>FILTROS</p>
+						</div>
+						<div id='form-options'>
+							<label>Status</label>
+							<select class='dropdown-select'>
+								<option value="all">Todos os status</option>
+							</select>
+						</div>
+						<div id='form-buttons'>
+							<button id='btnApagarFiltros' class='btn'>Limpar filtros</button>
+							<input id='btnAplicarFiltros' class='btn-purple btn ' type='button' value='Aplicar filtros'> 
+						</div>
+					</form>
+				</div> -->
+				<div id='info-vaga-container' class='mid-card box_shadow'>
+					<div class='container-header'>
+						<p class='strong'>INFORMAÇÕES DA VAGA</p>
+					</div>
+					<div id='info-card-center'>
+						<div id='center-header'>
+							<div id="bolinhaInformacoes"></div>
+							<div>
+								<p id="vagaPega" class='strong'></p>
+								<p id="ocupadaOuNao"></p>
+							</div>
+						</div>
+						<div id='center-body'>
+							<div id='center-body-text-section'>
+								<div>
+									<p>Placa: </p>
+									<p>Tipo: </p>
+									<p>Entrada: </p>
+									<p>Horário: </p>
+									<p>Valor por hora: </p>
+									<p>Valor atual: </p>
+								</div>
+								<div id='vagas-value-text-container'>
+									<p id="valorPlaca">Valor</p>
+									<p id="tipoVaga">Valor</p>
+									<p id="dataEntrada">Valor</p>
+									<p id="horaEntrada">Valor</p>
+									<p id="valorHora">Valor</p>
+									<p id="valorPlaca">Valor</p>
+								</div>
+							</div>
+							
+							<div>
+								<button id='btnRegistrar' class='btn btn-danger'>Registrar saída</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

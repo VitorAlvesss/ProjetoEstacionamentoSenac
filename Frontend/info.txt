@@ -1,0 +1,3 @@
+crie uma pasta com o nome da sua página/tela
+
+em seguida, coloque o seu arquivo .html dentro dela, com o nome 'index'
