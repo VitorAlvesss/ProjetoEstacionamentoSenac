@@ -1,38 +1,79 @@
-const pagamento_repository = require('../repositories/pagamentoRepository');
-const { validarDadosPagamento } = require('../services/validacaoService'); // ou onde estiver sua função de validação
+const PAGAMENTO_REPOSITORY = require('./pagamentoRepository');
 
-const pagamento_controller = {
-    async criarCobranca(requisicao, resposta) {
+const PAGAMENTO_CONTROLLER = {
+
+    // Rota: POST /pagamentos/confirmar
+    // Chamada pelo frontend pra checar/confirmar o status de um pagamento sob demanda
+    async confirmarPagamento(req, res) {
         try {
-            const dados_recebidos = requisicao.body;
+            const { id_registro, id_pagamento_mp } = req.body;
 
-            // 1. Valida os dados usando a função que criamos
-            const validacao = validarDadosPagamento(dados_recebidos);
-            if (!validacao.valido) {
-                return resposta.status(400).json({ erros: validacao.erros });
+            if (!id_registro || !id_pagamento_mp) {
+                return res.status(400).json({ erro: 'id_registro e id_pagamento_mp são obrigatórios' });
             }
 
-            // 2. Busca o registro de ocupação no banco pelo ID informado
-            const registro_ocupacao = await pagamento_repository.obterPorId(dados_recebidos.id_registro);
-            if (!registro_ocupacao) {
-                return resposta.status(404).json({ mensagem: "Registro de ocupação não encontrado." });
+            const resultado = await PAGAMENTO_REPOSITORY.confirmarPagamento(id_registro, id_pagamento_mp);
+
+            return res.status(200).json(resultado);
+        } catch (erro) {
+            console.error('Erro ao confirmar pagamento:', erro);
+            return res.status(500).json({ erro: erro.message || 'Falha ao confirmar pagamento' });
+        }
+    },
+
+    // Rota: POST /pagamento/:id_registro/cobranca
+    // Chamada quando o carro vai sair e precisa gerar o QR code PIX
+    async criarCobranca(req, res) {
+        try {
+            const { id_registro } = req.params;
+            const { email_cliente } = req.body;
+
+            const cobranca = await PAGAMENTO_REPOSITORY.criarCobranca(id_registro, email_cliente);
+
+            return res.status(201).json(cobranca);
+        } catch (erro) {
+            console.error('Erro ao criar cobrança PIX:', erro);
+            return res.status(500).json({ erro: erro.message || 'Falha ao criar cobrança' });
+        }
+    },
+
+    // Rota: POST /webhook/pagamento
+    // O Mercado Pago manda esse POST toda vez que o status de um pagamento muda
+    async receberWebhook(req, res) {
+        try {
+            const { data, type } = req.body;
+
+            if (type !== 'payment') {
+                return res.sendStatus(200); // ignora outros tipos de notificação
             }
 
-            // 3. Aqui entraria a integração com o Mercado Pago para gerar o PIX
-            // const cobranca_pix = await servicoMercadoPago.gerarPix(dados_recebidos.valor, dados_recebidos.email);
+            const id_pagamento_mp = data.id;
 
-            // 4. Retorna a resposta de sucesso com os dados do pagamento
-            return resposta.status(201).json({
-                mensagem: "Cobrança PIX gerada com sucesso!",
-                valor_cobrado: dados_recebidos.valor,
-                // qr_code: cobranca_pix.qr_code
-            });
+            // ⚠️ Aqui você precisa saber a qual id_registro esse pagamento pertence.
+            // O jeito mais comum é usar o campo "external_reference" na hora de CRIAR
+            // a cobrança PIX, passando o id_registro. Ajusta conforme seu fluxo de criação.
+            const id_registro = req.body.external_reference || req.query.id_registro;
 
-        } catch (erro_interno) {
-            console.error("Erro ao criar cobrança:", erro_interno);
-            return resposta.status(500).json({ mensagem: "Erro interno no servidor ao processar pagamento." });
+            const resultado = await PAGAMENTO_REPOSITORY.confirmarPagamento(id_registro, id_pagamento_mp);
+
+            return res.status(200).json(resultado);
+        } catch (erro) {
+            console.error('Erro ao processar webhook de pagamento:', erro);
+            return res.status(500).json({ erro: 'Falha ao processar pagamento' });
+        }
+    },
+
+    // Rota alternativa pra polling manual, ex: GET /pagamento/:id_registro/status/:id_pagamento_mp
+    async verificarStatus(req, res) {
+        try {
+            const { id_registro, id_pagamento_mp } = req.params;
+            const resultado = await PAGAMENTO_REPOSITORY.confirmarPagamento(id_registro, id_pagamento_mp);
+            return res.status(200).json(resultado);
+        } catch (erro) {
+            console.error('Erro ao verificar status do pagamento:', erro);
+            return res.status(500).json({ erro: 'Falha ao verificar pagamento' });
         }
     }
 };
 
-module.exports = pagamento_controller;
+module.exports = PAGAMENTO_CONTROLLER;
