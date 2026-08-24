@@ -624,3 +624,26 @@ form div {
 body p {
     color: var(--texto-principal);
 }
+
+
+.bolinhaVerde,
+.bolinhaVermelha {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 25px;
+    cursor: pointer;
+}
+
+.bolinhaVerde {
+    background-color: var(--cor-verde);
+}
+
+.bolinhaVermelha {
+    background-color: var(--cor-vermelho);
+}
+
+td p {
+    text-align: center;
+    margin: 0;
+}

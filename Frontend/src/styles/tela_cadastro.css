@@ -6,14 +6,14 @@
 }
 
 body {
-    min-height: 100vh;
-    display: flex;
-    overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
 
-    background-color: var(--bg-body);
-    color: var(--texto-secundario);
+  background-color: var(--bg-body);
+  color: var(--texto-secundario);
 
-    transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* TEMA ESCURO (PADRÃO) */
@@ -32,11 +32,16 @@ body {
   --texto-destaque: #cbd5e1;
 
   /* Cores de ícones em modo escuro */
-  --fundo-azul: rgba(59, 130, 246, 0.15);   --cor-azul: #3b82f6;
-  --fundo-verde: rgba(34, 197, 94, 0.15);   --cor-verde: #22c55e;
-  --fundo-vermelho: rgba(239, 68, 68, 0.15);--cor-vermelho: #ef4444;
-  --fundo-amarelo: rgba(234, 179, 8, 0.15); --cor-amarelo: #eab308;
-  --fundo-roxo: rgba(168, 85, 247, 0.15);   --cor-roxo: #a855f7;
+  --fundo-azul: rgba(59, 130, 246, 0.15);
+  --cor-azul: #3b82f6;
+  --fundo-verde: rgba(34, 197, 94, 0.15);
+  --cor-verde: #22c55e;
+  --fundo-vermelho: rgba(239, 68, 68, 0.15);
+  --cor-vermelho: #ef4444;
+  --fundo-amarelo: rgba(234, 179, 8, 0.15);
+  --cor-amarelo: #eab308;
+  --fundo-roxo: rgba(168, 85, 247, 0.15);
+  --cor-roxo: #a855f7;
 
   /* IMG */
   --opacidade-esp32: 0.05;
@@ -51,7 +56,7 @@ body.light-theme {
   --bg-item-vaga: #f1f5f9;
   --borda: #cbd5e1;
   --sombra: rgba(0, 0, 0, 0.05);
- 
+
 
   --texto-principal: #0f172a;
   --texto-secundario: #1e293b;
@@ -60,11 +65,16 @@ body.light-theme {
   --texto-destaque: #334155;
 
   /* Cores de ícones em modo claro */
-  --fundo-azul: #eff6ff;   --cor-azul: #2563eb;
-  --fundo-verde: #f0fdf4;  --cor-verde: #16a34a;
-  --fundo-vermelho: #fef2f2;--cor-vermelho: #dc2626;
-  --fundo-amarelo: #fefce8; --cor-amarelo: #ca8a04;
-  --fundo-roxo: #faf5ff;   --cor-roxo: #9333ea;
+  --fundo-azul: #eff6ff;
+  --cor-azul: #2563eb;
+  --fundo-verde: #f0fdf4;
+  --cor-verde: #16a34a;
+  --fundo-vermelho: #fef2f2;
+  --cor-vermelho: #dc2626;
+  --fundo-amarelo: #fefce8;
+  --cor-amarelo: #ca8a04;
+  --fundo-roxo: #faf5ff;
+  --cor-roxo: #9333ea;
 
   /* IMG */
   --opacidade-esp32: 0.3;
@@ -93,7 +103,8 @@ body.light-theme {
   margin-bottom: 20px;
 }
 
-#hora-atual,#data-atual{
+#hora-atual,
+#data-atual {
 
   color: #dde0e3;
 }
@@ -169,12 +180,12 @@ body.light-theme {
 .botao-icone {
   position: relative;
   cursor: pointer;
-  color: var(--texto-mutado);
+  color: var(white);
   transition: color 0.2s;
 }
 
 .botao-icone:hover {
-  color: var(--texto-principal);
+  transform: scale(1.1);
 }
 
 .botao-icone .emblema {
@@ -202,17 +213,22 @@ body.light-theme {
 .detalhes-usuario {
   display: flex;
   flex-direction: column;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
 }
 
-#nome-usuario {
+#avatar {
+  font-size: 1.6rem;
+  color: var(--text-muted);
+}
+
+.nome-usuario {
   color: var(--texto-principal);
   font-weight: 600;
 }
 
-.status-online {
-  color: #4ade80;
-  font-size: 0.7rem;
+#status-usuario {
+  font-size: 0.65rem;
+  color: rgb(49, 247, 0);
 }
 
 /* 4. CARDS DE MÉTRICAS */
@@ -265,11 +281,30 @@ body.light-theme {
   font-size: 1.35rem;
 }
 
-.fundo-azul     { background-color: var(--fundo-azul);     color: var(--cor-azul); }
-.fundo-verde    { background-color: var(--fundo-verde);    color: var(--cor-verde); }
-.fundo-vermelho { background-color: var(--fundo-vermelho); color: var(--cor-vermelho); }
-.fundo-amarelo  { background-color: var(--fundo-amarelo);  color: var(--cor-amarelo); }
-.fundo-roxo     { background-color: var(--fundo-roxo);     color: var(--cor-roxo); }
+.fundo-azul {
+  background-color: var(--fundo-azul);
+  color: var(--cor-azul);
+}
+
+.fundo-verde {
+  background-color: var(--fundo-verde);
+  color: var(--cor-verde);
+}
+
+.fundo-vermelho {
+  background-color: var(--fundo-vermelho);
+  color: var(--cor-vermelho);
+}
+
+.fundo-amarelo {
+  background-color: var(--fundo-amarelo);
+  color: var(--cor-amarelo);
+}
+
+.fundo-roxo {
+  background-color: var(--fundo-roxo);
+  color: var(--cor-roxo);
+}
 
 .info-card {
   display: flex;
@@ -319,7 +354,8 @@ body.light-theme {
   }
 }
 
-.coluna-esquerda, .coluna-direita {
+.coluna-esquerda,
+.coluna-direita {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -341,24 +377,24 @@ body.light-theme {
 }
 
 .sidebar {
-    width: 250px;
+  width: 250px;
 
-    min-height: 100vh;
+  min-height: 100vh;
 
-    background-color: #0f172a;
+  background-color: #0f172a;
 
-    border-right: 1px solid #1e293b;
+  border-right: 1px solid #1e293b;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    flex-shrink: 0;
+  flex-shrink: 0;
 
-    transition:
-        margin-left 0.3s ease,
-        transform 0.3s ease;
+  transition:
+    margin-left 0.3s ease,
+    transform 0.3s ease;
 
-    z-index: 1000;
+  z-index: 1000;
 }
 
 
@@ -369,13 +405,13 @@ body.light-theme {
 ============================================================ */
 
 .sidebar-copyright {
-    padding: 12px 16px;
+  padding: 12px 16px;
 
-    font-size: 0.62rem;
+  font-size: 0.62rem;
 
-    color: #4a5568;
+  color: #4a5568;
 
-    border-top: 1px solid #1e293b;
+  border-top: 1px solid #1e293b;
 }
 
 
@@ -384,19 +420,19 @@ body.light-theme {
 ============================================================ */
 
 .main-wrapper {
-    flex: 1;
+  flex: 1;
 
-    width: 100%;
+  width: 100%;
 
-    min-width: 0;
+  min-width: 0;
 
-    display: flex;
+  display: flex;
 
-    flex-direction: column;
+  flex-direction: column;
 
-    overflow-y: auto;
+  overflow-y: auto;
 
-    transition: 0.3s ease;
+  transition: 0.3s ease;
 }
 
 /* ============================================================
@@ -404,26 +440,13 @@ body.light-theme {
 ============================================================ */
 
 .headerTelaCadastro {
-    padding: 20px;
+  padding: 20px;
 
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 
-#pageTitle {
-    color: #f8fafc;
 
-    font-size: 28px;
-
-    margin-bottom: 4px;
-}
-
-
-#pageSubtitle {
-    color: #6b7280;
-
-    font-size: 14px;
-}
 
 
 /* ============================================================
@@ -431,15 +454,15 @@ body.light-theme {
 ============================================================ */
 
 .mainTelaCadastro {
-    padding: 0 20px 20px;
+  padding: 0 20px 20px;
 
-    display: grid;
+  display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
-    gap: 20px;
+  gap: 20px;
 
-    align-items: stretch;
+  align-items: stretch;
 }
 
 
@@ -453,22 +476,22 @@ body.light-theme {
 .cadastroTarifa,
 .cadastroDispIot,
 .cadastroPermissao {
-    
-    background: var(--bg-card);
 
-    border: 1px solid var(--borda);
+  background: var(--bg-card);
 
-    border-radius: 12px;
+  border: 1px solid var(--borda);
 
-    padding: 20px;
+  border-radius: 12px;
 
-    display: flex;
+  padding: 20px;
 
-    flex-direction: column;
+  display: flex;
 
-    height: 100%;
+  flex-direction: column;
 
-    min-height: 450px;
+  height: 100%;
+
+  min-height: 450px;
 }
 
 
@@ -481,11 +504,11 @@ body.light-theme {
 .mainCadastroTarifa,
 .mainCadastroIot,
 .mainCadastroPermissao {
-    display: flex;
+  display: flex;
 
-    flex-direction: column;
+  flex-direction: column;
 
-    flex: 1;
+  flex: 1;
 }
 
 
@@ -494,13 +517,13 @@ body.light-theme {
 ============================================================ */
 
 .cardTitle {
-    display: flex;
+  display: flex;
 
-    align-items: center;
+  align-items: center;
 
-    gap: 12px;
+  gap: 12px;
 
-    margin-bottom: 18px;
+  margin-bottom: 18px;
 }
 
 
@@ -509,63 +532,63 @@ body.light-theme {
 ============================================================ */
 
 .cardIcon {
-    width: 44px;
-    height: 44px;
+  width: 44px;
+  height: 44px;
 
-    display: flex;
+  display: flex;
 
-    justify-content: center;
+  justify-content: center;
 
-    align-items: center;
+  align-items: center;
 
-    border-radius: 50%;
+  border-radius: 50%;
 
-    color: #fff;
+  color: #fff;
 
-    font-size: 24px !important;
+  font-size: 24px !important;
 
-    line-height: 1 !important;
+  line-height: 1 !important;
 
-    padding: 0;
+  padding: 0;
 }
 
 
 .material-symbols-outlined.cardIcon {
-    display: flex !important;
+  display: flex !important;
 
-    justify-content: center;
+  justify-content: center;
 
-    align-items: center;
+  align-items: center;
 }
 
 
 .vaga {
-    background: #3b82f6;
+  background: #3b82f6;
 }
 
 
 .usuario {
-    background: #22c55e;
+  background: #22c55e;
 }
 
 
 .veiculo {
-    background: #f59e0b;
+  background: #f59e0b;
 }
 
 
 .tarifa {
-    background: #8b5cf6;
+  background: #8b5cf6;
 }
 
 
 .iot {
-    background: #06b6d4;
+  background: #06b6d4;
 }
 
 
 .permissao {
-    background: #ec4899;
+  background: #ec4899;
 }
 
 
@@ -579,9 +602,9 @@ body.light-theme {
 #tituloCadastroTarifa,
 #tituloCadastroIot,
 #tituloCadastroPermissao {
-    font-size: 14px;
+  font-size: 14px;
 
-    color: white;
+  color:var(--texto-principal)
 }
 
 
@@ -595,11 +618,11 @@ body.light-theme {
 #paragrafoCadastroTarifa,
 #paragrafoCadastroIot,
 #paragrafoCadastroPermissao {
-    font-size: 12px;
+  font-size: 12px;
 
-    color: #9ca3af;
+  color: #7e8186;
 
-    margin-top: 3px;
+  margin-top: 3px;
 }
 
 
@@ -608,15 +631,15 @@ body.light-theme {
 ============================================================ */
 
 .tituloInput {
-    font-size: 11px;
+  font-size: 11px;
 
-    font-weight: 600;
+  font-weight: 600;
 
-    color: #cbd5e1;
+  color: var(--texto-principal);
 
-    margin-top: 10px;
+  margin-top: 10px;
 
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 
@@ -625,33 +648,33 @@ body.light-theme {
 ============================================================ */
 
 .inputTelaCadastro {
-    width: 100%;
+  width: 100%;
 
-    height: 34px;
+  height: 34px;
 
-    border: 1px solid #475569;
+  border: 1px solid #475569;
 
-    border-radius: 4px;
+  border-radius: 4px;
 
-    background: #0f172A;
+  background: var(--bg-body);
 
-    color: white;
+  color: white;
 
-    padding: 0 10px;
+  padding: 0 10px;
 
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 
 .inputTelaCadastro::placeholder {
-    color: #6b7280;
+  color: #6b7280;
 }
 
 
 .inputTelaCadastro:focus {
-    outline: none;
+  outline: none;
 
-    border-color: #7c3aed;
+  border-color: #7c3aed;
 }
 
 
@@ -660,65 +683,65 @@ body.light-theme {
 ============================================================ */
 
 .botoes {
-    margin-top: auto;
+  margin-top: auto;
 
-    display: flex;
+  display: flex;
 
-    gap: 10px;
+  gap: 10px;
 
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 
 /* Cancelar */
 
 .botaoCancelar {
-    flex: 1;
+  flex: 1;
 
-    height: 34px;
+  height: 34px;
 
-    font-size: 12px;
+  font-size: 12px;
 
-    border-radius: 6px;
+  border-radius: 6px;
 
-    border: 1px solid #6b7280;
+  border: 1px solid #6b7280;
 
-    background: #374151;
+  background: #374151;
 
-    color: white;
+  color: white;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 
 .botaoCancelar:hover {
-    background: #4b5563;
+  background: #4b5563;
 }
 
 
 /* Salvar */
 
 .botaoSalvar {
-    flex: 2;
+  flex: 2;
 
-    height: 34px;
+  height: 34px;
 
-    font-size: 12px;
+  font-size: 12px;
 
-    border: none;
+  border: none;
 
-    border-radius: 6px;
+  border-radius: 6px;
 
-    background: #7c3aed;
+  background: #7c3aed;
 
-    color: white;
+  color: white;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 
 .botaoSalvar:hover {
-    background: #6d28d9;
+  background: #6d28d9;
 }
 
 
@@ -727,46 +750,46 @@ body.light-theme {
 ============================================================ */
 
 .linha {
-    display: grid;
+  display: grid;
 
-    grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
-    gap: 10px;
+  gap: 10px;
 
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 
 .campo {
-    display: flex;
+  display: flex;
 
-    flex-direction: column;
+  flex-direction: column;
 }
 
 
 .campo label {
-    font-size: 11px;
+  font-size: 11px;
 
-    font-weight: 600;
+  font-weight: 600;
 
-    color: #cbd5e1;
+  color: #cbd5e1;
 
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 
 .campo input {
-    height: 34px;
+  height: 34px;
 
-    border: 1px solid #475569;
+  border: 1px solid #475569;
 
-    border-radius: 4px;
+  border-radius: 4px;
 
-    background: #0f172a;
+  background: var(--bg-body);
 
-    color: white;
+  color: white;
 
-    padding: 0 10px;
+  padding: 0 10px;
 }
 
 
@@ -776,54 +799,54 @@ body.light-theme {
 
 @media (max-width: 1200px) {
 
-    .mainTelaCadastro {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .mainTelaCadastro {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
 }
 
 
 @media (max-width: 768px) {
 
-    .mainTelaCadastro {
-        grid-template-columns: 1fr;
-    }
+  .mainTelaCadastro {
+    grid-template-columns: 1fr;
+  }
 
 
-    .sidebar {
-        position: fixed;
+  .sidebar {
+    position: fixed;
 
-        top: 0;
-        left: 0;
+    top: 0;
+    left: 0;
 
-        height: 100vh;
+    height: 100vh;
 
-        margin-left: 0;
-    }
-
-
-    .sidebar.collapsed {
-        margin-left: -250px;
-    }
+    margin-left: 0;
+  }
 
 
-    .mainTelaCadastro {
-        padding: 0 15px 20px;
-    }
+  .sidebar.collapsed {
+    margin-left: -250px;
+  }
 
 
-    .headerTelaCadastro {
-        padding: 20px 15px;
-    }
+  .mainTelaCadastro {
+    padding: 0 15px 20px;
+  }
 
 
-    .top-header {
-        padding: 15px;
-    }
+  .headerTelaCadastro {
+    padding: 20px 15px;
+  }
 
 
-    .linha {
-        grid-template-columns: 1fr;
-    }
+  .top-header {
+    padding: 15px;
+  }
+
+
+  .linha {
+    grid-template-columns: 1fr;
+  }
 
 }

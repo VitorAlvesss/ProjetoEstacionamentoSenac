@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="/Frontend/src/styles/menu.css">
     <link rel="stylesheet" href="/Frontend/src/styles/tela_cadastro.css">
+    <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -33,37 +34,38 @@
 
 
         <nav class="sidebar-nav">
-      <ul>
-        <li class="nav-item">
-          <a href="/Frontend/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">
-              app_registration</i> Cadastro</a>
-        </li>
-        <li class="nav-item">
-          <a href="/Frontend/vagas/index.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
-        </li>
-        <li class="nav-item">
-          <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
-        </li>
-        <li class="nav-item">
-          <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
-        </li>
-        <li class="nav-item">
-          <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
-        </li>
-        <li class="nav-item">
-          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
-        </li>
-        <li class="nav-item">
-          <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
-        </li>
-        <li class="nav-item">
-          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
-        </li>
-      </ul>
-    </nav>
+            <ul>
+                <li class="nav-item">
+                    <a href="/Frontend/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">
+                            app_registration</i> Cadastro</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Frontend/vagas/index.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i>
+                        Entradas e Saídas</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+                </li>
+                <li class="nav-item">
+                    <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+                </li>
+                <li class="nav-item">
+                    <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+                </li>
+            </ul>
+        </nav>
 
         <div class="quick-summary">
             <div class="quick-summary-title">RESUMO RÁPIDO</div>
@@ -130,16 +132,17 @@
 
                 <!-- Ususario -->
                 <div id="usuario-logado">
-                    <span class="material-symbols-outlined">
-                        account_circle
-                    </span>
+                    <i id="avatar" class="fa-solid fa-circle-user avatar"></i>
+                    <div class="user-details">
 
-                    <div class="detalhes-usuario">
-                        <strong id="nome-usuario">----</strong>
-                        <span class="status-online" id="status-usuario">--</span>
+                        <div class="detalhes-usuario">
+                            <span id="nome-usuario" style="font-weight: 600;">Administrador</span>
+                            <!-- <strong id="nome-usuario">----</strong> -->
+                            <span id="status-usuario" class="status">Online</span>
+                            <!-- <span class="status-online" id="status-usuario">--</span> -->
+                        </div>
                     </div>
                 </div>
-            </div>
         </header>
 
         <header class="headerTelaCadastro">
