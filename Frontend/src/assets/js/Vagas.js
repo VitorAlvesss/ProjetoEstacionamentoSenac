@@ -1,5 +1,3 @@
-// TEMA CLARO e ESCURO
-
 const btnTema = document.getElementById("btnTema");
 
 // Carrega o tema salvo
@@ -15,6 +13,7 @@ if (btnTema) {
     localStorage.setItem("tema", isLight ? "light" : "dark");
   });
 }
+
 
 
 
@@ -80,6 +79,9 @@ function marcarLinkAtivo() {
 document.addEventListener('DOMContentLoaded', marcarLinkAtivo);
 
 
+
+
+
 /* Atualização da Data e Hora no Cabeçalho */
 function atualizarDataHora() {
   const horaEl = document.getElementById('hora-atual');
@@ -102,38 +104,3 @@ setInterval(atualizarDataHora, 1000);
 /* Inicialização do Menu */
 renderSidebarNav();
 window.navigateTo(DEFAULT_SCREEN);
-
-
-// Renderização do gráfico do Financeiro Hoje
-const ctxFaturamento = document.getElementById('graficoFaturamento');
-
-if (ctxFaturamento) {
-  new Chart(ctxFaturamento, {
-    type: 'line',
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
-      datasets: [{
-        data: [150, 280, 200, 320, 290, 410, 380, 487.50],
-        borderColor: '#22c55e',
-        borderWidth: 2,
-        backgroundColor: 'rgba(34, 197, 94, 0.08)',
-        fill: true,
-        tension: 0.4,
-        pointRadius: (context) => context.dataIndex === 7 ? 4 : 0,
-        pointBackgroundColor: '#22c55e'
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { enabled: false }
-      },
-      scales: {
-        x: { display: false },
-        y: { display: false }
-      }
-    }
-  });
-}

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goiabinha - Controle de Estacionamento</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/Frontend/src/styles/entr.css">
+  <link rel="stylesheet" href="/Frontend/src/styles/menu.css">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+</head>
+
+<body>
+
+  <!-- Menu lateral (sidebar) -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
+
+      <div class="logo-container">
+
+        <div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="/Frontend/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">
+              app_registration</i> Cadastro</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/vagas/index.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="quick-summary">
+      <div class="quick-summary-title">RESUMO RÁPIDO</div>
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$
+          0,00</span></div>
+    </div>
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+    </div>
+  </aside>
+
+  <!-- Area Principal -->
+  <main class="main-wrapper">
+    
+    <header class="cabecalho-principal">
+
+      <!-- Lado Esquerdo: Apenas a Logo -->
+      <div class="cabecalho-esquerda">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu">
+        </i>
+        <div class="brand-logo">
+          <img src="/Frontend/public/logo.png" alt="Goiabinha & CIA" class="img-logo">
+        </div>
+      </div>
+
+      <!-- Centro: Título e Subtítulo Centralizados -->
+      <div class="titulos-cabecalho centralizado">
+
+        <h1 id="pageTitle">
+          Controle de Entradas e Saídas
+        </h1>
+
+        <h2 id="pageSubtitle">
+          Movimentação em tempo real
+        </h2>
+
+      </div>
+      
+
+      <!-------------------------- Lado Direito: Informações e Notificação ------------------->
+      <div class="info-cabecalho">
+
+        <!--Alternar o tema -->
+        <button id="btnTema" class="btn-tema" title="Alternar Tema">
+          <span class="material-symbols-outlined">routine</span>
+
+        </button>
+
+        <!--Data e Hora-->
+        <div id="data-hora">
+          <span id="hora-atual">--:--:--</span>
+          <small id="data-atual">--/--/----</small>
+        </div>
+
+        <!-- Notificação -->
+        <div id="notificacao" class="botao-icone">
+          <span class="material-symbols-outlined">notifications</span>
+
+          <span class="emblema" id="qtd-notificacoes">0</span>
+        </div>
+
+        <!-- Ususario -->
+        <div id="usuario-logado">
+          <i id="avatar" class="fa-solid fa-circle-user avatar"></i>
+          <div class="user-details">
+
+            <div class="detalhes-usuario">
+              <span id="nome-usuario" style="font-weight: 600;">Administrador</span>
+              <!-- <strong id="nome-usuario">----</strong> -->
+              <span id="status-usuario" class="status">Online</span>
+              <!-- <span class="status-online" id="status-usuario">--</span> -->
+            </div>
+          </div>
+        </div>
+    </header>
+
+    <div class="painel">
+
+      <!-- Resumo do Dia -->
+      <section class="cards-resumo">
+
+        <!-- Card 1: Estacionados -->
+        <div class="card verdes">
+          <div class="card-cabecalho">
+            <span class="card-titulo">Estacionados Agora</span>
+            <div class="card-icone" style="background: var(--cor-sucesso);">
+              <i class="fa-solid fa-arrow-down-to-line"></i>
+            </div>
+          </div>
+          <div class="card-corpo">
+            <span class="card-valor" id="num-estacionados">13</span>
+            <span style="font-size: 0.85rem; color: var(--cor-sucesso); font-weight: bold;">Ativos</span>
+          </div>
+          <div class="card-rodape">
+            <span>Total hoje: <strong id="num-total-entradas">24</strong></span>
+            <span>Vagas ocupadas</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Saídas -->
+        <div class="card vermelhos">
+          <div class="card-cabecalho">
+            <span class="card-titulo">Saídas Realizadas</span>
+            <div class="card-icone" style="background: var(--cor-perigo);">
+              <i class="fa-solid fa-arrow-up-from-line"></i>
+            </div>
+          </div>
+          <div class="card-corpo">
+            <span class="card-valor" id="num-saidas">11</span>
+            <span style="font-size: 0.85rem; color: var(--cor-perigo); font-weight: bold;">Hoje</span>
+          </div>
+          <div class="card-rodape">
+            <span>Faturamento: <strong>R$ 487,00</strong></span>
+            <span>Ticket médio: R$ 44,27</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Reservas -->
+        <div class="card laranjas">
+          <div class="card-cabecalho">
+            <span class="card-titulo">Reservas Ativas</span>
+            <div class="card-icone" style="background: var(--cor-alerta);">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+          </div>
+          <div class="card-corpo">
+            <span class="card-valor" id="num-reservas">02</span>
+            <span style="font-size: 0.85rem; color: var(--cor-alerta); font-weight: bold;">Aguardando</span>
+          </div>
+          <div class="card-rodape">
+            <span>Próxima chegada: <strong>14 min</strong></span>
+            <span>Reservadas</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Tabela de Movimentação -->
+      <div class="bloco-tabela">
+        <div class="bloco-cabecalho">
+          <div>
+            <h3 style="font-size: 1rem;">Histórico de Movimentação</h3>
+            <span style="font-size: 0.75rem; color: var(--texto-suave);">Registros do dia atual</span>
+          </div>
+          <button class="btn btn-primario" id="btnNovaEntrada">
+            <i class="fa-solid fa-plus"></i> Nova Entrada
+          </button>
+        </div>
+
+        <div class="tabela-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Placa</th>
+                <th>Vaga</th>
+                <th>Tipo</th>
+                <th>Entrada</th>
+                <th>Saída</th>
+                <th>Status</th>
+                <th>Valor</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="listaMovimentacao">
+              <tr>
+                <td><strong>ABC-1023</strong></td>
+                <td>Vaga 02</td>
+                <td>Mensalista</td>
+                <td>20/05/2026 13:29</td>
+                <td>—</td>
+                <td><span class="status status-estacionado">Estacionado</span></td>
+                <td>R$ 4,00</td>
+                <td>
+                  <button class="btn btn-saida" onclick="darSaida(this)">
+                    <i class="fa-solid fa-right-from-bracket"></i> Dar Saída
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>DEF-4056</strong></td>
+                <td>Vaga 03</td>
+                <td>Avulso</td>
+                <td>20/05/2026 12:51</td>
+                <td>—</td>
+                <td><span class="status status-estacionado">Estacionado</span></td>
+                <td>R$ 10,00</td>
+                <td>
+                  <button class="btn btn-saida" onclick="darSaida(this)">
+                    <i class="fa-solid fa-right-from-bracket"></i> Dar Saída
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>XYZ-9988</strong></td>
+                <td>Vaga 06</td>
+                <td>Reserva Online</td>
+                <td>—</td>
+                <td>—</td>
+                <td><span class="status status-reservado">Reservado</span></td>
+                <td>R$ 0,00</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td><strong>GHI-7890</strong></td>
+                <td>Vaga 07</td>
+                <td>Avulso</td>
+                <td>20/05/2026 10:15</td>
+                <td>20/05/2026 12:30</td>
+                <td><span class="status status-saiu">Finalizado</span></td>
+                <td>R$ 18,00</td>
+                <td><i class="fa-solid fa-check-double" style="color: var(--cor-sucesso);"></i> Concluído</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Modal: Nova Entrada -->
+  <div class="modal-fundo" id="modalEntrada">
+    <div class="modal-caixa">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 style="font-size: 1rem;">Registrar Entrada</h3>
+        <i class="fa-solid fa-xmark" id="btnFecharModal" style="cursor: pointer; color: var(--texto-suave);"></i>
+      </div>
+
+      <form id="formNovaEntrada">
+        <div class="campo">
+          <label for="placa">Placa do Veículo</label>
+          <input type="text" id="placa" placeholder="Ex: ABC-1234" required style="text-transform: uppercase;">
+        </div>
+
+        <div class="campo">
+          <label for="vaga">Vaga Selecionada</label>
+          <select id="vaga" required>
+            <option value="Vaga 01">Vaga 01 (Livre)</option>
+            <option value="Vaga 04">Vaga 04 (Livre)</option>
+            <option value="Vaga 05">Vaga 05 (Livre)</option>
+            <option value="Vaga 08">Vaga 08 (Livre)</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="tipoCliente">Tipo de Cliente</label>
+          <select id="tipoCliente">
+            <option value="Avulso">Avulso</option>
+            <option value="Mensalista">Mensalista</option>
+            <option value="Conveniado">Conveniado</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+          <button type="button" class="btn" id="btnCancelar" style="background: #e2e8f0; flex: 1;">Cancelar</button>
+          <button type="submit" class="btn btn-primario" style="flex: 1;">Confirmar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <script type="module" src="/Frontend/src/assets/js/etrSai.JS"></script>
+  
+</body>
+
+</html>
