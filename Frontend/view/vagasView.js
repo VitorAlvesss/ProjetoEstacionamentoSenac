@@ -1,99 +1,302 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const vagasTotais = document.querySelector("#vagas-totais");
-    const vagasLivres = document.querySelector("#vagas-livres");
-    const vagasOcupadas = document.querySelector("#vagas-ocupadas");
-    const taxaOcupacao = document.querySelector("#taxa-ocupacao");
-    const entradasHoje = document.querySelector("#entradas-hoje");
-    const saidasHoje = document.querySelector("#saidas-hoje");
-    const permanecem = document.querySelector("#permanecem");
-    const detalheTaxa = document.querySelector("#detalhe-taxa");
-    const subFinanceiro = document.querySelector("#sub-financeiro");
-    const financeiroHoje = document.querySelector("#valor-financeiro");
-    const ticketMedio = document.querySelector("#ticket-medio");
-    const faturamentoHoje = document.querySelector("#faturamento-hoje");
-    const qtdVeiculosHoje = document.querySelector("#qtd-veiculos-hoje");
+    // ============================================================
+    // ELEMENTOS DO HTML
+    // ============================================================
 
-    const btnAtualizarMovimentacao = document.querySelector("#btnAtualizarMovimentacoes");
+    const vagasTotais =
+        document.querySelector("#vagas-totais");
 
-    const btnAtualizarIOT = document.querySelector("#btnAtualizarIot");
+    const vagasLivres =
+        document.querySelector("#vagas-livres");
+
+    const vagasOcupadas =
+        document.querySelector("#vagas-ocupadas");
+
+    const taxaOcupacao =
+        document.querySelector("#taxa-ocupacao");
+
+    const detalheTaxa =
+        document.querySelector("#detalhe-taxa");
+
+
+    // ============================================================
+    // MOVIMENTAÇÃO
+    // ============================================================
+
+    const entradasHoje =
+        document.querySelector("#entradas-hoje");
+
+    const saidasHoje =
+        document.querySelector("#saidas-hoje");
+
+    const permanecem =
+        document.querySelector("#permanecem");
+
+
+    // ============================================================
+    // FINANCEIRO
+    // ============================================================
+
+    const subFinanceiro =
+        document.querySelector("#sub-financeiro");
+
+    const financeiroHoje =
+        document.querySelector("#valor-financeiro");
+
+    const ticketMedio =
+        document.querySelector("#ticket-medio");
+
+    const faturamentoHoje =
+        document.querySelector("#faturamento-hoje");
+
+    const qtdVeiculosHoje =
+        document.querySelector("#qtd-veiculos-hoje");
+
+
+    // ============================================================
+    // TABELA
+    // ============================================================
+
+    const btnTodasMovimentacoes =
+        document.querySelector("#todasMovimentacoes");
+
+    const tabelaMovimentacoes =
+        document.querySelector("#corpo-tabela");
+
+    const btnAtualizarMovimentacao =
+        document.querySelector("#btnAtualizarMovimentacoes");
+
+
+    // ============================================================
+    // IOT
+    // ============================================================
+
+    const dataIOT =
+        document.querySelector("#data-iot");
+
+    const btnAtualizarIOT =
+        document.querySelector("#btnAtualizarIot");
+
+
+    // ============================================================
+    // REGISTROS
+    // ============================================================
+
+    let todosRegistros = [];
+
+
+    // ============================================================
+    // ATUALIZAR MOVIMENTAÇÕES
+    // ============================================================
 
     btnAtualizarMovimentacao.addEventListener("click", () => {
+
         carregarDashboard();
+
     });
 
-    btnAtualizarIOT.addEventListener("click", () => {
-        carregarDashboard();
+
+    // ============================================================
+    // TODAS AS MOVIMENTAÇÕES
+    // ============================================================
+
+    btnTodasMovimentacoes.addEventListener("click", (event) => {
+
+        event.preventDefault();
+
+        todasMovimentacoes(todosRegistros);
+
     });
+
+
+    // ============================================================
+    // ATUALIZAR IOT
+    // ============================================================
+
+    btnAtualizarIOT.addEventListener("click", () => {
+
+        carregarDashboard();
+
+    });
+
+
+    // ============================================================
+    // CARREGAR DASHBOARD
+    // ============================================================
 
     async function carregarDashboard() {
 
         try {
 
-            const resposta = await fetch("/dashboard");
-            const data = await resposta.json();
+            const resposta =
+                await fetch("/dashboard");
 
+
+            if (!resposta.ok) {
+
+                throw new Error(
+                    `Erro HTTP: ${resposta.status}`
+                );
+
+            }
+
+
+            const data =
+                await resposta.json();
+
+
+            // ====================================================
+            // REGISTROS
+            // ====================================================
+
+            todosRegistros =
+                data.todosRegistros || [];
+
+
+            // ====================================================
             // VAGAS
+            // ====================================================
 
-            vagasTotais.textContent = data.vagas.total;
+            vagasTotais.textContent =
+                data.vagas.total ?? 0;
 
-            vagasLivres.textContent = data.vagas.livres;
+            vagasLivres.textContent =
+                data.vagas.livres ?? 0;
 
-            vagasOcupadas.textContent = data.vagas.ocupadas;
-
-            detalheTaxa.textContent = data.vagas.ocupadas + " de " + data.vagas.total + " vagas";
-
-            // FINANCEIRO
-            faturamentoHoje.textContent =
-                `R$ ${Number(data.financeiro.faturamento).toFixed(2).replace(".", ",")}`;
-
-            qtdVeiculosHoje.textContent =
-                `${data.financeiro.veiculos} veículos`;
-
-            financeiroHoje.textContent =
-                "R$ " + data.financeiro.faturamento.toFixed(2);
-
-            ticketMedio.textContent =
-                `R$ ${Number(data.financeiro.ticketMedio).toFixed(2).replace(".", ",")}`;
+            vagasOcupadas.textContent =
+                data.vagas.ocupadas ?? 0;
 
 
+            detalheTaxa.textContent =
+                `${data.vagas.ocupadas ?? 0} de ${data.vagas.total ?? 0} vagas`;
+
+
+            // ====================================================
             // TAXA DE OCUPAÇÃO
+            // ====================================================
 
-            let taxa;
+            let taxa = 0;
+
 
             if (data.vagas.total > 0) {
 
                 taxa =
-                    (data.vagas.ocupadas / data.vagas.total) * 100;
-
-            } else {
-
-                taxa = 0;
+                    (data.vagas.ocupadas /
+                        data.vagas.total) * 100;
 
             }
 
+
             taxaOcupacao.textContent =
-                taxa.toFixed(2) + "%";
+                `${taxa.toFixed(2)}%`;
 
 
+            // ====================================================
+            // FINANCEIRO
+            // ====================================================
+
+            const faturamento =
+                Number(
+                    data.financeiro?.faturamento || 0
+                );
+
+
+            const ticket =
+                Number(
+                    data.financeiro?.ticketMedio || 0
+                );
+
+
+            const veiculos =
+                Number(
+                    data.financeiro?.veiculos || 0
+                );
+
+
+            faturamentoHoje.textContent =
+                `R$ ${faturamento
+                    .toFixed(2)
+                    .replace(".", ",")}`;
+
+
+            financeiroHoje.textContent =
+                `R$ ${faturamento
+                    .toFixed(2)
+                    .replace(".", ",")}`;
+
+
+            qtdVeiculosHoje.textContent =
+                `${veiculos} veículos`;
+
+
+            ticketMedio.textContent =
+                `R$ ${ticket
+                    .toFixed(2)
+                    .replace(".", ",")}`;
+
+
+            // ====================================================
             // MOVIMENTAÇÃO
+            // ====================================================
 
-            subFinanceiro.textContent =
-                data.movimentacao.entradasHoje;
+            const entradas =
+                data.movimentacao?.entradasHoje || 0;
+
+            const saidas =
+                data.movimentacao?.saidasHoje || 0;
+
+            const permanecemAtual =
+                data.movimentacao?.permanecem || 0;
+
 
             entradasHoje.textContent =
-                data.movimentacao.entradasHoje;
+                entradas;
 
             saidasHoje.textContent =
-                data.movimentacao.saidasHoje;
+                saidas;
 
             permanecem.textContent =
-                data.movimentacao.permanecem;
+                permanecemAtual;
 
 
+            // ====================================================
+            // SUBTÍTULO FINANCEIRO
+            // ====================================================
+
+            subFinanceiro.textContent =
+                `${entradas} entradas hoje`;
+
+
+            // ====================================================
+            // DATA DE ATUALIZAÇÃO
+            // ====================================================
+
+            const horario =
+                new Date();
+
+
+            dataIOT.textContent =
+                horario.toLocaleString("pt-BR");
+
+
+            // ====================================================
             // VAGAS
+            // ====================================================
 
-            carregarVagas(data.vagasLista);
+            carregarVagas(
+                data.listaVagas || []
+            );
+
+
+            // ====================================================
+            // MOVIMENTAÇÕES
+            // ====================================================
+
+            todasMovimentacoes(
+                data.movimentacao?.movimentacoes || []
+            );
+
 
         } catch (error) {
 
@@ -103,13 +306,19 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
         }
+
     }
 
+
+    // ============================================================
+    // CARREGAR VAGAS
+    // ============================================================
 
     function carregarVagas(vagas) {
 
         const listaVagas =
-            document.querySelector("#lista-vagas");
+            document.querySelector("#listaVagas");
+
 
         listaVagas.innerHTML = "";
 
@@ -119,48 +328,189 @@ document.addEventListener("DOMContentLoaded", () => {
             const itemVaga =
                 document.createElement("div");
 
-            itemVaga.classList.add("item-vaga");
+
+            itemVaga.classList.add(
+                "item-vaga"
+            );
 
 
             if (vaga.ocupada) {
 
-                // VAGA OCUPADA
+                itemVaga.classList.add(
+                    "status-ocupado"
+                );
 
-                itemVaga.classList.add("status-ocupado");
 
                 itemVaga.innerHTML = `
+
                     <span class="led-status"></span>
 
                     <span class="texto-vaga">
+
                         ${vaga.codigo_vaga} -
-                        <strong>${vaga.placa}</strong>
+
+                        <strong>
+                            ${vaga.placa ?? "Ocupada"}
+                        </strong>
+
                     </span>
+
                 `;
 
             } else {
 
-                // VAGA LIVRE
+                itemVaga.classList.add(
+                    "status-livre"
+                );
 
-                itemVaga.classList.add("status-livre");
 
                 itemVaga.innerHTML = `
+
                     <span class="led-status"></span>
 
                     <span class="texto-vaga">
+
                         ${vaga.codigo_vaga} -
+
                         <strong class="info-status">
                             Livre
                         </strong>
+
                     </span>
+
                 `;
 
             }
 
-            listaVagas.appendChild(itemVaga);
+
+            listaVagas.appendChild(
+                itemVaga
+            );
 
         });
 
     }
+
+
+    // ============================================================
+    // MOVIMENTAÇÕES
+    // ============================================================
+
+    function todasMovimentacoes(registros) {
+
+        tabelaMovimentacoes.innerHTML = "";
+
+
+        registros.forEach(registro => {
+
+
+            // ====================================================
+            // STATUS
+            // ====================================================
+
+            const status =
+                registro.pago
+                    ? "Finalizado"
+                    : "Em aberto";
+
+
+            const classeStatus =
+                registro.pago
+                    ? "status-finalizado"
+                    : "status-aberto";
+
+
+            // ====================================================
+            // LINHA
+            // ====================================================
+
+            const row =
+                document.createElement("tr");
+
+
+            // ====================================================
+            // VALOR
+            // ====================================================
+
+            let valor = "---";
+
+
+            if (
+                registro.total_pago !== null &&
+                registro.total_pago !== undefined
+            ) {
+
+                valor =
+                    `R$ ${Number(registro.total_pago)
+                        .toFixed(2)
+                        .replace(".", ",")}`;
+
+            }
+
+
+            // ====================================================
+            // CONTEÚDO
+            // ====================================================
+
+            row.innerHTML = `
+
+                <td class="txt-bold">
+                    ${registro.placa ?? "---"}
+                </td>
+
+
+                <td>
+
+                    <span class="badge-tipo">
+                        Usuário
+                    </span>
+
+                </td>
+
+
+                <td>
+                    ${registro.data_entrada ?? "---"}
+                </td>
+
+
+                <td>
+                    ${registro.data_saida ?? "---"}
+                </td>
+
+
+                <td>
+                    ${registro.tempo_uso ?? "---"}
+                </td>
+
+
+                <td>
+                    ${valor}
+                </td>
+
+
+                <td>
+
+                    <span class="badge-status ${classeStatus}">
+                        ${status}
+                    </span>
+
+                </td>
+
+            `;
+
+
+            tabelaMovimentacoes.appendChild(
+                row
+            );
+
+        });
+
+    }
+
+
+    // ============================================================
+    // CARREGAMENTO INICIAL
+    // ============================================================
 
     carregarDashboard();
 
