@@ -1,33 +1,44 @@
-const db = require('../Connection/db');
-const firebase = require('../Connection/fireDb');
-const {collection, getDocs} = require("firebase/firestore")
+const db = require("../Connection/db");
 
-async function buscarDispositivoIOT(){
+const firebase = require('../Connection/fireDb.js');
+
+const { collection, getDocs } = require("firebase/firestore");
+
+
+async function buscarDispositivoIOT() {
+
     const referencia = collection(firebase, "estacionamento");
+
     const resultado = await getDocs(referencia);
 
     const dispositivos = [];
 
     resultado.docs.forEach((docs) => {
+
         dispositivos.push({
             id: docs.id,
             ...docs.data()
         });
+
     });
+
     return dispositivos;
 }
 
-async function buscarDashboard(){
+
+async function buscarDashboard() {
+
     const [resultado] = await db.query(`
         SELECT
             COUNT(*) AS total,
             SUM(ocupada = FALSE) AS livres,
             SUM(ocupada = TRUE) AS ocupadas
         FROM tbl_vaga
-        `);
-    return resultado[0];
+    `);
 
+    return resultado[0];
 }
+
 
 async function registro_vagasOcupadas() {
 
@@ -54,62 +65,105 @@ async function registro_vagasOcupadas() {
     return resultado;
 }
 
-async function registro_ocupacao(){
+
+async function registro_ocupacao() {
+
     const [resultado] = await db.query(`
         SELECT 
             r.id,
             r.id_vaga,
             c.placa,
-
             r.data_entrada,
             r.data_saida,
             r.tempo_uso,
             r.tempo_pago,
             r.pago
+
         FROM tbl_registro_ocupacao r 
+
         INNER JOIN tbl_carro c 
             ON r.id_carro = c.id
+
         ORDER BY r.data_entrada DESC
-        LIMIT 10
-        `);
+
+        LIMIT 5
+    `);
+
     return resultado;
 }
 
-async function entradasHoje(){
+
+async function todos_registros() {
+
+    const [resultado] = await db.query(`
+        SELECT 
+            r.id,
+            r.id_vaga,
+            c.placa,
+            r.data_entrada,
+            r.data_saida,
+            r.tempo_uso,
+            r.tempo_pago,
+            r.pago
+
+        FROM tbl_registro_ocupacao r 
+
+        INNER JOIN tbl_carro c 
+            ON r.id_carro = c.id
+
+        ORDER BY r.data_entrada DESC
+    `);
+
+    return resultado;
+}
+
+
+async function entradasHoje() {
+
     const [resultado] = await db.query(`
         SELECT COUNT(*) AS total
         FROM tbl_registro_ocupacao
         WHERE DATE(data_entrada) = CURDATE()
-        `);
+    `);
 
-        return resultado.total;
+    return resultado[0].total;
 }
 
-async function saidasHoje(){
+
+async function saidasHoje() {
+
     const [resultado] = await db.query(`
         SELECT COUNT(*) AS total
         FROM tbl_registro_ocupacao
-        WHERE DATE(data_saida) = CURDATE()        
-        `);
-        return resultado.total;
+        WHERE DATE(data_saida) = CURDATE()
+    `);
+
+    return resultado[0].total;
 }
+
 
 async function permanecem() {
+
     const [resultado] = await db.query(`
         SELECT COUNT(*) AS total
         FROM tbl_registro_ocupacao
-        WHERE data_saida IS NULL        
-        `);
-        return resultado.total;
+        WHERE data_saida IS NULL
+    `);
+
+    return resultado[0].total;
 }
 
+
 async function financeiroHoje() {
+
     const [resultado] = await db.query(`
         SELECT
             COALESCE(SUM(total_pago), 0) AS faturamento,
             COUNT(*) AS veiculos,
             COALESCE(AVG(total_pago), 0) AS ticket_medio
+
         FROM tbl_registro_ocupacao
+
         WHERE DATE(data_saida) = CURDATE()
           AND data_saida IS NOT NULL
     `);
@@ -117,13 +171,17 @@ async function financeiroHoje() {
     return resultado[0];
 }
 
+
 module.exports = {
-    buscarDashboard, 
+
+    buscarDashboard,
     registro_ocupacao,
     entradasHoje,
     saidasHoje,
     permanecem,
     buscarDispositivoIOT,
     registro_vagasOcupadas,
-    financeiroHoje
+    financeiroHoje,
+    todos_registros
+
 };
