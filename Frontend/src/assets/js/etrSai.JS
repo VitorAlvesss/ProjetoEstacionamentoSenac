@@ -104,36 +104,91 @@ renderSidebarNav();
 window.navigateTo(DEFAULT_SCREEN);
 
 
-// Renderização do gráfico do Financeiro Hoje
-const ctxFaturamento = document.getElementById('graficoFaturamento');
 
-if (ctxFaturamento) {
-  new Chart(ctxFaturamento, {
-    type: 'line',
-    data: {
-      labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
-      datasets: [{
-        data: [150, 280, 200, 320, 290, 410, 380, 487.50],
-        borderColor: '#22c55e',
-        borderWidth: 2,
-        backgroundColor: 'rgba(34, 197, 94, 0.08)',
-        fill: true,
-        tension: 0.4,
-        pointRadius: (context) => context.dataIndex === 7 ? 4 : 0,
-        pointBackgroundColor: '#22c55e'
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: { enabled: false }
-      },
-      scales: {
-        x: { display: false },
-        y: { display: false }
-      }
+
+// Geral
+
+    // Contadores
+    let totalEstacionados = 13;
+    let totalSaidas = 11;
+    let totalEntradasDia = 24;
+
+    // Elementos da tela
+    const elEstacionados = document.getElementById('num-estacionados');
+    const elSaidas = document.getElementById('num-saidas');
+    const elTotalEntradas = document.getElementById('num-total-entradas');
+
+    // Elementos do Modal
+    const modal = document.getElementById('modalEntrada');
+    const btnAbrirModal = document.getElementById('btnNovaEntrada');
+    const btnFecharModal = document.getElementById('btnFecharModal');
+    const btnCancelar = document.getElementById('btnCancelar');
+    const formEntrada = document.getElementById('formNovaEntrada');
+
+    // Abrir e Fechar Modal
+    const fecharModal = () => {
+      modal.classList.remove('visivel');
+      formEntrada.reset();
+    };
+
+    btnAbrirModal.addEventListener('click', () => modal.classList.add('visivel'));
+    btnFecharModal.addEventListener('click', fecharModal);
+    btnCancelar.addEventListener('click', fecharModal);
+
+    // Salvar Nova Entrada
+    formEntrada.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const placa = document.getElementById('placa').value.toUpperCase();
+      const vaga = document.getElementById('vaga').value;
+      const tipo = document.getElementById('tipoCliente').value;
+      const horaAtual = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+      const tabela = document.getElementById('listaMovimentacao');
+      const novaLinha = document.createElement('tr');
+
+      novaLinha.innerHTML = `
+        <td><strong>${placa}</strong></td>
+        <td>${vaga}</td>
+        <td>${tipo}</td>
+        <td>Hoje ${horaAtual}</td>
+        <td>—</td>
+        <td><span class="status status-estacionado">Estacionado</span></td>
+        <td>R$ 0,00</td>
+        <td>
+          <button class="btn btn-saida" onclick="darSaida(this)">
+            <i class="fa-solid fa-right-from-bracket"></i> Dar Saída
+          </button>
+        </td>
+      `;
+
+      tabela.insertBefore(novaLinha, tabela.firstChild);
+
+      // Atualiza os cards
+      totalEstacionados++;
+      totalEntradasDia++;
+      elEstacionados.innerText = String(totalEstacionados).padStart(2, '0');
+      elTotalEntradas.innerText = totalEntradasDia;
+
+      fecharModal();
+    });
+
+    // Função de Dar Saída
+    function darSaida(botao) {
+      const linha = botao.closest('tr');
+      const horaAtual = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+      // Atualiza os campos da linha
+      linha.children[4].innerText = `Hoje ${horaAtual}`;
+      linha.children[5].innerHTML = `<span class="status status-saiu">Finalizado</span>`;
+      linha.children[7].innerHTML = `<i class="fa-solid fa-check-double" style="color: var(--cor-sucesso);"></i> Concluído`;
+
+      // Atualiza os cards
+      totalEstacionados--;
+      totalSaidas++;
+      elEstacionados.innerText = String(totalEstacionados).padStart(2, '0');
+      elSaidas.innerText = String(totalSaidas).padStart(2, '0');
     }
-  });
-}
+
+
+

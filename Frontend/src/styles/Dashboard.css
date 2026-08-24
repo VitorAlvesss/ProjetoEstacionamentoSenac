@@ -41,27 +41,30 @@ body.light-theme {
   --borda: #cbd5e1;
   --sombra: rgba(0, 0, 0, 0.05);
 
-
   --texto-principal: #0f172a;
   --texto-secundario: #1e293b;
-  --texto-mutado: #64748b;
-  --texto-suave: #94a3b8;
+  --texto-mutado: #475569;
+  --texto-suave: #64748b;
   --texto-destaque: #334155;
 
   /* Cores de ícones em modo claro */
-  --fundo-azul: #eff6ff;
-  --cor-azul: #2563eb;
-  --fundo-verde: #f0fdf4;
-  --cor-verde: #16a34a;
-  --fundo-vermelho: #fef2f2;
-  --cor-vermelho: #dc2626;
-  --fundo-amarelo: #fefce8;
-  --cor-amarelo: #ca8a04;
-  --fundo-roxo: #faf5ff;
-  --cor-roxo: #9333ea;
+  --fundo-azul: #e0f2fe;
+  --cor-azul: #0369a1;
+  --fundo-verde: #dcfce7;
+  --cor-verde: #15803d;
+  --fundo-vermelho: #ffe4e6;
+  --cor-vermelho: #be123c;
+  --fundo-amarelo: #fef3c7;
+  --cor-amarelo: #b45309;
+  --fundo-roxo: #f3e8ff;
+  --cor-roxo: #6b21a8;
 
   /* IMG */
   --opacidade-esp32: 0.3;
+}
+
+@view-transition {
+  navigation: auto;
 }
 
 /* 2. CONFIGURAÇÕES GERAIS */
@@ -75,8 +78,15 @@ body.light-theme {
 body {
   background-color: var(--bg-body);
   color: var(--texto-secundario);
-  padding: 20px;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.main-wrapper {
+  flex: 1;
+  width: 100% ;
+  margin-left: 0 ;
+  padding: 20px;
+  transition: all 0.3s ease;
 }
 
 /*3. CABEÇALHO*/
@@ -95,7 +105,6 @@ body {
 
 #hora-atual,
 #data-atual {
-
   color: #dde0e3;
 }
 
@@ -170,12 +179,12 @@ body {
 .botao-icone {
   position: relative;
   cursor: pointer;
-  color: var(--texto-mutado);
+  color: var(white);
   transition: color 0.2s;
 }
 
 .botao-icone:hover {
-  color: var(--texto-principal);
+ transform: scale(1.1);
 }
 
 .botao-icone .emblema {
@@ -207,7 +216,6 @@ body {
 }
 
 #avatar {
-
   font-size: 1.6rem;
   color: var(--text-muted);
 }
@@ -404,15 +412,15 @@ body {
 }
 
 .led-livre {
-  background-color: #22c55e;
+  background-color: var(--cor-verde);
 }
 
 .led-ocupado {
-  background-color: #ef4444;
+  background-color: var(--cor-vermelho);
 }
 
 .led-reservado {
-  background-color: #eab308;
+  background-color: var(--cor-amarelo);
 }
 
 .divisor-linha {
@@ -450,18 +458,18 @@ body {
 
 /* CORES DE FUNDO TRANSLÚCIDO E BORDAS */
 .status-livre {
-  background-color: rgba(34, 197, 94, 0.12);
-  border-color: rgba(34, 197, 94, 0.3);
+  background-color: var(--fundo-verde);
+  border-color: var(--cor-verde);
 }
 
 .status-ocupado {
-  background-color: rgba(239, 68, 68, 0.12);
-  border-color: rgba(239, 68, 68, 0.3);
+  background-color: var(--fundo-vermelho);
+  border-color: var(--cor-vermelho);
 }
 
 .status-reservado {
-  background-color: rgba(234, 179, 8, 0.12);
-  border-color: rgba(234, 179, 8, 0.3);
+  background-color: var(--fundo-amarelo);
+  border-color: var(--cor-amarelo);
 }
 
 /* TEXTOS E DESTAQUES */
@@ -474,15 +482,15 @@ body {
 }
 
 .status-livre .texto-vaga strong {
-  color: #4ade80;
+  color: var(--cor-verde);
 }
 
 .status-ocupado .texto-vaga strong {
-  color: #f87171;
+  color: var(--cor-vermelho);
 }
 
 .status-reservado .texto-vaga strong {
-  color: #facc15;
+  color: var(--cor-amarelo);
 }
 
 .texto-vaga small {
@@ -557,23 +565,23 @@ body {
 }
 
 .tipo-professor {
-  background-color: rgba(147, 51, 234, 0.15);
-  color: #a855f7;
+  background-color: var(--fundo-roxo);
+  color: var(--cor-roxo);
 }
 
 .tipo-visitante {
-  background-color: rgba(59, 130, 246, 0.15);
-  color: #60a5fa;
+  background-color: var(--fundo-azul);
+  color: var(--cor-azul);
 }
 
 .tipo-aluno {
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #34d399;
+  background-color: var(--fundo-verde);
+  color: var(--cor-verde);
 }
 
 .tipo-funcionario {
-  background-color: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
+  background-color: var(--fundo-amarelo);
+  color: var(--cor-amarelo);
 }
 
 /* STATUS (EM ABERTO, FINALIZADO) */
@@ -586,13 +594,13 @@ body {
 }
 
 .status-em-aberto {
-  background-color: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
+  background-color: var(--fundo-amarelo);
+  color: var(--cor-amarelo);
 }
 
 .status-finalizado {
-  background-color: rgba(16, 185, 129, 0.15);
-  color: #34d399;
+  background-color: var(--fundo-verde);
+  color: var(--cor-verde);
 }
 
 /* RODAPÉ LINK VER TODAS */

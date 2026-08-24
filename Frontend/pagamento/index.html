@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
+    <link rel="stylesheet" href="/Frontend/src/styles/menu.css">
+    <link rel="stylesheet" href="/Frontend/src/styles/pagamento.css">
+
+    <title>Goiabinha & CIA - Pagamento</title>
+</head>
+
+<body>
+
+    <!--  MENU LATERAL -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
+        </div>
+
+        <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="/Frontend/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">
+              app_registration</i> Cadastro</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/vagas/index.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
+    </nav>
+
+        <div class="quick-summary">
+            <div class="quick-summary-title">RESUMO RÁPIDO</div>
+            <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+            <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+            <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+            <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+            <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$
+                    0,00</span></div>
+        </div>
+
+        <div class="sidebar-copyright">
+            © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+        </div>
+    </aside>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="main-wrapper">
+
+        <!-- HEADER SUPERIOR -->
+        <header class="cabecalho-principal">
+            <div class="header-left">
+                <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
+                <div class="logo-container">
+                    <img src="/Frontend/public/logo.png" alt="Goiabinha & CIA" class="img-logo">
+                </div>
+            </div>
+
+            <!-- TÍTULO DA PÁGINA -->
+            <div class="page-title">
+                <h1 id="pageTitle">Financeiro</h1>
+                <p id="pageSubtitle">Acompanhe o faturamento do estacionamento</p>
+            </div>
+
+            <div class="info-cabecalho">
+                <section class="mudarTema">
+                    <button id="btnConfig" class="btnTema" title="Mudar Tema">
+                        <span class="material-symbols-outlined">routine</span>
+                    </button>
+
+                </section>
+
+                <!--Data e Hora-->
+                <div id="data-hora">
+                    <span id="hora-atual">--:--:--</span>
+                    <small id="data-atual">--/--/----</small>
+                </div>
+
+                <!-- Notificação -->
+                <div id="notificacao" class="botao-icone">
+                    <span class="material-symbols-outlined">notifications</span>
+
+                    <span class="emblema" id="qtd-notificacoes">0</span>
+                </div>
+
+                <!-- Ususario -->
+                <div id="usuario-logado">
+                    <i id="avatar" class="fa-solid fa-circle-user avatar"></i>
+                    <div class="user-details">
+
+                        <div class="detalhes-usuario">
+                            <span id="nome-usuario" style="font-weight: 600;">Administrador</span>
+                            <!-- <strong id="nome-usuario">----</strong> -->
+                            <span id="status-usuario" class="status">Online</span>
+                            <!-- <span class="status-online" id="status-usuario">--</span> -->
+                        </div>
+                    </div>
+        </header>
+
+        <!-- CORPO DA TELA DE PAGAMENTO -->
+        <main class="pagina-pagamento">
+
+            <!-- ALERTA -->
+            <section class="alerta-pagamento">
+                <div class="alerta-conteudo">
+                    <div class="icone-sucesso">
+                        <span class="material-symbols-outlined">check</span>
+                    </div>
+                    <div>
+                        <strong>Veículo localizado com sucesso!</strong>
+                        <p>Confira os dados, selecione a forma de pagamento e finalize a saída.</p>
+                    </div>
+                </div>
+                <button class="btn-saida-sem-cobranca">
+                    <span class="material-symbols-outlined">money_off</span>
+                    Registrar saída sem cobrança
+                </button>
+            </section>
+
+            <!-- GRID PRINCIPAL DE CARDS -->
+            <section class="grid-pagamento">
+
+                <!-- COLUNA ESQUERDA -->
+                <div class="coluna-pagamento-esquerda">
+
+                    <!-- DADOS DO VEÍCULO -->
+                    <div class="card-pagamento">
+                        <h3 class="titulo-secao">DADOS DO VEÍCULO</h3>
+                        <div class="veiculo-destaque">
+                            <div class="icone-veiculo">
+                                <span class="material-symbols-outlined">directions_car</span>
+                            </div>
+                            <div>
+                                <strong>ABC-1D23</strong>
+                                <span>Toyota Corolla - Prata</span>
+                            </div>
+                        </div>
+
+                        <div class="linha-info">
+                            <span>Tipo de usuário</span>
+                            <strong class="badge-professor">Professor</strong>
+                        </div>
+                        <div class="linha-info">
+                            <span>Proprietário</span>
+                            <strong>Carlos Alberto Silva</strong>
+                        </div>
+                        <div class="linha-info">
+                            <span>Entrada</span>
+                            <strong>20/05/2024 12:40</strong>
+                        </div>
+                        <div class="linha-info">
+                            <span>Tempo de permanência</span>
+                            <strong>01h26min</strong>
+                        </div>
+                        <div class="linha-info">
+                            <span>Vaga</span>
+                            <strong class="badge-vaga">A03 - Setor A</strong>
+                        </div>
+                    </div>
+
+                    <!-- CÁLCULO DO VALOR -->
+                    <div class="card-pagamento">
+                        <h3 class="titulo-secao">CÁLCULO DO VALOR</h3>
+                        <div class="linha-calculo">
+                            <span>Tarifa base (R$ 8,00 / hora)</span>
+                            <strong>R$ 11,47</strong>
+                        </div>
+                        <div class="linha-calculo">
+                            <span>Horas utilizadas</span>
+                            <strong>1h26min</strong>
+                        </div>
+                        <div class="linha-calculo desconto">
+                            <span>Desconto (Professor - 50%)</span>
+                            <strong>- R$ 5,74</strong>
+                        </div>
+
+                        <div class="valor-total">
+                            <strong>VALOR TOTAL</strong>
+                            <strong>R$ 5,73</strong>
+                        </div>
+
+                        <div class="info-desconto">
+                            <span class="material-symbols-outlined">info</span>
+                            <div>
+                                <strong>Desconto aplicado conforme categoria</strong>
+                                <span>Professor: 50% de desconto na tarifa.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COLUNA MEIO - FORMA DE PAGAMENTO -->
+                <div class="card-pagamento forma-pagamento">
+                    <h3 class="titulo-secao">FORMA DE PAGAMENTO</h3>
+                    <p class="descricao-secao">Selecione a forma de pagamento</p>
+
+                    <label class="opcao-pagamento">
+                        <input type="radio" name="pagamento" value="dinheiro" checked>
+                        <div class="icone-pagamento dinheiro">
+                            <span class="material-symbols-outlined">payments</span>
+                        </div>
+                        <div class="texto-pagamento">
+                            <strong>Dinheiro</strong>
+                            <span>Pagamento em espécie</span>
+                        </div>
+                    </label>
+
+                    <label class="opcao-pagamento">
+                        <input type="radio" name="pagamento" value="debito">
+                        <div class="icone-pagamento debito">
+                            <span class="material-symbols-outlined">credit_card</span>
+                        </div>
+                        <div class="texto-pagamento">
+                            <strong>Cartão de Débito</strong>
+                            <span>Débito na maquininha</span>
+                        </div>
+                    </label>
+
+                    <label class="opcao-pagamento">
+                        <input type="radio" name="pagamento" value="credito">
+                        <div class="icone-pagamento credito">
+                            <span class="material-symbols-outlined">credit_card</span>
+                        </div>
+                        <div class="texto-pagamento">
+                            <strong>Cartão de Crédito</strong>
+                            <span>Crédito na maquininha</span>
+                        </div>
+                    </label>
+
+                    <label class="opcao-pagamento">
+                        <input type="radio" name="pagamento" value="pix">
+                        <div class="icone-pagamento pix">
+                            <span class="material-symbols-outlined">qr_code_2</span>
+                        </div>
+                        <div class="texto-pagamento">
+                            <strong>PIX</strong>
+                            <span>Pagamento instantâneo</span>
+                        </div>
+                    </label>
+
+                    <label class="opcao-pagamento">
+                        <input type="radio" name="pagamento" value="isento">
+                        <div class="icone-pagamento isento">
+                            <span class="material-symbols-outlined">redeem</span>
+                        </div>
+                        <div class="texto-pagamento">
+                            <strong>Isento / Cortesia</strong>
+                            <span>Sem cobrança</span>
+                        </div>
+                    </label>
+
+                    <div class="campo-pagamento">
+                        <label for="valorRecebido">RECEBIDO DE</label>
+                        <div class="input-dinheiro">
+                            <span>R$</span>
+                            <input type="number" id="valorRecebido" value="10.00" step="0.01">
+                        </div>
+                    </div>
+
+                    <div class="campo-pagamento">
+                        <label>TROCO</label>
+                        <div class="campo-troco">R$ 4,27</div>
+                    </div>
+
+                    <button class="btn-confirmar">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        Confirmar pagamento
+                    </button>
+
+                    <button class="btn-cancelar">
+                        <span class="material-symbols-outlined">cancel</span>
+                        Cancelar
+                    </button>
+                </div>
+
+                <!-- COLUNA DIREITA - RESUMO DO PAGAMENTO -->
+                <div class="card-pagamento resumo-pagamento">
+                    <h3 class="titulo-secao">RESUMO DO PAGAMENTO</h3>
+
+                    <div class="valor-a-pagar">
+                        <span>Valor a pagar</span>
+                        <strong>R$ 5,73</strong>
+                        <div class="icone-resumo">
+                            <span class="material-symbols-outlined">payments</span>
+                        </div>
+                    </div>
+
+                    <div class="resumo-linhas">
+                        <div><span>Placa</span><strong>ABC-1D23</strong></div>
+                        <div><span>Entrada</span><strong>20/05/2024 12:40</strong></div>
+                        <div><span>Saída</span><strong>20/05/2024 14:06</strong></div>
+                        <div><span>Permanência</span><strong>01h26min</strong></div>
+                        <div><span>Vaga</span><strong>A03 - Setor A</strong></div>
+                        <div><span>Tipo de usuário</span><strong class="texto-roxo">Professor</strong></div>
+                        <div><span>Desconto aplicado</span><strong class="texto-verde">50%</strong></div>
+                    </div>
+
+                    <div class="resumo-valores">
+                        <div><span>Tarifa base</span><strong>R$ 11,47</strong></div>
+                        <div><span>Desconto</span><strong class="texto-verde">- R$ 5,74</strong></div>
+                    </div>
+
+                    <div class="total-resumo">
+                        <strong>TOTAL</strong>
+                        <strong>R$ 5,73</strong>
+                    </div>
+
+                    <button class="btn-resumo">
+                        <span class="material-symbols-outlined">print</span>
+                        Imprimir comprovante
+                    </button>
+
+                    <button class="btn-resumo">
+                        <span class="material-symbols-outlined">mail</span>
+                        Enviar por e-mail
+                    </button>
+                </div>
+
+            </section>
+
+            <!-- TABELA ÚLTIMOS PAGAMENTOS -->
+            <section class="card-pagamento ultimos-pagamentos">
+                <div class="cabecalho-tabela">
+                    <h3 class="titulo-secao">ÚLTIMOS PAGAMENTOS</h3>
+                    <a href="#">Ver todos</a>
+                </div>
+
+                <div class="tabela-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PLACA</th>
+                                <th>PROPRIETÁRIO</th>
+                                <th>SAÍDA</th>
+                                <th>PERMANÊNCIA</th>
+                                <th>VALOR</th>
+                                <th>FORMA PAGAMENTO</th>
+                                <th>USUÁRIO</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>DEF-4G56</td>
+                                <td>Juliana Ferreira</td>
+                                <td>20/05/2024 13:02</td>
+                                <td>01h47min</td>
+                                <td>R$ 14,00</td>
+                                <td>Cartão de Débito</td>
+                                <td>Administrador</td>
+                                <td><button class="btn-ver">Ver</button></td>
+                            </tr>
+                            <tr>
+                                <td>GHI-7J89</td>
+                                <td>Lucas Martins</td>
+                                <td>20/05/2024 12:55</td>
+                                <td>00h45min</td>
+                                <td>R$ 8,00</td>
+                                <td>Dinheiro</td>
+                                <td>Administrador</td>
+                                <td><button class="btn-ver">Ver</button></td>
+                            </tr>
+                            <tr>
+                                <td>JKL-9M01</td>
+                                <td>Rafael Souza</td>
+                                <td>20/05/2024 11:30</td>
+                                <td>02h15min</td>
+                                <td>R$ 20,00</td>
+                                <td>PIX</td>
+                                <td>Administrador</td>
+                                <td><button class="btn-ver">Ver</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <script type="module" src="/Frontend/src/assets/js/financeiro.js"></script>
+    <script>
+        if (localStorage.getItem('sidebar-collapsed') === 'true') {
+            document.documentElement.classList.add('sidebar-is-collapsed');
+        }
+    </script>
+
+</body>
+
+</html>

@@ -79,7 +79,6 @@ function marcarLinkAtivo() {
 // Executa automaticamente quando a página carrega
 document.addEventListener('DOMContentLoaded', marcarLinkAtivo);
 
-
 /* Atualização da Data e Hora no Cabeçalho */
 function atualizarDataHora() {
   const horaEl = document.getElementById('hora-atual');
@@ -113,13 +112,13 @@ if (ctxFaturamento) {
     data: {
       labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
       datasets: [{
-        data: [150, 280, 200, 320, 290, 410, 380, 487.50],
+        data: [150, 280, 200, 320, 290, 410, 380, 487.50], 
         borderColor: '#22c55e',
         borderWidth: 2,
         backgroundColor: 'rgba(34, 197, 94, 0.08)',
         fill: true,
-        tension: 0.4,
-        pointRadius: (context) => context.dataIndex === 7 ? 4 : 0,
+        tension: 0.4, 
+        pointRadius: (context) => context.dataIndex === 7 ? 4 : 0, 
         pointBackgroundColor: '#22c55e'
       }]
     },
