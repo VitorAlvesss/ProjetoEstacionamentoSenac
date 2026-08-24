@@ -1,0 +1,537 @@
+/* TEMA ESCURO (PADRÃO) */
+:root {
+  --bg-body: #0b0f19;
+  --bg-cabecalho: #0f172a;
+  --bg-card: #0f172a;
+  --bg-item-vaga: #162032;
+  --borda: #1e293b;
+  --sombra: rgba(0, 0, 0, 0.2);
+
+  --texto-principal: #ffffff;
+  --texto-secundario: #f1f5f9;
+  --texto-mutado: #94a3b8;
+  --texto-suave: #64748b;
+  --texto-destaque: #cbd5e1;
+
+  /* Cores de ícones em modo escuro */
+  --fundo-azul: rgba(59, 130, 246, 0.15);
+  --cor-azul: #3b82f6;
+  --fundo-verde: rgba(34, 197, 94, 0.15);
+  --cor-verde: #22c55e;
+  --fundo-vermelho: rgba(239, 68, 68, 0.15);
+  --cor-vermelho: #ef4444;
+  --fundo-amarelo: rgba(234, 179, 8, 0.15);
+  --cor-amarelo: #eab308;
+  --fundo-roxo: rgba(168, 85, 247, 0.15);
+  --cor-roxo: #a855f7;
+
+  /* IMG */
+  --opacidade-esp32: 0.08;
+}
+
+/* TEMA CLARO (ATIVADO COM A CLASSE .light-theme) */
+body.light-theme {
+  --bg-body: #f8fafc;
+  --bg-cabecalho: #11225a;
+  --bg-card: #ffffff;
+  --bg-item-vaga: #f1f5f9;
+  --borda: #cbd5e1;
+  --sombra: rgba(0, 0, 0, 0.05);
+
+  --texto-principal: #0f172a;
+  --texto-secundario: #1e293b;
+  --texto-mutado: #475569;
+  --texto-suave: #64748b;
+  --texto-destaque: #334155;
+
+  /* Cores de ícones em modo claro */
+  --fundo-azul: #e0f2fe;
+  --cor-azul: #0369a1;
+  --fundo-verde: #dcfce7;
+  --cor-verde: #15803d;
+  --fundo-vermelho: #ffe4e6;
+  --cor-vermelho: #be123c;
+  --fundo-amarelo: #fef3c7;
+  --cor-amarelo: #b45309;
+  --fundo-roxo: #f3e8ff;
+  --cor-roxo: #6b21a8;
+
+  /* IMG */
+  --opacidade-esp32: 0.3;
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+/* =========================================================
+   2. CONFIGURAÇÕES GERAIS E LAYOUT
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh; 
+  background-color: var(--bg-body); 
+  color: var(--texto-secundario);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dashboard-container, 
+.main-content, 
+.main-wrapper, 
+main {
+  background-color: var(--bg-body);
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  flex: 1;
+  margin-left: 0;
+  transition: all 0.3s ease;
+}
+
+/* =========================================================
+   3. CABEÇALHO
+   ========================================================= */
+
+.cabecalho-principal {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
+  width: 100%;
+  min-height: 64px;
+
+  background-color: var(--bg-cabecalho);
+  color: #ffffff;
+
+  padding: 10px 18px;
+
+  border-radius: 12px;
+  margin-bottom: 25px;
+
+  border: 1px solid var(--borda);
+  box-shadow: 0 4px 12px var(--sombra);
+
+  position: relative;
+}
+
+/* ÁREA ESQUERDA - LOGO */
+.cabecalho-esquerda {
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+}
+
+.img-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ÁREA CENTRAL - TÍTULOS */
+.titulos-cabecalho.centralizado {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.titulos-cabecalho h1 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.titulos-cabecalho h2 {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 400;
+  margin: 2px 0 0;
+}
+
+/* ÁREA DIREITA - INFO */
+.info-cabecalho {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* BOTÃO DE TEMA */
+#btnTema {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  padding: 4px;
+  transition: transform 0.2s ease;
+}
+
+#btnTema:hover {
+  transform: scale(1.1);
+}
+
+/* DATA E HORA */
+#data-hora {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: var(--texto-mutado);
+  white-space: nowrap;
+}
+
+#hora-atual,
+#data-atual {
+  color: #dde0e3;
+}
+
+/* BOTÕES DE ÍCONE E NOTIFICAÇÃO */
+.botao-icone {
+  position: relative;
+  cursor: pointer;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.botao-icone:hover {
+  transform: scale(1.1);
+}
+
+.botao-icone .emblema {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #ef4444;
+  color: #ffffff;
+  font-size: 0.62rem;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* USUÁRIO LOGADO */
+#usuario-logado {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.detalhes-usuario {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75rem;
+}
+
+#avatar {
+  font-size: 1.6rem;
+  color: var(--texto-mutado);
+}
+
+.nome-usuario {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+#status-usuario {
+  font-size: 0.65rem;
+  color: rgb(49, 247, 0);
+}
+
+/* RESPONSIVIDADE DO CABEÇALHO */
+@media (max-width: 900px) {
+  .cabecalho-principal {
+    grid-template-columns: auto 1fr auto;
+    padding: 10px 14px;
+  }
+
+  .titulos-cabecalho.centralizado {
+    justify-self: center;
+  }
+
+  .info-cabecalho {
+    gap: 10px;
+  }
+
+  #data-hora {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .cabecalho-principal {
+    min-height: 58px;
+    padding: 8px 12px;
+  }
+
+  .img-logo {
+    height: 36px;
+  }
+
+  .titulos-cabecalho h1 {
+    font-size: 1.05rem;
+  }
+
+  .titulos-cabecalho h2 {
+    font-size: 0.65rem;
+  }
+
+  #data-hora {
+    display: none;
+  }
+
+  #usuario-logado .detalhes-usuario {
+    display: none;
+  }
+
+  #avatar {
+    font-size: 1.4rem;
+  }
+}
+
+/* =========================================================
+   4. MÓDULO IOT
+   ========================================================= */
+
+/* CARD CONTAINER PRINCIPAL DO IOT */
+.iot-card {
+  width: 100%; 
+  max-width: none; 
+  box-sizing: border-box; 
+  background-color: var(--bg-card); 
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 20px;
+  color: var(--texto-secundario); 
+  font-family: 'Inter', system-ui, sans-serif;
+  box-shadow: 0 4px 12px var(--sombra);
+ 
+}
+
+
+/* HEADER DO IOT */
+.iot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--borda);
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.iot-icon-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.iot-icon-title h3 {
+  color: var(--texto-principal);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.iot-subtitle {
+  font-size: 0.8rem;
+  color: var(--texto-mutado);
+  display: block;
+  margin-top: 2px;
+}
+
+.iot-badge-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--fundo-verde);
+  color: var(--cor-verde);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--cor-verde);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--cor-verde);
+}
+
+/* METRICS GRID */
+.iot-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.metric-box {
+  background: var(--bg-item-vaga);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.metric-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--texto-mutado);
+  text-transform: uppercase;
+}
+
+.metric-value {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+  margin-top: 4px;
+}
+
+/* TABELA DE DISPOSITIVOS */
+.iot-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 18px;
+  background-color: transparent; 
+}
+
+.iot-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background-color: transparent; 
+}
+
+.iot-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--texto-mutado); 
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--borda);
+  background-color: transparent; 
+}
+
+.iot-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--borda);
+  font-size: 0.875rem;
+  color: var(--texto-principal); 
+  background-color: transparent; 
+}
+
+.device-name {
+  color: var(--texto-principal);
+  font-weight: 600;
+}
+
+.device-type {
+  color: var(--texto-mutado);
+  font-size: 0.8rem;
+}
+
+/* STATUS COLORS & DOTS */
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.status-dot.online { background-color: var(--cor-verde); }
+.status-dot.occupied { background-color: var(--cor-amarelo); }
+.status-dot.offline { background-color: var(--cor-vermelho); }
+
+.text-green { color: var(--cor-verde) !important; font-weight: 600; }
+.text-yellow { color: var(--cor-amarelo) !important; font-weight: 600; }
+.text-red { color: var(--cor-vermelho) !important; font-weight: 600; }
+
+/* BOTÕES DE AÇÃO */
+.iot-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.btn-iot {
+  flex: 1;
+  min-width: 140px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.btn-iot.primary {
+  background-color: var(--cor-azul);
+  color: #ffffff;
+}
+
+.btn-iot.primary:hover {
+  opacity: 0.9;
+}
+
+.btn-iot.secondary {
+  background-color: var(--bg-item-vaga);
+  color: var(--texto-principal);
+  border-color: var(--borda);
+}
+
+.btn-iot.secondary:hover {
+  border-color: var(--texto-mutado);
+}
+
+.btn-iot.danger {
+  background-color: var(--fundo-vermelho);
+  color: var(--cor-vermelho);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.btn-iot.danger:hover {
+  background-color: var(--cor-vermelho);
+  color: #ffffff;
+}

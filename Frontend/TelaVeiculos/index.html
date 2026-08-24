@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goiabinha&CIA - Veículos / Usuários</title>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Fonte Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+  <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
+
+  <!-- Estilos CSS -->
+  <link rel="stylesheet" href="/Frontend/src/styles/menu.css">
+  <link rel="stylesheet" href="/Frontend/src/styles/TelaVeiculos.css">
+</head>
+
+<body>
+
+  <!-- Menu lateral (sidebar) -->
+  <aside id="sidebar" class="sidebar collapsed">
+    <div class="sidebar-header">
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="/Frontend/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">
+              app_registration</i> Cadastro</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/vagas/index.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="quick-summary">
+      <div class="quick-summary-title">RESUMO RÁPIDO</div>
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$
+          0,00</span></div>
+    </div>
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+    </div>
+  </aside>
+
+  <!-- Conteudo principal -->
+  <div class="main-wrapper">
+
+    <!-- Header superior -->
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
+
+        <div class="logo-container">
+          <div class="brand-logo">
+            <img src="/Frontend/public/logo.png" alt="Goiabinha & CIA" class="img-logo">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Titulo da pagina -->
+      <div class="page-title">
+        <h1>Veículos / Usuários</h1>
+        <p>Cadastre e gerencie veículos e usuários do estacionamento</p>
+      </div>
+
+
+
+      <!-- Acoes do cabeçalho -->
+      <div class="header-actions">
+
+        <!--Alternar o tema -->
+        <button id="btnTema" class="btn-tema" title="Alternar Tema">
+          <span class="material-symbols-outlined">routine</span>
+
+        </button>
+
+        <div id="data-hora">
+          <span id="hora-atual">--:--:--</span>
+          <small id="data-atual">--/--/----</small>
+        </div>
+
+        <div class="notification-btn">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge">0</span>
+        </div>
+
+        <div class="user-profile-top">
+          <i class="fa-solid fa-circle-user avatar"></i>
+          <div class="user-details">
+            <span style="font-weight: 600;">Administrador</span>
+            <span class="status">Online</span>
+          </div>
+          <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; color: var(--text-muted);"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- Corpo da pagina -->
+    <main class="content-area">
+      <!-- Cards de metrica -->
+      <section class="metrics-grid">
+        <div class="metric-card active-card">
+          <div class="card-top">
+            <div class="card-icon icon-purple"><i class="fa-solid fa-car"></i></div>
+            <div>
+              <div class="card-title">VEÍCULOS / USUÁRIOS</div>
+              <div class="card-value" id="cardTotalCount">0</div>
+            </div>
+          </div>
+          <div class="card-subtext">Total cadastrados</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="card-top">
+            <div class="card-icon icon-green"><i class="fa-solid fa-car-side"></i></div>
+            <div>
+              <div class="card-title">VEÍCULOS CADASTRADOS</div>
+              <div class="card-value" id="cardCadastradosCount">0</div>
+            </div>
+          </div>
+          <div class="card-subtext">100% do total</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="card-top">
+            <div class="card-icon icon-orange"><i class="fa-regular fa-clock"></i></div>
+            <div>
+              <div class="card-title">VEÍCULOS ATIVOS HOJE</div>
+              <div class="card-value">0</div>
+            </div>
+          </div>
+          <div class="card-subtext">Em circulação</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="card-top">
+            <div class="card-icon icon-blue"><i class="fa-solid fa-right-to-bracket"></i></div>
+            <div>
+              <div class="card-title">ENTRADAS HOJE</div>
+              <div class="card-value">0</div>
+            </div>
+          </div>
+          <div class="card-subtext">Total de entradas</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="card-top">
+            <div class="card-icon icon-red"><i class="fa-solid fa-right-from-bracket"></i></div>
+            <div>
+              <div class="card-title">SAÍDAS HOJE</div>
+              <div class="card-value">0</div>
+            </div>
+          </div>
+          <div class="card-subtext">Total de saídas</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="card-top">
+            <div class="card-icon icon-teal"><i class="fa-solid fa-dollar-sign"></i></div>
+            <div>
+              <div class="card-title">FATURAMENTO HOJE</div>
+              <div class="card-value" style="font-size: 1rem; margin-top: 4px;">R$ 0,00</div>
+            </div>
+          </div>
+          <div class="card-subtext">Total arrecadado</div>
+        </div>
+      </section>
+
+      <!-- Tabela + Formulario -->
+      <div class="dashboard-body">
+
+        <!-- Tabela de dados -->
+        <section class="table-section">
+          <div class="section-header">LISTA DE VEÍCULOS / USUÁRIOS</div>
+
+          <div class="filter-bar">
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="searchInput" placeholder="Buscar por placa, nome ou e-mail...">
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>PLACA</th>
+                  <th>NOME / USUÁRIO</th>
+                  <th>E-MAIL / CONTATO</th>
+                  <th>DATA CADASTRO</th>
+                  <th>AÇÕES</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="pagination-bar">
+            <span id="paginationInfo">Exibindo 0 a 0 de 0 registros</span>
+            <div class="pagination-controls" id="paginationButtons"></div>
+
+            <select class="filter-select" id="itemsPerPageSelect">
+              <option value="10">10 por página</option>
+              <option value="20">20 por página</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- Widgets da direita -->
+        <aside class="widgets-section">
+
+          <div class="widget-card">
+            <div class="section-header">MOVIMENTAÇÃO DE HOJE</div>
+            <div class="chart-container">
+              <div class="donut-chart">
+                <div class="donut-inner">
+                  <span class="total-num">0</span>
+                  <span class="total-label">Total</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-legend">
+              <div class="legend-item">
+                <span class="legend-label"><span class="dot"
+                    style="background-color: var(--blue-accent, #3b82f6);"></span> Entradas</span>
+                <span style="font-weight: 600; color: #fff;">0 (0%)</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-label"><span class="dot"
+                    style="background-color: var(--red-accent, #ef4444);"></span> Saídas</span>
+                <span style="font-weight: 600; color: #fff;">0 (0%)</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-label"><span class="dot"
+                    style="background-color: var(--orange-accent, #f97316);"></span> Ativos</span>
+                <span style="font-weight: 600; color: #fff;">0 (0%)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="widget-card">
+            <div class="section-header">CADASTRO RÁPIDO</div>
+
+            <form id="registerForm">
+              <div class="form-group">
+                <label>Nome</label>
+                <input type="text" class="form-control" id="formName" placeholder="Nome completo" required>
+              </div>
+
+              <div class="form-group">
+                <label>Placa do veículo</label>
+                <input type="text" class="form-control" id="formPlate" placeholder="Ex: ABC-1D23" required>
+              </div>
+
+              <div class="form-group">
+                <label>E-mail / Telefone</label>
+                <input type="text" class="form-control" id="formContact" placeholder="exemplo@email.com" required>
+              </div>
+
+              <button type="submit" class="btn-submit" id="formSubmitBtn">
+                <i class="fa-solid fa-right-to-bracket"></i> Cadastrar
+              </button>
+            </form>
+          </div>
+
+        </aside>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="menu.js"></script>
+  <script src="/Frontend/src/assets/js/TelaVeiculos.jS"></script>
+</body>
+
+</html>

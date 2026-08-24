@@ -8,69 +8,73 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="/Frontend/src/styles/menu.css" />
-  <link rel="stylesheet" href="/Frontend/src/styles/index-css.css" />
+  <link rel="stylesheet" href="/Frontend/src/styles/Dashboard.css" />
   <title>Goiabinha & CIA - Estacionamento</title>
   <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
 </head>
 
 <body>
 
-  <aside id="sidebar" class="sidebar collapsed">
-
+  <!-- Menu lateral (sidebar) -->
+  <aside id="sidebar" class="sidebar">
     <div class="sidebar-header">
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
 
-      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu">
-      </i>
+      <div class="logo-container">
+
+        <div>
+
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
+
 
     <nav class="sidebar-nav">
-      <ul id="sidebarNav"></ul>
+      <ul>
+        <li class="nav-item">
+          <a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">
+              app_registration</i> Cadastro</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/vagas/index.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
     </nav>
 
-
     <div class="quick-summary">
-
-      <div class="quick-summary-title">
-        RESUMO RÁPIDO
-      </div>
-
-      <div class="summary-row">
-        <span>Vagas totais</span>
-        <span class="val">20</span>
-      </div>
-
-      <div class="summary-row">
-        <span>Vagas livres</span>
-        <span class="val green">20</span>
-      </div>
-
-      <div class="summary-row">
-        <span>Vagas ocupadas</span>
-        <span class="val red">0</span>
-      </div>
-
-      <div class="summary-row">
-        <span>Taxa de ocupação</span>
-        <span class="val">0%</span>
-      </div>
-
-      <div class="summary-row">
-        <span>Faturamento hoje</span>
-        <span class="val green">R$ 0,00</span>
-      </div>
-
+      <div class="quick-summary-title">RESUMO RÁPIDO</div>
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$
+          0,00</span></div>
     </div>
-
 
     <div class="sidebar-copyright">
-
-      © 2024 Goiabinha&CIA<br>
-      Todos os direitos reservados.
-
+      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
     </div>
-
   </aside>
 
   <div class="main-wrapper">
@@ -514,7 +518,12 @@
     </main>
   </div>
 
-  <script type="module" src="./src/assets/js/imports.js"></script>
+  <script type="module" src="./src/assets/js/dashboardJS.js"></script>
+  <script>
+    if (localStorage.getItem('sidebar-collapsed') === 'true') {
+      document.documentElement.classList.add('sidebar-is-collapsed');
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </body>

@@ -18,135 +18,67 @@ if (btnTema) {
 
 
 
-/* Caso precisar adicionar uma nova tela: Adicione um novo objeto dentro do array SCREENS. */
-const SCREENS = [
-  {
-    id: 'dashboard',
-    label: 'Dashboard',
-    icon: 'fa-house',
-    subtitle: 'Visão geral do estacionamento'
-  },
-  {
-    id: 'vagas',
-    label: 'Vagas',
-    icon: 'fa-square-parking',
-    subtitle: 'Gerencie as vagas do estacionamento'
-  },
-  {
-    id: 'veiculos',
-    label: 'Veículos / Usuários',
-    icon: 'fa-car',
-    subtitle: 'Cadastre e gerencie veículos e usuários do estacionamento'
-  },
-  {
-    id: 'entradas-saidas',
-    label: 'Entradas e Saídas',
-    icon: 'fa-right-to-bracket',
-    subtitle: 'Controle o fluxo de entradas e saídas'
-  },
-  {
-    id: 'financeiro',
-    label: 'Financeiro',
-    icon: 'fa-dollar-sign',
-    subtitle: 'Acompanhe o faturamento do estacionamento'
-  },
-  {
-    id: 'relatorios',
-    label: 'Relatórios',
-    icon: 'fa-file-lines',
-    subtitle: 'Relatórios e estatísticas'
-  },
-  {
-    id: 'dispositivos-iot',
-    label: 'Dispositivos IoT',
-    icon: 'fa-sitemap',
-    subtitle: 'Gerencie os dispositivos conectados'
-  },
-  {
-    id: 'configuracoes',
-    label: 'Configurações',
-    icon: 'fa-gear',
-    subtitle: 'Configurações do sistema'
-  }
-];
+// Menu lateral (sidebar) abrir e fechar
 
-/* Tela padrão configurada para a sua página atual */
-const DEFAULT_SCREEN = 'dashboard';
+(function () {
+  // Executa com segurança assim que o DOM estiver pronto
+  document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+    const topHeaderToggleBtn = document.getElementById('topHeaderToggleBtn');
 
-let currentScreen = DEFAULT_SCREEN;
+    if (!sidebar) return;
 
-function renderSidebarNav() {
-  const nav = document.getElementById('sidebarNav');
+    // 1. Restaura o estado salvo no localStorage
+    const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+    if (isCollapsed) {
+      sidebar.classList.add('collapsed');
+    } else {
+      sidebar.classList.remove('collapsed');
+    }
 
-  if (!nav) return;
+    // 2. Função para alternar e salvar o estado
+    function toggleSidebar() {
+      sidebar.classList.toggle('collapsed');
+      const novoEstado = sidebar.classList.contains('collapsed');
+      localStorage.setItem('sidebarCollapsed', novoEstado);
+    }
 
-  nav.innerHTML = SCREENS.map(s => `
-    <li class="nav-item ${s.id === currentScreen ? 'active' : ''}">
-      <a href="#" onclick="navigateTo('${s.id}'); return false;">
-        <i class="fa-solid ${s.icon}"></i>
-        ${s.label}
-      </a>
-    </li>
-  `).join('');
+    // 3. Eventos dos botões hambúrguer
+    if (sidebarToggleBtn) sidebarToggleBtn.addEventListener('click', toggleSidebar);
+    if (topHeaderToggleBtn) topHeaderToggleBtn.addEventListener('click', toggleSidebar);
+
+    // 4. Fecha automaticamente em telas menores ao clicar em um link
+    document.querySelectorAll('.sidebar-nav .nav-item a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768 && !sidebar.classList.contains('collapsed')) {
+          toggleSidebar();
+        }
+      });
+    });
+  });
+})();
+
+// MARCAR OPÇÃO SELECIONADA
+function marcarLinkAtivo() {
+
+  const caminhoAtual = window.location.pathname.toLowerCase();
+  document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
+    item.classList.remove('active');
+
+    const link = item.querySelector('a');
+    if (!link) return;
+    const hrefLink = (link.getAttribute('href') || '').toLowerCase();
+
+    if (hrefLink && (caminhoAtual.endsWith(hrefLink) || hrefLink.endsWith(caminhoAtual))) {
+      item.classList.add('active');
+    }
+  });
 }
 
-/* Tornamos a função acessível para o onclick do HTML */
-window.navigateTo = function(screenId) {
-  const screenMeta = SCREENS.find(s => s.id === screenId);
+// Executa automaticamente quando a página carrega
+document.addEventListener('DOMContentLoaded', marcarLinkAtivo);
 
-  if (!screenMeta) return;
-
-  currentScreen = screenId;
-
-  document
-    .querySelectorAll('.screen')
-    .forEach(el => el.classList.remove('active'));
-
-  const target = document.getElementById(`screen-${screenId}`);
-
-  if (target) {
-    target.classList.add('active');
-  }
-
-  const titleEl = document.getElementById('pageTitle');
-  if (titleEl) {
-    titleEl.innerText = screenMeta.label;
-  }
-
-  const subtitleEl = document.getElementById('pageSubtitle');
-  if (subtitleEl) {
-    subtitleEl.innerText = screenMeta.subtitle;
-  }
-
-  renderSidebarNav();
-
-  if (
-    window.innerWidth <= 768 &&
-    sidebar &&
-    !sidebar.classList.contains('collapsed')
-  ) {
-    sidebar.classList.add('collapsed');
-  }
-};
-
-/* Elementos do Menu */
-const sidebar = document.getElementById('sidebar');
-const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
-const topHeaderToggleBtn = document.getElementById('topHeaderToggleBtn');
-
-function toggleSidebar() {
-  if (sidebar) {
-    sidebar.classList.toggle('collapsed');
-  }
-}
-
-if (sidebarToggleBtn) {
-  sidebarToggleBtn.addEventListener('click', toggleSidebar);
-}
-
-if (topHeaderToggleBtn) {
-  topHeaderToggleBtn.addEventListener('click', toggleSidebar);
-}
 
 /* Atualização da Data e Hora no Cabeçalho */
 function atualizarDataHora() {
@@ -181,13 +113,13 @@ if (ctxFaturamento) {
     data: {
       labels: ['1', '2', '3', '4', '5', '6', '7', '8'],
       datasets: [{
-        data: [150, 280, 200, 320, 290, 410, 380, 487.50], 
+        data: [150, 280, 200, 320, 290, 410, 380, 487.50],
         borderColor: '#22c55e',
         borderWidth: 2,
         backgroundColor: 'rgba(34, 197, 94, 0.08)',
         fill: true,
-        tension: 0.4, 
-        pointRadius: (context) => context.dataIndex === 7 ? 4 : 0, 
+        tension: 0.4,
+        pointRadius: (context) => context.dataIndex === 7 ? 4 : 0,
         pointBackgroundColor: '#22c55e'
       }]
     },

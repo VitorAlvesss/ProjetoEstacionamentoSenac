@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/Frontend/src/styles/IoT.css">
+  <link rel="stylesheet" href="/Frontend/src/styles/menu.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
+
+  <title>Tela IoT</title>
+</head>
+
+<body>
+
+  <!-- MENU LATERAL -->
+
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-header">
+
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu">
+      </i>
+
+      <div class="logo-container">
+        <div></div>
+      </div>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="/Frontend/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">
+              app_registration</i> Cadastro</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/vagas/index.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
+    </nav>
+
+
+    <!-- RESUMO RÁPIDO -->
+
+    <div class="quick-summary">
+
+      <div class="quick-summary-title">
+        RESUMO RÁPIDO
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas totais</span>
+        <span class="val">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas livres</span>
+        <span class="val green">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas ocupadas</span>
+        <span class="val red">0</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Taxa de ocupação</span>
+        <span class="val">0%</span>
+      </div>
+
+      <div class="summary-row" style="margin-top: 8px;">
+        <span>Faturamento hoje</span>
+        <span class="val green">R$ 0,00</span>
+      </div>
+
+    </div>
+
+
+    <!-- COPYRIGHT -->
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>
+      Todos os direitos reservados.
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       CONTEÚDO PRINCIPAL
+       ===================================================== -->
+
+  <div class="main-wrapper">
+
+
+    <!-- ===================================================
+         CABEÇALHO
+         =================================================== -->
+
+    <header class="cabecalho-principal">
+
+
+      <!-- ESQUERDA: MENU + LOGO -->
+
+      <div class="cabecalho-esquerda">
+
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu">
+        </i>
+
+        <div class="brand-logo">
+
+          <img src="/Frontend/public/logo.png" alt="Goiabinha & CIA" class="img-logo">
+
+        </div>
+
+      </div>
+
+
+      <!-- CENTRO: TÍTULO -->
+
+      <div class="titulos-cabecalho centralizado">
+
+        <h1 id="pageTitle">
+          Dispositivos IoT
+        </h1>
+
+        <h2 id="pageSubtitle">
+          Monitoramento e controle dos dispositivos
+        </h2>
+
+      </div>
+
+
+      <!-- DIREITA: TEMA + DATA/HORA + USUÁRIO -->
+
+      <div class="info-cabecalho">
+
+
+        <!-- TEMA -->
+
+        <button id="btnTema" title="Alterar tema">
+
+          <span class="material-symbols-outlined">routine</span>
+
+        </button>
+
+
+        <!-- DATA E HORA -->
+
+        <div id="data-hora">
+
+          <span id="hora-atual">
+            14:45:25
+          </span>
+
+          <span id="data-atual">
+            20/08/2026
+          </span>
+
+        </div>
+
+
+        <!-- USUÁRIO -->
+
+        <div id="usuario-logado">
+
+          <div id="usuario-logado">
+            <i id="avatar" class="fa-solid fa-circle-user avatar"></i>
+            <div class="user-details">
+
+              <div class="detalhes-usuario">
+
+                <span class="nome-usuario">
+                  Administrador
+                </span>
+
+                <span id="status-usuario">
+                  Online
+                </span>
+              </div>
+            </div>
+          </div>
+
+    </header>
+
+
+    <!-- ===================================================
+         CONTEÚDO DA TELA IOT
+         =================================================== -->
+
+    <main class="conteudo-iot">
+      <!-- CARD IOT -->
+      <div class="card iot-card">
+
+        <!-- CABEÇALHO DO CARD -->
+        <div class="iot-header">
+          <div class="iot-title-box">
+            <div class="iot-icon-title">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+
+                <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9" />
+                <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5" />
+                <circle cx="12" cy="12" r="2" />
+                <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5" />
+                <path d="M19.1 4.9c3.9 3.9 3.9 10.3 0 14.2" />
+
+              </svg>
+
+              <h3>
+                SISTEMA IOT & DISPOSITIVOS
+              </h3>
+
+            </div>
+            <span class="iot-subtitle">
+              Status de hardware e comunicação em tempo real
+            </span>
+          </div>
+
+          <div class="iot-badge-status online">
+            <span class="pulse-dot"></span>
+            MQTT Conectado (24ms)
+          </div>
+        </div>
+
+
+        <!-- MÉTRICAS -->
+
+        <div class="iot-metrics-grid">
+          <div class="metric-box">
+            <span class="metric-label">
+              Gateway Principal
+            </span>
+            <strong class="metric-value">
+              ESP32 DevKit v1
+            </strong>
+
+          </div>
+
+
+          <div class="metric-box">
+
+            <span class="metric-label">
+              Sinal Wi-Fi (RSSI)
+            </span>
+
+            <strong class="metric-value text-green">
+              -58 dBm (Excelente)
+            </strong>
+
+          </div>
+
+
+          <div class="metric-box">
+
+            <span class="metric-label">
+              Uptime do Sistema
+            </span>
+
+            <strong class="metric-value">
+              14d 08h 22m
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- TABELA -->
+
+        <div class="iot-table-wrapper">
+          <table class="iot-table">
+            <thead>
+              <tr>
+                <th>
+                  Dispositivo
+                </th>
+                <th>
+                  Tipo / Função
+                </th>
+                <th>
+                  Status
+                </th>
+                <th>
+                  Leitura / Telemetria
+                </th>
+                <th>
+                  Bateria / Sinal
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td class="device-name">
+                  ESP32 Principal
+                </td>
+                <td class="device-type">
+                  Microcontrolador
+                </td>
+                <td>
+                  <span class="status-dot online"></span>
+                  <span class="text-green">
+                    Online
+                  </span>
+                </td>
+                <td>
+                  IP: 192.168.1.105
+                </td>
+                <td>
+                  Sinal -58 dBm
+                </td>
+              </tr>
+
+              <tr>
+                <td class="device-name">
+                  Sensor Vaga 01
+                </td>
+                <td class="device-type">
+                  Ultrassônico HC-SR04
+                </td>
+                <td>
+                  <span class="status-dot online"></span>
+                  <span class="text-green">
+                    Livre
+                  </span>
+                </td>
+                <td>
+                  Distância: 215 cm
+                </td>
+                <td>
+                  95% (4.1V)
+                </td>
+              </tr>
+
+              <tr>
+                <td class="device-name">
+                  Sensor Vaga 02
+                </td>
+                <td class="device-type">
+                  Ultrassônico HC-SR04
+                </td>
+                <td>
+                  <span class="status-dot occupied"></span>
+                  <span class="text-yellow">
+                    Ocupado
+                  </span>
+                </td>
+                <td>
+                  Distância: 45 cm (ABC-1D23)
+                </td>
+                <td>
+                  92% (4.0V)
+                </td>
+              </tr>
+
+              <tr>
+                <td class="device-name">
+                  Sensor Vaga 03
+                </td>
+                <td class="device-type">
+                  Ultrassônico HC-SR04
+                </td>
+                <td>
+                  <span class="status-dot online"></span>
+                  <span class="text-green">
+                    Online
+                  </span>
+                </td>
+                <td>
+                  Sem leitura há 5 min
+                </td>
+                <td>
+                  <span class="text-red">
+                    0% (Crítico)
+                  </span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="device-name">
+                  Sensor Vaga 04
+                </td>
+                <td class="device-type">
+                  Ultrassônico HC-SR04
+                </td>
+                <td>
+                  <span class="status-dot offline"></span>
+                  <span class="text-red">
+                    Offline
+                  </span>
+                </td>
+                <td>
+                  Sem leitura há 5 min
+                </td>
+                <td>
+                  <span class="text-red">
+                    0% (Crítico)
+                  </span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="device-name">
+                  Sensor Vaga 05
+                </td>
+                <td class="device-type">
+                  Ultrassônico HC-SR04
+                </td>
+                <td>
+                  <span class="status-dot online"></span>
+                  <span class="text-green">
+                    Online
+                  </span>
+                </td>
+                <td>
+                  Sem leitura há 5 min
+                </td>
+                <td>
+                  <span class="text-red">
+                    0% (Crítico)
+                  </span>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="device-name">
+                  Sensor Vaga 06
+                </td>
+                <td class="device-type">
+                  Ultrassônico HC-SR04
+                </td>
+                <td>
+                  <span class="status-dot online"></span>
+                  <span class="text-green">
+                    Online
+                  </span>
+                </td>
+                <td>
+                  Sem leitura há 5 min
+                </td>
+                <td>
+                  <span class="text-red">
+                    0% (Crítico)
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="device-name">
+                  Cancela Entrada
+                </td>
+                <td class="device-type">
+                  Servo / Solenóide
+                </td>
+                <td>
+                  <span class="status-dot online"></span>
+                  <span class="text-green">
+                    Fechada
+                  </span>
+                </td>
+                <td>
+                  Ativada às 14:02
+                </td>
+                <td>
+                  Rede Elétrica AC
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <!-- AÇÕES -->
+
+        <div class="iot-actions">
+
+          <button class="btn-iot primary">
+            Abrir Cancela Entrada
+          </button>
+          <button class="btn-iot primary">
+            Abrir Cancela Saída
+          </button>
+          <button class="btn-iot secondary">
+            Calibrar Sensores
+          </button>
+          <button class="btn-iot danger">
+            Reset ESP32
+          </button>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/Frontend/src/assets/js/Iot.js"></script>
+</body>
+
+</html>
