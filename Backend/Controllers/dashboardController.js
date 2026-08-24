@@ -4,7 +4,7 @@ async function buscarDash(req, res) {
 
     try {
 
-        const [vagas, registro, entradasHoje, saidasHoje, permanecem, dispositivos, financeiro, todosRegistros, listaVagas] = await Promise.all([
+        const [vagas, registro, entradasHoje, saidasHoje, permanecem, dispositivos, financeiro, todosRegistros, listaVagas, tempoUso] = await Promise.all([
 
             dashboardRepository.buscarDashboard(),
 
@@ -22,7 +22,9 @@ async function buscarDash(req, res) {
 
             dashboardRepository.todos_registros(),
 
-            dashboardRepository.registro_vagasOcupadas()
+            dashboardRepository.registro_vagasOcupadas(),
+
+            dashboardRepository.tempoMedioUso()
 
         ]);
 
@@ -51,7 +53,9 @@ async function buscarDash(req, res) {
 
             todosRegistros,
 
-            listaVagas
+            listaVagas,
+
+            tempoUso
 
         });
 

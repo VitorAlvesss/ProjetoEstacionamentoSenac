@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const detalheTaxa =
         document.querySelector("#detalhe-taxa");
 
+    const tempoUso =
+        document.querySelector("#tempoUso");
+
 
     // ============================================================
     // MOVIMENTAÇÃO
@@ -171,6 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
             detalheTaxa.textContent =
                 `${data.vagas.ocupadas ?? 0} de ${data.vagas.total ?? 0} vagas`;
 
+            tempoUso.textContent = data.tempoUso;
 
             // ====================================================
             // TAXA DE OCUPAÇÃO
@@ -296,6 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
             todasMovimentacoes(
                 data.movimentacao?.movimentacoes || []
             );
+
+            carregarDispositivosIOT();
 
 
         } catch (error) {
@@ -505,6 +511,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
+    }
+
+    async function carregarDispositivosIOT() {
+
+        const dispositivos = await buscarDispositivoIOT();
+
+        const lista = document.querySelector("#lista-dispositivos");
+
+        lista.innerHTML = "";
+
+        dispositivos.forEach((dispositivo) => {
+
+            const online = dispositivo.online;
+
+            const classeLed = online
+                ? "led-online"
+                : "led-offline";
+
+            const classeTexto = online
+                ? "txt-verde"
+                : "txt-vermelho";
+
+            const status = online
+                ? "Online"
+                : "Offline";
+
+            lista.innerHTML += `
+            <div class="item-iot">
+
+                <span class="led-iot ${classeLed}"></span>
+
+                <span class="nome-dispositivo">
+                    ${dispositivo.nome_dispositivo}
+                </span>
+
+                <strong class="status-iot ${classeTexto}">
+                    ${status}
+                </strong>
+
+            </div>
+        `;
+        });
     }
 
 

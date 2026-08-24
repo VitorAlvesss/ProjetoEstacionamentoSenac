@@ -1,3 +1,4 @@
+const { ref } = require("node:process");
 const db = require("../Connection/db");
 
 const firebase = require('../Connection/fireDb.js');
@@ -9,7 +10,12 @@ async function buscarDispositivoIOT() {
 
     const referencia = collection(firebase, "estacionamento");
 
-    const resultado = await getDocs(referencia);
+    const consulta = query(
+        referencia,
+        where("id_arduino", "!=", null)
+    )
+    
+    const resultado = await getDocs(consulta);
 
     const dispositivos = [];
 
@@ -23,6 +29,18 @@ async function buscarDispositivoIOT() {
     });
 
     return dispositivos;
+}
+
+async function tempoMedioUso() {
+
+    const [resultado] = await db.query(`
+        SELECT CEIL(AVG(TIME_TO_SEC(tempo_uso)) / 60) AS tempo_medio_minutos
+        FROM tbl_registro_ocupacao
+        WHERE DATE(data_entrada) = CURDATE()
+        AND data_saida IS NOT NULL
+        `);
+
+    return resultado[0].tempo_medio_minutos;
 }
 
 
@@ -182,6 +200,7 @@ module.exports = {
     buscarDispositivoIOT,
     registro_vagasOcupadas,
     financeiroHoje,
-    todos_registros
+    todos_registros,
+    tempoMedioUso
 
 };

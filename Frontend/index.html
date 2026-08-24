@@ -366,11 +366,6 @@
                     Ocupado
                   </span>
 
-                  <span>
-                    <i class="led led-reservado"></i>
-                    Reservada
-                  </span>
-
                 </div>
 
               </div>
@@ -462,14 +457,14 @@
                 </div>
 
 
-                <div class="item-vaga status-reservado">
+                <div class="item-vaga status-livre">
 
                   <span class="led-status"></span>
 
                   <span class="texto-vaga">
                     Vaga 06 -
                     <strong class="info-status">
-                      Reservada
+                      Livre
                     </strong>
                   </span>
 
@@ -834,14 +829,13 @@
                       schedule
                     </span>
 
-                    <span>
+                    <span >
                       Tempo médio de permanência
                     </span>
 
                   </div>
 
-                  <strong class="valor-metrica">
-                    01h42min
+                  <strong class="valor-metrica" id="tempoUso">
                   </strong>
 
                 </div>
@@ -932,7 +926,7 @@
 
               <div class="corpo-iot">
 
-                <div class="lista-dispositivos">
+                <div class="lista-dispositivos" id="lista-dispositivos">
 
                   <div class="item-iot">
 
