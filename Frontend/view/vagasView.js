@@ -125,9 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // o dashboard inteiro será carregado novamente.
 
     btnAtualizarMovimentacao.addEventListener("click", () => {
-
         carregarDashboard();
-
     });
 
 
@@ -158,9 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // os dados do Firebase também serão atualizados.
 
     btnAtualizarIOT.addEventListener("click", () => {
-
         carregarDashboard();
-
     });
 
 
