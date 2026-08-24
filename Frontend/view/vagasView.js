@@ -24,6 +24,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const tempoUso =
         document.querySelector("#tempoUso");
 
+    const vagasResumo = 
+        document.querySelector("#vagas-totais-resumo");
+    
+    const vagasLivresResumo =
+        document.querySelector("#vagas-livres-resumo");
+
+    const vagasOcupadasResumo =
+        document.querySelector("#vagas-ocupadas-resumo");
+
+    const taxaOcupacaoResumo =
+        document.querySelector("#taxa-ocupacao-resumo");
+    
+    const faturamentoResumo =
+        document.querySelector("#faturamento-resumo");
+
 
     // ============================================================
     // MOVIMENTAÇÃO
@@ -221,6 +236,15 @@ document.addEventListener("DOMContentLoaded", () => {
             vagasOcupadas.textContent =
                 data.vagas.ocupadas ?? 0;
 
+            vagasTotaisResumo.textContent = 
+                data.vagas.total ?? 0;
+
+            vagasLivresResumo.textContent =
+                data.vagas.livres ?? 0;
+
+            vagasOcupadasResumo.textContent =
+                data.vagas.ocupadas ?? 0;
+
 
             // Mostra algo como:
             //
@@ -262,6 +286,9 @@ document.addEventListener("DOMContentLoaded", () => {
             taxaOcupacao.textContent =
                 `${taxa.toFixed(2)}%`;
 
+            taxaOcupacaoResumo.textContent =
+                `${taxa.toFixed(2)}%`;
+
 
             // ====================================================
             // FINANCEIRO
@@ -275,6 +302,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     data.financeiro?.faturamento || 0
                 );
 
+            const faturamentoResumo =
+                Number(
+                    data.financeiro?.faturamento || 0
+                );
 
             const ticket =
                 Number(
