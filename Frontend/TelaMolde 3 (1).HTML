@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goiabinha&CIA - [Nome da Tela]</title>
+
+  <!-- Fonte Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilo compartilhado do sistema (sidebar, cabeçalho, tema, etc.) -->
+  <link rel="stylesheet" href="menu.css">
+</head>
+<body>
+
+  <!-- menu laterla (sidebar) -->
+  <aside id="sidebar" class="sidebar collapsed">
+    <div class="sidebar-header">
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
+
+      <div class="logo-container">
+        <div class="logo-icon"></div>
+        <div>
+          <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
+          <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
+        </div>
+      </div>
+    </div>
+
+    <!--Vou usar os links(HREF) para cada tela do sistema-->
+    <!--Se pricisar colocar mais uma tela nova, é so copiar a estrutura dos "href" ai-->
+    <nav class="sidebar-nav">
+      <ul>
+      <li class="nav-item">
+        <a href="TelaDashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a href="TelaVagas.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+      </li>
+      <li class="nav-item">
+        <a href="TelaVeiculos.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+      </li>
+      <li class="nav-item">
+        <a href="TelaEntradasSaidas.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+      </li>
+      <li class="nav-item">
+        <a href="TelaFinanceiro.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+      </li>
+      <li class="nav-item">
+        <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+      </li>
+      <li class="nav-item">
+        <a href="TelaDispositivosIot.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+      </li>
+      <li class="nav-item">
+        <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+      </li>
+      </ul>
+    </nav>
+
+    <div class="quick-summary">
+      <div class="quick-summary-title">RESUMO RÁPIDO</div>
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$ 0,00</span></div>
+    </div>
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+    </div>
+  </aside>
+
+  <!-- conteudo principal -->
+  <div class="main-wrapper">
+
+    <!-- header superior -->
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
+
+        <div class="logo-container">
+          <div class="logo-icon"></div>
+          <div>
+            <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
+            <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- titulo da paina (fixo em HTML, cada tela escreve o seu) -->
+      <div class="page-title">
+        <h1>[Nome da Tela]</h1>
+        <p>[Descrição da tela]</p>
+      </div>
+
+      <div class="header-actions">
+        <!-- seletor de mudar tema. Depois troca pelo do Will -->
+        <section class="mudarTema">
+          <button id="btnConfig" class="btnTema" title="Mudar Tema">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </button>
+
+          <div id="menuTema">
+            <button type="button" onclick="mudarTema('claro')">
+              <i class="fa-solid fa-sun"></i> Tema Claro
+            </button>
+            <button type="button" onclick="mudarTema('escuro')">
+              <i class="fa-solid fa-moon"></i> Tema Escuro
+            </button>
+          </div>
+        </section>
+
+        <div class="datetime">
+          <i class="fa-regular fa-clock"></i> <span id="clockTime">00:00:00</span><br>
+          <span style="font-size: 0.65rem;" id="clockDate">--/--/----</span>
+        </div>
+
+        <div class="notification-btn">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge">0</span>
+        </div>
+
+        <div class="user-profile-top">
+          <i class="fa-solid fa-circle-user avatar"></i>
+          <div class="user-details">
+            <span style="font-weight: 600;">Administrador</span>
+            <span class="status">Online</span>
+          </div>
+          <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; color: var(--text-muted);"></i>
+        </div>
+      </div>
+    </header>
+
+    <!-- corpo da pagina -->
+    <main class="content-area">
+      <!--
+        Coloque aqui o conteúdo específico desta tela.
+        O menu lateral, o cabeçalho, o tema e o relógio já funcionam
+        sozinhos (vêm dpo menu.css e menu.js)  não precisa mexer neles.
+
+        Se sua tela precisar de comportamento próprio em JavaScript
+        (formulário, tabela, filtros e os caramba), crie um arquivo .js só dela
+        (ex: TelaFinanceiro.js) e inclua com <script src="..."></script>
+        antes do </body>
+      -->
+      <div class="screen-placeholder">
+        <p>Substitua este bloco pelo conteúdo real da tela.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Comportamento compartilhado do sistema (menu, tema, relógio) -->
+  <script src="menu.js"></script>
+</body>
+</html>

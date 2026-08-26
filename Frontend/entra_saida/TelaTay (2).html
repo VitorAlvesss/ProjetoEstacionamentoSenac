@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goiabinha&CIA - Entradas e Saídas</title>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Fonte Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilo compartilhado do sistema -->
+  <link rel="stylesheet" href="../src//styles/Menu 2 (1).CSS">
+
+  <!-- Estilo específico desta tela (desenvolvido pela Tay) -->
+  <style>
+    /* Cards de resumo */
+    .cards-resumo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .card-resumo {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);
+    }
+
+    .card-resumo::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+
+    .card-resumo.verde::before  { background: #00e676; }
+    .card-resumo.vermelho::before { background: #ef4444; }
+    .card-resumo.laranja::before  { background: #f97316; }
+
+    .card-resumo-cabecalho {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .card-resumo-titulo {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+
+    .card-resumo-icone {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+
+    .card-resumo-valor {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--text-main);
+    }
+
+    .card-resumo-corpo {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .card-resumo-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .card-resumo-rodape {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Bloco da tabela */
+    .bloco-tabela {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid var(--border-color);
+    }
+
+    .bloco-cabecalho {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .bloco-cabecalho h3 {
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .bloco-cabecalho span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .btn-nova-entrada {
+      background: var(--purple-btn);
+      color: #fff;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color 0.2s;
+    }
+
+    .btn-nova-entrada:hover { background: #581c87; }
+
+    .tabela-container { overflow-x: auto; }
+
+    .tabela-mov {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+
+    .tabela-mov th, .tabela-mov td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .tabela-mov th {
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* badges de status */
+    .status-badge {
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .status-estacionado { background: #dcfce7; color: #15803d; }
+    .status-saiu        { background: #fee2e2; color: #b91c1c; }
+
+    /* botão de dar saída dentro da tabela */
+    .btn-saida-acao {
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-saida-acao:hover { opacity: 0.85; }
+
+    /* Modal de nova entrada */
+    .modal-fundo {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(7, 10, 18, 0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-fundo.visivel { display: flex; }
+
+    .modal-caixa {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      width: 100%;
+      max-width: 420px;
+      padding: 24px;
+    }
+
+    .modal-caixa h3 {
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+
+    .modal-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .modal-fechar {
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      transition: color 0.2s;
+    }
+
+    .modal-fechar:hover { color: var(--text-main); }
+
+    .campo { margin-bottom: 14px; }
+
+    .campo label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .campo input, .campo select {
+      width: 100%;
+      padding: 9px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .campo input:focus, .campo select:focus {
+      border-color: var(--purple-btn);
+    }
+
+    .modal-botoes {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn-cancelar {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-cancelar:hover { background: rgba(255,255,255,0.05); }
+
+    .btn-confirmar {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      background: var(--purple-btn);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-confirmar:hover { background: #581c87; }
+  </style>
+</head>
+<body>
+
+  <!-- menu lateral (sidebar) -->
+  <aside id="sidebar" class="sidebar collapsed">
+    <div class="sidebar-header">
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
+
+      <div class="logo-container">
+        <div class="logo-icon"></div>
+        <div>
+          <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
+          <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="TelaDashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaVagas.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaVeiculos.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaEntradasSaidas.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaFinanceiro.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaDispositivosIot.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="quick-summary">
+      <div class="quick-summary-title">RESUMO RÁPIDO</div>
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$ 0,00</span></div>
+    </div>
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+    </div>
+  </aside>
+
+  <!-- conteudo principal -->
+  <div class="main-wrapper">
+
+    <!--cabaçalho padrão do sistema -->
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
+
+        <div class="logo-container">
+          <div class="logo-icon"></div>
+          <div>
+            <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
+            <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-title">
+        <h1>Entradas e Saídas</h1>
+        <p>Movimentação em tempo real</p>
+      </div>
+
+      <div class="header-actions">
+        <section class="mudarTema">
+          <button id="btnConfig" class="btnTema" title="Mudar Tema">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </button>
+          <div id="menuTema">
+            <button type="button" onclick="mudarTema('claro')">
+              <i class="fa-solid fa-sun"></i> Tema Claro
+            </button>
+            <button type="button" onclick="mudarTema('escuro')">
+              <i class="fa-solid fa-moon"></i> Tema Escuro
+            </button>
+          </div>
+        </section>
+
+        <div class="datetime">
+          <i class="fa-regular fa-clock"></i> <span id="clockTime">00:00:00</span><br>
+          <span style="font-size: 0.65rem;" id="clockDate">--/--/----</span>
+        </div>
+
+        <div class="notification-btn">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge">0</span>
+        </div>
+
+        <div class="user-profile-top">
+          <i class="fa-solid fa-circle-user avatar"></i>
+          <div class="user-details">
+            <span style="font-weight: 600;">Administrador</span>
+            <span class="status">Online</span>
+          </div>
+          <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; color: var(--text-muted);"></i>
+        </div>
+      </div>
+    </header>
+
+    <!--conteudo da tela (Parte da Taya) -->
+    <main class="content-area">
+
+      <!-- Cards de resumo -->
+      <section class="cards-resumo">
+
+        <div class="card-resumo verde">
+          <div class="card-resumo-cabecalho">
+            <span class="card-resumo-titulo">Estacionados Agora</span>
+            <div class="card-resumo-icone" style="background:#00e676;">
+              <i class="fa-solid fa-arrow-down-to-line" style="color:#000;"></i>
+            </div>
+          </div>
+          <div class="card-resumo-corpo">
+            <span class="card-resumo-valor" id="num-estacionados">00</span>
+            <span class="card-resumo-label" style="color:#00e676;">Ativos</span>
+          </div>
+          <div class="card-resumo-rodape">
+            <span>Total hoje: <strong id="num-total-entradas">0</strong></span>
+            <span>Vagas ocupadas</span>
+          </div>
+        </div>
+
+        <div class="card-resumo vermelho">
+          <div class="card-resumo-cabecalho">
+            <span class="card-resumo-titulo">Saídas Realizadas</span>
+            <div class="card-resumo-icone" style="background:#ef4444;">
+              <i class="fa-solid fa-arrow-up-from-line"></i>
+            </div>
+          </div>
+          <div class="card-resumo-corpo">
+            <span class="card-resumo-valor" id="num-saidas">00</span>
+            <span class="card-resumo-label" style="color:#ef4444;">Hoje</span>
+          </div>
+          <div class="card-resumo-rodape">
+            <span>Faturamento: <strong>R$ 0,00</strong></span>
+            <span>Ticket médio: —</span>
+          </div>
+        </div>
+
+        <div class="card-resumo laranja">
+          <div class="card-resumo-cabecalho">
+            <span class="card-resumo-titulo">Reservas Ativas</span>
+            <div class="card-resumo-icone" style="background:#f97316;">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+          </div>
+          <div class="card-resumo-corpo">
+            <span class="card-resumo-valor" id="num-reservas">00</span>
+            <span class="card-resumo-label" style="color:#f97316;">Aguardando</span>
+          </div>
+          <div class="card-resumo-rodape">
+            <span>Próxima chegada: <strong>—</strong></span>
+            <span>Reservadas</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Tabela de movimentação -->
+      <div class="bloco-tabela">
+        <div class="bloco-cabecalho">
+          <div>
+            <h3>Histórico de Movimentação</h3>
+            <span>Registros do dia atual</span>
+          </div>
+          <button class="btn-nova-entrada" id="btnNovaEntrada">
+            <i class="fa-solid fa-plus"></i> Nova Entrada
+          </button>
+        </div>
+
+        <div class="tabela-container">
+          <table class="tabela-mov">
+            <thead>
+              <tr>
+                <th>Placa</th>
+                <th>Vaga</th>
+                <th>Tipo</th>
+                <th>Entrada</th>
+                <th>Saída</th>
+                <th>Status</th>
+                <th>Valor</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="listaMovimentacao"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Modal: Nova Entrada -->
+  <div class="modal-fundo" id="modalEntrada">
+    <div class="modal-caixa">
+      <div class="modal-topo">
+        <h3>Registrar Entrada</h3>
+        <i class="fa-solid fa-xmark modal-fechar" id="btnFecharModal"></i>
+      </div>
+
+      <form id="formNovaEntrada">
+        <div class="campo">
+          <label for="placa">Placa do Veículo</label>
+          <input type="text" id="placa" placeholder="Ex: ABC-1234" required style="text-transform: uppercase;">
+        </div>
+
+        <div class="campo">
+          <label for="vaga">Vaga Selecionada</label>
+          <select id="vaga" required>
+            <option value="Vaga 01">Vaga 01 (Livre)</option>
+            <option value="Vaga 04">Vaga 04 (Livre)</option>
+            <option value="Vaga 05">Vaga 05 (Livre)</option>
+            <option value="Vaga 08">Vaga 08 (Livre)</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="tipoCliente">Tipo de Cliente</label>
+          <select id="tipoCliente">
+            <option value="Avulso">Avulso</option>
+            <option value="Mensalista">Mensalista</option>
+            <option value="Conveniado">Conveniado</option>
+          </select>
+        </div>
+
+        <div class="modal-botoes">
+          <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
+          <button type="submit" class="btn-confirmar">Confirmar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JS compartilhado do sistema (menu, tema, relógio) — SEMPRE PRIMEIRO -->
+  <!-- JS específico desta tela -->
+  <script src="Menu 2 (1).JS" defer></script>
+    <script src="Te" defer></script>
+
+  <script src="TelaTay (3).js"></script>
+
+</body>
+</html>
