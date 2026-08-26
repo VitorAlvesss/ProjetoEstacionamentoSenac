@@ -17,7 +17,6 @@ if (btnTema) {
 }
 
 
-
 // Menu lateral (sidebar) abrir e fechar
 
 (function () {
