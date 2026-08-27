@@ -5,7 +5,7 @@
 */
 
 // Recupera do localStorage ou inicia com lista vazia
-let movimentacoes = JSON.parse(localStorage.getItem('movimentacoes')) || [];
+//let movimentacoes = JSON.parse(localStorage.getItem('movimentacoes')) || [];
 
 const elEstacionados   = document.getElementById('num-estacionados');
 const elSaidas         = document.getElementById('num-saidas');
@@ -29,10 +29,12 @@ btnFecharModal.addEventListener('click', fecharModal);
 btnCancelar.addEventListener('click', fecharModal);
 
 // Salva no localStorage e renderiza a tabela
+
+/*
 function salvarERenderizar() {
   localStorage.setItem('movimentacoes', JSON.stringify(movimentacoes));
   renderizarTabela();
-}
+}*/
 
 function renderizarTabela() {
   tabela.innerHTML = '';
@@ -81,8 +83,8 @@ formEntrada.addEventListener('submit', (event) => {
     valor:   '0,00'
   };
 
-  movimentacoes.unshift(novaEntrada);
-  salvarERenderizar();
+  //movimentacoes.unshift(novaEntrada);
+  //salvarERenderizar();
   fecharModal();
 });
 
@@ -91,7 +93,7 @@ window.darSaida = function (index) {
   movimentacoes[index].saida  = `Hoje ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
   movimentacoes[index].status = 'Finalizado';
   movimentacoes[index].valor  = '15,00';
-  salvarERenderizar();
+  //salvarERenderizar();
 };
 
 // Carrega os dados salvos ao abrir a página

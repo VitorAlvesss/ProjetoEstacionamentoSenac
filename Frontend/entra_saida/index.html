@@ -3,614 +3,204 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Goiabinha - Controle de Estacionamento</title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="visual.css">
-  
+  <title>Goiabinha&CIA - Entradas e Saídas</title>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Fonte Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilo compartilhado do sistema -->
+  <link rel="stylesheet" href="../src//styles/Menu 2 (1).CSS">
+
+  <!-- Estilo específico desta tela (desenvolvido pela Tay) -->
   <style>
-
-
-    
-
-
-:root {
-  --bg-dark: #070a12;
-  --card-bg: #0d121d;
-  --border-color: #1a202c;
-  --text-main: #ffffff;
-  --text-muted: #8c9ba5;
-
-  --purple-primary: #581c4a;
-  --purple-btn: #6b21a8;
-
-  --green-accent: #00e676;
-  --pink-accent: #ff4081;
-  --orange-accent: #f97316;
-  --blue-accent: #3b82f6;
-  --red-accent: #ef4444;
-  --teal-accent: #14b8a6;
-}
-
-
-
-body {
-  display: flex;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-
-
-.main-wrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  width: 100%;
-}
-
-
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-
-/* Círculo que representa o ícone da logo */
-.logo-icon {
-  width: 28px;
-  height: 28px;
-  background: radial-gradient(
-    circle at 30% 30%,
-    #ff5252,
-    #e91e63
-  );
-  border-radius: 50%;
-  position: relative;
-  flex-shrink: 0;
-}
-
-
-/* Pequeno detalhe verde da logo */
-.logo-icon::after {
-  content: '';
-  position: absolute;
-  top: 1px;
-  right: 2px;
-  width: 7px;
-  height: 7px;
-  background-color: var(--green-accent);
-  border-radius: 50%;
-}
-
-
-/* Nome "Goiabinha&CIA" */
-.brand-name {
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-
-/* Cor da palavra "Goiabinha" */
-.brand-name .pink {
-  color: var(--pink-accent);
-}
-
-
-/* Cor da palavra "&CIA" */
-.brand-name .green {
-  color: var(--green-accent);
-}
-
-
-/* Texto abaixo do nome da empresa */
-.brand-subtitle {
-  font-size: 0.5rem;
-  color: var(--text-muted);
-  font-weight: 600;
-  letter-spacing: 0.3px;
-}
-
-
-/* O JavaScript usa essa classe para abrir e fechar o menu*/
-
-.sidebar {
-  width: 250px;
-  background-color: var(--card-bg);
-  border-right: 1px solid var(--border-color);
-
-  display: flex;
-  flex-direction: column;
-
-  flex-shrink: 0;
-
-  transition:
-    transform 0.3s ease,
-    margin-left 0.3s ease;
-
-  z-index: 100;
-}
-
-
-/* Quando o JavaScript adiciona a classe "collapsed" à sidebar,ela é movida para fora da tela */
-
-.sidebar.collapsed {
-  margin-left: -250px;
-}
-
-.sidebar-header {
-  padding: 16px;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  border-bottom: 1px solid var(--border-color);
-}
-
-.hamburger-icon {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 4px;
-
-  transition: background 0.2s;
-}
-
-
-.hamburger-icon:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-
-.sidebar-nav {
-  padding: 12px 8px;
-  flex: 1;
-  overflow-y: auto;
-}
-
-
-.sidebar-nav ul {
-  list-style: none;
-
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-
-/* 
-Esses elementos são criados automaticamente pelo js.Por isso, não é necessário criar um "<li class="nav-item"></li>" manualmente no HTML.
-*/
-.nav-item a {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  padding: 10px 12px;
-
-  color: var(--text-muted);
-  text-decoration: none;
-
-  font-size: 0.82rem;
-  font-weight: 500;
-
-  border-radius: 6px;
-
-  transition: all 0.2s;
-}
-
-
-/* Ícone de cada item do menu */
-.nav-item a i {
-  width: 16px;
-  text-align: center;
-  font-size: 0.95rem;
-}
-
-
-/* Efeito ao passar o mouse */
-.nav-item a:hover {
-  color: var(--text-main);
-  background-color: rgba(255, 255, 255, 0.04);
-}
-
-.nav-item.active a {
-  background-color: var(--purple-primary);
-  color: var(--text-main);
-  font-weight: 600;
-}
-
-
-/* Se não precisar dessa área, ela pode ser removida do CSS*/
-
-.quick-summary {
-  margin: 12px 8px;
-  padding: 12px;
-
-  background-color: rgba(255, 255, 255, 0.02);
-
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-}
-
-
-.quick-summary-title {
-  font-size: 0.65rem;
-  font-weight: 700;
-
-  color: var(--text-muted);
-
-  letter-spacing: 0.5px;
-
-  margin-bottom: 10px;
-}
-
-
-.summary-row {
-  display: flex;
-  justify-content: space-between;
-
-  font-size: 0.72rem;
-
-  margin-bottom: 6px;
-
-  color: var(--text-muted);
-}
-
-
-.summary-row span.val {
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.summary-row span.val.green {
-  color: var(--green-accent);
-}
-
-.summary-row span.val.red {
-  color: var(--red-accent);
-}
-
-.sidebar-copyright {
-  padding: 12px 16px;
-
-  font-size: 0.62rem;
-  color: #4a5568;
-
-  border-top: 1px solid var(--border-color);
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.top-header .logo-container,
-.top-header #topHeaderToggleBtn {
-  display: none;
-}
-
-.sidebar.collapsed ~ .main-wrapper .top-header .logo-container {
-  display: flex;
-}
-
-.sidebar.collapsed ~ .main-wrapper .top-header #topHeaderToggleBtn {
-  display: inline-block;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-    :root {
-      --fundo-pagina: #f1f5f9;
-      --menu-bg: #0f172a;
-      --card-bg: #ffffff;
-      --texto-principal: #334155;
-      --texto-suave: #64748b;
-
-      --cor-sucesso: #22c55e;
-      --cor-perigo: #ef4444;
-      --cor-alerta: #f97316;
-      --cor-destaque: #8b5cf6;
-      --borda: #e2e8f0;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, sans-serif;
-    }
-
-    body {
-      display: flex;
-      background-color: var(--fundo-pagina);
-      color: var(--texto-principal);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    /* --- Menu Lateral --- */
-    .menu-lateral {
-      width: 260px;
-      background: var(--menu-bg);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 20px 0;
-      flex-shrink: 0;
-      transition: all 0.3s ease;
-    }
-
-    @media (min-width: 769px) {
-      .menu-lateral.fechado { 
-        margin-left: -260px; 
-      }
-    }
-
-    @media (max-width: 768px) {
-      .menu-lateral {
-        position: fixed;
-        top: 0; 
-        bottom: 0; 
-        left: -260px;
-        z-index: 999;
-        height: 100vh;
-      }
-      .menu-lateral.aberto { 
-        left: 0; 
-      }
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 0 20px 20px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .logo-icone {
-      width: 32px;
-      height: 32px;
-      background: #ec4899;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .navegacao {
-      list-style: none;
-      margin-top: 15px;
-    }
-
-    .navegacao a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 20px;
-      color: #94a3b8;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: 0.2s;
-    }
-
-    .navegacao li.ativo a,
-    .navegacao a:hover {
-      background: rgba(139, 92, 246, 0.15);
-      color: #fff;
-      border-left: 4px solid var(--cor-destaque);
-    }
-
-    /* --- Area Principal --- */
-    .conteudo-principal {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    .topo {
-      background: var(--card-bg);
-      padding: 15px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--borda);
-    }
-
-    .topo-info {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .btn-menu {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: var(--texto-suave);
-    }
-
-    .painel {
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    /* --- Cards de Resumo --- */
+    /* Cards de resumo */
     .cards-resumo {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
     }
 
-    .card {
+    .card-resumo {
       background: var(--card-bg);
       border-radius: 12px;
-      padding: 22px;
-      border: 1px solid var(--borda);
+      padding: 20px;
+      border: 1px solid var(--border-color);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.08);
     }
 
-    .card::before {
+    .card-resumo::before {
       content: '';
       position: absolute;
-      top: 0; 
-      left: 0; 
-      right: 0;
+      top: 0; left: 0; right: 0;
       height: 4px;
     }
 
-    .card.verdes::before { background: var(--cor-sucesso); }
-    .card.vermelhos::before { background: var(--cor-perigo); }
-    .card.laranjas::before { background: var(--cor-alerta); }
+    .card-resumo.verde::before  { background: #00e676; }
+    .card-resumo.vermelho::before { background: #ef4444; }
+    .card-resumo.laranja::before  { background: #f97316; }
 
-    .card-cabecalho {
+    .card-resumo-cabecalho {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
     }
 
-    .card-titulo {
-      font-size: 0.85rem;
+    .card-resumo-titulo {
+      font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: var(--texto-suave);
+      color: var(--text-muted);
     }
 
-    .card-icone {
-      width: 46px;
-      height: 46px;
+    .card-resumo-icone {
+      width: 42px;
+      height: 42px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       color: #fff;
     }
 
-    .card-corpo {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-    }
-
-    .card-valor {
-      font-size: 2.2rem;
+    .card-resumo-valor {
+      font-size: 2rem;
       font-weight: 800;
       line-height: 1;
+      color: var(--text-main);
     }
 
-    .card-rodape {
+    .card-resumo-corpo {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .card-resumo-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .card-resumo-rodape {
       margin-top: 12px;
       padding-top: 12px;
-      border-top: 1px dashed var(--borda);
-      font-size: 0.78rem;
-      color: var(--texto-suave);
+      border-top: 1px dashed var(--border-color);
+      font-size: 0.75rem;
+      color: var(--text-muted);
       display: flex;
       justify-content: space-between;
     }
 
-    /* --- Tabela --- */
+    /* Bloco da tabela */
     .bloco-tabela {
       background: var(--card-bg);
       border-radius: 8px;
       padding: 20px;
-      border: 1px solid var(--borda);
+      border: 1px solid var(--border-color);
     }
 
     .bloco-cabecalho {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
       gap: 10px;
     }
 
-    .btn {
-      padding: 10px 16px;
-      border-radius: 6px;
+    .bloco-cabecalho h3 {
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .bloco-cabecalho span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .btn-nova-entrada {
+      background: var(--purple-btn);
+      color: #fff;
       border: none;
-      font-size: 0.85rem;
-      cursor: pointer;
+      padding: 9px 16px;
+      border-radius: 6px;
+      font-size: 0.82rem;
       font-weight: 600;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: opacity 0.2s;
+      transition: background-color 0.2s;
     }
 
-    .btn:hover { opacity: 0.9; }
-    .btn-primario { background: var(--cor-destaque); color: #fff; }
-    .btn-saida { background: var(--cor-perigo); color: #fff; padding: 5px 10px; font-size: 0.75rem; }
+    .btn-nova-entrada:hover { background: #581c87; }
 
     .tabela-container { overflow-x: auto; }
 
-    table {
+    .tabela-mov {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       text-align: left;
     }
 
-    th, td {
-      padding: 12px 10px;
-      border-bottom: 1px solid var(--borda);
+    .tabela-mov th, .tabela-mov td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
     }
 
-    th {
-      color: var(--texto-suave);
-      font-size: 0.75rem;
+    .tabela-mov th {
+      color: var(--text-muted);
+      font-size: 0.7rem;
       text-transform: uppercase;
+      font-weight: 700;
     }
 
-    .status {
+    /* badges de status */
+    .status-badge {
       padding: 4px 10px;
       border-radius: 20px;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       display: inline-block;
     }
 
     .status-estacionado { background: #dcfce7; color: #15803d; }
-    .status-saiu { background: #fee2e2; color: #b91c1c; }
-    .status-reservado { background: #ffedd5; color: #c2410c; }
+    .status-saiu        { background: #fee2e2; color: #b91c1c; }
 
-    /* --- Modal --- */
+    /* botão de dar saída dentro da tabela */
+    .btn-saida-acao {
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-saida-acao:hover { opacity: 0.85; }
+
+    /* Modal de nova entrada */
     .modal-fundo {
       position: fixed;
-      top: 0; 
-      left: 0; 
-      width: 100vw; 
-      height: 100vh;
-      background: rgba(15, 23, 42, 0.6);
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(7, 10, 18, 0.75);
       display: none;
       align-items: center;
       justify-content: center;
@@ -621,251 +211,292 @@ Esses elementos são criados automaticamente pelo js.Por isso, não é necessár
 
     .modal-caixa {
       background: var(--card-bg);
-      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
       width: 100%;
       max-width: 420px;
-      padding: 22px;
+      padding: 24px;
     }
+
+    .modal-caixa h3 {
+      font-size: 1rem;
+      color: var(--text-main);
+    }
+
+    .modal-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .modal-fechar {
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      transition: color 0.2s;
+    }
+
+    .modal-fechar:hover { color: var(--text-main); }
 
     .campo { margin-bottom: 14px; }
-    .campo label { display: block; font-size: 0.8rem; color: var(--texto-suave); margin-bottom: 4px; }
+
+    .campo label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
     .campo input, .campo select {
-      width: 100%; 
-      padding: 9px; 
-      border: 1px solid var(--borda); 
-      border-radius: 6px; 
-      font-size: 0.85rem; 
+      width: 100%;
+      padding: 9px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: var(--text-main);
       outline: none;
     }
+
+    .campo input:focus, .campo select:focus {
+      border-color: var(--purple-btn);
+    }
+
+    .modal-botoes {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .btn-cancelar {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-cancelar:hover { background: rgba(255,255,255,0.05); }
+
+    .btn-confirmar {
+      flex: 1;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      background: var(--purple-btn);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-confirmar:hover { background: #581c87; }
   </style>
-  
-  
-  <!--
-importante:
-Não é necessário criar manualmente os itens do menu.
-Os itens de navegação são gerados automaticamente pelo js através do array SCREENS.
-O ID dos elementos abaixo não deve ser alterado, porque o js usa esses IDs para funcionar.
-IDs obrigatórios:
-#sidebar
-#sidebarNav
-#sidebarToggleBtn
-#topHeaderToggleBtn
--->
-
-<aside id="sidebar" class="sidebar collapsed">
-
-  <!-- Cabeçalho do menu lateral -->
-  <div class="sidebar-header">
-
-    <i
-      class="fa-solid fa-bars hamburger-icon"
-      id="sidebarToggleBtn"
-      title="Fechar Menu">
-    </i>
-
-    <div class="logo-container">
-
-    <div class="logo-icon"></div>
-
-      <div>
-        <div class="brand-name">
-          <span class="pink">Goiabinha</span>
-          <span class="green">&CIA</span>
-        </div>
-
-        <div class="brand-subtitle">
-          ESTACIONAMENTO INTELIGENTE
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-<!--não colca os links das telas manualmente aqui. O js vai preencher automaticamente este <ul> utilizando o array SCREENS.-->
-
-  <nav class="sidebar-nav">
-    <ul id="sidebarNav"></ul>
-  </nav>
-
-
-  <!--Esta área mostra informações resumidas do estacionamento.Os valores são apenas exemplos, só para tapar buraco.
-Quando for usar dados reais vindos de JavaScript,banco de dados ou API, da para alterar esses valores utilizando o JS.
-Se não precisar dessa área, ela pode ser removida do HTML. -->
-
-  <div class="quick-summary">
-
-    <div class="quick-summary-title">
-      RESUMO RÁPIDO
-    </div>
-
-    <div class="summary-row">
-      <span>Vagas totais</span>
-      <span class="val">20</span>
-    </div>
-
-    <div class="summary-row">
-      <span>Vagas livres</span>
-      <span class="val green">20</span>
-    </div>
-
-    <div class="summary-row">
-      <span>Vagas ocupadas</span>
-      <span class="val red">0</span>
-    </div>
-
-    <div class="summary-row">
-      <span>Taxa de ocupação</span>
-      <span class="val">0%</span>
-    </div>
-
-    <div class="summary-row" style="margin-top: 8px;">
-      <span>Faturamento hoje</span>
-      <span class="val green">R$ 0,00</span>
-    </div>
-
-  </div>
-
-
-  <!-- Rodapé do menu -->
-  <div class="sidebar-copyright">
-    © 2024 Goiabinha&CIA<br>
-    Todos os direitos reservados.
-  </div>
-
-</aside>
-
-
-
-<!--Coloca embaixo do <header>.-->
-
-<div class="header-left">
-
-  <i
-    class="fa-solid fa-bars hamburger-icon"
-    id="topHeaderToggleBtn"
-    title="Abrir Menu">
-  </i>
-
-
-  <div class="logo-container">
-
-    <div class="logo-icon"></div>
-
-    <div>
-      <div class="brand-name">
-        <span class="pink">Goiabinha</span>
-        <span class="green">&CIA</span>
-      </div>
-
-      <div class="brand-subtitle">
-        ESTACIONAMENTO INTELIGENTE
-      </div>
-    </div>
-
-  </div>
-
-</div>
-
-
-  
+  <script src='/Frontend/src/controllers/entradaSaida.js' defer></script>
+  <script src="Menu 2 (1).JS" defer></script>
+  <!-- <script src="TelaTay (3).js" defer></script> -->
 </head>
 <body>
 
+  <!-- menu lateral (sidebar) -->
+  <aside id="sidebar" class="sidebar collapsed">
+    <div class="sidebar-header">
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
 
-
-  <!-- Area Principal -->
-  <main class="conteudo-principal">
-    <header class="topo">
-      <div class="topo-info">
-        <button class="btn-menu" id="btnToggleMenu"><i class="fa-solid fa-bars"></i></button>
+      <div class="logo-container">
+        <div class="logo-icon"></div>
         <div>
-          <h2 style="font-size: 1.1rem;">Controle de Entradas e Saídas</h2>
-          <span style="font-size: 0.75rem; color: var(--texto-suave);">Movimentação em tempo real</span>
+          <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
+          <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="TelaDashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaVagas.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaVeiculos.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaEntradasSaidas.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaFinanceiro.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaDispositivosIot.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="quick-summary">
+      <div class="quick-summary-title">RESUMO RÁPIDO</div>
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$ 0,00</span></div>
+    </div>
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+    </div>
+  </aside>
+
+  <!-- conteudo principal -->
+  <div class="main-wrapper">
+
+    <!--cabaçalho padrão do sistema -->
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
+
+        <div class="logo-container">
+          <div class="logo-icon"></div>
+          <div>
+            <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
+            <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-title">
+        <h1>Entradas e Saídas</h1>
+        <p>Movimentação em tempo real</p>
+      </div>
+
+      <div class="header-actions">
+        <section class="mudarTema">
+          <button id="btnConfig" class="btnTema" title="Mudar Tema">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </button>
+          <div id="menuTema">
+            <button type="button" onclick="mudarTema('claro')">
+              <i class="fa-solid fa-sun"></i> Tema Claro
+            </button>
+            <button type="button" onclick="mudarTema('escuro')">
+              <i class="fa-solid fa-moon"></i> Tema Escuro
+            </button>
+          </div>
+        </section>
+
+        <div class="datetime">
+          <i class="fa-regular fa-clock"></i> <span id="clockTime">00:00:00</span><br>
+          <span style="font-size: 0.65rem;" id="clockDate">--/--/----</span>
+        </div>
+
+        <div class="notification-btn">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge">0</span>
+        </div>
+
+        <div class="user-profile-top">
+          <i class="fa-solid fa-circle-user avatar"></i>
+          <div class="user-details">
+            <span style="font-weight: 600;">Administrador</span>
+            <span class="status">Online</span>
+          </div>
+          <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; color: var(--text-muted);"></i>
         </div>
       </div>
     </header>
 
-    <div class="painel">
+    <!--conteudo da tela (Parte da Taya) -->
+    <main class="content-area">
 
-      <!-- Resumo do Dia -->
+      <!-- Cards de resumo -->
       <section class="cards-resumo">
 
-        <!-- Card 1: Estacionados -->
-        <div class="card verdes">
-          <div class="card-cabecalho">
-            <span class="card-titulo">Estacionados Agora</span>
-            <div class="card-icone" style="background: var(--cor-sucesso);">
-              <i class="fa-solid fa-arrow-down-to-line"></i>
+        <div class="card-resumo verde">
+          <div class="card-resumo-cabecalho">
+            <span class="card-resumo-titulo">Estacionados Agora</span>
+            <div class="card-resumo-icone" style="background:#00e676;">
+              <i class="fa-solid fa-arrow-down-to-line" style="color:#000;"></i>
             </div>
           </div>
-          <div class="card-corpo">
-            <span class="card-valor" id="num-estacionados">13</span>
-            <span style="font-size: 0.85rem; color: var(--cor-sucesso); font-weight: bold;">Ativos</span>
+          <div class="card-resumo-corpo">
+            <span class="card-resumo-valor" id="num-estacionados">00</span>
+            <span class="card-resumo-label" style="color:#00e676;">Ativos</span>
           </div>
-          <div class="card-rodape">
-            <span>Total hoje: <strong id="num-total-entradas">24</strong></span>
+          <div class="card-resumo-rodape">
+            <span>Total hoje: <strong id="num-total-entradas">0</strong></span>
             <span>Vagas ocupadas</span>
           </div>
         </div>
 
-        <!-- Card 2: Saídas -->
-        <div class="card vermelhos">
-          <div class="card-cabecalho">
-            <span class="card-titulo">Saídas Realizadas</span>
-            <div class="card-icone" style="background: var(--cor-perigo);">
+        <div class="card-resumo vermelho">
+          <div class="card-resumo-cabecalho">
+            <span class="card-resumo-titulo">Saídas Realizadas</span>
+            <div class="card-resumo-icone" style="background:#ef4444;">
               <i class="fa-solid fa-arrow-up-from-line"></i>
             </div>
           </div>
-          <div class="card-corpo">
-            <span class="card-valor" id="num-saidas">11</span>
-            <span style="font-size: 0.85rem; color: var(--cor-perigo); font-weight: bold;">Hoje</span>
+          <div class="card-resumo-corpo">
+            <span class="card-resumo-valor" id="num-saidas">00</span>
+            <span class="card-resumo-label" style="color:#ef4444;">Hoje</span>
           </div>
-          <div class="card-rodape">
-            <span>Faturamento: <strong>R$ 487,00</strong></span>
-            <span>Ticket médio: R$ 44,27</span>
+          <div class="card-resumo-rodape">
+            <span>Faturamento: <strong>R$ 0,00</strong></span>
+            <span>Ticket médio: —</span>
           </div>
         </div>
 
-        <!-- Card 3: Reservas -->
-        <div class="card laranjas">
-          <div class="card-cabecalho">
-            <span class="card-titulo">Reservas Ativas</span>
-            <div class="card-icone" style="background: var(--cor-alerta);">
+        <div class="card-resumo laranja">
+          <div class="card-resumo-cabecalho">
+            <span class="card-resumo-titulo">Reservas Ativas</span>
+            <div class="card-resumo-icone" style="background:#f97316;">
               <i class="fa-solid fa-clock-rotate-left"></i>
             </div>
           </div>
-          <div class="card-corpo">
-            <span class="card-valor" id="num-reservas">02</span>
-            <span style="font-size: 0.85rem; color: var(--cor-alerta); font-weight: bold;">Aguardando</span>
+          <div class="card-resumo-corpo">
+            <span class="card-resumo-valor" id="num-reservas">00</span>
+            <span class="card-resumo-label" style="color:#f97316;">Aguardando</span>
           </div>
-          <div class="card-rodape">
-            <span>Próxima chegada: <strong>14 min</strong></span>
+          <div class="card-resumo-rodape">
+            <span>Próxima chegada: <strong>—</strong></span>
             <span>Reservadas</span>
           </div>
         </div>
 
       </section>
 
-      <!-- Tabela de Movimentação -->
+      <!-- Tabela de movimentação -->
       <div class="bloco-tabela">
         <div class="bloco-cabecalho">
           <div>
-            <h3 style="font-size: 1rem;">Histórico de Movimentação</h3>
-            <span style="font-size: 0.75rem; color: var(--texto-suave);">Registros do dia atual</span>
+            <h3>Histórico de Movimentação</h3>
+            <span>Registros do dia atual</span>
           </div>
-          <button class="btn btn-primario" id="btnNovaEntrada">
+          <button class="btn-nova-entrada" id="btnNovaEntrada">
             <i class="fa-solid fa-plus"></i> Nova Entrada
           </button>
         </div>
 
         <div class="tabela-container">
-          <table>
+          <table class="tabela-mov">
             <thead>
               <tr>
                 <th>Placa</th>
                 <th>Vaga</th>
-                <th>Tipo</th>
                 <th>Entrada</th>
                 <th>Saída</th>
                 <th>Status</th>
@@ -873,69 +504,20 @@ Se não precisar dessa área, ela pode ser removida do HTML. -->
                 <th>Ações</th>
               </tr>
             </thead>
-            <tbody id="listaMovimentacao">
-              <tr>
-                <td><strong>ABC-1023</strong></td>
-                <td>Vaga 02</td>
-                <td>Mensalista</td>
-                <td>20/05/2026 13:29</td>
-                <td>—</td>
-                <td><span class="status status-estacionado">Estacionado</span></td>
-                <td>R$ 4,00</td>
-                <td>
-                  <button class="btn btn-saida" onclick="darSaida(this)">
-                    <i class="fa-solid fa-right-from-bracket"></i> Dar Saída
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>DEF-4056</strong></td>
-                <td>Vaga 03</td>
-                <td>Avulso</td>
-                <td>20/05/2026 12:51</td>
-                <td></td>
-                <td><span class="status status-estacionado">Estacionado</span></td>
-                <td>R$ 10,00</td>
-                <td>
-                  <button class="btn btn-saida" onclick="darSaida(this)">
-                    <i class="fa-solid fa-right-from-bracket"></i> Dar Saída
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>XYZ-9988</strong></td>
-                <td>Vaga 06</td>
-                <td>Reserva Online</td>
-                <td>—</td>
-                <td>—</td>
-                <td><span class="status status-reservado">Reservado</span></td>
-                <td>R$ 0,00</td>
-                <td>—</td>
-              </tr>
-              <tr>
-                <td><strong>GHI-7890</strong></td>
-                <td>Vaga 07</td>
-                <td>Avulso</td>
-                <td>20/05/2026 10:15</td>
-                <td>20/05/2026 12:30</td>
-                <td><span class="status status-saiu">Finalizado</span></td>
-                <td>R$ 18,00</td>
-                <td><i class="fa-solid fa-check-double" style="color: var(--cor-sucesso);"></i> Concluído</td>
-              </tr>
-            </tbody>
+            <tbody id="listaMovimentacao"></tbody>
           </table>
         </div>
       </div>
 
-    </div>
-  </main>
+    </main>
+  </div>
 
   <!-- Modal: Nova Entrada -->
   <div class="modal-fundo" id="modalEntrada">
     <div class="modal-caixa">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <h3 style="font-size: 1rem;">Registrar Entrada</h3>
-        <i class="fa-solid fa-xmark" id="btnFecharModal" style="cursor: pointer; color: var(--texto-suave);"></i>
+      <div class="modal-topo">
+        <h3>Registrar Entrada</h3>
+        <i class="fa-solid fa-xmark modal-fechar" id="btnFecharModal"></i>
       </div>
 
       <form id="formNovaEntrada">
@@ -946,119 +528,25 @@ Se não precisar dessa área, ela pode ser removida do HTML. -->
 
         <div class="campo">
           <label for="vaga">Vaga Selecionada</label>
-          <select id="vaga" required>
-            <option value="Vaga 01">Vaga 01 (Livre)</option>
-            <option value="Vaga 04">Vaga 04 (Livre)</option>
-            <option value="Vaga 05">Vaga 05 (Livre)</option>
-            <option value="Vaga 08">Vaga 08 (Livre)</option>
+          <select id="id_vaga" required>
+            <option value="1">Vaga 1</option>
+            <option value="2">Vaga 2</option>
+            <option value="3">Vaga 3</option>
+            <option value="4">Vaga 4</option>
           </select>
         </div>
 
-        <div class="campo">
-          <label for="tipoCliente">Tipo de Cliente</label>
-          <select id="tipoCliente">
-            <option value="Avulso">Avulso</option>
-            <option value="Mensalista">Mensalista</option>
-            <option value="Conveniado">Conveniado</option>
-          </select>
-        </div>
-
-        <div style="display: flex; gap: 10px; margin-top: 20px;">
-          <button type="button" class="btn" id="btnCancelar" style="background: #e2e8f0; flex: 1;">Cancelar</button>
-          <button type="submit" class="btn btn-primario" style="flex: 1;">Confirmar</button>
+        <div class="modal-botoes">
+          <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
+          <button type="submit" class="btn-confirmar">Confirmar</button>
         </div>
       </form>
     </div>
   </div>
 
-  <script>
-    // Contadores
-    let totalEstacionados = 13;
-    let totalSaidas = 11;
-    let totalEntradasDia = 24;
+  <!-- JS compartilhado do sistema (menu, tema, relógio) — SEMPRE PRIMEIRO -->
+  <!-- JS específico desta tela -->
+  
 
-    // Elementos da tela
-    const elEstacionados = document.getElementById('num-estacionados');
-    const elSaidas = document.getElementById('num-saidas');
-    const elTotalEntradas = document.getElementById('num-total-entradas');
-
-    // Elementos do Modal
-    const modal = document.getElementById('modalEntrada');
-    const btnAbrirModal = document.getElementById('btnNovaEntrada');
-    const btnFecharModal = document.getElementById('btnFecharModal');
-    const btnCancelar = document.getElementById('btnCancelar');
-    const formEntrada = document.getElementById('formNovaEntrada');
-
-    // Abrir e Fechar Modal
-    const fecharModal = () => {
-      modal.classList.remove('visivel');
-      formEntrada.reset();
-    };
-
-    btnAbrirModal.addEventListener('click', () => modal.classList.add('visivel'));
-    btnFecharModal.addEventListener('click', fecharModal);
-    btnCancelar.addEventListener('click', fecharModal);
-
-    // Salvar Nova Entrada
-    formEntrada.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      const placa = document.getElementById('placa').value.toUpperCase();
-      const vaga = document.getElementById('vaga').value;
-      const tipo = document.getElementById('tipoCliente').value;
-      const horaAtual = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-      const tabela = document.getElementById('listaMovimentacao');
-      const novaLinha = document.createElement('tr');
-
-      novaLinha.innerHTML = `
-        <td><strong>${placa}</strong></td>
-        <td>${vaga}</td>
-        <td>${tipo}</td>
-        <td>Hoje ${horaAtual}</td>
-        <td>—</td>
-        <td><span class="status status-estacionado">Estacionado</span></td>
-        <td>R$ 0,00</td>
-        <td>
-          <button class="btn btn-saida" onclick="darSaida(this)">
-            <i class="fa-solid fa-right-from-bracket"></i> Dar Saída
-          </button>
-        </td>
-      `;
-
-      tabela.insertBefore(novaLinha, tabela.firstChild);
-
-      // Atualiza os cards
-      totalEstacionados++;
-      totalEntradasDia++;
-      elEstacionados.innerText = String(totalEstacionados).padStart(2, '0');
-      elTotalEntradas.innerText = totalEntradasDia;
-
-      fecharModal();
-    });
-
-    // Função de Dar Saída
-    function darSaida(botao) {
-      const linha = botao.closest('tr');
-      const horaAtual = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-      // Atualiza os campos da linha
-      linha.children[4].innerText = `Hoje ${horaAtual}`;
-      linha.children[5].innerHTML = `<span class="status status-saiu">Finalizado</span>`;
-      linha.children[7].innerHTML = `<i class="fa-solid fa-check-double" style="color: var(--cor-sucesso);"></i> Concluído`;
-
-      // Atualiza os cards
-      totalEstacionados--;
-      totalSaidas++;
-      elEstacionados.innerText = String(totalEstacionados).padStart(2, '0');
-      elSaidas.innerText = String(totalSaidas).padStart(2, '0');
-    }
-
-
-
-
-    
-
-  </script>
 </body>
 </html>
