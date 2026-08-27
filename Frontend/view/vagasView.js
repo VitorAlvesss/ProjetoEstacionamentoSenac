@@ -800,8 +800,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div class="item-iot">
 
-                        <span class="led-iot ${classeLed}">
-                        </span>
+                        <span class="led-iot ${classeLed}"></span>
 
                         <span class="nome-dispositivo">
                             ${dispositivo.nome_dispositivo}
