@@ -32,7 +32,7 @@
     <nav class="sidebar-nav">
       <ul>
         <li class="nav-item">
-          <a href="index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+          <a href="/Frontend/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
         </li>
         <li class="nav-item">
           <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">
@@ -51,24 +51,24 @@
           <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
         </li>
         <li class="nav-item">
-          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+          <a href="/Frontend/relatorios/index.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
         </li>
         <li class="nav-item">
           <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
         </li>
         <li class="nav-item">
-          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+          <a href="/Frontend/configurações/index.html"><i class="fa-solid fa-gear"></i> Configurações</a>
         </li>
       </ul>
     </nav>
 
     <div class="quick-summary">
       <div class="quick-summary-title">RESUMO RÁPIDO</div>
-      <div class="summary-row" id="vagas-totais-resumo"><span>Vagas totais</span><span class="val">20</span></div>
-      <div class="summary-row" id="vagas-livres-resumo"><span>Vagas livres</span><span class="val green">20</span></div>
-      <div class="summary-row" id="vagas-ocupadas-resumo"><span>Vagas ocupadas</span><span class="val red">0</span></div>
-      <div class="summary-row" id="taxa-ocupacao-resumo"><span>Taxa de ocupação</span><span class="val">0%</span></div>
-      <div class="summary-row" style="margin-top: 8px;" id="faturamento-resumo"><span>Faturamento hoje</span><span class="val green">R$
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$
           0,00</span></div>
     </div>
 
@@ -223,17 +223,8 @@
               <div class="mapa-header-mini">
                 <h3>STATUS DO ESTACIONAMENTO</h3>
                 <div class="legenda-mini">
-
-                  <span>
-                    <i class="led led-livre"></i>
-                    Livre
-                  </span>
-
-                  <span>
-                    <i class="led led-ocupado"></i>
-                    Ocupado
-                  </span>
-
+                  <span><i class="led led-livre"></i> Livre</span>
+                  <span><i class="led led-ocupado"></i> Ocupado</span>
                 </div>
               </div>
 
@@ -270,18 +261,10 @@
                   <span class="texto-vaga">Vaga 05 - <strong class="info-status">Livre</strong></span>
                 </div>
 
-
+                <!-- Vaga 6 -->
                 <div class="item-vaga status-livre">
-
                   <span class="led-status"></span>
-
-                  <span class="texto-vaga">
-                    Vaga 06 -
-                    <strong class="info-status">
-                      Livre
-                    </strong>
-                  </span>
-
+                  <span class="texto-vaga">Vaga 06 - <strong class="info-status">Livre</strong></span>
                 </div>
               </div>
 
@@ -409,20 +392,10 @@
                 <!-- Item 1: Tempo médio -->
                 <div class="item-metrica">
                   <div class="info-metrica-esquerda">
-
-                    <span class="material-symbols-outlined">
-                      schedule
-                    </span>
-
-                    <span >
-                      Tempo médio de permanência
-                    </span>
-
+                    <span class="material-symbols-outlined">schedule</span>
+                    <span>Tempo médio de permanência</span>
                   </div>
-
-                  <strong class="valor-metrica" id="tempoUso">
-                  </strong>
-
+                  <strong class="valor-metrica">01h42min</strong>
                 </div>
 
                 <!-- Item 2: Entradas hoje -->
@@ -464,9 +437,8 @@
               </div>
 
               <div class="corpo-iot">
-
-                <div class="lista-dispositivos" id="lista-dispositivos">
-
+                <!-- Lado Esquerdo: Lista de Dispositivos -->
+                <div class="lista-dispositivos">
                   <div class="item-iot">
                     <span class="led-iot led-online"></span>
                     <span class="nome-dispositivo">ESP32 Principal</span>
@@ -552,7 +524,7 @@
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="view/vagasView.js"></script>
+  <script src="/Frontend/view/vagasView.js" defer></script>
 
 </body>
 

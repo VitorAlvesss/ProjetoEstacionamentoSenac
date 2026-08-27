@@ -173,7 +173,7 @@ body {
   flex-direction: column;
   align-items: flex-end;
   font-size: 0.78rem;
-  color: var(--texto-mutado);
+  color:  #dde0e3;
 }
 
 .botao-icone {

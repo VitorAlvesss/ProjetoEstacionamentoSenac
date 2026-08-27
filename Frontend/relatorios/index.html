@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/Frontend/src/styles/menu.css">
+  <link rel="stylesheet" href="/Frontend/src/styles/RelatorioMensal.css">
+
+  <title>Goiabinha & CIA - Relatório Mensal</title>
+
+  <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
+</head>
+
+<body>
+
+<aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-header">
+
+      <i class="fa-solid fa-bars hamburger-icon"
+        id="sidebarToggleBtn"
+        title="Fechar Menu"></i>
+
+      <div class="logo-container">
+        <div></div>
+      </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+      <ul>
+
+        <li class="nav-item">
+          <a href="/Frontend/index.html">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/Frontend/tela_cadastro/index.html">
+            <i class="material-symbols-outlined">
+              app_registration
+            </i>
+            Cadastro
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/Frontend/vagas/index.html">
+            <i class="fa-solid fa-square-parking"></i>
+            Vagas
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/Frontend/TelaVeiculos/index.html">
+            <i class="fa-solid fa-car"></i>
+            Veículos / Usuários
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/Frontend/entradaSaida/entradaSaida.html">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Entradas e Saídas
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/Frontend/pagamento/index.html">
+            <i class="fa-solid fa-dollar-sign"></i>
+            Financeiro
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/Frontend/relatorios/index.html">
+            <i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+
+        <li class="nav-item">
+          <a href="/Frontend/IoT/index.html">
+            <i class="fa-solid fa-sitemap"></i>
+            Dispositivos IoT
+          </a>
+        </li>
+
+        <li class="nav-item active">
+          <a href="/Frontend/configurações/index.html">
+            <i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+
+    <!-- RESUMO RÁPIDO -->
+    <div class="quick-summary">
+
+      <div class="quick-summary-title">
+        RESUMO RÁPIDO
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas totais</span>
+        <span class="val">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas livres</span>
+        <span class="val green">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas ocupadas</span>
+        <span class="val red">0</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Taxa de ocupação</span>
+        <span class="val">0%</span>
+      </div>
+
+      <div class="summary-row" style="margin-top: 8px;">
+        <span>Faturamento hoje</span>
+        <span class="val green">
+          R$ 0,00
+        </span>
+      </div>
+
+    </div>
+
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>
+      Todos os direitos reservados.
+    </div>
+
+  </aside>
+
+
+  <!--ÁREA PRINCIPAL-->
+
+  <div class="main-wrapper">
+
+
+    <!--CABEÇALHO -->
+
+    <header class="cabecalho-principal">
+
+      <div class="cabecalho-esquerda">
+
+        <i class="fa-solid fa-bars hamburger-icon"
+          id="topHeaderToggleBtn"
+          title="Abrir Menu">
+        </i>
+
+        <div class="brand-logo">
+
+          <img
+            src="/Frontend/public/logo.png"
+            alt="Goiabinha & CIA"
+            class="img-logo">
+
+        </div>
+
+      </div>
+
+
+      <div class="titulos-cabecalho centralizado">
+
+        <h1 id="pageTitle">
+          Relatório Mensal
+        </h1>
+
+        <h2 id="pageSubtitle">
+          Resumo mensal do estacionamento
+        </h2>
+
+      </div>
+
+
+      <div class="info-cabecalho">
+
+        <!-- TEMA -->
+        <button
+          id="btnTema"
+          class="btn-tema"
+          title="Alternar Tema">
+
+          <span class="material-symbols-outlined">
+            routine
+          </span>
+
+        </button>
+
+
+        <!-- DATA E HORA -->
+        <div id="data-hora">
+
+          <span id="hora-atual">
+            --:--:--
+          </span>
+
+          <small id="data-atual">
+            --/--/----
+          </small>
+
+        </div>
+
+
+        <!-- NOTIFICAÇÃO -->
+        <div id="notificacao" class="botao-icone">
+
+          <span class="material-symbols-outlined">
+            notifications
+          </span>
+
+          <span
+            class="emblema"
+            id="qtd-notificacoes">
+            0
+          </span>
+
+        </div>
+
+
+        <!-- USUÁRIO -->
+        <div id="usuario-logado">
+
+          <i
+            id="avatar"
+            class="fa-solid fa-circle-user avatar">
+          </i>
+
+          <div class="user-details">
+
+            <div class="detalhes-usuario">
+
+              <span
+                id="nome-usuario"
+                style="font-weight: 600;">
+                Administrador
+              </span>
+
+              <span
+                id="status-usuario"
+                class="status">
+                Online
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- CONTEÚDO DO RELATÓRIO-->
+
+    <main class="relatorio-container">
+
+
+      <!--FILTROS-->
+
+      <section class="relatorio-filtros">
+
+
+        <!-- MÊS / ANO -->
+
+        <div class="filtro-grupo">
+
+          <label for="mesRelatorio">
+            MÊS / ANO
+          </label>
+
+          <div class="campo-select">
+
+            <span class="material-symbols-outlined">
+              calendar_month
+            </span>
+
+            <select id="mesRelatorio">
+
+              <option value="2026-08">
+                Agosto / 2026
+              </option>
+
+              <option value="2026-07">
+                Julho / 2026
+              </option>
+
+              <option value="2026-06">
+                Junho / 2026
+              </option>
+
+              <option value="2026-05">
+                Maio / 2026
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- TIPO DE RELATÓRIO -->
+
+        <div class="filtro-grupo filtro-tipo">
+
+          <label for="tipoRelatorio">
+            TIPO DE RELATÓRIO
+          </label>
+
+          <div class="campo-select">
+
+            <span class="material-symbols-outlined">
+              description
+            </span>
+
+            <select id="tipoRelatorio">
+
+              <option value="geral">
+                Resumo Geral
+              </option>
+
+              <option value="financeiro">
+                Financeiro
+              </option>
+
+              <option value="movimentacao">
+                Entradas e Saídas
+              </option>
+
+              <option value="ocupacao">
+                Ocupação
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- BOTÕES -->
+
+        <div class="acoes-relatorio">
+
+          <button
+            type="button"
+            class="btn-relatorio btn-imprimir"
+            id="btnImprimir">
+
+            <span class="material-symbols-outlined">
+              print
+            </span>
+
+            Imprimir
+
+          </button>
+
+
+          <button
+            type="button"
+            class="btn-relatorio btn-pdf"
+            id="btnGerarPDF">
+
+            <span class="material-symbols-outlined">
+              picture_as_pdf
+            </span>
+
+            Gerar PDF
+
+          </button>
+
+        </div>
+
+      </section>
+
+
+
+      <!--CARDS PRINCIPAIS-->
+
+      <section class="relatorio-cards">
+
+
+        <!-- FATURAMENTO -->
+
+        <div class="relatorio-card">
+
+          <div class="relatorio-icone fundo-verde">
+
+            <span class="material-symbols-outlined">
+              payments
+            </span>
+
+          </div>
+
+          <div class="relatorio-card-info">
+
+            <span class="relatorio-card-titulo">
+              FATURAMENTO TOTAL
+            </span>
+
+            <strong class="relatorio-card-valor">
+              R$ 12.458,00
+            </strong>
+
+            <span class="relatorio-card-subtitulo">
+              Agosto / 2026
+            </span>
+
+            <span class="relatorio-comparacao positivo">
+              + 18,7%
+              <small>vs. Julho / 2026</small>
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ENTRADAS -->
+
+        <div class="relatorio-card">
+
+          <div class="relatorio-icone fundo-azul">
+
+            <span class="material-symbols-outlined">
+              login
+            </span>
+
+          </div>
+
+          <div class="relatorio-card-info">
+
+            <span class="relatorio-card-titulo">
+              ENTRADAS NO MÊS
+            </span>
+
+            <strong class="relatorio-card-valor">
+              512
+            </strong>
+
+            <span class="relatorio-card-subtitulo">
+              Total de veículos
+            </span>
+
+            <span class="relatorio-comparacao positivo">
+              + 12,5%
+              <small>vs. Julho / 2026</small>
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- SAÍDAS -->
+
+        <div class="relatorio-card">
+
+          <div class="relatorio-icone fundo-amarelo">
+
+            <span class="material-symbols-outlined">
+              logout
+            </span>
+
+          </div>
+
+          <div class="relatorio-card-info">
+
+            <span class="relatorio-card-titulo">
+              SAÍDAS NO MÊS
+            </span>
+
+            <strong class="relatorio-card-valor">
+              498
+            </strong>
+
+            <span class="relatorio-card-subtitulo">
+              Total de veículos
+            </span>
+
+            <span class="relatorio-comparacao positivo">
+              + 11,3%
+              <small>vs. Julho / 2026</small>
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- TICKET MÉDIO -->
+
+        <div class="relatorio-card">
+
+          <div class="relatorio-icone fundo-roxo">
+
+            <span class="material-symbols-outlined">
+              confirmation_number
+            </span>
+
+          </div>
+
+          <div class="relatorio-card-info">
+
+            <span class="relatorio-card-titulo">
+              TICKET MÉDIO
+            </span>
+
+            <strong class="relatorio-card-valor">
+              R$ 25,02
+            </strong>
+
+            <span class="relatorio-card-subtitulo">
+              Média por veículo
+            </span>
+
+            <span class="relatorio-comparacao positivo">
+              + 5,6%
+              <small>vs. Julho / 2026</small>
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- RESUMO POR DIA -->
+
+      <section class="bloco-relatorio">
+
+        <div class="cabecalho-bloco-relatorio">
+
+          <h3>
+            Resumo por Dia
+          </h3>
+
+        </div>
+
+
+        <div class="tabela-relatorio-container">
+
+          <table class="tabela-relatorio">
+
+            <thead>
+
+              <tr>
+
+                <th>Dia</th>
+
+                <th>Entradas</th>
+
+                <th>Saídas</th>
+
+                <th>Veículos Ativos<br>(Final do Dia)</th>
+
+                <th>Faturamento (R$)</th>
+
+                <th>Ticket Médio (R$)</th>
+
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr>
+
+                <td>01/08/2026 (Sáb)</td>
+                <td>18</td>
+                <td>16</td>
+                <td>22</td>
+                <td class="valor-destaque">450,00</td>
+                <td>25,00</td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>02/08/2026 (Dom)</td>
+                <td>14</td>
+                <td>12</td>
+                <td>24</td>
+                <td class="valor-destaque">320,00</td>
+                <td>24,62</td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>03/08/2026 (Seg)</td>
+                <td>22</td>
+                <td>20</td>
+                <td>26</td>
+                <td class="valor-destaque">560,00</td>
+                <td>25,45</td>
+
+              </tr>
+
+
+              <tr class="linha-reticencias">
+
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>31/08/2026 (Seg)</td>
+                <td>21</td>
+                <td>19</td>
+                <td>23</td>
+                <td class="valor-destaque">510,00</td>
+                <td>24,29</td>
+
+              </tr>
+
+            </tbody>
+
+
+            <tfoot>
+
+              <tr>
+
+                <td>
+                  TOTAL DO MÊS
+                </td>
+
+                <td>
+                  512
+                </td>
+
+                <td>
+                  498
+                </td>
+
+                <td>
+                  —
+                </td>
+
+                <td>
+                  R$ 12.458,00
+                </td>
+
+                <td>
+                  R$ 25,02
+                </td>
+
+              </tr>
+
+            </tfoot>
+
+          </table>
+
+        </div>
+
+      </section>
+
+
+
+      <!--BLOCOS INFERIORES-->
+
+      <section class="relatorio-blocos-inferiores">
+
+
+        <!-- RESUMO POR TIPO -->
+
+        <div class="bloco-relatorio bloco-tipo-servico">
+
+          <div class="cabecalho-bloco-relatorio">
+
+            <h3>
+              Resumo por Tipo de Serviço
+            </h3>
+
+          </div>
+
+
+          <div class="tabela-relatorio-container">
+
+            <table class="tabela-relatorio tabela-servico">
+
+              <thead>
+
+                <tr>
+
+                  <th>Tipo</th>
+                  <th>Quantidade</th>
+                  <th>Percentual</th>
+                  <th>Faturamento (R$)</th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody>
+
+                <tr>
+
+                  <td>Avulso</td>
+                  <td>312</td>
+                  <td>60,9%</td>
+                  <td>R$ 7.850,00</td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>Mensalista</td>
+                  <td>112</td>
+                  <td>21,9%</td>
+                  <td>R$ 3.250,00</td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>Reserva Online</td>
+                  <td>88</td>
+                  <td>17,2%</td>
+                  <td>R$ 1.358,00</td>
+
+                </tr>
+
+              </tbody>
+
+
+              <tfoot>
+
+                <tr>
+
+                  <td>
+                    TOTAL
+                  </td>
+
+                  <td>
+                    512
+                  </td>
+
+                  <td>
+                    100%
+                  </td>
+
+                  <td class="total-verde">
+                    R$ 12.458,00
+                  </td>
+
+                </tr>
+
+              </tfoot>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- RESUMO DO MÊS -->
+
+        <div class="bloco-relatorio resumo-mes">
+
+          <div class="cabecalho-bloco-relatorio">
+
+            <h3>
+              Resumo do Mês
+            </h3>
+
+          </div>
+
+
+          <div class="lista-resumo-mes">
+
+            <div class="linha-resumo">
+
+              <span>
+                Dias no mês:
+              </span>
+
+              <strong>
+                31
+              </strong>
+
+            </div>
+
+
+            <div class="linha-resumo">
+
+              <span>
+                Média diária de faturamento:
+              </span>
+
+              <strong>
+                R$ 401,87
+              </strong>
+
+            </div>
+
+
+            <div class="linha-resumo">
+
+              <span>
+                Média diária de entradas:
+              </span>
+
+              <strong>
+                16,52
+              </strong>
+
+            </div>
+
+
+            <div class="linha-resumo">
+
+              <span>
+                Média diária de saídas:
+              </span>
+
+              <strong>
+                16,06
+              </strong>
+
+            </div>
+
+
+            <div class="linha-resumo">
+
+              <span>
+                Taxa de ocupação média:
+              </span>
+
+              <strong class="txt-verde">
+                78,4%
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+
+      <!--RODAPÉ DO RELATÓRIO-->
+
+      <footer class="rodape-relatorio">
+
+        Relatório gerado em
+        <span id="data-geracao">
+          24/08/2026 14:39:21
+        </span>
+
+      </footer>
+
+
+    </main>
+
+  </div>
+
+
+  <!--BIBLIOTECA PARA GERAÇÃO DE PDF -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script type="module" src="/Frontend/src/assets/js/relatorios.js"></script>
+
+</body>
+
+</html>
