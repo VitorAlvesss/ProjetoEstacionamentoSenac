@@ -10,13 +10,3 @@ const pool = mysql.createPool({
 });
 
 module.exports = pool;
-
-// const pool = mysql.createPool({
-//     host: '127.0.0.1',
-//     port: 3308,
-//     // host: process.env.DB_HOST,
-//     // port: process.env.DB_PORT,
-//     user: 'root', 
-//     password: '',
-//     database: 'estacionamento_teste'
-// });

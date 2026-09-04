@@ -36,9 +36,4 @@ app.use('/', registrosRoutes);
 const PORTA = 19696;
 app.listen(PORTA, () => {
     console.log (`Servidor rodando  e escutando na porta ${PORTA}`);
-    console.log(process.env.DB_HOST);
-    console.log(process.env.DB_PORT);
-    console.log(process.env.DB_USER);
-    console.log(process.env.DB_PASSWORD);
-    console.log(process.env.DB_NAME);
 });

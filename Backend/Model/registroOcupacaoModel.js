@@ -1,4 +1,4 @@
-class registroOcupacao{
+class registroOcupacao{ // não utilizei
     constructor(id, id_carro, id_vaga, valor_hora, total_pago, pago, data_entrada, data_saida, tempo_uso){
         this.id = id,
         this.id_carro = id_carro,

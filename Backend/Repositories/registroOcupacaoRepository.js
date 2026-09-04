@@ -28,12 +28,17 @@ async function encontrarCarroId(placa) {
 	return linhas;
 	}
 
-async function listarQuantos(coluna) {
-    if (!Object.hasOwn(COLUMNS, coluna[0])) { //vamos ver se isso é realmente eficaz contra SQL Injection...
-        return "Acesso negado. Te peguei!";
-    }
+async function listarQuantos() {
 
-	const [linhas] = await db.query(`select count(id) from tbl_registro_ocupacao where ${coluna} == null`);
+    const SQL =  `
+    select
+        sum(case when data_saida is null then 1 else 0 end) as estacionados,
+        sum(case when date(data_saida) = curdate() then 1 else 0 end) as saidas_hoje,
+        sum(case when date(data_entrada) = curdate() then 1 else 0 end) as estacionados_hoje
+    from tbl_registro_ocupacao;
+    `
+
+    const [linhas] = await db.query(SQL);
 	return linhas;
 	}
 
@@ -70,7 +75,7 @@ async function salvarRegistro(id_carro, id_vaga, valor_hora, data_entrada) { // 
 
 // update
 // essa função é muito apelona kkkk ela vai servir para tudo o que é update, ou seja, até para "dar saída" ela serve, porque é preciso apenas de um update
-async function atualizarRegistro(id, colunas, valores) { // provavelmente, está funcionando
+async function atualizarRegistro(id, colunas, valores) { // provavelmente, está funcionando 
     let sql = 'update tbl_registro_ocupacao set ';
     let temp = 'VITOR E AS 1200 LINHAS NO CSS EM 30 MINUTOS';
 
