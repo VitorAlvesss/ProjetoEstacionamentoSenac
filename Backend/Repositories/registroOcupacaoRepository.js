@@ -10,7 +10,7 @@ COLUMNS.id_vaga = "id_vaga";
 
 const db = require('../Connection/db');
 
-/*
+/* isso daqui tá velho já
 create table tbl_registro_ocupacao (
 	id int primary key auto_increment,
 	valor_hora decimal(4,2) not null,
@@ -24,7 +24,7 @@ create table tbl_registro_ocupacao (
 // aqui só tem funções de caráter read
 
 async function encontrarCarroId(placa) {
-	const [linhas] = await db.query('select id from tbl_carro where placa ?', [placa]);
+	const [linhas] = await db.query('select id from tbl_carro where placa = ?', [placa]);
 	return linhas;
 	}
 
