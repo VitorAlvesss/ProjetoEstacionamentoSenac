@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/crud.css">
+  <link rel="stylesheet" href="../css/menu.css">
+
+  <link rel="icon" type="image/x-icon" href="../IMG/icon-guia.png">
+
+  <script type="module" src="../js/imports.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <title>Goiabinha & CIA - Estacionamento</title>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       SIDEBAR
+       ========================================================= -->
+
+  <aside id="sidebar" class="sidebar collapsed">
+
+    <div class="sidebar-header">
+
+      <i
+        class="fa-solid fa-bars hamburger-icon"
+        id="sidebarToggleBtn"
+        title="Fechar Menu">
+      </i>
+
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul id="sidebarNav"></ul>
+    </nav>
+
+    <div class="quick-summary">
+
+      <div class="quick-summary-title">
+        RESUMO RÁPIDO
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas totais</span>
+        <span class="val">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas livres</span>
+        <span class="val green">20</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Vagas ocupadas</span>
+        <span class="val red">0</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Taxa de ocupação</span>
+        <span class="val">0%</span>
+      </div>
+
+      <div class="summary-row">
+        <span>Faturamento hoje</span>
+        <span class="val green">R$ 0,00</span>
+      </div>
+
+    </div>
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>
+      Todos os direitos reservados.
+    </div>
+
+  </aside>
+
+
+  <!-- =========================================================
+       CONTEÚDO PRINCIPAL
+       ========================================================= -->
+
+  <div class="main-wrapper">
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho-principal">
+
+      <!-- Lado esquerdo -->
+      <div class="cabecalho-esquerda">
+
+        <i
+          class="fa-solid fa-bars hamburger-icon"
+          id="topHeaderToggleBtn"
+          title="Abrir Menu">
+        </i>
+
+        <div class="brand-logo">
+          <img
+            src="../IMG/logo.png"
+            alt="Goiabinha & CIA"
+            class="img-logo">
+        </div>
+
+      </div>
+
+
+      <!-- Centro -->
+      <div class="titulos-cabecalho centralizado">
+
+        <h1 id="pageTitle">
+          Veículos / Usuários
+        </h1>
+
+        <h2 id="pageSubtitle">
+          Cadastre e gerencie os veículos e usuários do estacionamento
+        </h2>
+
+      </div>
+
+
+      <!-- Lado direito -->
+      <div class="info-cabecalho">
+
+        <!-- Tema -->
+        <button
+          id="btnTema"
+          class="btn-tema"
+          title="Alternar Tema">
+
+          <span class="material-symbols-outlined">
+            routine
+          </span>
+
+        </button>
+
+
+        <!-- Data e hora -->
+        <div id="data-hora">
+
+          <span id="hora-atual">
+            --:--:--
+          </span>
+
+          <small id="data-atual">
+            --/--/----
+          </small>
+
+        </div>
+
+
+        <!-- Notificação -->
+        <div
+          id="notificacao"
+          class="botao-icone">
+
+          <span class="material-symbols-outlined">
+            notifications
+          </span>
+
+          <span
+            class="emblema"
+            id="qtd-notificacoes">
+            0
+          </span>
+
+        </div>
+
+
+        <!-- Usuário -->
+        <div id="usuario-logado">
+
+          <span class="material-symbols-outlined">
+            account_circle
+          </span>
+
+          <div class="detalhes-usuario">
+
+            <strong id="nome-usuario">
+              ----
+            </strong>
+
+            <span
+              class="status-online"
+              id="status-usuario">
+              --
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =======================================================
+         DASHBOARD
+         ======================================================= -->
+
+    <main class="conteiner-dashboard">
+
+      <div
+        id="screen-dashboard"
+        class="screen active">
+
+
+        <!-- ===================================================
+             CARDS DE MÉTRICAS
+             =================================================== -->
+
+        <section class="grade-card">
+
+          <!-- TOTAL CADASTRADOS -->
+          <div class="card">
+
+            <div class="icone-card fundo-roxo">
+              <span class="material-symbols-outlined">
+                directions_car
+              </span>
+            </div>
+
+            <div class="info-card">
+
+              <span class="titulo-card">
+                TOTAL CADASTRADOS
+              </span>
+
+              <strong
+                class="valor-card"
+                id="cadastro--total">
+                --
+              </strong>
+
+              <span class="subtitulo-card">
+                Veículos/Usuários
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- PROFESSORES -->
+          <div class="card">
+
+            <div class="icone-card fundo-verde">
+              <span class="material-symbols-outlined">
+                person
+              </span>
+            </div>
+
+            <div class="info-card">
+
+              <span class="titulo-card">
+                PROFESSORES
+              </span>
+
+              <strong
+                class="valor-card"
+                id="professores--total">
+                --
+              </strong>
+
+              <span
+                class="subtitulo-card"
+                id="pocentagem--professores">
+                --% do total
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- FUNCIONÁRIOS -->
+          <div class="card">
+
+            <div class="icone-card fundo-azul">
+              <span class="material-symbols-outlined">
+                groups
+              </span>
+            </div>
+
+            <div class="info-card">
+
+              <span class="titulo-card">
+                FUNCIONÁRIOS
+              </span>
+
+              <strong
+                class="valor-card"
+                id="funcionarios--total">
+                --
+              </strong>
+
+              <span
+                class="subtitulo-card"
+                id="porcentagem-funcionarios">
+                --% do total
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- ALUNOS -->
+          <div class="card">
+
+            <div class="icone-card fundo-amarelo">
+              <span class="material-symbols-outlined">
+                school
+              </span>
+            </div>
+
+            <div class="info-card">
+
+              <span class="titulo-card">
+                ALUNOS
+              </span>
+
+              <strong
+                class="valor-card"
+                id="alunos--total">
+                --
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- VISITANTES -->
+          <div class="card">
+
+            <div class="icone-card fundo-roxo">
+              <span class="material-symbols-outlined">
+                person
+              </span>
+            </div>
+
+            <div class="info-card">
+
+              <span class="titulo-card">
+                VISITANTES
+              </span>
+
+              <strong
+                class="valor-card"
+                id="visitantes-total">
+                --
+              </strong>
+
+              <span class="subtitulo-card">
+                --% do total
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===================================================
+             APP / TABELA / LATERAL
+             =================================================== -->
+
+        <div class="app">
+
+          <h1 class="page-title">
+            Painel de Veículos e Usuários
+          </h1>
+
+
+          <div class="grid">
+
+
+            <!-- ===============================================
+                 COLUNA ESQUERDA
+                 =============================================== -->
+
+            <div style="display:flex; flex-direction:column; gap:20px;">
+
+              <!-- TABELA -->
+              <div class="card">
+
+                <div class="card-title">
+                  Lista de Veículos / Usuários
+                </div>
+
+
+                <div class="toolbar">
+
+                  <div class="search-wrap">
+
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2">
+
+                      <circle
+                        cx="11"
+                        cy="11"
+                        r="7"/>
+
+                      <line
+                        x1="21"
+                        y1="21"
+                        x2="16.65"
+                        y2="16.65"/>
+
+                    </svg>
+
+                    <input
+                      id="searchInput"
+                      type="text"
+                      placeholder="Buscar por placa, nome ou e-mail...">
+
+                  </div>
+
+
+                  <select id="tipoFiltro">
+
+                    <option value="">
+                      Todos os tipos
+                    </option>
+
+                    <option value="Professor">
+                      Professores
+                    </option>
+
+                    <option value="Funcionário">
+                      Funcionários
+                    </option>
+
+                    <option value="Aluno">
+                      Alunos
+                    </option>
+
+                    <option value="Visitante">
+                      Visitantes
+                    </option>
+
+                  </select>
+
+
+                  <button
+                    class="btn-filtro"
+                    id="btnFiltros">
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2">
+
+                      <line x1="4" y1="6" x2="20" y2="6"/>
+                      <line x1="7" y1="12" x2="17" y2="12"/>
+                      <line x1="10" y1="18" x2="14" y2="18"/>
+
+                    </svg>
+
+                    Filtros
+
+                  </button>
+
+
+                  <button
+                    class="btn-exportar"
+                    id="btnExportar">
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2">
+
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+
+                    </svg>
+
+                    Exportar
+
+                  </button>
+
+                </div>
+
+
+                <div
+                  class="filtro-extra"
+                  id="filtroExtra">
+
+                  <select id="statusFiltro">
+
+                    <option value="">
+                      Todos os status
+                    </option>
+
+                    <option value="Ativo">
+                      Ativo
+                    </option>
+
+                    <option value="Inativo">
+                      Inativo
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <!-- TABELA -->
+                <div class="table-scroll">
+
+                  <table>
+
+                    <thead>
+
+                      <tr>
+                        <th>Placa</th>
+                        <th>Nome/Usuário</th>
+                        <th>Tipo</th>
+                        <th>Email/Contato</th>
+                        <th>Data Cadastro</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                      </tr>
+
+                    </thead>
+
+                    <tbody id="crudTableBody"></tbody>
+
+                  </table>
+
+                </div>
+
+
+                <!-- PAGINAÇÃO -->
+                <div class="crud-footer">
+
+                  <span
+                    class="crud-info"
+                    id="crudInfo">
+                  </span>
+
+                  <div
+                    class="crud-pagination"
+                    id="crudPagination">
+                  </div>
+
+                  <div class="crud-per-page">
+
+                    <select id="porPagina">
+
+                      <option value="10">
+                        10 por página
+                      </option>
+
+                      <option value="25">
+                        25 por página
+                      </option>
+
+                      <option value="50">
+                        50 por página
+                      </option>
+
+                    </select>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- VEÍCULOS ATIVOS -->
+              <div class="card">
+
+                <div class="active-header">
+
+                  <div
+                    class="card-title"
+                    style="margin:0;">
+
+                    Veículos Ativos no Estacionamento
+
+                  </div>
+
+                  <button
+                    class="ver-todos"
+                    id="btnVerTodos">
+
+                    Ver todos
+                    (<span id="totalAtivosCount">0</span>)
+
+                  </button>
+
+                </div>
+
+                <div
+                  class="vehicles-row"
+                  id="vehiclesRow">
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- ===============================================
+                 COLUNA DIREITA
+                 =============================================== -->
+
+            <div style="display:flex; flex-direction:column; gap:20px;">
+
+              <!-- DONUT -->
+              <div class="card">
+
+                <div class="card-title">
+                  Tipos de Usuários
+                </div>
+
+                <div class="donut-wrap">
+
+                  <div
+                    class="donut-svg"
+                    id="donutSvgWrap">
+                  </div>
+
+                  <ul
+                    class="donut-legend"
+                    id="donutLegend">
+                  </ul>
+
+                </div>
+
+              </div>
+
+
+              <!-- CADASTRO -->
+              <div class="card">
+
+                <div class="card-title">
+                  Cadastro Rápido
+                </div>
+
+
+                <form id="cadastroForm">
+
+                  <div class="form-group">
+
+                    <label for="fTipo">
+                      Tipo de usuário
+                    </label>
+
+                    <select
+                      id="fTipo"
+                      required>
+
+                      <option
+                        value=""
+                        disabled
+                        selected
+                        hidden>
+
+                        Selecione o tipo
+
+                      </option>
+
+                      <option value="Professor">
+                        Professor
+                      </option>
+
+                      <option value="Funcionário">
+                        Funcionário
+                      </option>
+
+                      <option value="Aluno">
+                        Aluno
+                      </option>
+
+                      <option value="Visitante">
+                        Visitante
+                      </option>
+
+                    </select>
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label for="fNome">
+                      Nome
+                    </label>
+
+                    <input
+                      id="fNome"
+                      type="text"
+                      placeholder="Nome completo"
+                      required>
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label for="fPlaca">
+                      Placa do veículo
+                    </label>
+
+                    <input
+                      id="fPlaca"
+                      type="text"
+                      placeholder="Ex: ABC-1D23"
+                      maxlength="8"
+                      required>
+
+                  </div>
+
+
+                  <div class="form-group">
+
+                    <label for="fContato">
+                      E-mail / Telefone
+                    </label>
+
+                    <input
+                      id="fContato"
+                      type="text"
+                      placeholder="exemplo@email.com ou (11) 99999-9999"
+                      required>
+
+                  </div>
+
+
+                  <button
+                    type="submit"
+                    class="btn-cadastrar">
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2">
+
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <line x1="19" y1="8" x2="19" y2="14"/>
+                      <line x1="22" y1="11" x2="16" y2="11"/>
+
+                    </svg>
+
+                    Cadastrar
+
+                  </button>
+
+                </form>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================================================
+       TOAST
+       ========================================================= -->
+
+  <div
+    class="toast"
+    id="toast">
+
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5">
+
+      <path d="M20 6L9 17l-5-5"/>
+
+    </svg>
+
+    <span id="toastMsg">
+      Cadastrado com sucesso!
+    </span>
+
+  </div>
+
+
+  <!-- =========================================================
+       SEU JAVASCRIPT EXTERNO
+       ========================================================= -->
+
+  <script src="../js/tabela.js" defer></script>
+
+</body>
+</html>
+s
