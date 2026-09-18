@@ -50,9 +50,10 @@ async function listarRegistros() {  // totalmente funcional... provavelmente, va
 		vaga.id as vaga_id,
 		r.id,
 		carro.placa,
+        vaga.codigo_vaga,
 		r.data_entrada,
 		r.data_saida,
-		r.total_pago
+		r.valor_hora
     from tbl_registro_ocupacao as r
     inner join tbl_carro carro on r.id_carro = carro.id
     inner join tbl_vaga vaga on r.id_vaga = vaga_id
@@ -68,7 +69,7 @@ async function listarRegistros() {  // totalmente funcional... provavelmente, va
 
 
 async function salvarRegistro(id_carro, id_vaga, valor_hora, data_entrada) { // vou precisar consultar um pouco das regras de negócio da tela que esta função irá interagir com
-    const [resultado] = await db.execute('insert into tbl_registro_ocupacao (id_carro, id_vaga, valor_hora, data_entrada) values (?, ?);', [id_carro, id_vaga, valor_hora, data_entrada]);
+    const [resultado] = await db.execute('insert into tbl_registro_ocupacao (id_carro, id_vaga, valor_hora, data_entrada) values (?, ?, ?, ?);', [id_carro, id_vaga, valor_hora, data_entrada]);
     //console.log('feio');
     return resultado;
 }

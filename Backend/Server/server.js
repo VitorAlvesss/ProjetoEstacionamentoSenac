@@ -1,6 +1,7 @@
 //usando as ferramentas em que baixei
-require('dotenv').config();
+//require('dotenv').config();
 const express = require ("express");// biblioteca que esta criando o servidor web
+const cors = require('cors');
 const app = express(); // esta iniciando o servidor e guarda na variavel.
 const db = require('../Connection/db');
 const dashboardroutes = require("../Routes/testeDash");
@@ -21,7 +22,10 @@ app.get('/teste-conexao', async (req, res)=>{
 
 
 });
+
+app.use(cors());
 app.use(express.json());
+
 app.use("/", dashboardroutes);
 app.use('/', registrosRoutes);
 

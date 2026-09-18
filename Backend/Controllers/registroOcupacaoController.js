@@ -38,7 +38,8 @@ async function salvarRegistro(req, res) { //POST
 		const CARRO_PLACA = req.body.placa;
 		try {
 			const CARRO_ID = await repository.encontrarCarroId(CARRO_PLACA);
-			const resultado = await repository.salvarRegistro(CARRO_ID, VAGA_ID, valor_hora, DATA_ENTRADA);
+            //função para salvar o veículo (sua placa)
+			const resultado = await repository.salvarRegistro(CARRO_ID, VAGA_ID, 30.00, DATA_ENTRADA);
 			return res.status(200).json(resultado);
 			} catch (err) {
 				return res.status(500).json({erro: err.message})
@@ -60,7 +61,7 @@ async function atualizarRegistro(req, res) { //precisa carregar os dados do req.
     }
 }
 
-async function deletarRegistro() {
+async function deletarRegistro(req, res) {
     try {
 		const id = req.body.id;
         const resultado = await repository.deletarRegistro(id);
