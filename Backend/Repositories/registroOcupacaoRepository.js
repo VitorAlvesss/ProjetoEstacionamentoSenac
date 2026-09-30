@@ -10,17 +10,6 @@ COLUMNS.id_vaga = "id_vaga";
 
 const db = require('../Connection/db');
 
-/* isso daqui tá velho já
-create table tbl_registro_ocupacao (
-	id int primary key auto_increment,
-	valor_hora decimal(4,2) not null,
-	valor_pago decimal(6,2),
-	pago boolean not null default false,
-	data_entrada datetime not null,
-	data_saida datetime,
-	tempo_uso time	
-);*/
-
 // aqui só tem funções de caráter read
 
 async function encontrarCarroId(placa) {
@@ -50,10 +39,9 @@ async function listarRegistros() {  // totalmente funcional... provavelmente, va
 		vaga.id as vaga_id,
 		r.id,
 		carro.placa,
-        vaga.codigo_vaga,
 		r.data_entrada,
 		r.data_saida,
-		r.valor_hora
+		r.total_pago
     from tbl_registro_ocupacao as r
     inner join tbl_carro carro on r.id_carro = carro.id
     inner join tbl_vaga vaga on r.id_vaga = vaga_id
@@ -64,9 +52,13 @@ async function listarRegistros() {  // totalmente funcional... provavelmente, va
     return linhas;
 }
 
+async function listarRegistrosOcupados() {
+	const SQL = 'select * from tbl_registro_ocupacao where data_saida is null';
+	const [LINHAS] = await db.query(SQL);
+	return LINHAS;
+}
+
 // agora, é a vez do create
-
-
 
 async function salvarRegistro(id_carro, id_vaga, valor_hora, data_entrada) { // vou precisar consultar um pouco das regras de negócio da tela que esta função irá interagir com
     const [resultado] = await db.execute('insert into tbl_registro_ocupacao (id_carro, id_vaga, valor_hora, data_entrada) values (?, ?, ?, ?);', [id_carro, id_vaga, valor_hora, data_entrada]);
@@ -115,4 +107,4 @@ async function deletarRegistro(id) { // não sei se isso vai ser usado, sinceram
     return resultado;
 }
 
-module.exports = {listarRegistros, salvarRegistro, atualizarRegistro, deletarRegistro, listarQuantos, encontrarCarroId};
+module.exports = {listarRegistros, listarRegistrosOcupados, salvarRegistro, atualizarRegistro, deletarRegistro, listarQuantos, encontrarCarroId};

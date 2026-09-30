@@ -1,4 +1,5 @@
 const repository = require('../Repositories/registroOcupacaoRepository');
+const service = require('../Services/registroOcupacaoService.js');
 
 const COLUMNS = Object.create(null);
 COLUMNS.data_entrada = "data_entrada";
@@ -9,8 +10,6 @@ COLUMNS.valor_pago = "valor_pago";
 COLUMNS.tempo_uso = "tempo_uso";
 COLUMNS.id_carro = "id_carro";
 COLUMNS.id_vaga = "id_vaga";
-
-
 
 async function listarQuantos(req, res) {
     try {
@@ -30,20 +29,22 @@ async function listarRegistros(req, res) { // encontrar a placa do veiculo aqui
     }
 }
 
+
 async function salvarRegistro(req, res) { //POST
     try {
-		const VAGA_ID = req.body.id_vaga;
-		const DATA_ENTRADA = new Date();
-		
-		const CARRO_PLACA = req.body.placa;
-		try {
-			const CARRO_ID = await repository.encontrarCarroId(CARRO_PLACA);
-            //função para salvar o veículo (sua placa)
-			const resultado = await repository.salvarRegistro(CARRO_ID, VAGA_ID, 30.00, DATA_ENTRADA);
+	const VAGA_ID = req.body.id_vaga;
+	const CARRO_PLACA = req.body.placa;
+	const VALOR_HORA = req.body.valor_hora;
+	const resultado = await service.salvarRegistro(CARRO_PLACA, VAGA_ID, VALOR_HORA);
+
+	if (!Array.isArray(resultado)) {
+		if (Object.hasOwn(resultado, "affectedRows")) {
 			return res.status(200).json(resultado);
-			} catch (err) {
-				return res.status(500).json({erro: err.message})
-				}
+		}
+		return res.status(500).json(resultado);
+	};
+
+	return res.status(200).json(resultado);
     } catch (err) {
         return res.status(500).json({erro: err.message});
     }
@@ -51,9 +52,9 @@ async function salvarRegistro(req, res) { //POST
 
 async function atualizarRegistro(req, res) { //precisa carregar os dados do req.body
     try {
-		const id = req.body.id;
-		let colunas = req.body.colunas;
-		let valores = req.body.valores;
+	const id = req.body.id;
+	let colunas = req.body.colunas;
+	let valores = req.body.valores;
         const resultado = await repository.atualizarRegistro(id, colunas, valores);
         return res.json(resultado);
     } catch (err) {
@@ -61,7 +62,7 @@ async function atualizarRegistro(req, res) { //precisa carregar os dados do req.
     }
 }
 
-async function deletarRegistro(req, res) {
+async function deletarRegistro() {
     try {
 		const id = req.body.id;
         const resultado = await repository.deletarRegistro(id);

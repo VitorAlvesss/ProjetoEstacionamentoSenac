@@ -7,7 +7,7 @@ const btnAbrirModal = document.getElementById('btnNovaEntrada');
 const btnFecharModal = document.getElementById('btnFecharModal');
 const btnCancelar = document.getElementById('btnCancelar');
 
-//const BTN_SAIDA = document.querySelectorAll('.btn-saida-acao'); obsoleto
+//const BTN_SAIDA = document.querySelectorAll('.btn-saida-acao'); //arrumar onde isso deve ficar
 const TABELA = document.querySelector('#listaMovimentacao');
 const FORM_REGISTRO = document.querySelector('#formNovaEntrada');
 
@@ -26,7 +26,7 @@ function limparTabela() {
 }
 async function carregarTabela() {
 	try {
-		const RES = await fetch(`${URL_SERVER}/registro`, {
+		const RES = await fetch(SERVIDOR_URL, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
@@ -39,11 +39,10 @@ async function carregarTabela() {
 			TABELA.innerHTML = RESULTADO.map(d => `
 			<tr data-id="${d.id}" data-id-vaga="${d.vaga_id}">
 				<td>${d.placa}</td>
-				<td>${d.cod_vaga}</td>
 				<td>${d.data_entrada}</td>
 				<td>${d.data_saida === null ? `---` : d.data_saida}</td>
 				<td>---</td>
-				<td>${d.valor_hora}</td>
+				<td>${d.total_pago}</td>
 				<td>
 					${d.data_saida === null ? `<button class="btn-saida-acao" onclick="darSaida(${d.id})"><i class="fa-solid fa-right-from-bracket"></i> Dar Saída</button>` : `<i class="fa-solid fa-check-double" style="color:#00e676;"></i> Concluído`}
 				</td>
@@ -54,21 +53,22 @@ async function carregarTabela() {
 				}
 		
 		} catch (err) {
-			alert(err);
-			console.log(err);
+			alert('Algo deu muito errado!');
+                        console.log(err);
 			}
 	}
 
 async function darSaida(id) {
 	try {
 
-		const RES = await fetch(`${URL_SERVER}/registro/deletar/:id`, {
+		const RES = await fetch(SERVIDOR_URL, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({id})
 		});
+		//const RESULTADO = await RES.json();
 
 		if (RES.status == 200) {
 			alert('Saída registrada com sucesso!');
@@ -84,13 +84,13 @@ async function darSaida(id) {
 
 async function listarQuantos() {
 	try {
-		const RES = await fetch(`${URL_SERVER}/registro/quantidade`, {
+		const RES = await fetch(`${SERVIDOR_URL}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
 			}
 		});
-		const RESULTADO = await RES.json();
+		const RESULTADO = RES.json();
 
 		NUM_ESTACIONADOS.innerText = RESULTADO.estacionados;
 		NUM_TOTAL_ENTRADAS.innerText = RESULTADO.estacionados_hoje;
@@ -107,13 +107,15 @@ FORM_REGISTRO.addEventListener('submit', async function(e) {
 		const id_vaga = document.getElementById('id_vaga').value;
 		
 		try {
-			const RES = await fetch(`${URL_SERVER}/registro/salvar`, {
+			const RES = await fetch(SERVIDOR_URL, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
 					},
 				body: JSON.stringify({placa, id_vaga})
 				});
+				
+			//const RESULTADO = await RES.json();
 			
 			if (RES.status == 200) {
 				alert('Registro realizado com sucesso!');
