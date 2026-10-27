@@ -1,12 +1,3 @@
-const COLUMNS = Object.create(null);
-COLUMNS.data_entrada = "data_entrada";
-COLUMNS.data_saida = "data_saida";
-COLUMNS.pago = "pago";
-COLUMNS.valor_hora = "valor_hora";
-COLUMNS.valor_pago = "valor_pago";
-COLUMNS.tempo_uso = "tempo_uso";
-COLUMNS.id_carro = "id_carro";
-COLUMNS.id_vaga = "id_vaga";
 
 const db = require('../Connection/db');
 
@@ -46,6 +37,7 @@ async function listarRegistros() {  // totalmente funcional... provavelmente, va
     inner join tbl_carro carro on r.id_carro = carro.id
     inner join tbl_vaga vaga on r.id_vaga = vaga_id
     where carro.placa = ? and vaga.id = ?
+    order by r.data_entrada desc;
     `
     
     const [linhas] = await db.query('select * from tbl_registro_ocupacao');
@@ -66,45 +58,5 @@ async function salvarRegistro(id_carro, id_vaga, valor_hora, data_entrada) { // 
     return resultado;
 }
 
-// update
-// essa função é muito apelona kkkk ela vai servir para tudo o que é update, ou seja, até para "dar saída" ela serve, porque é preciso apenas de um update
-async function atualizarRegistro(id, colunas, valores) { // provavelmente, está funcionando 
-    let sql = 'update tbl_registro_ocupacao set ';
-    let temp = 'VITOR E AS 1200 LINHAS NO CSS EM 30 MINUTOS';
 
-    for (let i = 0; i < colunas.length; i++) { //agora, é torcer que isso realmente pare um SQL Injection na prática...
-        if (!Object.hasOwn(COLUMNS, colunas[i])) {
-            return "SQL INJECTION AQUI NÃO!";
-        }
-    }
-    
-    if (colunas.length == 1) {
-        temp = sql;
-        sql = temp + `${colunas[0]} = ? where id = ?`;
-    } else {
-        for (let i = 0; i < colunas.length; i++) {
-            if (i == colunas.length - 1) {
-                temp = sql + `${colunas[i]} = ? where id = ?`;
-                sql = temp;
-            } else {
-                temp = sql + `${colunas[i]} = ?, `;
-                sql = temp;
-            }
-            
-        }
-    }
-
-    const params = [...valores, id];
-
-    const [resultado] = await db.execute(sql, params);
-    return resultado;
-}
-
-// delete (que medo...)
-
-async function deletarRegistro(id) { // não sei se isso vai ser usado, sinceramente, mas está funcional
-    const [resultado] = await db.execute('delete from tbl_registro_ocupacao where id = ?', [id]);
-    return resultado;
-}
-
-module.exports = {listarRegistros, listarRegistrosOcupados, salvarRegistro, atualizarRegistro, deletarRegistro, listarQuantos, encontrarCarroId};
+module.exports = {listarRegistros, listarRegistrosOcupados, salvarRegistro, listarQuantos, encontrarCarroId};

@@ -7,7 +7,6 @@ const btnAbrirModal = document.getElementById('btnNovaEntrada');
 const btnFecharModal = document.getElementById('btnFecharModal');
 const btnCancelar = document.getElementById('btnCancelar');
 
-//const BTN_SAIDA = document.querySelectorAll('.btn-saida-acao'); //arrumar onde isso deve ficar
 const TABELA = document.querySelector('#listaMovimentacao');
 const FORM_REGISTRO = document.querySelector('#formNovaEntrada');
 
@@ -68,7 +67,6 @@ async function darSaida(id) {
 			},
 			body: JSON.stringify({id})
 		});
-		//const RESULTADO = await RES.json();
 
 		if (RES.status == 200) {
 			alert('Saída registrada com sucesso!');
@@ -115,7 +113,6 @@ FORM_REGISTRO.addEventListener('submit', async function(e) {
 				body: JSON.stringify({placa, id_vaga})
 				});
 				
-			//const RESULTADO = await RES.json();
 			
 			if (RES.status == 200) {
 				alert('Registro realizado com sucesso!');

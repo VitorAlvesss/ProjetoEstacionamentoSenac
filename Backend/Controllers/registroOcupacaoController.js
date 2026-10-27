@@ -1,15 +1,15 @@
 const repository = require('../Repositories/registroOcupacaoRepository');
 const service = require('../Services/registroOcupacaoService.js');
 
-const COLUMNS = Object.create(null);
-COLUMNS.data_entrada = "data_entrada";
-COLUMNS.data_saida = "data_saida";
-COLUMNS.pago = "pago";
-COLUMNS.valor_hora = "valor_hora";
-COLUMNS.valor_pago = "valor_pago";
-COLUMNS.tempo_uso = "tempo_uso";
-COLUMNS.id_carro = "id_carro";
-COLUMNS.id_vaga = "id_vaga";
+// const COLUMNS = Object.create(null);
+// COLUMNS.data_entrada = "data_entrada";
+// COLUMNS.data_saida = "data_saida";
+// COLUMNS.pago = "pago";
+// COLUMNS.valor_hora = "valor_hora";
+// COLUMNS.valor_pago = "valor_pago";
+// COLUMNS.tempo_uso = "tempo_uso";
+// COLUMNS.id_carro = "id_carro";
+// COLUMNS.id_vaga = "id_vaga";
 
 async function listarQuantos(req, res) {
     try {
@@ -50,26 +50,4 @@ async function salvarRegistro(req, res) { //POST
     }
 }
 
-async function atualizarRegistro(req, res) { //precisa carregar os dados do req.body
-    try {
-	const id = req.body.id;
-	let colunas = req.body.colunas;
-	let valores = req.body.valores;
-        const resultado = await repository.atualizarRegistro(id, colunas, valores);
-        return res.json(resultado);
-    } catch (err) {
-        return res.json({erro: err, msg: err.message});
-    }
-}
-
-async function deletarRegistro() {
-    try {
-		const id = req.body.id;
-        const resultado = await repository.deletarRegistro(id);
-        return res.json(resultado);
-    } catch (err) {
-        return res.json({erro: err.message});
-    }
-} 
-
-module.exports = {listarRegistros, salvarRegistro, atualizarRegistro, deletarRegistro, listarQuantos};
+module.exports = {listarRegistros, salvarRegistro, listarQuantos};
