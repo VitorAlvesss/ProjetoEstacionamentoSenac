@@ -1,16 +1,6 @@
 const repository = require('../Repositories/registroOcupacaoRepository');
 const service = require('../Services/registroOcupacaoService.js');
 
-// const COLUMNS = Object.create(null);
-// COLUMNS.data_entrada = "data_entrada";
-// COLUMNS.data_saida = "data_saida";
-// COLUMNS.pago = "pago";
-// COLUMNS.valor_hora = "valor_hora";
-// COLUMNS.valor_pago = "valor_pago";
-// COLUMNS.tempo_uso = "tempo_uso";
-// COLUMNS.id_carro = "id_carro";
-// COLUMNS.id_vaga = "id_vaga";
-
 async function listarQuantos(req, res) {
     try {
         const resultado = await repository.listarQuantos();
