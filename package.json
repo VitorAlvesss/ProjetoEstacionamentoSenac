@@ -2,10 +2,10 @@
   "scripts": {
     "start": "node Backend/Server/server.js",
     "dev": "node --watch Backend/Server/server.js",
-    "criar-banco": "node Backend/Database/criarBanco.js",
-    "criar-usuario":"node Backend/Database/criarUsuario.js",
-    "gerar-token": "node gerarToken.js",
-    "testar": "node Backend/Database/testarSistema.js"
+    "criar-banco": "node Backend/Scripts/criarBanco.js",
+    "criar-usuario": "node Backend/Scripts/criarUsuario.js",
+    "gerar-token": "node Backend/Scripts/gerarToken.js",
+    "testar": "node Backend/Scripts/testarSistema.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

@@ -7,9 +7,9 @@
 //
 // Depois, no Insomnia, mande o cabeçalho:
 //   Authorization: Bearer <token que aparecer aqui>
-const db = require('./Backend/Connection/db');
-const { firebaseAuth, trocarCustomTokenPorIdToken } = require('./Backend/Connection/firebase');
-const usuarioRepository = require('./Backend/Repositories/usuarioRepository');
+const db = require('../Connection/db');
+const { firebaseAuth, trocarCustomTokenPorIdToken } = require('../Connection/firebase');
+const usuarioRepository = require('../Repositories/usuarioRepository');
 
 async function gerarIdTokenReal() {
     const email = process.argv[2];

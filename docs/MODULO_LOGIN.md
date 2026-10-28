@@ -180,6 +180,8 @@ O backend segue o padrão que o grupo já usava, em camadas:
 | **Controllers** | `Backend/Controllers` | Regras de negócio: valida dados, decide a resposta. |
 | **Repositories / Model** | `Backend/Repositories`, `Backend/Model` | Só SQL. Nenhuma regra de negócio. |
 | **Services** | `Backend/Services` | Coisas externas (envio de e-mail). |
+| **Database** | `Backend/Database` | Só os arquivos `.sql` do banco. |
+| **Scripts** | `Backend/Scripts` | Ferramentas rodadas pelo terminal (`npm run ...`): criar banco, criar usuário, testar, gerar token. |
 | **Connection** | `Backend/Connection` | Conexão com MySQL (`db.js`) e Firebase (`firebase.js`). |
 
 ---
@@ -466,10 +468,10 @@ O script usa `CREATE ... IF NOT EXISTS`: rodar de novo **não apaga nada**.
 | `Backend/Services/emailService.js` | Envia os e-mails (ou mostra no terminal se não houver SMTP). |
 | `Backend/Database/estacionamentoSenac.sql` | Script do banco. |
 | `Backend/Database/dadosExemplo.sql` | Dados de exemplo (opcional). |
-| `Backend/Database/criarBanco.js` | `npm run criar-banco` — roda os SQL sem Workbench. |
-| `Backend/Database/criarUsuario.js` | `npm run criar-usuario` — cria usuário com senha criptografada. |
-| `Backend/Database/testarSistema.js` | `npm run testar` — o teste automático completo. |
-| `gerarToken.js` | `npm run gerar-token` — gera um token para testar no Insomnia. |
+| `Backend/Scripts/criarBanco.js` | `npm run criar-banco` — roda os SQL sem Workbench. |
+| `Backend/Scripts/criarUsuario.js` | `npm run criar-usuario` — cria usuário com senha criptografada. |
+| `Backend/Scripts/testarSistema.js` | `npm run testar` — o teste automático completo. |
+| `Backend/Scripts/gerarToken.js` | `npm run gerar-token` — gera um token para testar no Insomnia. |
 
 ### Frontend
 
