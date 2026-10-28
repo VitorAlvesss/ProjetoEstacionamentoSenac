@@ -1,0 +1,5 @@
+node_modules/
+
+# Segredos: NUNCA enviar para o GitHub
+.env
+projectparkingtoken.json
