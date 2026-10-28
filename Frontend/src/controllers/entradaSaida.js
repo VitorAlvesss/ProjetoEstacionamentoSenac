@@ -9,6 +9,7 @@ const btnCancelar = document.getElementById('btnCancelar');
 
 const TABELA = document.querySelector('#listaMovimentacao');
 const FORM_REGISTRO = document.querySelector('#formNovaEntrada');
+const COMBOBOX = document.querySelector('#id_vaga');
 
 // Abrir/fechar modal
 const fecharModal = () => {
@@ -23,6 +24,33 @@ btnCancelar.addEventListener('click', fecharModal);
 function limparTabela() {
 	TABELA.innerHTML = '';
 }
+
+function limparComboboxModal() {
+	COMBOBOX.innerHTML = ''; 
+}
+
+async function carregarVagas() {
+	try {
+		const RES = await fetch(SERVIDOR_URL, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		const RESULTADO = await RES.json();
+		limparComboboxModal();
+		if (RES.status == 200) {
+			COMBOBOX.innerHTML = RESULTADO.map(v => `
+			<option value="${v.id}">Vaga ${v.id}</option>
+			`).join('');
+		} else {
+		COMBOBOX.innerHTML = 'ERRO AO CARREGAR AS VAGAS DISPONÍVEIS';
+		}
+	} catch (err) {
+		alert('erro: ' + err);
+	}
+}
+
 async function carregarTabela() {
 	try {
 		const RES = await fetch(SERVIDOR_URL, {
@@ -131,6 +159,7 @@ FORM_REGISTRO.addEventListener('submit', async function(e) {
 // aqui, a coisa já fica diferente
 window.onload = async (e) => { // aqui salva os dados no banco de dados já
 	await carregarTabela();
+	await carregarVagas();
 	console.log("carregou, pelo menos");
 	}
 
