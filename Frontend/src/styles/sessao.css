@@ -1,0 +1,449 @@
+/* =========================================================
+   sessao.css - menu do usuário, perfil e notificações
+   (carregado automaticamente pelo sessao.js)
+   ========================================================= */
+
+:root {
+  --sessao-fundo: #111827;
+  --sessao-fundo-2: #1f2937;
+  --sessao-borda: #1e293b;
+  --sessao-texto: #f1f5f9;
+  --sessao-mutado: #94a3b8;
+  --sessao-destaque: #a855f7;
+  --sessao-verde: #22c55e;
+  --sessao-vermelho: #ef4444;
+  --sessao-sombra: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+body.light-theme {
+  --sessao-fundo: #ffffff;
+  --sessao-fundo-2: #f1f5f9;
+  --sessao-borda: #cbd5e1;
+  --sessao-texto: #0f172a;
+  --sessao-mutado: #475569;
+  --sessao-destaque: #6b21a8;
+  --sessao-verde: #15803d;
+  --sessao-vermelho: #be123c;
+  --sessao-sombra: 0 12px 32px rgba(15, 23, 42, 0.15);
+}
+
+/* ---------- Painéis flutuantes (menu e notificações) ---------- */
+.sessao-dropdown {
+  position: fixed;
+  z-index: 1000;
+  width: 300px;
+  max-width: calc(100vw - 16px);
+  background: var(--sessao-fundo);
+  color: var(--sessao-texto);
+  border: 1px solid var(--sessao-borda);
+  border-radius: 12px;
+  box-shadow: var(--sessao-sombra);
+  overflow: hidden;
+  font-size: 0.85rem;
+}
+
+.sessao-dropdown[hidden],
+.sessao-overlay[hidden] {
+  display: none;
+}
+
+.sessao-dropdown-topo,
+.sessao-menu-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--sessao-borda);
+}
+
+.sessao-dropdown small,
+.sessao-modal small {
+  color: var(--sessao-mutado);
+}
+
+.sessao-cargo {
+  align-self: flex-start;
+  margin-top: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--sessao-destaque);
+  background: color-mix(in srgb, var(--sessao-destaque) 15%, transparent);
+}
+
+.sessao-menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 16px;
+  border: none;
+  background: none;
+  color: var(--sessao-texto);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sessao-menu button i {
+  width: 16px;
+  color: var(--sessao-mutado);
+}
+
+.sessao-menu button:hover,
+.sessao-menu button:focus-visible {
+  background: var(--sessao-fundo-2);
+  outline: none;
+}
+
+.sessao-menu button.perigo,
+.sessao-menu button.perigo i {
+  color: var(--sessao-vermelho);
+}
+
+/* ---------- Notificações ---------- */
+.sessao-notif {
+  width: 360px;
+}
+
+.sessao-notif-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 380px;
+  overflow-y: auto;
+}
+
+.sessao-notif-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--sessao-borda);
+}
+
+.sessao-notif-item:last-child {
+  border-bottom: none;
+}
+
+.sessao-notif-item.nao-lida {
+  background: color-mix(in srgb, var(--sessao-destaque) 10%, transparent);
+}
+
+.sessao-notif-item p {
+  margin: 0 0 4px;
+  line-height: 1.35;
+}
+
+.sessao-notif-item i {
+  margin-top: 3px;
+}
+
+.sessao-notif-item i.entrada,
+.sessao-aviso.entrada i {
+  color: var(--sessao-verde);
+}
+
+.sessao-notif-item i.saida,
+.sessao-aviso.saida i {
+  color: var(--sessao-vermelho);
+}
+
+.sessao-vazio {
+  list-style: none;
+  padding: 20px 16px;
+  text-align: center;
+  color: var(--sessao-mutado);
+}
+
+/* Avisos que aparecem no canto quando um carro entra/sai */
+.sessao-avisos {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: calc(100vw - 32px);
+}
+
+.sessao-aviso {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 340px;
+  max-width: 100%;
+  padding: 12px 16px;
+  background: var(--sessao-fundo);
+  color: var(--sessao-texto);
+  border: 1px solid var(--sessao-borda);
+  border-left: 4px solid var(--sessao-verde);
+  border-radius: 10px;
+  box-shadow: var(--sessao-sombra);
+  font-size: 0.85rem;
+  animation: sessao-entrar 0.25s ease-out;
+}
+
+.sessao-aviso.saida {
+  border-left-color: var(--sessao-vermelho);
+}
+
+@keyframes sessao-entrar {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Janela do perfil ---------- */
+.sessao-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(2, 6, 23, 0.65);
+}
+
+.sessao-modal {
+  width: 520px;
+  max-width: 100%;
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  background: var(--sessao-fundo);
+  color: var(--sessao-texto);
+  border: 1px solid var(--sessao-borda);
+  border-radius: 16px;
+  box-shadow: var(--sessao-sombra);
+  font-size: 0.9rem;
+}
+
+.sessao-modal-topo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 20px 16px;
+}
+
+.sessao-modal-titulo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.sessao-modal-titulo h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  overflow-wrap: anywhere;
+}
+
+.sessao-avatar-grande {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff477e, #a855f7);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.sessao-fechar {
+  align-self: flex-start;
+  border: none;
+  background: none;
+  color: var(--sessao-mutado);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.sessao-fechar:hover {
+  color: var(--sessao-texto);
+}
+
+.sessao-abas {
+  display: flex;
+  gap: 4px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--sessao-borda);
+  overflow-x: auto;
+}
+
+.sessao-abas button {
+  padding: 10px 12px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--sessao-mutado);
+  font: inherit;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.sessao-abas button.ativa {
+  color: var(--sessao-texto);
+  border-bottom-color: var(--sessao-destaque);
+}
+
+.sessao-modal section {
+  padding: 20px;
+}
+
+.sessao-modal section[hidden] {
+  display: none;
+}
+
+.sessao-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sessao-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--sessao-mutado);
+}
+
+.sessao-form input {
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--sessao-borda);
+  border-radius: 8px;
+  background: var(--sessao-fundo-2);
+  color: var(--sessao-texto);
+  font: inherit;
+  font-weight: 400;
+}
+
+.sessao-form input:focus {
+  outline: 2px solid var(--sessao-destaque);
+  outline-offset: 1px;
+}
+
+.sessao-info {
+  margin: 0;
+  color: var(--sessao-mutado);
+  font-size: 0.8rem;
+}
+
+.sessao-msg {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+}
+
+.sessao-msg[hidden] {
+  display: none;
+}
+
+.sessao-msg.erro {
+  color: var(--sessao-vermelho);
+  background: color-mix(in srgb, var(--sessao-vermelho) 12%, transparent);
+}
+
+.sessao-msg.sucesso {
+  color: var(--sessao-verde);
+  background: color-mix(in srgb, var(--sessao-verde) 12%, transparent);
+}
+
+.sessao-btn {
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background: #5b21b6;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sessao-btn:hover {
+  background: #4c1d95;
+}
+
+.sessao-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Lista de veículos do usuário */
+.sessao-carros {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sessao-carro {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--sessao-borda);
+  border-radius: 10px;
+  background: var(--sessao-fundo-2);
+}
+
+.sessao-carro-icone {
+  font-size: 1.3rem;
+  color: var(--sessao-destaque);
+}
+
+.sessao-carro-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 140px;
+}
+
+.sessao-placa {
+  align-self: flex-start;
+  padding: 1px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--sessao-borda);
+  font-family: monospace;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.sessao-status {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.sessao-status.dentro {
+  color: var(--sessao-verde);
+  background: color-mix(in srgb, var(--sessao-verde) 15%, transparent);
+}
+
+.sessao-status.fora {
+  color: var(--sessao-mutado);
+  background: color-mix(in srgb, var(--sessao-mutado) 15%, transparent);
+}
+
+@media (max-width: 480px) {
+  .sessao-dropdown,
+  .sessao-notif {
+    left: 8px;
+    right: 8px !important;
+    width: auto;
+  }
+}
