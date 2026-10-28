@@ -10,7 +10,8 @@ Projeto de estacionamento com arduíno e programação web realizado pela turma 
 4. **Backend:** `npm run dev` (API em http://localhost:3000)
 5. **Frontend:** abra `Frontend/Login/telaLogin.html` com o Live Server (porta 5501)
 
-Usuários de exemplo: `admin@goiabinha.com` / `Admin1234` e `maria@goiabinha.com` / `Usuario1234`.
+Os dados de exemplo criam usuários com senhas conhecidas (ver `Backend/Database/dadosExemplo.sql`): use só no seu PC para testar.
+Para o sistema de verdade, rode `npm run criar-banco` (sem `exemplos`) e crie o administrador com `npm run criar-usuario`.
 
 ## Comandos
 
