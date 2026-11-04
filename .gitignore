@@ -3,4 +3,5 @@
 /node_modules
 package_lock.json
 package.json
+vscode/
 /Backend/Connection/estacionamento-e4bd4-firebase-adminsdk-fbsvc-1eb9ab2bc7.json
