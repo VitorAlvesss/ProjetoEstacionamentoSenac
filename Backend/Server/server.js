@@ -7,6 +7,7 @@ const dashboardroutes = require("../Routes/dashboardRoutes");
 const dispositivoRoutes = require("../Routes/dispositivoRoutes");
 const veiculoRoutes = require("../Routes/veiculoRoutes");
 const permissaoRoutes = require("../Routes/permissaoRoutes");
+const registrosRoutes = require('../Routes/registroOcupacaoRoutes');
 //traz o caminho que criei
 //const rotasDeUsuarios = require ('../Routes/usuarioRoutes');
  
@@ -29,6 +30,7 @@ app.use('/', dispositivoRoutes);
 app.use("/", veiculoRoutes);
 app.use('/', registrosRoutes);
 app.use("/", permissaoRoutes);
+app.use('/', registrosRoutes);
 
 
 
