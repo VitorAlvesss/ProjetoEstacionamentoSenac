@@ -49,6 +49,8 @@ body {
     margin-left 0.3s ease;
 
   z-index: 100;
+  /* ADICIONE ESTA LINHA ABAIXO */
+  margin-top: 22px; 
 
   
   
@@ -65,35 +67,30 @@ body {
 /* Cabeçalho da sidebar */
 
 .sidebar-header {
-  padding: 16px;
-
+  padding: 18px 16px; /* Ajuste o padding vertical para casar com o do seu cabeçalho principal */
   display: flex;
   align-items: center;
   gap: 12px;
-
   border-bottom: 1px solid var(--menu-border);
+  height: 70px; /* Define uma altura fixa idêntica para o topo do menu */
 }
 
 
 /* Botão hambúrguer */
 
-.hamburger-icon {
+.hamburger-icon,
+#topHeaderToggleBtn {
   font-size: 1.1rem;
-
   color: var(--menu-muted);
-
   cursor: pointer;
-
-  padding: 4px;
-
-  border-radius: 4px;
-
+  padding: 8px;
+  border-radius: 6px;
   transition: 0.2s;
-}
-
-.hamburger-icon:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
 }
 
 .hamburger-icon:hover,
@@ -101,6 +98,40 @@ body {
   background-color: rgba(255, 255, 255, 0.1);
   color: #fff;
 }
+
+/* Menu aberto: esconde o botão do cabeçalho */
+.sidebar:not(.collapsed) ~ .main-wrapper #topHeaderToggleBtn {
+    display: none !important;
+}
+
+/* Menu fechado: mostra o botão do cabeçalho */
+.sidebar.collapsed ~ .main-wrapper #topHeaderToggleBtn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Força o alinhamento perfeito das barras do ícone em todas telas */
+#topHeaderToggleBtn i.fa-bars,
+.hamburger-icon i.fa-bars,
+#topHeaderToggleBtn.fa-bars,
+.hamburger-icon.fa-bars {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  vertical-align: middle !important;
+  line-height: 0 !important;
+  transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.cabecalho-esquerda {
+  display: flex;
+  align-items: center;
+  gap: 16px !important; 
+}
+
 
 /* Logo */
 .logo-container {
@@ -240,8 +271,6 @@ body {
 
 .quick-summary {
   margin: 12px 8px;
-  margin-top: 150px; 
-  
   padding: 12px;
   background-color: rgba(255, 255, 255, 0.02);
   border-radius: 8px;
@@ -293,7 +322,7 @@ body {
   font-size: 0.62rem;
   color: #4a5568;
   border-top: 1px solid var(--menu-border);
-  margin-top: auto; 
+  margin-top: 10px; /* Mantém uma distância segura e fixa logo abaixo do resumo */
 }
 
 /*Botão do header*/
@@ -311,12 +340,6 @@ body {
 }
 
 
-/* Quando o menu está aberto,
-   o botão do header fica escondido */
-
-.sidebar:not(.collapsed) ~ .main-wrapper #topHeaderToggleBtn {
-  display: none;
-}
 
 
 /* MENU COM O TEMA CLARO */

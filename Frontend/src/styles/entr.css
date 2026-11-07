@@ -118,11 +118,6 @@ body {
   box-shadow: 0 4px 12px var(--sombra);
 }
 
-#hora-atual,
-#data-atual {
-  color: #dde0e3;
-}
-
 .cabecalho-esquerda {
   display: flex;
   align-items: center;
@@ -188,7 +183,7 @@ body {
   flex-direction: column;
   align-items: flex-end;
   font-size: 0.78rem;
-  color: var(--texto-mutado);
+  color:  #dde0e3;
 }
 
 .botao-icone {
