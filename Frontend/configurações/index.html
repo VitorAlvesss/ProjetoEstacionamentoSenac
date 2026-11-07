@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/Frontend/src/styles/menu.css" />
+  <link rel="stylesheet" href="/Frontend/src/styles/Configuracoes.css" />
+  <title>Goiabinha & CIA - Configurações</title>
+  <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
+</head>
+
+<body>
+
+  <!-- Menu lateral (sidebar) -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
+      <div class="logo-container">
+        <div></div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="/Frontend/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">app_registration</i>
+            Cadastro</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/vagas/index.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e
+            Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/relatorios/index.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item active">
+          <a href="/Frontend/configurações/index.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="quick-summary">
+      <div class="quick-summary-title">RESUMO RÁPIDO</div>
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$
+          0,00</span></div>
+    </div>
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho-principal">
+      <div class="cabecalho-esquerda">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
+        <div class="brand-logo">
+          <img src="/Frontend/public/logo.png" alt="Goiabinha & CIA" class="img-logo">
+        </div>
+      </div>
+
+      <div class="titulos-cabecalho centralizado">
+        <h1 id="pageTitle">Configurações</h1>
+        <h2 id="pageSubtitle">Gerencie as configurações do sistema</h2>
+      </div>
+
+      <div class="info-cabecalho">
+        <button id="btnTema" class="btn-tema" title="Alternar Tema">
+          <span class="material-symbols-outlined">routine</span>
+        </button>
+
+        <div id="data-hora">
+          <span id="hora-atual">14:39:21</span>
+          <small id="data-atual">24/08/2026</small>
+        </div>
+
+        <div id="notificacao" class="botao-icone">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="emblema" id="qtd-notificacoes">0</span>
+        </div>
+
+        <div id="usuario-logado">
+          <i id="avatar" class="fa-solid fa-circle-user avatar"></i>
+          <div class="user-details">
+            <div class="detalhes-usuario">
+              <span id="nome-usuario" style="font-weight: 600;">Administrador</span>
+              <span id="status-usuario" class="status">Online</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="container-configuracoes">
+
+      <div class="grid-configuracoes">
+
+        <!-- CARD 1: CONFIGURAÇÕES DO ESTACIONAMENTO -->
+        <div class="card-config">
+          <div class="card-config-header">
+            <div class="card-icon icone-azul">
+              <i class="fa-solid fa-building"></i>
+            </div>
+            <div>
+              <h3>CONFIGURAÇÕES DO ESTACIONAMENTO</h3>
+              <p>Informações gerais do estacionamento</p>
+            </div>
+          </div>
+
+          <div class="card-config-body grid-estacionamento">
+            <div class="col-esquerda">
+              <div class="form-group">
+                <label>Nome do estacionamento</label>
+                <input type="text" value="Goiabinha&CIA">
+              </div>
+
+              <div class="form-group">
+                <label>Endereço</label>
+                <input type="text" value="Rua das Goiabas, 123 - Centro">
+              </div>
+
+              <div class="form-group">
+                <label>Telefone</label>
+                <input type="text" value="(62) 99999-9999">
+              </div>
+
+              <div class="form-group">
+                <label>Quantidade total de vagas</label>
+                <input type="number" value="20">
+                <small class="helper-text">Total de vagas disponíveis no estacionamento</small>
+              </div>
+            </div>
+
+            <div class="col-direita">
+              <label class="section-label">Horário de funcionamento</label>
+
+              <div class="time-range-row">
+                <span>Segunda a Sexta</span>
+                <div class="time-inputs">
+                  <input type="text" value="07:00">
+                  <i class="fa-regular fa-clock icon-clock"></i>
+                  <span class="sep">às</span>
+                  <input type="text" value="22:00">
+                  <i class="fa-regular fa-clock icon-clock"></i>
+                </div>
+              </div>
+
+              <div class="time-range-row">
+                <span>Sábado</span>
+                <div class="time-inputs">
+                  <input type="text" value="08:00">
+                  <i class="fa-regular fa-clock icon-clock"></i>
+                  <span class="sep">às</span>
+                  <input type="text" value="22:00">
+                  <i class="fa-regular fa-clock icon-clock"></i>
+                </div>
+              </div>
+
+              <div class="time-range-row">
+                <span>Domingo</span>
+                <div class="time-inputs-fechado">
+                  <input type="text" value="Fechado" disabled class="input-disabled-center">
+                </div>
+              </div>
+
+              <div class="form-group margin-top-15">
+                <label>Tolerância de permanência</label>
+                <div class="input-with-suffix">
+                  <input type="number" value="15">
+                  <span class="suffix">minutos</span>
+                </div>
+                <small class="helper-text">Tempo de tolerância antes da cobrança</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2: CONFIGURAÇÕES FINANCEIRAS -->
+        <div class="card-config">
+          <div class="card-config-header">
+            <div class="card-icon icone-verde">
+              <i class="fa-solid fa-dollar-sign"></i>
+            </div>
+            <div>
+              <h3>CONFIGURAÇÕES FINANCEIRAS</h3>
+              <p>Valores e regras de cobrança</p>
+            </div>
+          </div>
+
+          <div class="card-config-body grid-2-col">
+            <div class="form-group">
+              <label>Valor da hora avulsa (primeira hora)</label>
+              <input type="text" value="R$ 10,00">
+            </div>
+
+            <div class="form-group">
+              <label>Valor mensalista</label>
+              <input type="text" value="R$ 250,00">
+            </div>
+
+            <div class="form-group">
+              <label>Valor da hora adicional</label>
+              <input type="text" value="R$ 5,00">
+            </div>
+
+            <div class="form-group">
+              <label>Tolerância antes da cobrança</label>
+              <div class="input-with-suffix">
+                <input type="number" value="10">
+                <span class="suffix">minutos</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Valor da reserva</label>
+              <input type="text" value="R$ 5,00">
+            </div>
+
+            <div class="form-group">
+              <label>Forma de cobrança</label>
+              <select>
+                <option selected>Por hora</option>
+                <option>Diária</option>
+                <option>Fixo</option>
+              </select>
+            </div>
+
+            <div class="info-alert-box col-span-2">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>As alterações nos valores serão aplicadas automaticamente para novos registros.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3: CONTROLE DE VAGAS -->
+        <div class="card-config">
+          <div class="card-config-header">
+            <div class="card-icon icone-amarelo">
+              <i class="fa-solid fa-car"></i>
+            </div>
+            <div>
+              <h3>CONTROLE DE VAGAS</h3>
+              <p>Distribuição e categorias das vagas</p>
+            </div>
+          </div>
+
+          <div class="card-config-body grid-vagas">
+            <div class="vagas-list">
+              <div class="vaga-item">
+                <div class="vaga-label"><i class="fa-solid fa-car icone-vaga"></i> Vagas totais</div>
+                <input type="number" value="6" min="1" class="input-small">
+              </div>
+              <div class="vaga-item">
+                <div class="vaga-label"><i class="fa-solid fa-user-check icone-vaga"></i> Vagas para mensalistas</div>
+                <input type="number" value="3" min="0" class="input-small">
+              </div>
+              <div class="vaga-item">
+                <div class="vaga-label"><i class="fa-solid fa-bookmark icone-vaga"></i> Vagas para reservas</div>
+                <input type="number" value="1" min="0" class="input-small">
+              </div>
+              <div class="vaga-item">
+                <div class="vaga-label"><i class="fa-solid fa-star icone-vaga"></i> Vagas preferenciais</div>
+                <input type="number" value="1" min="0" class="input-small">
+              </div>
+              <div class="vaga-item">
+                <div class="vaga-label"><i class="fa-solid fa-wheelchair icone-vaga"></i> Vagas para deficientes</div>
+                <input type="number" value="1" min="0" class="input-small">
+              </div>
+              <div class="vaga-item">
+                <div class="vaga-label"><i class="fa-solid fa-person-cane icone-vaga"></i> Vagas para idosos</div>
+                <input type="number" value="0" min="0" class="input-small">
+              </div>
+            </div>
+
+            <div class="gerenciar-vagas-box">
+              <h4>Gerenciar vagas individuais</h4>
+              <p>Visualize e configure o status de cada vaga do estacionamento.</p>
+              <button class="btn-outline"><i class="fa-solid fa-list-check"></i> Gerenciar vagas</button>
+            </div>
+
+            <div class="info-alert-box col-span-2">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>A distribuição será considerada na alocação automática de vagas.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4: SISTEMA IOT -->
+        <div class="card-config">
+          <div class="card-config-header">
+            <div class="card-icon icone-roxo">
+              <i class="fa-solid fa-wifi"></i>
+            </div>
+            <div>
+              <h3>SISTEMA IOT</h3>
+              <p>Dispositivos e sensores conectados</p>
+            </div>
+          </div>
+
+          <div class="card-config-body grid-iot">
+            <div class="disp-list-box">
+              <label class="section-label">Dispositivos conectados</label>
+              <div class="iot-device-row">
+                <span>ESP32 Principal</span>
+                <span class="status-pill online"><i class="fa-solid fa-circle"></i> Online</span>
+              </div>
+              <div class="iot-device-row">
+                <span>Sensor Vaga 01</span>
+                <span class="status-pill online"><i class="fa-solid fa-circle"></i> Online</span>
+              </div>
+              <div class="iot-device-row">
+                <span>Sensor Vaga 02</span>
+                <span class="status-pill online"><i class="fa-solid fa-circle"></i> Online</span>
+              </div>
+              <div class="iot-device-row">
+                <span>Sensor Vaga 03</span>
+                <span class="status-pill online"><i class="fa-solid fa-circle"></i> Online</span>
+              </div>
+              <div class="iot-device-row">
+                <span>Sensor Vaga 04</span>
+                <span class="status-pill offline"><i class="fa-solid fa-circle"></i> Offline</span>
+              </div>
+              <div class="iot-device-row">
+                <span>Sensor Vaga 05</span>
+                <span class="status-pill online"><i class="fa-solid fa-circle"></i> Online</span>
+              </div>
+            </div>
+
+            <div class="iot-controls-box">
+              <div class="form-group">
+                <label>Intervalo de atualização dos sensores</label>
+                <select>
+                  <option selected>5 segundos</option>
+                  <option>10 segundos</option>
+                  <option>30 segundos</option>
+                </select>
+              </div>
+
+              <div class="switch-row">
+                <span>Atualização automática</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+
+              <div class="switch-row">
+                <span>Notificar quando sensor ficar offline</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="slider round"></span>
+                </label>
+              </div>
+
+              <button class="btn-outline btn-full margin-top-10">
+                <i class="fa-solid fa-signal"></i> Testar conexão dos dispositivos
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 5: CONTA DO ADMINISTRADOR (LARGURA TOTAL) -->
+        <div class="card-config card-full-width">
+          <div class="card-config-header">
+            <div class="card-icon icone-azul-escuro">
+              <i class="fa-solid fa-user-gear"></i>
+            </div>
+            <div>
+              <h3>CONTA DO ADMINISTRADOR</h3>
+              <p>Informações da conta administrativa</p>
+            </div>
+          </div>
+
+          <div class="card-config-body admin-account-grid">
+            <div class="form-group">
+              <label>Nome</label>
+              <input type="text" value="Administrador">
+            </div>
+
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" value="admin@goiabinhacia.com">
+            </div>
+
+            <div class="form-group">
+              <label>Senha</label>
+              <input type="password" value="********">
+            </div>
+
+            <div class="form-group flex-end-button">
+              <button class="btn-outline"><i class="fa-solid fa-lock"></i> Alterar senha</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOTÕES DE AÇÃO INFERIORES -->
+      <div class="footer-actions">
+        <button class="btn-secondary"><i class="fa-solid fa-xmark"></i> Cancelar</button>
+        <button class="btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar alterações</button>
+      </div>
+
+    </main>
+  </div>
+
+  <script type="module" src="/Frontend/src/assets/js/configuracoes.js"></script>
+</body>
+
+</html>

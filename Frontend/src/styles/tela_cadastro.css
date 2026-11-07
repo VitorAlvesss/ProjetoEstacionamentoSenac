@@ -1,0 +1,426 @@
+/* ============================================================
+   1. VARIÁVEIS DE CORES (TEMA ESCURO E CLARO)
+============================================================ */
+
+:root {
+  --bg-body: #0b0f19;
+  --bg-cabecalho: #0f172a;
+  --bg-card: #0f172a;
+  --bg-item-vaga: #162032;
+  --borda: #1e293b;
+  --sombra: rgba(0, 0, 0, 0.2);
+
+  --texto-principal: #ffffff;
+  --texto-secundario: #f1f5f9;
+  --texto-mutado: #94a3b8;
+  --texto-suave: #64748b;
+  --texto-destaque: #cbd5e1;
+}
+
+body.light-theme {
+  --bg-body: #f8fafc;
+  --bg-cabecalho: #11225a;
+  --bg-card: #ffffff;
+  --bg-item-vaga: #f1f5f9;
+  --borda: #cbd5e1;
+  --sombra: rgba(0, 0, 0, 0.05);
+
+  --texto-principal: #0f172a;
+  --texto-secundario: #1e293b;
+  --texto-mutado: #64748b;
+  --texto-suave: #94a3b8;
+  --texto-destaque: #334155;
+}
+
+/* ============================================================
+   2. ESTRUTURA GLOBAL E LAYOUT DA PÁGINA
+============================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+  background-color: var(--bg-body);
+  color: var(--texto-secundario);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Área principal ao lado da Sidebar */
+.main-wrapper {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+/* ============================================================
+   3. CABEÇALHO PRINCIPAL PADRÃO
+============================================================ */
+
+.cabecalho-principal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-cabecalho);
+  color: #ffffff;
+  padding: 14px 24px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 1px solid var(--borda);
+  box-shadow: 0 4px 12px var(--sombra);
+}
+
+.cabecalho-esquerda {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+}
+
+.img-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+}
+
+.titulos-cabecalho.centralizado {
+  text-align: center;
+  flex: 1;
+}
+
+.titulos-cabecalho h1 {
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.titulos-cabecalho h2 {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.info-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  flex: 1;
+}
+
+#btnTema {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+}
+
+#btnTema:hover {
+  transform: scale(1.1);
+}
+
+#data-hora {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.78rem;
+  color: #dde0e3;
+}
+
+.botao-icone {
+  position: relative;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.botao-icone:hover {
+  transform: scale(1.1);
+}
+
+.botao-icone .emblema {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.62rem;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+#usuario-logado {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.detalhes-usuario {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75rem;
+}
+
+#avatar {
+  font-size: 1.6rem;
+  color: var(--text-muted);
+}
+
+#status-usuario {
+  font-size: 0.65rem;
+  color: rgb(49, 247, 0);
+}
+
+/* ============================================================
+   4. TÍTULO DA SEÇÃO DE CADASTRO
+============================================================ */
+
+.headerTelaCadastro {
+  padding: 0 0 20px 0;
+  margin-bottom: 0;
+}
+
+.headerTelaCadastro h1 {
+  font-size: 1.3rem;
+  color: var(--texto-principal);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.headerTelaCadastro p {
+  font-size: 0.8rem;
+  color: var(--texto-mutado);
+}
+
+/* ============================================================
+   5. ÁREA PRINCIPAL DOS CARDS DE CADASTRO
+============================================================ */
+
+.mainTelaCadastro {
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* CARDS INDIVIDUAIS */
+.cadastroVaga,
+.cadastroUsuario,
+.cadastroVeiculo,
+.cadastroTarifa,
+.cadastroDispIot,
+.cadastroPermissao {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 450px;
+  box-shadow: 0 2px 8px var(--sombra);
+}
+
+/* ÁREAS INTERNAS DOS CARDS */
+.mainCadastroVaga,
+.mainCadastroUsuario,
+.mainCadastroTarifa,
+.mainCadastroIot,
+.mainCadastroPermissao {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* TÍTULOS E ÍCONES DOS CARDS */
+.cardTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.cardIcon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24px !important;
+  line-height: 1 !important;
+  padding: 0;
+}
+
+.material-symbols-outlined.cardIcon {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Cores específicas dos ícones */
+.vaga { background: #3b82f6; }
+.usuario { background: #22c55e; }
+.veiculo { background: #f59e0b; }
+.tarifa { background: #8b5cf6; }
+.iot { background: #06b6d4; }
+.permissao { background: #ec4899; }
+
+#tituloCadastroVaga,
+#tituloCadastroUsuario,
+#tituloCadastroVeiculo,
+#tituloCadastroTarifa,
+#tituloCadastroIot,
+#tituloCadastroPermissao {
+  font-size: 14px;
+  color: var(--texto-principal);
+  font-weight: 700;
+}
+
+#paragrafoCadastroVaga,
+#paragrafoCadastroUsuario,
+#paragrafoCadastroVeiculo,
+#paragrafoCadastroTarifa,
+#paragrafoCadastroIot,
+#paragrafoCadastroPermissao {
+  font-size: 12px;
+  color: var(--texto-mutado);
+  margin-top: 3px;
+}
+
+/* INPUTS E FORMULÁRIOS */
+.tituloInput {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--texto-principal);
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.inputTelaCadastro {
+  width: 100%;
+  height: 34px;
+  border: 1px solid var(--borda);
+  border-radius: 4px;
+  background: var(--bg-body);
+  color: var(--texto-principal);
+  padding: 0 10px;
+  margin-bottom: 4px;
+}
+
+.inputTelaCadastro::placeholder {
+  color: var(--texto-suave);
+}
+
+.inputTelaCadastro:focus {
+  outline: none;
+  border-color: #7c3aed;
+}
+
+/* BOTÕES DO FORMULÁRIO */
+.botoes {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.botaoCancelar {
+  flex: 1;
+  height: 34px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--borda);
+  background: #374151;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botaoCancelar:hover {
+  background: #4b5563;
+}
+
+.botaoSalvar {
+  flex: 2;
+  height: 34px;
+  font-size: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #7c3aed;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botaoSalvar:hover {
+  background: #6d28d9;
+}
+
+/* LINHAS E CAMPOS LADO A LADO */
+.linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+}
+
+.campo label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--texto-destaque);
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   6. RESPONSIVIDADE
+============================================================ */
+
+@media (max-width: 1200px) {
+  .mainTelaCadastro {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .mainTelaCadastro {
+    grid-template-columns: 1fr;
+  }
+
+  .linha {
+    grid-template-columns: 1fr;
+  }
+}
