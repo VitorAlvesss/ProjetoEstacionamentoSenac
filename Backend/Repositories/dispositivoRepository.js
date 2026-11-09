@@ -1,17 +1,18 @@
 const firebase = require('../Connection/fireDb');
-const {collection, getDocs} = require("firebase/firestore")
 
 async function buscarDispositivoIOT(){
-    const referencia = collection(firebase, "estacionamento");
-    const resultado = await getDocs(referencia);
+    const referencia = firebase.collection("estacionamento");
+    const resultado = await referencia.get();
 
     const dispositivos = [];
 
-    resultado.docs.forEach((docs) => {
+    resultado.docs.forEach((doc) => {
         dispositivos.push({
-            id: docs.id,
-            ...docs.data()
+            id: doc.id,
+            ...doc.data()
         });
     });
     return dispositivos;
 }
+
+module.exports = { buscarDispositivoIOT };

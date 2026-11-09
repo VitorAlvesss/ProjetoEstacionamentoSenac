@@ -12,6 +12,7 @@ const registrosRoutes = require('../Routes/registroOcupacaoRoutes');
 //const rotasDeUsuarios = require ('../Routes/usuarioRoutes');
  
 // transformando oq vier do front  em dados json fazendo com o node js entenda
+app.use(express.json());
 
 app.get('/teste-conexao', async (req, res)=>{
 
