@@ -316,19 +316,12 @@ body {
 
 /* 6. CORPO DA DASHBOARD */
 .dashboard-body {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
+  display: block; 
+  width: 100%;
 }
 
-@media (max-width: 900px) {
-  .dashboard-body {
-    grid-template-columns: 1fr;
-  }
-}
-
-.table-section,
-.widget-card {
+.table-section {
+  width: 100%;
   background-color: var(--bg-card);
   border-radius: 12px;
   padding: 18px;
@@ -336,7 +329,7 @@ body {
   box-shadow: 0 2px 8px var(--sombra);
   display: flex;
   flex-direction: column;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .section-header {
@@ -402,7 +395,7 @@ body {
   border-color: var(--cor-azul);
 }
 
-/* 8. TABELA DE DADOS */
+/* 8. TABELA DE DADOS E PAGINAÇÃO */
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -437,6 +430,48 @@ body {
   margin-top: 14px;
   font-size: 0.75rem;
   color: var(--texto-mutado);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pagination-right-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pagination-right-area .filter-select {
+  width: auto;
+  min-width: 130px;
+  padding: 6px 10px;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination-controls button {
+  background-color: var(--bg-body);
+  border: 1px solid var(--borda);
+  color: var(--texto-principal);
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+  background-color: var(--cor-azul);
+  color: #ffffff;
+  border-color: var(--cor-azul);
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 /* 9. WIDGETS E FORMULÁRIOS */
