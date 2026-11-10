@@ -14,34 +14,17 @@
 
   <!-- Estilo compartilhado do sistema -->
   <link rel="stylesheet" href="../src/styles/menu.css">
-  
- <!-- Estilo compartilhado do sistema -->
-  <link rel="stylesheet" href="../src/styles/menu.css">
-  <link rel="stylesheet" href="../../src/styles/menu.css">
 
   <!-- No <head> do seu index.html -->
-<link rel="stylesheet" href="visual.css">
+  <link rel="stylesheet" href="visual.css">
 
-
-<link rel="stylesheet" href="../../src/styles/menu.css">
-
-<!-- No final do seu index.html (antes de </body>) -->
-<script src="Menu 2 (1).JS" defer></script>
-<script src="../src/controllers/entradaSaida.js" defer></script>
+	<!-- No final do seu index.html (antes de </body>) -->
+  <script src="Menu 2 (1).js" defer></script>
+  <script src="../src/controllers/entradaSaida.js" defer></script>
 
   <!-- Estilo específico desta tela (desenvolvido pela Tay) -->
-  
-  <script src='/Frontend/src/controllers/entradaSaida.js' defer></script>
-  <script src="Menu 2 (1).JS" defer></script>
-
-
-<script src="../../src/controllers/entradaSaida.js" defer></script>
-
-
   <!-- Estilo específico desta tela (desenvolvido pela Tay) -->
   
-  <script src='/Frontend/src/controllers/entradaSaida.js' defer></script>
-  <script src="Menu 2 (1).JS" defer></script>
 </head>
 <body>
 
@@ -195,28 +178,11 @@
             <span class="card-resumo-label" style="color:#ef4444;">Hoje</span>
           </div>
           <div class="card-resumo-rodape">
-            <!-- <span>Faturamento: <strong>R$ 0,00</strong></span>
-            <span>Ticket médio: —</span> -->
+
           </div>
         </div>
 
-        <!-- <div class="card-resumo laranja">
-          <div class="card-resumo-cabecalho">
-            <span class="card-resumo-titulo">Reservas Ativas</span>
-            <div class="card-resumo-icone" style="background:#f97316;">
-              <i class="fa-solid fa-clock-rotate-left"></i>
-            </div>
-          </div>
-          <div class="card-resumo-corpo">
-            <span class="card-resumo-valor" id="num-reservas">00</span>
-            <span class="card-resumo-label" style="color:#f97316;">Aguardando</span>
-          </div>
-          <div class="card-resumo-rodape">
-            <span>Próxima chegada: <strong>—</strong></span>
-            <span>Reservadas</span>
-          </div>
-        </div> -->
-
+       
       </section>
 
       <!-- Tabela de movimentação -->
@@ -226,9 +192,7 @@
             <h3>Histórico de Movimentação</h3>
             <span>Registros do dia atual</span>
           </div>
-          <button class="btn-nova-entrada" id="btnNovaEntrada">
-            <i class="fa-solid fa-plus"></i> Nova Entrada
-          </button>
+          
         </div>
 
         <div class="tabela-container">
@@ -252,37 +216,6 @@
     </main>
   </div>
 
-  <!-- Modal: Nova Entrada -->
-  <div class="modal-fundo" id="modalEntrada">
-    <div class="modal-caixa">
-      <div class="modal-topo">
-        <h3>Registrar Entrada</h3>
-        <i class="fa-solid fa-xmark modal-fechar" id="btnFecharModal"></i>
-      </div>
-
-      <form id="formNovaEntrada">
-        <div class="campo">
-          <label for="placa">Placa do Veículo</label>
-          <input type="text" id="placa" placeholder="Ex: ABC-1234" required style="text-transform: uppercase;">
-        </div>
-
-        <div class="campo">
-          <label for="vaga">Vaga Selecionada</label> 
-          <select id="id_vaga" required>
-            <option value="1">Vaga 1</option>
-            <option value="2">Vaga 2</option>
-            <option value="3">Vaga 3</option>
-            <option value="4">Vaga 4</option>
-          </select>
-        </div>
-
-        <div class="modal-botoes">
-          <button type="button" class="btn-cancelar" id="btnCancelar">Cancelar</button>
-          <button type="submit" class="btn-confirmar">Confirmar</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- JS compartilhado do sistema (menu, tema, relógio) — SEMPRE PRIMEIRO -->
   <!-- JS específico desta tela -->

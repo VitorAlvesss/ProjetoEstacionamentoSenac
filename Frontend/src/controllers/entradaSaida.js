@@ -2,53 +2,11 @@ const NUM_ESTACIONADOS = document.getElementById('num-estacionados');
 const NUM_SAIDAS = document.getElementById('num-saidas');
 const NUM_TOTAL_ENTRADAS = document.getElementById('num-total-entradas');
 
-const modal = document.getElementById('modalEntrada');
-const btnAbrirModal = document.getElementById('btnNovaEntrada');
-const btnFecharModal = document.getElementById('btnFecharModal');
-const btnCancelar = document.getElementById('btnCancelar');
 
 const TABELA = document.querySelector('#listaMovimentacao');
-const FORM_REGISTRO = document.querySelector('#formNovaEntrada');
-const COMBOBOX = document.querySelector('#id_vaga');
-
-// Abrir/fechar modal
-const fecharModal = () => {
-  modal.classList.remove('visivel');
-  FORM_REGISTRO.reset();
-};
-
-btnAbrirModal.addEventListener('click', () => modal.classList.add('visivel'));
-btnFecharModal.addEventListener('click', fecharModal);
-btnCancelar.addEventListener('click', fecharModal);
 
 function limparTabela() {
 	TABELA.innerHTML = '';
-}
-
-function limparComboboxModal() {
-	COMBOBOX.innerHTML = ''; 
-}
-
-async function carregarVagas() {
-	try {
-		const RES = await fetch(SERVIDOR_URL, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-		const RESULTADO = await RES.json();
-		limparComboboxModal();
-		if (RES.status == 200) {
-			COMBOBOX.innerHTML = RESULTADO.map(v => `
-			<option value="${v.id}">Vaga ${v.id}</option>
-			`).join('');
-		} else {
-		COMBOBOX.innerHTML = 'ERRO AO CARREGAR AS VAGAS DISPONÍVEIS';
-		}
-	} catch (err) {
-		alert('erro: ' + err);
-	}
 }
 
 async function carregarTabela() {
@@ -85,29 +43,6 @@ async function carregarTabela() {
 			}
 	}
 
-async function darSaida(id) {
-	try {
-
-		const RES = await fetch(SERVIDOR_URL, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({id})
-		});
-
-		if (RES.status == 200) {
-			alert('Saída registrada com sucesso!');
-			await carregarTabela();
-		} else {
-			alert('ERRO!');
-		}
-
-	} catch (err) {
-		alert('Algo deu errado!');
-	}
-}
-
 async function listarQuantos() {
 	try {
 		const RES = await fetch(`${SERVIDOR_URL}`, {
@@ -125,45 +60,10 @@ async function listarQuantos() {
 	} catch {
 		alert('Houve um problema no servidor!');
 	}
-} // programa isso e testa
-
-FORM_REGISTRO.addEventListener('submit', async function(e) {
-		e.preventDefault();
-		const placa = document.getElementById('placa').value;
-		const id_vaga = document.getElementById('id_vaga').value;
-		
-		try {
-			const RES = await fetch(SERVIDOR_URL, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-					},
-				body: JSON.stringify({placa, id_vaga})
-				});
-				
-			
-			if (RES.status == 200) {
-				alert('Registro realizado com sucesso!');
-				fecharModal();
-				await carregarTabela();
-				await listarQuantos();
-				} else {
-					alert('Ocorreu algum problema com o registro!');
-					}
-			} catch(err) {
-				alert('Algo deu errado!');
-				}
-		FORM_REGISTRO.reset();
-		});
+}
 
 // aqui, a coisa já fica diferente
 window.onload = async (e) => { // aqui salva os dados no banco de dados já
 	await carregarTabela();
-	await carregarVagas();
 	console.log("carregou, pelo menos");
 	}
-
-
-
-
-
