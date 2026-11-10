@@ -1,12 +1,11 @@
 /* ============================================================
-   1. VARIÁVEIS DE CORES (TEMA ESCURO E CLARO)
+   1. VARIÁVEIS DE CORES
 ============================================================ */
 
 :root {
   --bg-body: #0b0f19;
   --bg-cabecalho: #0f172a;
   --bg-card: #0f172a;
-  --bg-item-vaga: #162032;
   --borda: #1e293b;
   --sombra: rgba(0, 0, 0, 0.2);
 
@@ -21,7 +20,6 @@ body.light-theme {
   --bg-body: #f8fafc;
   --bg-cabecalho: #11225a;
   --bg-card: #ffffff;
-  --bg-item-vaga: #f1f5f9;
   --borda: #cbd5e1;
   --sombra: rgba(0, 0, 0, 0.05);
 
@@ -32,8 +30,9 @@ body.light-theme {
   --texto-destaque: #334155;
 }
 
+
 /* ============================================================
-   2. ESTRUTURA GLOBAL E LAYOUT DA PÁGINA
+   2. ESTRUTURA GLOBAL
 ============================================================ */
 
 * {
@@ -52,7 +51,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Área principal ao lado da Sidebar */
 .main-wrapper {
   flex: 1;
   width: 100%;
@@ -61,11 +59,11 @@ body {
   flex-direction: column;
   padding: 20px;
   overflow-y: auto;
-  transition: all 0.3s ease;
 }
 
+
 /* ============================================================
-   3. CABEÇALHO PRINCIPAL PADRÃO
+   3. CABEÇALHO
 ============================================================ */
 
 .cabecalho-principal {
@@ -152,7 +150,7 @@ body {
 .botao-icone {
   position: relative;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: transform 0.2s ease;
 }
 
 .botao-icone:hover {
@@ -189,7 +187,7 @@ body {
 
 #avatar {
   font-size: 1.6rem;
-  color: var(--text-muted);
+  color: var(--texto-mutado);
 }
 
 #status-usuario {
@@ -197,13 +195,13 @@ body {
   color: rgb(49, 247, 0);
 }
 
+
 /* ============================================================
-   4. TÍTULO DA SEÇÃO DE CADASTRO
+   4. TÍTULO DA TELA
 ============================================================ */
 
 .headerTelaCadastro {
-  padding: 0 0 20px 0;
-  margin-bottom: 0;
+  padding: 0 0 20px;
 }
 
 .headerTelaCadastro h1 {
@@ -218,48 +216,43 @@ body {
   color: var(--texto-mutado);
 }
 
+
 /* ============================================================
-   5. ÁREA PRINCIPAL DOS CARDS DE CADASTRO
+   5. CARDS
 ============================================================ */
 
 .mainTelaCadastro {
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
   align-items: stretch;
 }
 
-/* CARDS INDIVIDUAIS */
 .cadastroVaga,
-.cadastroUsuario,
-.cadastroVeiculo,
-.cadastroTarifa,
-.cadastroDispIot,
-.cadastroPermissao {
+.cadastroTarifa {
   background: var(--bg-card);
   border: 1px solid var(--borda);
   border-radius: 12px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  min-height: 450px;
+  min-height: 400px;
   box-shadow: 0 2px 8px var(--sombra);
 }
 
-/* ÁREAS INTERNAS DOS CARDS */
 .mainCadastroVaga,
-.mainCadastroUsuario,
-.mainCadastroTarifa,
-.mainCadastroIot,
-.mainCadastroPermissao {
+.mainCadastroTarifa {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-/* TÍTULOS E ÍCONES DOS CARDS */
+
+/* ============================================================
+   6. TÍTULO DOS CARDS
+============================================================ */
+
 .cardTitle {
   display: flex;
   align-items: center;
@@ -286,37 +279,33 @@ body {
   align-items: center;
 }
 
-/* Cores específicas dos ícones */
-.vaga { background: #3b82f6; }
-.usuario { background: #22c55e; }
-.veiculo { background: #f59e0b; }
-.tarifa { background: #8b5cf6; }
-.iot { background: #06b6d4; }
-.permissao { background: #ec4899; }
+.vaga {
+  background: #3b82f6;
+}
+
+.tarifa {
+  background: #8b5cf6;
+}
 
 #tituloCadastroVaga,
-#tituloCadastroUsuario,
-#tituloCadastroVeiculo,
-#tituloCadastroTarifa,
-#tituloCadastroIot,
-#tituloCadastroPermissao {
+#tituloCadastroTarifa {
   font-size: 14px;
   color: var(--texto-principal);
   font-weight: 700;
 }
 
 #paragrafoCadastroVaga,
-#paragrafoCadastroUsuario,
-#paragrafoCadastroVeiculo,
-#paragrafoCadastroTarifa,
-#paragrafoCadastroIot,
-#paragrafoCadastroPermissao {
+#paragrafoCadastroTarifa {
   font-size: 12px;
   color: var(--texto-mutado);
   margin-top: 3px;
 }
 
-/* INPUTS E FORMULÁRIOS */
+
+/* ============================================================
+   7. CAMPOS
+============================================================ */
+
 .tituloInput {
   font-size: 11px;
   font-weight: 600;
@@ -345,50 +334,9 @@ body {
   border-color: #7c3aed;
 }
 
-/* BOTÕES DO FORMULÁRIO */
-.botoes {
-  margin-top: auto;
-  display: flex;
-  gap: 10px;
-  padding-top: 20px;
-}
-
-.botaoCancelar {
-  flex: 1;
-  height: 34px;
-  font-size: 12px;
-  border-radius: 6px;
-  border: 1px solid var(--borda);
-  background: #374151;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.botaoCancelar:hover {
-  background: #4b5563;
-}
-
-.botaoSalvar {
-  flex: 2;
-  height: 34px;
-  font-size: 12px;
-  border: none;
-  border-radius: 6px;
-  background: #7c3aed;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.botaoSalvar:hover {
-  background: #6d28d9;
-}
-
-/* LINHAS E CAMPOS LADO A LADO */
 .linha {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   margin-bottom: 8px;
 }
@@ -406,21 +354,236 @@ body {
 }
 
 /* ============================================================
-   6. RESPONSIVIDADE
+   BOTÕES DE CANCELAR E SALVAR 
+============================================================ */
+.botoesCadVaga {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.botaoCancelarCadVaga {
+  flex: 1;
+  height: 34px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--borda);
+  background: #374151;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botaoCancelarCadVaga:hover {
+  background: #4b5563;
+}
+
+.botaoSalvarCadVaga {
+  flex: 1;
+  height: 34px;
+  font-size: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #7c3aed;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botaoSalvarCadVaga:hover {
+  background: #6d28d9;
+}
+
+
+/* ============================================================
+   8. BOTÃO EDITAR
 ============================================================ */
 
-@media (max-width: 1200px) {
+.botoes {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.botaoEditar {
+  width: 100%;
+  height: 34px;
+  font-size: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--borda);
+  background: #f59e0b;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botaoEditar:hover {
+  background: #d97706;
+}
+
+
+/* ============================================================
+   9. MODAL DE EDIÇÃO
+============================================================ */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 9999;
+}
+
+.modal.ativo {
+  display: flex;
+}
+
+.modal-conteudo {
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  animation: abrirModal 0.2s ease;
+}
+
+@keyframes abrirModal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.modal-cabecalho h2 {
+  font-size: 17px;
+  color: var(--texto-principal);
+}
+
+.fechar-modal {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--texto-mutado);
+  font-size: 22px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.fechar-modal:hover {
+  background: var(--borda);
+  color: var(--texto-principal);
+}
+
+.modal-corpo {
+  padding: 20px;
+}
+
+.modal-corpo .campo {
+  margin-bottom: 14px;
+}
+
+.modal-corpo .tituloInput {
+  margin-top: 0;
+}
+
+.modal-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--borda);
+}
+
+.botaoCancelar,
+.botaoSalvar {
+  height: 36px;
+  padding: 0 20px;
+  font-size: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botaoCancelar {
+  border: 1px solid var(--borda);
+  background: #374151;
+  color: white;
+}
+
+.botaoCancelar:hover {
+  background: #4b5563;
+}
+
+.botaoSalvar {
+  border: none;
+  background: #7c3aed;
+  color: white;
+}
+
+.botaoSalvar:hover {
+  background: #6d28d9;
+}
+
+
+/* ============================================================
+   10. RESPONSIVIDADE
+============================================================ */
+
+@media (max-width: 900px) {
   .mainTelaCadastro {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
-  .mainTelaCadastro {
+  .linha {
     grid-template-columns: 1fr;
   }
 
-  .linha {
-    grid-template-columns: 1fr;
+  .cabecalho-principal {
+    padding: 12px 16px;
+  }
+
+  .info-cabecalho {
+    gap: 10px;
+  }
+
+  .main-wrapper {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 500px) {
+  .titulos-cabecalho {
+    display: none;
+  }
+
+  .modal {
+    padding: 12px;
+  }
+
+  .modal-conteudo {
+    max-width: 100%;
   }
 }
