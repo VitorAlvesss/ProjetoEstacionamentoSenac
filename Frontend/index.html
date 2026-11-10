@@ -1,11 +1,140 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>projeto-estacionamento</title>
-  </head>
-  <body>
 
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="./src/styles/menu.css" />
+  <link rel="stylesheet" href="./src/styles/Dashboard.css" />
+  <title>Goiabinha & CIA - Dashboard</title>
+  <link rel="icon" type="image/x-icon" href="./public/icon-guia.png">
+</head>
+
+<body>
+  <!-- Menu lateral (sidebar) -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
+      <div class="logo-container">
+        <div></div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="/Frontend/index.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/tela_cadastro/index.html"><i class="material-symbols-outlined">app_registration</i> Cadastro</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/vagas/index.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/relatorios/index.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/IoT/index.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item">
+          <a href="/Frontend/configurações/index.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="quick-summary">
+      <div class="quick-summary-title">RESUMO RÁPIDO</div>
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$ 0,00</span></div>
+    </div>
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+    <!-- CABEÇALHO -->
+    <header class="cabecalho-principal">
+      <div class="cabecalho-esquerda">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
+        <div class="brand-logo">
+          <img src="./public/logo.png" alt="Goiabinha & CIA" class="img-logo">
+        </div>
+      </div>
+
+      <div class="titulos-cabecalho centralizado">
+        <h1 id="pageTitle">Dashboard</h1>
+        <h2 id="pageSubtitle">Visão geral do estacionamento</h2>
+      </div>
+
+      <div class="info-cabecalho">
+        <button id="btnTema" class="btn-tema" title="Alternar Tema">
+          <span class="material-symbols-outlined">routine</span>
+        </button>
+
+        <div id="data-hora">
+          <span id="hora-atual">--:--:--</span>
+          <small id="data-atual">--/--/----</small>
+        </div>
+
+        <div id="notificacao" class="botao-icone" style="cursor: pointer;">
+          <span class="material-symbols-outlined">notifications</span>
+          <span class="emblema" id="qtd-notificacoes" style="display: none;">0</span>
+        </div>
+
+        <div id="usuario-logado">
+          <i id="avatar" class="fa-solid fa-circle-user avatar"></i>
+          <div class="user-details">
+            <div class="detalhes-usuario">
+              <span id="nome-usuario" style="font-weight: 600;">Carregando...</span>
+              <span id="status-usuario" class="status">Online</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="conteiner-dashboard">
+      <!-- Mantenha todo o seu conteúdo <main> do Dashboard aqui (Cards, gráficos, IoT, etc) -->
+      <div id="screen-dashboard" class="screen active">
+        <section class="grade-card">
+          <div class="card">
+            <div class="icone-card fundo-azul"><span class="material-symbols-outlined">directions_car</span></div>
+            <div class="info-card">
+              <span class="titulo-card">VAGAS TOTAIS</span>
+              <strong class="valor-card" id="vagas-totais">--</strong>
+              <span class="subtitulo-card">Cadastradas</span>
+            </div>
+          </div>
+          <!-- (Restante dos seus cards) -->
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- SCRIPTS GLOBAIS E LOCAIS -->
+  <!-- Sessão do usuário (login, perfil e notificações) -->
+  <script src="/Frontend/src/assets/js/auth.js"></script>
+  <script src="/Frontend/src/assets/js/sessao.js" defer></script>
+  <script src="./src/assets/js/global.js" defer></script>
+  <script type="module" src="./src/assets/js/dashboardJS.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./view/vagasView.js" defer></script>
+</body>
 </html>

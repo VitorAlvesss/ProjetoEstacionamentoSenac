@@ -1,32 +1,29 @@
+//notificacaoController.js
+
 const NotificacaoModel = require('../Model/notificacaoModel');
 
 const NotificacaoController = {
-    // Processa a requisição de buscar notificações
+    // GET /api/notificacoes -> entradas/saídas dos carros do usuário logado
+    // (o administrador recebe as de todos os carros)
     getNotificacoes: async (req, res) => {
         try {
-            const eventosBrutos = await NotificacaoModel.buscarEventos();
-            const ultimaVezVisto = NotificacaoModel.getUltimaVisualizacao();
-            
-            let unreadCount = 0;
+            const verTodos = req.usuario.cargo === 'administrador';
+            const [eventos, unreadCount] = await Promise.all([
+                NotificacaoModel.buscarEventos(req.usuario.id, verTodos),
+                NotificacaoModel.contarNaoLidas(req.usuario.id, verTodos)
+            ]);
 
-            const notificacoesFormatadas = eventosBrutos.map(evento => {
-                const dataDoEvento = new Date(evento.data_evento);
-                const isNova = dataDoEvento > ultimaVezVisto;
-                
-                // Se a notificação for mais nova que a última visualização, aumenta a bolinha vermelha
-                if (isNova) unreadCount++;
-
-                return {
-                    id_notificacao: `${evento.tipo_evento}-${evento.id}`,
-                    id_registro: evento.id,
-                    tipo: evento.tipo_evento,
-                    mensagem: evento.tipo_evento === 'ENTRADA' 
-                        ? `Veículo (ID: ${evento.id_carro}) ENTROU no estacionamento.`
-                        : `Veículo (ID: ${evento.id_carro}) SAIU do estacionamento.`,
-                    data_evento: evento.data_evento,
-                    naoLida: isNova
-                };
-            });
+            const notificacoesFormatadas = eventos.map(evento => ({
+                id_notificacao: `${evento.tipo_evento}-${evento.id}`,
+                id_registro: evento.id,
+                tipo: evento.tipo_evento,
+                placa: evento.placa,
+                mensagem: evento.tipo_evento === 'ENTRADA'
+                    ? `${evento.modelo} (${evento.placa}) ENTROU no estacionamento - vaga ${evento.codigo_vaga}.`
+                    : `${evento.modelo} (${evento.placa}) SAIU do estacionamento - vaga ${evento.codigo_vaga}.`,
+                data_evento: evento.data_evento,
+                naoLida: Boolean(evento.nao_lida)
+            }));
 
             res.json({
                 success: true,
@@ -35,21 +32,22 @@ const NotificacaoController = {
             });
 
         } catch (error) {
-            console.error(error);
+            console.error("Erro no NotificacaoController (getNotificacoes):", error);
             res.status(500).json({ success: false, message: "Erro ao buscar notificações." });
         }
     },
 
-    // Processa a requisição de zerar a bolinha
-    marcarComoLidas: (req, res) => {
+    // POST /api/notificacoes/marcar-lidas -> zera a bolinha vermelha deste usuário
+    marcarComoLidas: async (req, res) => {
         try {
-            NotificacaoModel.atualizarUltimaVisualizacao();
-            
+            await NotificacaoModel.marcarComoLidas(req.usuario.id);
+
             res.json({
                 success: true,
                 message: "Notificações marcadas como lidas. A bolinha vermelha foi zerada."
             });
         } catch (error) {
+            console.error("Erro no NotificacaoController (marcarComoLidas):", error);
             res.status(500).json({ success: false, message: "Erro ao atualizar visualização." });
         }
     }

@@ -1,6 +1,12 @@
+//notificacaoRoutes.js
+
 const express = require('express');
 const router = express.Router();
-const NotificacaoController = require('../controllers/notificacaoController');
+const NotificacaoController = require('../Controllers/notificacaoController');
+const { verificarToken } = require('../middlewares/authMiddleware');
+
+// Todas as rotas de notificação exigem login
+router.use(verificarToken);
 
 // Rota para buscar as notificações e o número da bolinha (GET)
 router.get('/', NotificacaoController.getNotificacoes);

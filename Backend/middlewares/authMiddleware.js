@@ -1,45 +1,50 @@
-const { initializeApp, cert, getApps } = require('firebase-admin/app');
-const { getAuth } = require('firebase-admin/auth');
+//authMiddleware.js
+const { firebaseAuth } = require('../Connection/firebase');
+const usuarioRepository = require('../Repositories/usuarioRepository');
 
-// Ajuste o nome do arquivo aqui se for diferente no seu PC
-const credenciais = require('../../../projectparkingtoken.json');
-
-// CORRIGIDO AQUI: "length"
-if (getApps().length === 0) {
-  console.log("⏳ Inicializando o Firebase Admin...");
-  initializeApp({
-    credential: cert(credenciais)
-  });
-  console.log("🔥 Firebase Admin inicializado com sucesso!");
-}
-
+// Protege as rotas: só passa quem mandar um ID Token válido do Firebase
+// no cabeçalho "Authorization: Bearer <token>".
 const verificarToken = async (req, res, next) => {
-  console.log("\n--- 🛡️ Iniciando Verificação de Segurança ---");
-  console.log("Cabeçalho recebido:", req.headers.authorization);
+  const [tipo, tokenEnviado] = (req.headers.authorization || '').split(' ');
 
-  const tokenEnviado = req.headers.authorization?.split(' ')[1];
-  
-  console.log("Token extraído:", tokenEnviado ? "Token recebido (oculto por segurança)" : "NENHUM TOKEN RECEBIDO");
-
-  if (!tokenEnviado) {
-    console.log("❌ Acesso Bloqueado: Usuário tentou acessar sem enviar o token.");
-    return res.status(401).json({erro: "Você precisa estar logado para acessar."});
+  if (tipo !== 'Bearer' || !tokenEnviado) {
+    return res.status(401).json({ success: false, erro: "Você precisa estar logado para acessar." });
   }
 
   try {
-    console.log("⏳ Consultando o Google para saber se o token é válido...");
-    const usuarioFirebase = await getAuth().verifyIdToken(tokenEnviado);
-    
-    console.log("✅ Sucesso! Token válido. ID do Usuário:", usuarioFirebase.uid);
+    // true = também recusa tokens revogados (ex.: depois de trocar a senha)
+    const usuarioFirebase = await firebaseAuth.verifyIdToken(tokenEnviado, true);
+
+    // O uid do Firebase é o id do usuário no MySQL. Conferimos se ele ainda existe e está ativo.
+    const usuario = await usuarioRepository.buscarPorId(usuarioFirebase.uid);
+    if (!usuario || !usuario.ativo) {
+      return res.status(401).json({ success: false, erro: "Conta desativada ou inexistente." });
+    }
+
     req.usuarioLogado = usuarioFirebase;
-    
-    console.log("➡ Liberando acesso para a próxima etapa (controller)...");
+    req.usuario = {
+      id: usuario.id,
+      nome: usuario.nome_usuario,
+      email: usuario.email,
+      cargo: usuario.cargo
+    };
     next();
 
-  } catch(erro) {
-    console.error("❌ Falha na Autenticação:", erro.message);
-    return res.status(401).json({erro: "Sessão expirada ou token inválido" });
+  } catch (erro) {
+    // Nunca logar o token: quem tiver acesso ao terminal poderia usá-lo
+    console.error("Falha na autenticação:", erro.code || erro.message);
+    return res.status(401).json({ success: false, erro: "Sessão expirada ou token inválido." });
   }
 };
 
+// Use depois do verificarToken nas rotas que só o administrador pode acessar
+const somenteAdmin = (req, res, next) => {
+  if (req.usuario?.cargo !== 'administrador') {
+    return res.status(403).json({ success: false, erro: "Acesso permitido apenas para administradores." });
+  }
+  next();
+};
+
 module.exports = verificarToken;
+module.exports.verificarToken = verificarToken;
+module.exports.somenteAdmin = somenteAdmin;

@@ -1,13 +1,10 @@
-const express = require('express');
-const app = express();
+//server.js
+// Liga a API (montada no app.js) na porta do .env
+const app = require('./app');
+const emailService = require('../Services/emailService');
 
-const verificarToken = require('../middlewares/authMiddleware');
-const authController = require('../controllers/authController');
-app.use(express.json());
-
-app.get('/api/auth/me', verificarToken, authController.testarLogin);
-
-const PORTA = 3000;
+const PORTA = Number(process.env.PORT) || 3000;
 app.listen(PORTA, () => {
-    console.log(`🚀 Módulo de Autenticação rodando na porta ${PORTA}`);
+    console.log(`🚀 API do estacionamento rodando na porta ${PORTA}`);
+    emailService.verificarConexao();
 });
