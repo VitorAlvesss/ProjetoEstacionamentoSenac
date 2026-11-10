@@ -197,8 +197,8 @@
             </div>
             <div class="info-card">
               <span class="titulo-card">FATURAMENTO HOJE</span>
-              <strong class="valor-card" id="faturamento-hoje">R$ 487,50</strong>
-              <span class="subtitulo-card" id="qtd-veiculos-hoje">32 veículos</span>
+              <strong class="valor-card" id="faturamento-hoje">--</strong>
+              <span class="subtitulo-card" id="totalEntradasHoje">--</span>
             </div>
           </div>
 
@@ -287,7 +287,7 @@
                       <th>Status</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="corpo-tabela">
                     <tr>
                       <td class="txt-bold">ABC-1D23</td>
                       <td><span class="badge-tipo tipo-professor">Professor</span></td>
@@ -338,7 +338,7 @@
               </div>
 
               <div class="rodape-tabela">
-                <a href="#" class="link-ver-todas">Ver todas as movimentações</a>
+                <a href="#" class="link-ver-todas" id="todasMovimentacoes">Ver todas as movimentações</a>
               </div>
             </div>
 
@@ -362,9 +362,9 @@
               <div class="corpo-financeiro">
                 <!-- Lado Esquerdo: Valores e Estatísticas -->
                 <div class="dados-financeiro">
-                  <strong class="valor-financeiro">R$ 487,50</strong>
-                  <span class="sub-financeiro">32 veículos atendidos</span>
-                  <small class="ticket-medio">Ticket médio: <span>R$ 15,23</span></small>
+                  <strong class="valor-financeiro" id="valor-financeiro">R$ 487,50</strong>
+                  <span class="sub-financeiro" id="qtdVeiculosHoje">32 veículos atendidos</span>
+                  <small class="ticket-medio">Ticket médio: <span id="ticketMedio">R$ 15,23</span></small>
                 </div>
 
                 <!-- Lado Direito: Gráfico de Tendência -->
@@ -391,7 +391,7 @@
                     <span class="material-symbols-outlined">schedule</span>
                     <span>Tempo médio de permanência</span>
                   </div>
-                  <strong class="valor-metrica">01h42min</strong>
+                  <strong class="valor-metrica" id="tempoUso">--</strong>
                 </div>
 
                 <!-- Item 2: Entradas hoje -->
@@ -400,7 +400,7 @@
                     <span class="material-symbols-outlined">no_crash</span>
                     <span>Entradas hoje</span>
                   </div>
-                  <strong class="valor-metrica txt-verde">32 veículos</strong>
+                  <strong class="valor-metrica txt-verde" id="entradasHoje">--</strong>
                 </div>
 
                 <!-- Item 3: Saídas hoje -->
@@ -409,7 +409,7 @@
                     <span class="material-symbols-outlined">swap_horiz</span>
                     <span>Saídas hoje</span>
                   </div>
-                  <strong class="valor-metrica txt-azul">25 veículos</strong>
+                  <strong class="valor-metrica txt-azul" id="saidasHoje">--</strong>
                 </div>
 
                 <!-- Item 4: Permanecem no momento -->
@@ -418,7 +418,7 @@
                     <span class="material-symbols-outlined">directions_car </span>
                     <span>Permanecem no momento</span>
                   </div>
-                  <strong class="valor-metrica txt-vermelho">13 veículos</strong>
+                  <strong class="valor-metrica txt-vermelho" id="permanecem">--</strong>
                 </div>
               </div>
             </div>
@@ -501,7 +501,7 @@
               <!-- Rodapé com Última Atualização -->
               <div class="rodape-iot">
                 <small>Última atualização: <span id="data-iot">20/05/2024 14:06:32</span></small>
-                <button id="btnAtualizarIot" class="btn-refresh" title="Atualizar">
+                <button id="btnAtualizariot" class="btn-refresh" title="Atualizar">
                   <span class="material-symbols-outlined">refresh</span>
                 </button>
               </div>
@@ -520,6 +520,7 @@
     }
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="src/assets/js/dashboard.js"></script>
 
 </body>
 

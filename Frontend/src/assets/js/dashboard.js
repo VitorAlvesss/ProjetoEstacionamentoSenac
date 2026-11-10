@@ -24,21 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const tempoUso =
         document.querySelector("#tempoUso");
 
-    const vagasResumo = 
-        document.querySelector("#vagas-totais-resumo");
-    
-    const vagasLivresResumo =
-        document.querySelector("#vagas-livres-resumo");
-
-    const vagasOcupadasResumo =
-        document.querySelector("#vagas-ocupadas-resumo");
-
-    const taxaOcupacaoResumo =
-        document.querySelector("#taxa-ocupacao-resumo");
-    
-    const faturamentoResumo =
-        document.querySelector("#faturamento-resumo");
-
+    const totalEntradasHoje = 
+        document.querySelector("#totalEntradasHoje");
 
     // ============================================================
     // MOVIMENTAÇÃO
@@ -49,10 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // - quantidade de veículos que ainda permanecem no estacionamento
 
     const entradasHoje =
-        document.querySelector("#entradas-hoje");
+        document.querySelector("#entradasHoje");
 
     const saidasHoje =
-        document.querySelector("#saidas-hoje");
+        document.querySelector("#saidasHoje");
 
     const permanecem =
         document.querySelector("#permanecem");
@@ -64,20 +51,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Elementos responsáveis pelas informações financeiras
     // do estacionamento.
 
-    const subFinanceiro =
-        document.querySelector("#sub-financeiro");
-
     const financeiroHoje =
         document.querySelector("#valor-financeiro");
 
     const ticketMedio =
-        document.querySelector("#ticket-medio");
+        document.querySelector("#ticketMedio");
 
     const faturamentoHoje =
         document.querySelector("#faturamento-hoje");
 
     const qtdVeiculosHoje =
-        document.querySelector("#qtd-veiculos-hoje");
+        document.querySelector("#qtdVeiculosHoje");
 
 
     // ============================================================
@@ -93,7 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const btnAtualizarMovimentacao =
         document.querySelector("#btnAtualizarMovimentacoes");
-
 
     // ============================================================
     // REGISTROS
@@ -125,13 +108,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Depois chama a função que monta a tabela usando
     // todos os registros armazenados.
 
-    btnTodasMovimentacoes.addEventListener("click", (event) => {
+    if (btnTodasMovimentacoes) {
+        btnTodasMovimentacoes.addEventListener("click", (event) => {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        todasMovimentacoes(todosRegistros);
+            todasMovimentacoes(todosRegistros);
 
-    });
+        });
+    };
 
     // ============================================================
     // CARREGAR DASHBOARD
@@ -153,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // ----------------------------------------------------
 
             const resposta =
-                await fetch("/dashboard");
+                await fetch("http://localhost:3000/dashboard");
 
 
             // ----------------------------------------------------
@@ -177,6 +162,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data =
                 await resposta.json();
+
+            console.log("Retorno completo do dashboard:", data);
+            console.log("Tempo de uso recebido:", data.tempoUso);
+            console.log("Elemento tempoUso:", tempoUso);
 
 
             // ====================================================
@@ -205,16 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
             vagasOcupadas.textContent =
                 data.vagas.ocupadas ?? 0;
 
-            vagasTotaisResumo.textContent = 
-                data.vagas.total ?? 0;
-
-            vagasLivresResumo.textContent =
-                data.vagas.livres ?? 0;
-
-            vagasOcupadasResumo.textContent =
-                data.vagas.ocupadas ?? 0;
-
-
             // Mostra algo como:
             //
             // 5 de 20 vagas
@@ -226,8 +205,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // Atualiza o tempo médio de uso.
 
             tempoUso.textContent =
-                data.tempoUso;
-
+                data.tempoUso != null
+                    ? `${data.tempoUso} min`
+                    : "Sem dados";
 
             // ====================================================
             // TAXA DE OCUPAÇÃO
@@ -255,10 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
             taxaOcupacao.textContent =
                 `${taxa.toFixed(2)}%`;
 
-            taxaOcupacaoResumo.textContent =
-                `${taxa.toFixed(2)}%`;
-
-
             // ====================================================
             // FINANCEIRO
             // ====================================================
@@ -267,11 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // Caso não exista valor, utiliza 0.
 
             const faturamento =
-                Number(
-                    data.financeiro?.faturamento || 0
-                );
-
-            const faturamentoResumo =
                 Number(
                     data.financeiro?.faturamento || 0
                 );
@@ -345,6 +316,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Atualiza os valores na tela.
 
+            totalEntradasHoje.textContent =
+                `${saidas} veículos`;
+
             entradasHoje.textContent =
                 entradas;
 
@@ -360,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // ====================================================
             // Exibe a quantidade de entradas do dia.
 
-            subFinanceiro.textContent =
+            entradasHoje.textContent =
                 `${entradas} entradas hoje`;
 
 
@@ -377,17 +351,6 @@ document.addEventListener("DOMContentLoaded", () => {
             //
             // Exemplo:
             // 24/08/2026, 15:30:20
-
-            // ====================================================
-            // VAGAS
-            // ====================================================
-            // Envia a lista de vagas recebida do backend
-            // para a função responsável por montar a interface.
-
-            carregarVagas(
-                data.listaVagas || []
-            );
-
 
             // ====================================================
             // MOVIMENTAÇÕES
@@ -412,115 +375,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     }
-
-
-    // ============================================================
-    // CARREGAR VAGAS
-    // ============================================================
-    // Recebe um array de vagas e cria os elementos HTML
-    // dinamicamente.
-
-    function carregarVagas(vagas) {
-
-        const listaVagas =
-            document.querySelector("#listaVagas");
-
-
-        // Limpa os elementos antigos antes de criar os novos.
-
-        listaVagas.innerHTML = "";
-
-
-        // Percorre cada vaga recebida.
-
-        vagas.forEach(vaga => {
-
-            // Cria uma nova div.
-
-            const itemVaga =
-                document.createElement("div");
-
-
-            // Adiciona a classe base.
-
-            itemVaga.classList.add(
-                "item-vaga"
-            );
-
-
-            // ====================================================
-            // VAGA OCUPADA
-            // ====================================================
-
-            if (vaga.ocupada) {
-
-                // Adiciona a classe que indica vaga ocupada.
-
-                itemVaga.classList.add(
-                    "status-ocupado"
-                );
-
-
-                // Monta o conteúdo da vaga.
-
-                itemVaga.innerHTML = `
-
-                    <span class="led-status"></span>
-
-                    <span class="texto-vaga">
-
-                        ${vaga.codigo_vaga} -
-
-                        <strong>
-                            ${vaga.placa ?? "Ocupada"}
-                        </strong>
-
-                    </span>
-
-                `;
-
-            } else {
-
-                // =================================================
-                // VAGA LIVRE
-                // =================================================
-
-                itemVaga.classList.add(
-                    "status-livre"
-                );
-
-
-                // Monta o conteúdo da vaga livre.
-
-                itemVaga.innerHTML = `
-
-                    <span class="led-status"></span>
-
-                    <span class="texto-vaga">
-
-                        ${vaga.codigo_vaga} -
-
-                        <strong class="info-status">
-                            Livre
-                        </strong>
-
-                    </span>
-
-                `;
-
-            }
-
-
-            // Adiciona a vaga criada dentro da lista.
-
-            listaVagas.appendChild(
-                itemVaga
-            );
-
-        });
-
-    }
-
 
     // ============================================================
     // MOVIMENTAÇÕES

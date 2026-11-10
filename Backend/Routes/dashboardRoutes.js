@@ -7,3 +7,4 @@ const dashboardController = require("../Controllers/dashboardController");
 router.get("/", dashboardController.buscarDash);
 
 module.exports = router;
+

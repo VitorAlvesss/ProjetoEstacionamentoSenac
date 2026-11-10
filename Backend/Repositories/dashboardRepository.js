@@ -1,76 +1,174 @@
-const dashboardRepository = require("../Repositories/dashboardRepository");
+const { ref } = require("node:process");
+const db = require("../Connection/db");
 
-async function buscarDash(req, res) {
+async function tempoMedioUso() {
 
-    try {
+    const [resultado] = await db.query(`
+        SELECT CEIL(AVG(TIME_TO_SEC(tempo_uso)) / 60) AS tempo_medio_minutos
+        FROM tbl_registro_ocupacao
+        WHERE DATE(data_entrada) = CURDATE()
+        AND data_saida IS NOT NULL
+        AND tempo_uso IS NOT NULL
+        `);
 
-        const [vagas, registro, entradasHoje, saidasHoje, permanecem, dispositivos, financeiro, todosRegistros, listaVagas, tempoUso] = await Promise.all([
-
-            dashboardRepository.buscarDashboard(),
-
-            dashboardRepository.registro_ocupacao(),
-
-            dashboardRepository.entradasHoje(),
-
-            dashboardRepository.saidasHoje(),
-
-            dashboardRepository.permanecem(),
-
-            dashboardRepository.buscarDispositivoIOT(),
-
-            dashboardRepository.financeiroHoje(),
-
-            dashboardRepository.todos_registros(),
-
-            dashboardRepository.registro_vagasOcupadas(),
-
-            dashboardRepository.tempoMedioUso()
-
-        ]);
-
-        res.status(200).json({
-
-            vagas: {
-                total: vagas.total,
-                livres: vagas.livres,
-                ocupadas: vagas.ocupadas
-            },
-
-            movimentacao: {
-                entradasHoje: entradasHoje,
-                saidasHoje: saidasHoje,
-                permanecem: permanecem,
-                movimentacoes: registro
-            },
-
-            financeiro: {
-                faturamento: financeiro.faturamento,
-                veiculos: financeiro.veiculos,
-                ticketMedio: financeiro.ticket_medio
-            },
-
-            dispositivos,
-
-            todosRegistros,
-
-            listaVagas,
-
-            tempoUso
-
-        });
-
-    } catch (erro) {
-
-        console.error(erro);
-
-        res.status(500).json({
-            mensagem: "Erro ao carregar dashboard"
-        });
-
-    }
-
+    return resultado[0].tempo_medio_minutos;
 }
 
+
+async function buscarDashboard() {
+
+    const [resultado] = await db.query(`
+        SELECT
+            COUNT(*) AS total,
+            SUM(ocupada = FALSE) AS livres,
+            SUM(ocupada = TRUE) AS ocupadas
+        FROM tbl_vaga
+    `);
+
+    return resultado[0];
+}
+
+
+async function registro_vagasOcupadas() {
+
+    const [resultado] = await db.query(`
+        SELECT
+            v.id AS id_vaga,
+            v.codigo_vaga,
+            v.vaga_especial,
+            v.ocupada,
+            c.placa,
+            r.data_entrada
+        FROM tbl_vaga v
+
+        LEFT JOIN tbl_registro_ocupacao r
+            ON r.id_vaga = v.id
+            AND r.data_saida IS NULL
+
+        LEFT JOIN tbl_carro c
+            ON c.id = r.id_carro
+
+        ORDER BY v.codigo_vaga
+    `);
+
+    return resultado;
+}
+
+
+async function registro_ocupacao() {
+
+    const [resultado] = await db.query(`
+        SELECT 
+            r.id,
+            r.id_vaga,
+            c.placa,
+            r.data_entrada,
+            r.data_saida,
+            r.tempo_uso,
+            r.total_pago
+
+        FROM tbl_registro_ocupacao r 
+
+        INNER JOIN tbl_carro c 
+            ON r.id_carro = c.id
+
+        ORDER BY r.data_entrada DESC
+
+        LIMIT 5
+    `);
+
+    return resultado;
+}
+
+
+async function todos_registros() {
+
+    const [resultado] = await db.query(`
+        SELECT 
+            r.id,
+            r.id_vaga,
+            c.placa,
+            r.data_entrada,
+            r.data_saida,
+            r.tempo_uso,
+            r.total_pago
+
+        FROM tbl_registro_ocupacao r 
+
+        INNER JOIN tbl_carro c 
+            ON r.id_carro = c.id
+
+        ORDER BY r.data_entrada DESC
+    `);
+
+    return resultado;
+}
+
+
+async function entradasHoje() {
+
+    const [resultado] = await db.query(`
+        SELECT COUNT(*) AS total
+        FROM tbl_registro_ocupacao
+        WHERE DATE(data_entrada) = CURDATE()
+    `);
+
+    return resultado[0].total;
+}
+
+
+async function saidasHoje() {
+
+    const [resultado] = await db.query(`
+        SELECT COUNT(*) AS total
+        FROM tbl_registro_ocupacao
+        WHERE DATE(data_saida) = CURDATE()
+    `);
+
+    return resultado[0].total;
+}
+
+
+async function permanecem() {
+
+    const [resultado] = await db.query(`
+        SELECT COUNT(*) AS total
+        FROM tbl_registro_ocupacao
+        WHERE data_saida IS NULL
+    `);
+
+    return resultado[0].total;
+}
+
+
+async function financeiroHoje() {
+
+    const [resultado] = await db.query(`
+        SELECT
+            COALESCE(SUM(total_pago), 0) AS faturamento,
+            COUNT(*) AS veiculos,
+            COALESCE(AVG(total_pago), 0) AS ticket_medio
+
+        FROM tbl_registro_ocupacao
+
+        WHERE DATE(data_saida) = CURDATE()
+          AND data_saida IS NOT NULL
+    `);
+
+    return resultado[0];
+}
+
+
 module.exports = {
-    buscarDash
+
+    buscarDashboard,
+    registro_ocupacao,
+    entradasHoje,
+    saidasHoje,
+    permanecem,
+    registro_vagasOcupadas,
+    financeiroHoje,
+    todos_registros,
+    tempoMedioUso
+
 };
