@@ -58,7 +58,6 @@ body.light-theme {
   --fundo-roxo: #faf5ff;
   --cor-roxo: #9333ea;
   --borda-roxo: #e9d5ff;
- 
 }
 
 @view-transition {
@@ -72,7 +71,7 @@ body.light-theme {
 }
 
 /* =========================================================
-   2. REGRAS GERAIS E LAYOUT (SEM VÃO DE MENU)
+   2. REGRAS GERAIS E LAYOUT
 ========================================================= */
 
 * {
@@ -90,14 +89,18 @@ body {
 
 .main-wrapper {
   flex: 1;
-  width: 100% ;
-  margin-left: 0 ;
+  width: 100%;
+  margin-left: 0;
   padding: 20px;
   transition: all 0.3s ease;
 }
 
+.pagina-pagamento {
+  width: 100%;
+}
+
 /* =========================================================
-   3. CABEÇALHO PRINCIPAL (AZUL FIXO E CENTRALIZADO)
+   3. CABEÇALHO PRINCIPAL
 ========================================================= */
 
 .cabecalho-principal {
@@ -111,9 +114,9 @@ body {
   margin-bottom: 25px;
   border: 1px solid var(--borda);
   box-shadow: 0 4px 12px var(--sombra);
+  position: relative;
 }
 
-/* Lado Esquerdo: Hambúrguer + Logo */
 .header-left {
   display: flex;
   align-items: center;
@@ -122,18 +125,16 @@ body {
 }
 
 .img-logo {
-  height: 42px;
+  height: 38px;
   width: auto;
   object-fit: contain;
 }
 
-/* Centro: Título da Página */
 .page-title {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  flex: 1;
   z-index: 1;
 }
 
@@ -151,7 +152,6 @@ body {
   margin-top: 2px;
 }
 
-/* Lado Direito: Ações, Data/Hora e Perfil */
 .info-cabecalho {
   display: flex;
   align-items: center;
@@ -181,14 +181,12 @@ body {
   flex-direction: column;
   align-items: flex-end;
   font-size: 0.78rem;
-  color:  #dde0e3;
+  color: #dde0e3;
 }
-
 
 .botao-icone {
   position: relative;
   cursor: pointer;
-  color: var(white);
   transition: color 0.2s;
 }
 
@@ -225,9 +223,8 @@ body {
 }
 
 #avatar {
-
   font-size: 1.6rem;
-  color: var(--text-muted);
+  color: var(--texto-mutado);
 }
 
 .nome-usuario {
@@ -240,102 +237,71 @@ body {
   color: rgb(49, 247, 0);
 }
 
-
 /* =========================================================
-   4. ALERTA DE LOCALIZAÇÃO DO VEÍCULO
+   4. CARDS DE RESUMO FINANCEIRO (PADRÃO TELA DE VAGAS)
 ========================================================= */
 
-.pagina-pagamento {
-  width: 100%;
-}
-
-.alerta-pagamento {
-  width: 100%;
-  min-height: 68px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  padding: 12px 18px;
-  margin-bottom: 20px;
-  background: var(--fundo-verde);
-  border: 1px solid var(--cor-verde);
-  border-radius: 8px;
-}
-
-.alerta-conteudo {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-}
-
-.icone-sucesso {
-  width: 38px;
-  height: 38px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--fundo-verde);
-  color: var(--cor-verde);
-}
-
-.icone-sucesso .material-symbols-outlined {
-  font-size: 21px;
-}
-
-.alerta-conteudo strong {
-  display: block;
-  margin-bottom: 3px;
-  font-size: 14px;
-  color: var(--cor-verde);
-}
-
-.alerta-conteudo p {
-  margin: 0;
-  font-size: 12px;
-  color: var(--texto-mutado);
-}
-
-.btn-saida-sem-cobranca {
-  height: 34px;
-  padding: 0 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  border: 1px solid var(--cor-verde);
-  border-radius: 6px;
-  background: var(--bg-card);
-  color: var(--cor-verde);
-  font-size: 12px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn-saida-sem-cobranca:hover {
-  background: var(--fundo-verde);
-}
-
-/* =========================================================
-   5. GRID E CARDS DE PAGAMENTO
-========================================================= */
-
-.grid-pagamento {
+.grid-resumo-financeiro {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  align-items: start;
-  
+  margin-bottom: 25px;
 }
 
-.coluna-pagamento-esquerda {
+.card-metrica {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--sombra);
+  box-sizing: border-box;
+}
+
+.metrica-icone {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.metrica-icone.verde { background: var(--cor-verde); color: #ffffff; }
+.metrica-icone.azul { background: var(--cor-azul); color: #ffffff; }
+.metrica-icone.vermelho { background: var(--cor-vermelho); color: #ffffff; }
+
+.metrica-icone span {
+  font-size: 26px;
+}
+
+.metrica-info {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 4px;
 }
+
+.metrica-titulo {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--texto-mutado);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metrica-valor {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--texto-principal);
+}
+
+/* =========================================================
+   5. TABELA DE ÚLTIMOS PAGAMENTOS
+========================================================= */
 
 .card-pagamento {
   width: 100%;
@@ -345,11 +311,21 @@ body {
   border: 1px solid var(--borda);
   border-radius: 12px;
   box-shadow: 0 2px 8px var(--sombra);
-  
+}
+
+.ultimos-pagamentos {
+  width: 100%;
+}
+
+.cabecalho-tabela {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
 .titulo-secao {
-  margin: 0 0 16px;
+  margin: 0;
   font-size: 13px;
   font-weight: 700;
   color: var(--texto-principal);
@@ -357,374 +333,15 @@ body {
   text-transform: uppercase;
 }
 
-.opcao-pagamento:has(input[type="radio"]:checked) {
-  border-color: #8b5cf6; 
-  background-color: rgba(139, 92, 246, 0.15); 
-}
-
-/* DADOS DO VEÍCULO */
-.veiculo-destaque {
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px;
-  margin-bottom: 12px;
-  border: 1px solid var(--borda);
-  border-radius: 8px;
-  background: var(--bg-item-vaga);
-}
-
-.icone-veiculo {
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  background: var(--fundo-roxo);
-  color: var(--cor-roxo);
-}
-
-.icone-veiculo .material-symbols-outlined {
-  font-size: 26px;
-}
-
-.veiculo-destaque strong {
-  display: block;
-  font-size: 20px;
-  line-height: 1.2;
-  color: var(--texto-principal);
-}
-
-.veiculo-destaque span {
-  display: block;
-  margin-top: 2px;
-  font-size: 13px;
-  color: var(--texto-mutado);
-}
-
-/* LINHAS DE CÁLCULO E INFORMAÇÕES */
-.linha-info, .linha-calculo {
-  width: 100%;
-  min-height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  border-bottom: 1px solid var(--borda-suave);
-  font-size: 12px;
-}
-
-.linha-info:last-child, .linha-calculo:last-child {
-  border-bottom: none;
-}
-
-.linha-info > span, .linha-calculo > span {
-  color: var(--texto-mutado);
-}
-
-.linha-info > strong, .linha-calculo > strong {
-  color: var(--texto-principal);
-  font-weight: 600;
-}
-
-.badge-professor, .badge-vaga {
-  padding: 4px 8px;
-  border-radius: 4px;
-  background: var(--fundo-roxo);
-  color: var(--cor-roxo) !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-}
-
-.valor-total {
-  width: 100%;
-  min-height: 44px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
-  padding: 0 12px;
-  border: 1px solid var(--borda-roxo);
-  border-radius: 8px;
-  background: var(--fundo-roxo);
-  color: var(--cor-roxo);
-  font-size: 13px;
-}
-
-.valor-total strong:last-child {
-  font-size: 20px;
-}
-
-.info-desconto {
-  width: 100%;
-  box-sizing: border-box;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin-top: 12px;
-  padding: 10px;
-  border: 1px solid var(--fundo-azul);
-  border-radius: 8px;
-  background: var(--fundo-azul);
-  color: var(--cor-azul);
-}
-
-.info-desconto strong {
-  font-size: 11px;
-  display: block;
-}
-
-.info-desconto span:not(.material-symbols-outlined) {
-  font-size: 10px;
-  color: var(--texto-mutado);
-}
-
-/* =========================================================
-   6. FORMAS DE PAGAMENTO
-========================================================= */
-
-.opcao-pagamento {
-  width: 100%;
-  min-height: 55px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 12px;
-  margin-bottom: 8px;
-  border: 1px solid var(--borda);
-  border-radius: 8px;
-  background: var(--bg-card);
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.opcao-pagamento:hover, .opcao-pagamento.selecionado {
-  border-color: var(--cor-roxo);
-  background: var(--fundo-roxo);
-}
-
-.opcao-pagamento input {
-  accent-color: var(--cor-roxo);
-  width: 16px;
-  height: 16px;
-}
-
-.icone-pagamento {
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-}
-
-.icone-pagamento.dinheiro { background: var(--fundo-amarelo); color: var(--cor-amarelo); }
-.icone-pagamento.debito { background: var(--fundo-azul); color: var(--cor-azul); }
-.icone-pagamento.credito { background: var(--fundo-roxo); color: var(--cor-roxo); }
-.icone-pagamento.pix { background: var(--fundo-verde); color: var(--cor-verde); }
-.icone-pagamento.isento { background: var(--bg-item-vaga); color: var(--texto-mutado); }
-
-.texto-pagamento strong {
-  display: block;
-  font-size: 12px;
-  color: var(--texto-principal);
-}
-
-.texto-pagamento span {
-  display: block;
-  font-size: 10px;
-  color: var(--texto-mutado);
-}
-
-.input-dinheiro {
-  width: 100%;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--borda);
-  border-radius: 6px;
-  background: var(--bg-card);
-  overflow: hidden;
-  margin-top: 6px;
-}
-
-.input-dinheiro span {
-  padding: 0 12px;
-  background: var(--bg-item-vaga);
-  color: var(--texto-mutado);
-  font-size: 12px;
-}
-
-.input-dinheiro input {
-  width: 100%;
-  height: 100%;
-  padding: 0 10px;
-  border: none;
-  background: transparent;
-  color: var(--texto-principal);
-  outline: none;
-}
-
-.campo-troco {
-  width: 100%;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  border: 1px solid var(--cor-verde);
-  border-radius: 6px;
-  background: var(--fundo-verde);
-  color: var(--cor-verde);
-  font-size: 18px;
-  font-weight: 700;
-  margin-top: 6px;
-}
-
-.btn-confirmar {
-  width: 100%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 16px;
-  border: none;
-  border-radius: 8px;
-  background: var(--cor-roxo);
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn-confirmar:hover {
-  opacity: 0.9;
-}
-
-.btn-cancelar {
-  width: 100%;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 8px;
-  border: 1px solid var(--borda);
-  border-radius: 8px;
-  background: var(--bg-card);
-  color: var(--texto-principal);
-  font-size: 12px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn-cancelar:hover {
-  background: var(--bg-item-vaga);
-}
-
-/* =========================================================
-   7. RESUMO FINAL E TABELA DE HISTÓRICO
-========================================================= */
-
-.valor-a-pagar {
-  width: 100%;
-  padding: 16px;
-  position: relative;
-  border: 1px solid var(--borda-roxo);
-  border-radius: 8px;
-  background: var(--fundo-roxo);
-}
-
-.valor-a-pagar span {
-  font-size: 12px;
-  color: var(--texto-mutado);
-}
-
-.valor-a-pagar strong {
-  display: block;
-  margin-top: 4px;
-  font-size: 26px;
-  color: var(--cor-roxo);
-}
-
-.icone-resumo {
-  position: absolute;
-  right: 16px;
-  top: 16px;
-  color: var(--cor-roxo);
-}
-
-.resumo-linhas > div, .resumo-valores > div {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--borda-suave);
-  font-size: 11px;
-}
-
-.resumo-linhas span, .resumo-valores span { color: var(--texto-mutado); }
-.resumo-linhas strong, .resumo-valores strong { color: var(--texto-principal); }
-
-.total-resumo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  margin-top: 10px;
-  border-top: 1px solid var(--borda);
-  border-bottom: 1px solid var(--borda);
-}
-
-.total-resumo strong:last-child {
-  color: var(--cor-roxo);
-  font-size: 22px;
-}
-
-.btn-resumo {
-  width: 100%;
-  height: 38px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 12px;
-  border: 1px solid var(--cor-roxo);
-  border-radius: 6px;
-  background: transparent;
-  color: var(--cor-roxo);
-  font-size: 11px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn-resumo:hover {
-  background: var(--fundo-roxo);
-}
-
-.ultimos-pagamentos {
-  width: 100%;
-  margin-top: 20px;
-}
-
-.cabecalho-tabela {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
 .cabecalho-tabela a {
   color: var(--cor-azul);
-  font-size: 11px;
+  font-size: 12px;
   text-decoration: none;
+  font-weight: 600;
+}
+
+.cabecalho-tabela a:hover {
+  text-decoration: underline;
 }
 
 .tabela-container {
@@ -738,53 +355,33 @@ body {
 }
 
 .ultimos-pagamentos th {
-  padding: 8px;
+  padding: 12px 10px;
   text-align: left;
   border-bottom: 1px solid var(--borda);
   color: var(--texto-mutado);
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .ultimos-pagamentos td {
-  padding: 10px 8px;
+  padding: 14px 10px;
   border-bottom: 1px solid var(--borda-suave);
   color: var(--texto-principal);
-  font-size: 11px;
+  font-size: 12px;
 }
 
-.btn-ver {
-  padding: 4px 10px;
-  border: 1px solid var(--cor-roxo);
-  border-radius: 4px;
-  background: transparent;
-  color: var(--cor-roxo);
-  font-size: 10px;
-  cursor: pointer;
-}
-
-.btn-ver:hover {
-  background: var(--fundo-roxo);
+.ultimos-pagamentos tbody tr:last-child td {
+  border-bottom: none;
 }
 
 /* =========================================================
-   8. MEDIA QUERIES (RESPONSIVIDADE)
+   6. RESPONSIVIDADE
 ========================================================= */
 
-@media (max-width: 1200px) {
-  .grid-pagamento {
-    grid-template-columns: 1fr 1fr;
-  }
-  .resumo-pagamento {
-    grid-column: span 2;
-  }
-}
-
-@media (max-width: 800px) {
-  .grid-pagamento {
+@media (max-width: 1000px) {
+  .grid-resumo-financeiro {
     grid-template-columns: 1fr;
-  }
-  .resumo-pagamento {
-    grid-column: span 1;
+    gap: 15px;
   }
 }
