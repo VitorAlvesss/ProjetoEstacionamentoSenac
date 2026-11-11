@@ -1,7 +1,7 @@
 import { alerta } from '../assets/js/sweetAlert.js';
-import Swal from 'sweetalert2';
+import Swal from 'https://cdn.jsdelivr.net/npm/sweetalert2@11/+esm';
 
-const API_URL = import.meta.env.VITE_API_URL; 
+const API_URL = 'http://localhost:3000';
 const FORM_REGISTRO = document.getElementById('registerForm');
 const INPUT_NOME = document.getElementById('formName');
 const INPUT_PLACA = document.getElementById('formPlate');
@@ -10,7 +10,7 @@ const INPUT_EMAIL = document.getElementById('formEmail');
 
 const TABELA = document.getElementById('tableBody');
 
-FORM_REGISTRO.addEventListener('submit', async (e) => {
+/*FORM_REGISTRO.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const nome = INPUT_NOME.value.trim();
@@ -53,7 +53,7 @@ FORM_REGISTRO.addEventListener('submit', async (e) => {
         );
     }
 });
-
+*/
 
 
 function desenharTabela(veiculos) {
@@ -86,7 +86,7 @@ async function carregarVeiculos(){
 }
 
 //Função para o botão de editar veiculo
-async function editarVeiculo(){
+/*async function editarVeiculo(){
   const res = await fetch(`${API_URL}/veiculo/update`, {
     method: 'PUT'
   });
@@ -96,7 +96,7 @@ async function editarVeiculo(){
     alerta('error', 'Erro', 'Não foi possivel atualizar veiculo.')
   }
 }
-
+*/
 //Função de deletar veiculo
 async function deletarVeiculo(id) {
 
