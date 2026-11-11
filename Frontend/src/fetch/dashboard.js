@@ -137,8 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // FAZ A REQUISIÇÃO PARA O BACKEND
             // ----------------------------------------------------
 
-            const resposta =
-                await fetch("http://localhost:3000/dashboard");
+            const resposta = await fetch("http://localhost:3000/dashboard");
 
 
             // ----------------------------------------------------
