@@ -336,16 +336,6 @@ document.addEventListener("DOMContentLoaded", () => {
             entradasHoje.textContent =
                 `${entradas} entradas hoje`;
 
-
-            // ====================================================
-            // DATA DE ATUALIZAÇÃO
-            // ====================================================
-            // Pega a data e hora atual do computador/navegador.
-
-            const horario =
-                new Date();
-
-
             // Converte para o formato brasileiro.
             //
             // Exemplo:
@@ -374,6 +364,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     }
+
+    function formatarData(dataString) {
+
+        if (!dataString) {
+            return "---";
+        }
+
+        const dataFormatada = new Date(dataString);
+
+        if (isNaN(dataFormatada.getTime())) {
+            return "---";
+        }
+
+        return dataFormatada.toLocaleString("pt-BR", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false
+        });
+    }
+
 
     // ============================================================
     // MOVIMENTAÇÕES
@@ -468,12 +482,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 <td>
-                    ${registro.data_entrada ?? "---"}
+                    ${formatarData(registro.data_entrada)}
                 </td>
 
 
                 <td>
-                    ${registro.data_saida ?? "---"}
+                    ${formatarData(registro.data_saida)}
                 </td>
 
 
