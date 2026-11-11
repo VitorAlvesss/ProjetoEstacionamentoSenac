@@ -1,134 +1,78 @@
-const model = require("../Model/vagaModel");
+﻿const model = require("../Model/vagaModel");
 
 exports.salvar = async (req, res) => {
-    try{
-        const vaga = req.body; 
-        const resultado = await model.inserirVaga(vaga);
-        if(resultado){
-            res.status(201).json({
-            mensagem: "Vaga cadastrada com sucesso."
-        });
-        }
-         res.status(409).json({        
-            mensagem: "Erro ao criar vaga."
-         });
-        
-    }catch(erro){
-        console.log(erro)
-        res.status(500).json({
-            mensagem: "Erro interno na hora de inserir a vaga.",
-            erro: erro.message
-        })
-    }
-};
-    
-exports.listarTodos = async(req, res) =>{
-    try{
-        const resultado = await model.listarVagas()
-        if(resultado !== null){
-            return res.json(resultado)
-        }
-        return res.status(409).json({
-            erro: "Erro ao listar vagas."
-        })
-    }catch(erro){
-        console.log(erro)
-        res.status(500).json({
-            mensagem: "Erro interno na hora de listar as vagas.",
-            erro: erro.message
-        })
+    try {
+        const resultado = await model.inserirVaga(req.body || {});
+        return res.status(201).json({ mensagem: "Vaga cadastrada com sucesso.", id: resultado.insertId });
+    } catch (erro) {
+        console.error("Erro ao criar vaga:", erro);
+        return res.status(500).json({ mensagem: "Erro interno ao inserir a vaga." });
     }
 };
 
-exports.listasVagasLivres = async(req, res) => {
-    try{
-        const resultado = await model.listasVagasDisponveis();
-        if(resultado !== null){
-            return res.json(resultado);
-        }
-        res.status(409).json({
-            message: "Nenhuma vaga disponível."
-        })
-    }catch(erro){
-        console.log(erro)
-        res.status(500).json({
-            erro: "Erro interno ao buscar vagas disponíveis."
-        })
+exports.listarTodos = async (req, res) => {
+    try {
+        const vagas = await model.listarVagas();
+        return res.status(200).json(vagas);
+    } catch (erro) {
+        console.error("Erro ao listar vagas:", erro);
+        return res.status(500).json({ mensagem: "Erro interno ao listar vagas." });
     }
 };
 
-exports.mudarOcupacaoVaga = async (req, res) =>{
-    try{
-        const vaga = req.body;
-        vaga.id = parseInt(req.params.id)
-        const resultado = await model.mudarDisponibilidadeDaVaga(vaga)
-        if(resultado){
-            return res.status(200).json({
-                mensagem: "Disponibilidade alterada com sucesso."
-        })     
-        }
-        return res.status(409).json({
-            message: "Erro ao atualizar disponibilidade da vaga."
-        })
-    }catch(erro){
-        console.log(erro)
-        return res.status(500).json({
-            erro: "Erro interno ao atualizar disponibilidade da vaga."
-        })
-    }  
-}
-
-
-exports.listarQuantidade = async(req, res) =>{
-    try{
-        const resultado = await model.quantidadeVagas()
-        if(resultado !== null){
-            return res.json(resultado)
-        }
-        return res.status(409).json({
-            erro: "Erro ao listar vagas."
-        })
-    }catch(erro){
-        console.log(erro)
-        res.status(500).json({
-            mensagem: "Erro interno na hora de listar as vagas.",
-            erro: erro.message
-        })
+exports.listasVagasLivres = async (req, res) => {
+    try {
+        const vagas = await model.listasVagasDisponveis();
+        return res.status(200).json(vagas);
+    } catch (erro) {
+        console.error("Erro ao buscar vagas livres:", erro);
+        return res.status(500).json({ mensagem: "Erro interno ao buscar vagas livres." });
     }
 };
 
-exports.buscarVagaId = async (req, res) =>{
-    try{
-        const id = parseInt(req.params.id)
-        const resultado = await model.vagaPorId(id)
-        if(resultado !== null){
-            return res.status(200).json(resultado)     
+exports.mudarOcupacaoVaga = async (req, res) => {
+    try {
+        const vaga = { ...req.body, id: Number(req.params.id) };
+        const resultado = await model.mudarDisponibilidadeDaVaga(vaga);
+        if (!resultado.affectedRows) {
+            return res.status(404).json({ mensagem: "Vaga não encontrada." });
         }
-        return res.status(409).json({
-            message: "Erro ao buscarvaga."
-        })
-    }catch(erro){
-        console.log(erro)
-        return res.status(500).json({
-            erro: "Erro interno ao buscar vaga."
-        })
-    }  
-}
+        return res.status(200).json({ mensagem: "Disponibilidade alterada com sucesso." });
+    } catch (erro) {
+        console.error("Erro ao atualizar vaga:", erro);
+        return res.status(500).json({ mensagem: "Erro interno ao atualizar a vaga." });
+    }
+};
 
-exports.buscarRegistroOcupacao = async (req, res) =>{
-    try{
-        const id = parseInt(req.params.id)
-        const resultado = await model.registroOcupacao(id)
-        if(resultado !== null){
-            return res.status(200).json(resultado)     
+exports.listarQuantidade = async (req, res) => {
+    try {
+        const quantidade = await model.quantidadeVagas();
+        return res.status(200).json(quantidade[0] || {});
+    } catch (erro) {
+        console.error("Erro ao contar vagas:", erro);
+        return res.status(500).json({ mensagem: "Erro interno ao contar vagas." });
+    }
+};
+
+exports.buscarVagaId = async (req, res) => {
+    try {
+        const vagas = await model.vagaPorId(Number(req.params.id));
+        if (!vagas.length) {
+            return res.status(404).json({ mensagem: "Vaga não encontrada." });
         }
-        return res.status(409).json({
-            message: "Erro ao buscar registro da vaga."
-        })
-    }catch(erro){
-        console.log(erro)
-        return res.status(500).json({
-            erro: "Erro interno ao buscar registro da vaga."
-        })
-    }  
-}
+        return res.status(200).json(vagas[0]);
+    } catch (erro) {
+        console.error("Erro ao buscar vaga:", erro);
+        return res.status(500).json({ mensagem: "Erro interno ao buscar vaga." });
+    }
+};
+
+exports.buscarRegistroOcupacao = async (req, res) => {
+    try {
+        const registros = await model.registroOcupacao(Number(req.params.id));
+        return res.status(200).json(registros);
+    } catch (erro) {
+        console.error("Erro ao buscar ocupação da vaga:", erro);
+        return res.status(500).json({ mensagem: "Erro interno ao buscar ocupação da vaga." });
+    }
+};
