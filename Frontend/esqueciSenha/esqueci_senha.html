@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recuperar Senha - Goiabinha&CIA</title>
+
+  <link rel="icon" type="image/png" href="/Frontend/public/goiabas-vermelhas.png">
+  <link rel="stylesheet" href="/Frontend/src/styles/estacionamento.css">
+</head>
+<body>
+
+  <div class="login-container">
+
+    <aside class="hero-section">
+      <header class="brand">
+        <img src="/Frontend/public/goiabas-vermelhas.png" alt="Logo Goiabinha" class="brand-logo-img">
+        <div class="brand-text">
+          <h1>Goiabinha<span>&CIA</span></h1>
+          <p>ESTACIONAMENTO INTELIGENTE</p>
+        </div>
+      </header>
+
+      <main class="hero-content">
+        <h2>Recuperação simples.</h2>
+        <h2 class="highlight">Acesso rápido.</h2>
+        <p>Enviaremos um link e um código de recuperação diretamente para o seu e-mail cadastrado.</p>
+      </main>
+
+      <footer class="features-bar">
+        <div class="feature-item">
+          <span class="icon">🔒</span>
+          <div>
+            <strong>Processo Seguro</strong>
+            <p>Link e código de uso único</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="icon">⏱️</span>
+          <div>
+            <strong>Expira em 15 min</strong>
+            <p>Depois disso, peça outro</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <span class="icon">💬</span>
+          <div>
+            <strong>Duas opções</strong>
+            <p>Clique no link ou digite o código</p>
+          </div>
+        </div>
+      </footer>
+
+      <small class="copyright">&copy; 2024 Goiabinha&CIA - Todos os direitos reservados.</small>
+    </aside>
+
+    <main class="login-section">
+      <div class="login-card">
+
+        <a href="/Frontend/Login/telaLogin.html" class="back-link">
+          <span>←</span> Voltar para o login
+        </a>
+
+        <div class="login-header">
+          <img src="/Frontend/public/goiabas-vermelhas.png" alt="Goiabinha" class="login-avatar-img">
+          <h2 id="titulo-etapa">Esqueceu sua senha?</h2>
+          <p id="descricao-etapa">Sem problemas! Digite seu e-mail abaixo para receber o link e o código de recuperação.</p>
+        </div>
+
+        <div id="recuperar-msg" class="form-msg" role="alert" hidden></div>
+
+        <!-- ETAPA 1: pedir o e-mail -->
+        <form class="login-form" id="form-email" novalidate>
+          <div class="input-group">
+            <label for="email">E-mail cadastrado</label>
+            <div class="input-wrapper">
+              <span class="input-icon">✉️</span>
+              <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" autocomplete="email" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <span>📩</span> Enviar link e código
+          </button>
+
+          <button type="button" class="link-botao" id="btn-ja-tenho-codigo">Já tenho um código</button>
+        </form>
+
+        <!-- ETAPA 2: código de 6 dígitos (ou link) + nova senha -->
+        <form class="login-form" id="form-nova-senha" novalidate hidden>
+          <div class="input-group" id="grupo-codigo">
+            <label for="codigo">Código de 6 dígitos (enviado por e-mail)</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔢</span>
+              <input type="text" id="codigo" name="codigo" inputmode="numeric" pattern="\d{6}" maxlength="6" placeholder="000000" autocomplete="one-time-code">
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="nova-senha">Nova senha</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="nova-senha" name="novaSenha" minlength="8" maxlength="72" placeholder="Mínimo 8 caracteres, letra e número" autocomplete="new-password" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="confirmar-senha">Confirmar nova senha</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="confirmar-senha" name="confirmar" maxlength="72" placeholder="Digite a nova senha de novo" autocomplete="new-password" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            <span>✅</span> Redefinir senha
+          </button>
+
+          <button type="button" class="link-botao" id="btn-reenviar">Não recebeu? Enviar de novo</button>
+        </form>
+
+        <div class="security-footer">
+          <div class="security-info">
+            <span class="shield-icon">🛡️</span>
+            <div>
+              <strong>Recuperação segura</strong>
+              <p>Link e código expiram em 15 minutos</p>
+            </div>
+          </div>
+          <span class="lock-icon">🔒</span>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <script src="/Frontend/src/assets/js/auth.js"></script>
+  <script src="/Frontend/src/assets/js/esqueciSenha.js" defer></script>
+</body>
+</html>

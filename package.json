@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "start": "node Backend/Server/server.js",
+    "dev": "node --watch Backend/Server/server.js",
+    "criar-banco": "node Backend/Scripts/criarBanco.js",
+    "criar-usuario": "node Backend/Scripts/criarUsuario.js",
+    "gerar-token": "node Backend/Scripts/gerarToken.js",
+    "testar": "node Backend/Scripts/testarSistema.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.5",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.1",
+    "firebase-admin": "^14.5.0",
+    "mysql2": "^3.24.5",
+    "nodemailer": "^10.2.1"
+  }
+}
