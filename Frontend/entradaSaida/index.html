@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goiabinha&CIA - Entradas e Saídas</title>
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Fonte Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estilo compartilhado do sistema (esse é antigo). -->
+  <link rel="stylesheet" href="/Frontend/src/styles/menu_antigo.css">
+
+  <!-- Estilo dessa página em específico. Ele utiliza variáveis do menu.css (aquele css antigo), aí vai ter que adaptar com o novo -->
+  <link rel="stylesheet" href="/Frontend/src/styles/entra_saida.css">
+
+  <script src="Menu 2 (1).js" defer></script> <!-- JS antigo do menu. Depois, quando adaptar para o novo menu, pode excluir esse arquivo 'Menu 2 (1).js' -->
+  
+  <!-- É o JS do fetch. Esse daqui tá normal -->
+  <script src="/Frontend/src/fetch/entradaSaida.js" defer></script>
+
+</head>
+<body>
+
+  <!-- menu lateral (sidebar antigo) -->
+  <aside id="sidebar" class="sidebar collapsed">
+    <div class="sidebar-header">
+      <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
+
+      <div class="logo-container">
+        <div class="logo-icon"></div>
+        <div>
+          <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
+          <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul>
+        <li class="nav-item">
+          <a href="TelaDashboard.html"><i class="fa-solid fa-house"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaVagas.html"><i class="fa-solid fa-square-parking"></i> Vagas</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaVeiculos.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaEntradasSaidas.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaFinanceiro.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaRelatorios.html"><i class="fa-solid fa-file-lines"></i> Relatórios</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaDispositivosIot.html"><i class="fa-solid fa-sitemap"></i> Dispositivos IoT</a>
+        </li>
+        <li class="nav-item">
+          <a href="TelaConfiguracoes.html"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="quick-summary">
+      <div class="quick-summary-title">RESUMO RÁPIDO</div>
+      <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
+      <div class="summary-row"><span>Vagas livres</span><span class="val green">20</span></div>
+      <div class="summary-row"><span>Vagas ocupadas</span><span class="val red">0</span></div>
+      <div class="summary-row"><span>Taxa de ocupação</span><span class="val">0%</span></div>
+      <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$ 0,00</span></div>
+    </div>
+
+    <div class="sidebar-copyright">
+      © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
+    </div>
+  </aside>
+
+  <!-- conteudo principal -->
+  <div class="main-wrapper">
+
+    <!--cabaçalho padrão do sistema -->
+    <header class="top-header">
+      <div class="header-left">
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
+
+        <div class="logo-container">
+          <div class="logo-icon"></div>
+          <div>
+            <div class="brand-name"><span class="pink">Goiabinha</span><span class="green">&CIA</span></div>
+            <div class="brand-subtitle">ESTACIONAMENTO INTELIGENTE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-title">
+        <h1>Entradas e Saídas</h1>
+        <p>Movimentação em tempo real</p>
+      </div>
+
+      <div class="header-actions">
+        <section class="mudarTema">
+          <button id="btnConfig" class="btnTema" title="Mudar Tema">
+            <i class="fa-solid fa-circle-half-stroke"></i>
+          </button>
+          <div id="menuTema">
+            <button type="button" onclick="mudarTema('claro')">
+              <i class="fa-solid fa-sun"></i> Tema Claro
+            </button>
+            <button type="button" onclick="mudarTema('escuro')">
+              <i class="fa-solid fa-moon"></i> Tema Escuro
+            </button>
+          </div>
+        </section>
+
+        <div class="datetime">
+          <i class="fa-regular fa-clock"></i> <span id="clockTime">00:00:00</span><br>
+          <span style="font-size: 0.65rem;" id="clockDate">--/--/----</span>
+        </div>
+
+        <div class="notification-btn">
+          <i class="fa-regular fa-bell"></i>
+          <span class="notification-badge">0</span>
+        </div>
+
+        <div class="user-profile-top">
+          <i class="fa-solid fa-circle-user avatar"></i>
+          <div class="user-details">
+            <span style="font-weight: 600;">Administrador</span>
+            <span class="status">Online</span>
+          </div>
+          <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; color: var(--text-muted);"></i>
+        </div>
+      </div>
+    </header>
+
+    <!--conteudo da tela (Parte da Taya) -->
+    <main class="content-area">
+
+      <!-- Cards de resumo -->
+      <section class="cards-resumo">
+
+        <div class="card-resumo verde">
+          <div class="card-resumo-cabecalho">
+            <span class="card-resumo-titulo">Estacionados Agora</span>
+            <div class="card-resumo-icone" style="background:#00e676;">
+              <i class="fa-solid fa-arrow-down-to-line" style="color:#000;"></i>
+            </div>
+          </div>
+          <div class="card-resumo-corpo">
+            <span class="card-resumo-valor" id="num-estacionados">00</span>
+            <span class="card-resumo-label" style="color:#00e676;">Ativos</span>
+          </div>
+          <div class="card-resumo-rodape">
+            <span>Total hoje: <strong id="num-total-entradas">0</strong></span>
+            
+          </div>
+        </div>
+
+        <div class="card-resumo vermelho">
+          <div class="card-resumo-cabecalho">
+            <span class="card-resumo-titulo">Saídas Realizadas</span>
+            <div class="card-resumo-icone" style="background:#ef4444;">
+              <i class="fa-solid fa-arrow-up-from-line"></i>
+            </div>
+          </div>
+          <div class="card-resumo-corpo">
+            <span class="card-resumo-valor" id="num-saidas">00</span>
+            <span class="card-resumo-label" style="color:#ef4444;">Hoje</span>
+          </div>
+          <div class="card-resumo-rodape">
+
+          </div>
+        </div>
+
+       
+      </section>
+
+      <!-- Tabela de movimentação -->
+      <div class="bloco-tabela">
+        <div class="bloco-cabecalho">
+          <div>
+            <h3>Histórico de Movimentação</h3>
+            <span>Registros do dia atual</span>
+          </div>
+          
+        </div>
+
+        <div class="tabela-container">
+          <table class="tabela-mov">
+            <thead>
+              <tr>
+                <th>Placa</th>
+                <th>Vaga</th>
+                <th>Entrada</th>
+                <th>Saída</th>
+                <th>Status</th>
+                <th>Valor</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="listaMovimentacao"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>
