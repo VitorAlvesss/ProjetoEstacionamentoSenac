@@ -12,23 +12,21 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Estilo compartilhado do sistema -->
+  <!-- Estilo compartilhado do sistema (esse é antigo). -->
   <link rel="stylesheet" href="../src/styles/menu.css">
 
-  <!-- No <head> do seu index.html -->
-  <link rel="stylesheet" href="visual.css">
+  <!-- Estilo dessa página em específico. Ele utiliza variáveis do menu.css (aquele css antigo), aí vai ter que adaptar com o novo -->
+  <link rel="stylesheet" href="/Frontend/src/styles/entra_saida.css">
 
-	<!-- No final do seu index.html (antes de </body>) -->
-  <script src="Menu 2 (1).js" defer></script>
+  <script src="Menu 2 (1).js" defer></script> <!-- JS antigo do menu. Depois, quando adaptar para o novo menu, pode excluir esse arquivo 'Menu 2 (1).js' -->
+  
+  <!-- É o JS do fetch. Esse daqui tá normal -->
   <script src="../src/controllers/entradaSaida.js" defer></script>
 
-  <!-- Estilo específico desta tela (desenvolvido pela Tay) -->
-  <!-- Estilo específico desta tela (desenvolvido pela Tay) -->
-  
 </head>
 <body>
 
-  <!-- menu lateral (sidebar) -->
+  <!-- menu lateral (sidebar antigo) -->
   <aside id="sidebar" class="sidebar collapsed">
     <div class="sidebar-header">
       <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
@@ -215,11 +213,6 @@
 
     </main>
   </div>
-
-
-  <!-- JS compartilhado do sistema (menu, tema, relógio) — SEMPRE PRIMEIRO -->
-  <!-- JS específico desta tela -->
-  
 
 </body>
 </html>
