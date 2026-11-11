@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -11,6 +11,12 @@
   <link rel="stylesheet" href="/Frontend/src/styles/estacionamento.css">
   <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
 
+  <style>
+    [hidden] { display: none !important; }
+    .form-msg { padding: 10px; border-radius: 8px; margin: 12px 0; }
+    .form-msg.erro { color: #b42318; background: #fee4e2; }
+    .form-msg.sucesso { color: #067647; background: #d1fadf; }
+  </style>
 </head>
 <body>
 
@@ -61,48 +67,53 @@
 
     <main class="login-section">
       <div class="login-card">
-        
-        <a href="index.html" class="back-link">
-         <a href="telaestacionamento.html"> <span>←</span> Voltar para o login</a> 
-        </a>
-
+        <a href="../Login/index.html" class="back-link">← Voltar para o login</a>
         <div class="login-header">
           <img src="/Frontend/public/icon-guia.png" alt="Goiabinha" class="login-avatar-img">
-          <h2>Esqueceu sua senha?</h2>
-          <p>Sem problemas! Digite seu e-mail abaixo para receber as instruções de recuperação.</p>
+          <h2 id="titulo-etapa">Esqueceu sua senha?</h2>
+          <p id="descricao-etapa">Digite seu e-mail cadastrado para receber um código de recuperação.</p>
         </div>
-
-        <form class="login-form">
-          
+        <p id="recuperar-msg" class="form-msg" role="status" hidden></p>
+        <form id="form-email" class="login-form">
           <div class="input-group">
             <label for="email">E-mail cadastrado</label>
             <div class="input-wrapper">
-              <span class="input-icon">✉️</span>
               <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
             </div>
           </div>
-
-          <button type="submit" class="btn-primary">
-            <span>📩</span> Enviar link de recuperação
-          </button>
-
+          <button type="submit" class="btn-primary">Enviar código de recuperação</button>
+          <button type="button" id="btn-ja-tenho-codigo" class="forgot-link">Já tenho um código</button>
         </form>
-
-        <div class="security-footer">
-          <div class="security-info">
-            <span class="shield-icon">🛡️</span>
-            <div>
-              <strong>Recuperação segura</strong>
-              <p>Não compartilhamos seus dados</p>
+        <form id="form-nova-senha" class="login-form" hidden>
+          <div class="input-group" id="grupo-codigo">
+            <label for="codigo">Código de 6 dígitos</label>
+            <div class="input-wrapper">
+              <input type="text" id="codigo" inputmode="numeric" autocomplete="one-time-code" maxlength="6">
             </div>
           </div>
-          <span class="lock-icon">🔒</span>
-        </div>
-
+          <div class="input-group">
+            <label for="nova-senha">Nova senha</label>
+            <div class="input-wrapper">
+              <input type="password" id="nova-senha" autocomplete="new-password" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="confirmar-senha">Confirme a nova senha</label>
+            <div class="input-wrapper">
+              <input type="password" id="confirmar-senha" autocomplete="new-password" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary">Redefinir senha</button>
+          <button type="button" id="btn-reenviar" class="forgot-link">Enviar outro código</button>
+        </form>
       </div>
     </main>
 
   </div>
 
+  <script type="module" src="/Frontend/src/assets/js/esqueciSenha.js"></script>
 </body>
 </html>
+
+
+
