@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Exibe a quantidade de entradas do dia.
 
             entradasHoje.textContent =
-                `${entradas} entradas hoje`;
+                `${entradas}`;
 
             // Converte para o formato brasileiro.
             //

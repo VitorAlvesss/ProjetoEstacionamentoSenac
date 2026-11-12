@@ -40,12 +40,12 @@ function travarBotao(form, travar) {
 }
 
 function irParaEtapaEmail() {
-    // Vai pedir outro e-mail: daqui para frente vale o cÃ³digo novo, nÃ£o o link antigo
+    // Vai pedir outro e-mail: daqui para frente vale o código novo, não o link antigo
     tokenDoLink = null;
     formNovaSenha.hidden = true;
     formEmail.hidden = false;
     titulo.textContent = 'Esqueceu sua senha?';
-    descricao.textContent = 'Sem problemas! Digite seu e-mail abaixo para receber o link e o cÃ³digo de recuperaÃ§Ã£o.';
+    descricao.textContent = 'Sem problemas! Digite seu e-mail abaixo para receber o link e o código de recuperação.';
     campoEmail.focus();
 }
 
@@ -54,29 +54,29 @@ function irParaEtapaNovaSenha(usandoLink) {
     formNovaSenha.hidden = false;
     grupoCodigo.hidden = usandoLink;
     document.getElementById('btn-reenviar').hidden = usandoLink;
-    document.getElementById('btn-reenviar').textContent = 'NÃ£o recebeu? Enviar de novo';
+    document.getElementById('btn-reenviar').textContent = 'Não recebeu? Enviar de novo';
     titulo.textContent = 'Crie uma nova senha';
     descricao.textContent = usandoLink
-        ? 'VocÃª abriu o link do e-mail. Agora escolha sua nova senha.'
-        : `Digite o cÃ³digo de 6 dÃ­gitos que enviamos para ${campoEmail.value.trim()} e escolha a nova senha.`;
+        ? 'Você abriu o link do e-mail. Agora escolha sua nova senha.'
+        : `Digite o código de 6 dígitos que enviamos para ${campoEmail.value.trim()} e escolha a nova senha.`;
     (usandoLink ? document.getElementById('nova-senha') : campoCodigo).focus();
 }
 
 // Veio pelo link do e-mail
 if (tokenDoLink) {
     campoEmail.value = parametros.get('email') || '';
-    // Tira o token da barra de endereÃ§o (nÃ£o fica no histÃ³rico do navegador)
+    // Tira o token da barra de endereço (não fica no histórico do navegador)
     history.replaceState(null, '', location.pathname);
     irParaEtapaNovaSenha(true);
 }
 
-// ETAPA 1: pedir link + cÃ³digo
+// ETAPA 1: pedir link + código
 formEmail.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = campoEmail.value.trim();
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        mostrarMensagem('Digite um e-mail vÃ¡lido.', 'erro');
+        mostrarMensagem('Digite um e-mail válido.', 'erro');
         return;
     }
 
@@ -84,13 +84,13 @@ formEmail.addEventListener('submit', async (e) => {
     try {
         const { ok, dados } = await postPublico('/esqueci-senha', { email });
         if (!ok) {
-            mostrarMensagem(dados.erro || 'NÃ£o foi possÃ­vel enviar agora.', 'erro');
+            mostrarMensagem(dados.erro || 'Não foi possível enviar agora.', 'erro');
             return;
         }
         mostrarMensagem(dados.mensagem, 'sucesso');
         irParaEtapaNovaSenha(false);
     } catch (erro) {
-        mostrarMensagem('NÃ£o foi possÃ­vel conectar ao servidor.', 'erro');
+        mostrarMensagem('Não foi possível conectar ao servidor.', 'erro');
     } finally {
         travarBotao(formEmail, false);
     }
@@ -98,7 +98,7 @@ formEmail.addEventListener('submit', async (e) => {
 
 document.getElementById('btn-ja-tenho-codigo').addEventListener('click', () => {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(campoEmail.value.trim())) {
-        mostrarMensagem('Digite primeiro o e-mail para o qual o cÃ³digo foi enviado.', 'erro');
+        mostrarMensagem('Digite primeiro o e-mail para o qual o código foi enviado.', 'erro');
         campoEmail.focus();
         return;
     }
@@ -111,7 +111,7 @@ document.getElementById('btn-reenviar').addEventListener('click', () => {
     irParaEtapaEmail();
 });
 
-// SÃ³ nÃºmeros no campo do cÃ³digo
+// Só números no campo do código
 campoCodigo.addEventListener('input', () => {
     campoCodigo.value = campoCodigo.value.replace(/\D/g, '').slice(0, 6);
 });
@@ -123,15 +123,15 @@ formNovaSenha.addEventListener('submit', async (e) => {
     const confirmar = document.getElementById('confirmar-senha').value;
 
     if (!tokenDoLink && !/^\d{6}$/.test(campoCodigo.value)) {
-        mostrarMensagem('O cÃ³digo tem 6 nÃºmeros.', 'erro');
+        mostrarMensagem('O código tem 6 números.', 'erro');
         return;
     }
     if (novaSenha.length < 8 || !/[A-Za-z]/.test(novaSenha) || !/\d/.test(novaSenha)) {
-        mostrarMensagem('A senha precisa ter no mÃ­nimo 8 caracteres, com pelo menos uma letra e um nÃºmero.', 'erro');
+        mostrarMensagem('A senha precisa ter no mínimo 8 caracteres, com pelo menos uma letra e um número.', 'erro');
         return;
     }
     if (novaSenha !== confirmar) {
-        mostrarMensagem('A confirmaÃ§Ã£o nÃ£o Ã© igual Ã  nova senha.', 'erro');
+        mostrarMensagem('A confirmação não é igual Ã  nova senha.', 'erro');
         return;
     }
 
@@ -143,8 +143,8 @@ formNovaSenha.addEventListener('submit', async (e) => {
     try {
         const { ok, dados } = await postPublico('/redefinir-senha', corpo);
         if (!ok) {
-            mostrarMensagem(dados.erro || 'NÃ£o foi possÃ­vel redefinir a senha.', 'erro');
-            // Link vencido ou jÃ¡ usado: mostra o botÃ£o para pedir outro e-mail (o endereÃ§o jÃ¡ fica preenchido)
+            mostrarMensagem(dados.erro || 'Não foi possível redefinir a senha.', 'erro');
+            // Link vencido ou já usado: mostra o botão para pedir outro e-mail (o endereço já fica preenchido)
             const botaoReenviar = document.getElementById('btn-reenviar');
             if (tokenDoLink) botaoReenviar.textContent = 'Pedir um novo e-mail';
             botaoReenviar.hidden = false;
@@ -153,7 +153,7 @@ formNovaSenha.addEventListener('submit', async (e) => {
         formNovaSenha.reset();
         location.replace(`/Frontend/Login/index.html?msg=${encodeURIComponent(dados.mensagem)}`);
     } catch (erro) {
-        mostrarMensagem('NÃ£o foi possÃ­vel conectar ao servidor.', 'erro');
+        mostrarMensagem('Não foi possível conectar ao servidor.', 'erro');
     } finally {
         travarBotao(formNovaSenha, false);
     }
