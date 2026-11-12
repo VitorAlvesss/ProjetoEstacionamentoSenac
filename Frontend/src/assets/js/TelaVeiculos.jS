@@ -1,5 +1,6 @@
-// TEMA CLARO e ESCURO
-
+// ==========================================
+// 1. TEMA CLARO E ESCURO
+// ==========================================
 const btnTema = document.getElementById("btnTema");
 
 // Carrega o tema salvo
@@ -17,6 +18,9 @@ if (btnTema) {
 }
 
 
+// ==========================================
+// 2. LÓGICA DE VEÍCULOS E USUÁRIOS
+// ==========================================
 const STORAGE_KEY_VEICULOS = 'goiabinha:veiculos';
 
 let vehiclesData = [];
@@ -47,6 +51,7 @@ function escapeHtml(str) {
 }
 
 function renderTable() {
+  if (!searchInput || !tableBody) return;
   const searchTerm = searchInput.value.toLowerCase().trim();
 
   const filteredData = vehiclesData.filter(item => {
@@ -69,7 +74,7 @@ function renderTable() {
 
   if (pageItems.length === 0) {
     const mensagem = vehiclesData.length === 0
-      ? 'Nenhum veículo cadastrado ainda. Use o formulário "Cadastro rápido" ao lado.'
+      ? 'Nenhum veículo cadastrado ainda.'
       : 'Nenhum resultado encontrado para a sua busca.';
     tableBody.innerHTML = `
       <tr>
@@ -103,19 +108,22 @@ function renderTable() {
     });
   }
 
-  if (totalItems === 0) {
-    paginationInfo.innerText = `Exibindo 0 a 0 de 0 registros`;
-  } else {
-    paginationInfo.innerText = `Exibindo ${startIndex + 1} a ${endIndex} de ${totalItems} registros`;
+  if (paginationInfo) {
+    if (totalItems === 0) {
+      paginationInfo.innerText = `Exibindo 0 a 0 de 0 registros`;
+    } else {
+      paginationInfo.innerText = `Exibindo ${startIndex + 1} a ${endIndex} de ${totalItems} registros`;
+    }
   }
 
-  cardTotalCount.innerText = vehiclesData.length;
-  cardCadastradosCount.innerText = vehiclesData.length;
+  if (cardTotalCount) cardTotalCount.innerText = vehiclesData.length;
+  if (cardCadastradosCount) cardCadastradosCount.innerText = vehiclesData.length;
 
   renderPaginationControls(totalPages);
 }
 
 function renderPaginationControls(totalPages) {
+  if (!paginationButtons) return;
   paginationButtons.innerHTML = '';
 
   const prevBtn = document.createElement('button');
@@ -141,45 +149,44 @@ function renderPaginationControls(totalPages) {
   paginationButtons.appendChild(nextBtn);
 }
 
-registerForm.addEventListener('submit', function (e) {
-  e.preventDefault();
+if (registerForm) {
+  registerForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-  const nome = document.getElementById('formName').value.trim();
-  const placa = document.getElementById('formPlate').value.trim().toUpperCase();
-  const contato = document.getElementById('formContact').value.trim();
+    const nome = document.getElementById('formName').value.trim();
+    const placa = document.getElementById('formPlate').value.trim().toUpperCase();
+    const contato = document.getElementById('formContact').value.trim();
 
-  // Validação: nenhum campo pode ficar vazio (mesmo que só com espaços)
-  if (!nome || !placa || !contato) {
-    alert('Preencha todos os campos antes de cadastrar.');
-    return;
-  }
+    if (!nome || !placa || !contato) {
+      alert('Preencha todos os campos antes de cadastrar.');
+      return;
+    }
 
-  // Validação: não permite placa duplicada
-  const placaJaExiste = vehiclesData.some(v => v.placa === placa);
-  if (placaJaExiste) {
-    alert(`A placa ${placa} já está cadastrada.`);
-    return;
-  }
+    const placaJaExiste = vehiclesData.some(v => v.placa === placa);
+    if (placaJaExiste) {
+      alert(`A placa ${placa} já está cadastrada.`);
+      return;
+    }
 
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString('pt-BR');
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString('pt-BR');
 
-  const newItem = {
-    id: Date.now(),
-    nome,
-    placa,
-    contato,
-    data: formattedDate
-  };
+    const newItem = {
+      id: Date.now(),
+      nome,
+      placa,
+      contato,
+      data: formattedDate
+    };
 
-  vehiclesData.unshift(newItem);
-  registerForm.reset();
-  currentPage = 1;
-  renderTable();
-  salvarVeiculos();
-  //Usuario e Veiculo
-  alert(`Usuario e Veiculo ${newItem.nome} cadastrado com sucesso!`);
-});
+    vehiclesData.unshift(newItem);
+    registerForm.reset();
+    currentPage = 1;
+    renderTable();
+    salvarVeiculos();
+    alert(`Usuário e Veículo de ${newItem.nome} cadastrados com sucesso!`);
+  });
+}
 
 window.viewVehicle = function (id) {
   const item = vehiclesData.find(v => v.id === id);
@@ -234,16 +241,19 @@ window.deleteVehicle = function (id) {
   }
 };
 
-searchInput.addEventListener('input', () => { currentPage = 1; renderTable(); });
+if (searchInput) {
+  searchInput.addEventListener('input', () => { currentPage = 1; renderTable(); });
+}
 
-document.getElementById('itemsPerPageSelect').addEventListener('change', function () {
-  itemsPerPage = parseInt(this.value);
-  currentPage = 1;
-  renderTable();
-});
+const itemsPerPageSelect = document.getElementById('itemsPerPageSelect');
+if (itemsPerPageSelect) {
+  itemsPerPageSelect.addEventListener('change', function () {
+    itemsPerPage = parseInt(this.value);
+    currentPage = 1;
+    renderTable();
+  });
+}
 
-
-//(localStorage do navegador)
 function salvarVeiculos() {
   try {
     localStorage.setItem(STORAGE_KEY_VEICULOS, JSON.stringify(vehiclesData));
@@ -262,54 +272,50 @@ function carregarVeiculos() {
   renderTable();
 }
 
-// inicialização
 carregarVeiculos();
 
 
-// Menu lateral (sidebar) abrir e fechar
-
+// ==========================================
+// 3. MENU LATERAL (SIDEBAR) ABRIR E FECHAR
+// ==========================================
 (function () {
-  // Executa com segurança assim que o DOM estiver pronto
-  document.addEventListener('DOMContentLoaded', () => {
-    const sidebar = document.getElementById('sidebar');
-    const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
-    const topHeaderToggleBtn = document.getElementById('topHeaderToggleBtn');
+  const sidebar = document.getElementById('sidebar');
+  const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+  const topHeaderToggleBtn = document.getElementById('topHeaderToggleBtn');
 
-    if (!sidebar) return;
+  if (!sidebar) return;
 
-    // 1. Restaura o estado salvo no localStorage
-    const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
-    if (isCollapsed) {
-      sidebar.classList.add('collapsed');
-    } else {
-      sidebar.classList.remove('collapsed');
-    }
+  // Restaura o estado salvo no localStorage
+  const isCollapsed = localStorage.getItem('sidebarCollapsed') === 'true';
+  if (isCollapsed) {
+    sidebar.classList.add('collapsed');
+  } else {
+    sidebar.classList.remove('collapsed');
+  }
 
-    // 2. Função para alternar e salvar o estado
-    function toggleSidebar() {
-      sidebar.classList.toggle('collapsed');
-      const novoEstado = sidebar.classList.contains('collapsed');
-      localStorage.setItem('sidebarCollapsed', novoEstado);
-    }
+  function toggleSidebar() {
+    sidebar.classList.toggle('collapsed');
+    const novoEstado = sidebar.classList.contains('collapsed');
+    localStorage.setItem('sidebarCollapsed', novoEstado);
+  }
 
-    // 3. Eventos dos botões hambúrguer
-    if (sidebarToggleBtn) sidebarToggleBtn.addEventListener('click', toggleSidebar);
-    if (topHeaderToggleBtn) topHeaderToggleBtn.addEventListener('click', toggleSidebar);
+  if (sidebarToggleBtn) sidebarToggleBtn.addEventListener('click', toggleSidebar);
+  if (topHeaderToggleBtn) topHeaderToggleBtn.addEventListener('click', toggleSidebar);
 
-    // 4. Fecha automaticamente em telas menores ao clicar em um link
-    document.querySelectorAll('.sidebar-nav .nav-item a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 768 && !sidebar.classList.contains('collapsed')) {
-          toggleSidebar();
-        }
-      });
+  document.querySelectorAll('.sidebar-nav .nav-item a').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768 && !sidebar.classList.contains('collapsed')) {
+        toggleSidebar();
+      }
     });
   });
 })();
 
-// MARCAR OPÇÃO SELECIONADA
-function marcarLinkAtivo() {
 
+// ==========================================
+// 4. MARCAR OPÇÃO SELECIONADA NO MENU
+// ==========================================
+function marcarLinkAtivo() {
   const caminhoAtual = window.location.pathname.toLowerCase();
   document.querySelectorAll('.sidebar-nav .nav-item').forEach(item => {
     item.classList.remove('active');
@@ -324,11 +330,12 @@ function marcarLinkAtivo() {
   });
 }
 
-// Executa automaticamente quando a página carrega
-document.addEventListener('DOMContentLoaded', marcarLinkAtivo);
+marcarLinkAtivo();
 
 
-/* Atualização da Data e Hora no Cabeçalho */
+// ==========================================
+// 5. DATA E HORA NO CABEÇALHO
+// ==========================================
 function atualizarDataHora() {
   const horaEl = document.getElementById('hora-atual');
   const dataEl = document.getElementById('data-atual');
@@ -343,10 +350,5 @@ function atualizarDataHora() {
   }
 }
 
-/* Chama a hora imediatamente e depois a cada 1 segundo */
 atualizarDataHora();
 setInterval(atualizarDataHora, 1000);
-
-/* Inicialização do Menu */
-renderSidebarNav();
-window.navigateTo(DEFAULT_SCREEN);
