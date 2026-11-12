@@ -1,45 +1,46 @@
-﻿const db = require('../Connection/db'); // ConexÃ£o mysql2/promise
+﻿const db = require('../Connection/db'); // Conexão mysql2/promise
+const veiculoRepository = require("../Repositories/veiculoRepository");
 
 class CarroController {
 
-  // 1. Cadastrar um novo veÃ­culo e vincular a um usuÃ¡rio
+  // 1. Cadastrar um novo veículo e vincular a um usuário
   async criar(req, res) {
     try {
       const { id_usuario, placa, marca, modelo, cor, tipo_veiculo, ano } = req.body;
 
-      // ValidaÃ§Ã£o dos campos obrigatÃ³rios
+      // Validação dos campos obrigatórios
       if (!id_usuario || !placa || !marca || !modelo) {
         return res.status(400).json({ 
-          mensagem: 'UsuÃ¡rio (id_usuario), placa, marca e modelo sÃ£o obrigatÃ³rios.' 
+          mensagem: 'Usuário (id_usuario), placa, marca e modelo são obrigatórios.' 
         });
       }
 
-      // Normaliza a placa (remove espaÃ§os/traÃ§os e deixa em caixa alta)
+      // Normaliza a placa (remove espaços/traços e deixa em caixa alta)
       const placaFormatada = placa.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
 
       if (placaFormatada.length !== 7) {
         return res.status(400).json({ mensagem: 'A placa deve conter exatamente 7 caracteres.' });
       }
 
-      // 1. Verifica se o usuÃ¡rio existe e estÃ¡ ativo
+      // 1. Verifica se o usuário existe e está ativo
       const [usuarioExiste] = await db.execute(
         'SELECT id FROM tbl_usuario WHERE id = ? AND ativo = TRUE', 
         [id_usuario]
       );
       if (usuarioExiste.length === 0) {
-        return res.status(404).json({ mensagem: 'UsuÃ¡rio informado nÃ£o foi encontrado ou estÃ¡ inativo.' });
+        return res.status(404).json({ mensagem: 'Usuário informado não foi encontrado ou está inativo.' });
       }
 
-      // 2. Verifica se a placa jÃ¡ estÃ¡ cadastrada
+      // 2. Verifica se a placa já está cadastrada
       const [placaExiste] = await db.execute(
         'SELECT id FROM tbl_carro WHERE placa = ?', 
         [placaFormatada]
       );
       if (placaExiste.length > 0) {
-        return res.status(409).json({ mensagem: 'VeÃ­culo com esta placa jÃ¡ estÃ¡ cadastrado.' });
+        return res.status(409).json({ mensagem: 'Veículo com esta placa já está cadastrado.' });
       }
 
-      // 3. Insere o veÃ­culo no banco
+      // 3. Insere o veículo no banco
       const sql = `
         INSERT INTO tbl_carro (id_usuario, placa, marca, modelo, cor, tipo_veiculo, ano) 
         VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -56,43 +57,30 @@ class CarroController {
       ]);
 
       return res.status(201).json({ 
-        mensagem: 'VeÃ­culo cadastrado com sucesso!', 
+        mensagem: 'Veículo cadastrado com sucesso!', 
         id_carro: result.insertId 
       });
 
     } catch (error) {
-      return res.status(500).json({ erro: 'Erro interno ao cadastrar veÃ­culo.', detalhe: error.message });
+      return res.status(500).json({ erro: 'Erro interno ao cadastrar veículo.', detalhe: error.message });
     }
   }
 
-  // 2. Listar todos os veÃ­culos cadastrados (com dados do proprietÃ¡rio)
+  // 2. Listar todos os veículos cadastrados (com dados do proprietário)
   async listarTodos(req, res) {
     try {
-      const sql = `
-        SELECT 
-          c.id, 
-          c.placa, 
-          c.marca, 
-          c.modelo, 
-          c.cor, 
-          c.tipo_veiculo, 
-          c.ano,
-          u.id AS id_proprietario,
-          u.nome_usuario AS nome_proprietario,
-          u.numero_usuario AS telefone_proprietario
-        FROM tbl_carro c
-        INNER JOIN tbl_usuario u ON c.id_usuario = u.id
-        ORDER BY c.id DESC
-      `;
-      const [carros] = await db.execute(sql);
-
-      return res.status(200).json(carros);
+      const [veiculos, cards] = await Promise.all([
+        veiculoRepository.buscarVeiculo(),
+        veiculoRepository.buscarCards()
+      ]);
+      return res.status(200).json({ veiculos, cards });
     } catch (error) {
-      return res.status(500).json({ erro: 'Erro interno ao listar veÃ­culos.', detalhe: error.message });
+      console.error("Erro ao listar veículos:", error);
+      return res.status(500).json({ erro: "Erro interno ao listar veículos." });
     }
   }
 
-  // 3. Buscar veÃ­culo especÃ­fico por Placa
+  // 3. Buscar veículo específico por Placa
   async buscarPorPlaca(req, res) {
     try {
       const { placa } = req.params;
@@ -110,16 +98,16 @@ class CarroController {
       const [rows] = await db.execute(sql, [placaFormatada]);
 
       if (rows.length === 0) {
-        return res.status(404).json({ mensagem: 'VeÃ­culo nÃ£o encontrado.' });
+        return res.status(404).json({ mensagem: 'Veículo não encontrado.' });
       }
 
       return res.status(200).json(rows[0]);
     } catch (error) {
-      return res.status(500).json({ erro: 'Erro interno ao buscar veÃ­culo.', detalhe: error.message });
+      return res.status(500).json({ erro: 'Erro interno ao buscar veículo.', detalhe: error.message });
     }
   }
 
-  // 4. Listar todos os veÃ­culos de um usuÃ¡rio especÃ­fico
+  // 4. Listar todos os veículos de um usuário específico
   async listarPorUsuario(req, res) {
     try {
       const { id_usuario } = req.params;
@@ -133,20 +121,20 @@ class CarroController {
 
       return res.status(200).json(carros);
     } catch (error) {
-      return res.status(500).json({ erro: 'Erro interno ao listar veÃ­culos do usuÃ¡rio.', detalhe: error.message });
+      return res.status(500).json({ erro: 'Erro interno ao listar veículos do usuário.', detalhe: error.message });
     }
   }
 
-  // 5. Atualizar dados do veÃ­culo (Marca, Modelo, Cor, Ano)
+  // 5. Atualizar dados do veículo (Marca, Modelo, Cor, Ano)
   async atualizar(req, res) {
     try {
       const { id } = req.params;
       const { marca, modelo, cor, tipo_veiculo, ano } = req.body;
 
-      // Verifica se o veÃ­culo existe
+      // Verifica se o veículo existe
       const [carro] = await db.execute('SELECT id FROM tbl_carro WHERE id = ?', [id]);
       if (carro.length === 0) {
-        return res.status(404).json({ mensagem: 'VeÃ­culo nÃ£o encontrado.' });
+        return res.status(404).json({ mensagem: 'Veículo não encontrado.' });
       }
 
       const sql = `
@@ -160,18 +148,18 @@ class CarroController {
       `;
       await db.execute(sql, [marca, modelo, cor, tipo_veiculo, ano, id]);
 
-      return res.status(200).json({ mensagem: 'Dados do veÃ­culo atualizados com sucesso!' });
+      return res.status(200).json({ mensagem: 'Dados do veículo atualizados com sucesso!' });
     } catch (error) {
-      return res.status(500).json({ erro: 'Erro interno ao atualizar veÃ­culo.', detalhe: error.message });
+      return res.status(500).json({ erro: 'Erro interno ao atualizar veículo.', detalhe: error.message });
     }
   }
 
-  // 6. Deletar veÃ­culo
+  // 6. Deletar veículo
   async deletar(req, res) {
     try {
       const { id } = req.params;
 
-      // Verifica se o veÃ­culo estÃ¡ com alguma ocupaÃ§Ã£o ativa no momento antes de deletar
+      // Verifica se o veículo está com alguma ocupação ativa no momento antes de deletar
       const [ocupacaoAtiva] = await db.execute(
         'SELECT id FROM tbl_registro_ocupacao WHERE id_carro = ? AND status_pagamento = "pendente"', 
         [id]
@@ -179,21 +167,23 @@ class CarroController {
       
       if (ocupacaoAtiva.length > 0) {
         return res.status(400).json({ 
-          mensagem: 'NÃ£o Ã© possÃ­vel remover o veÃ­culo pois ele estÃ¡ atualmente no estacionamento.' 
+          mensagem: 'Não é possível remover o veículo pois ele está atualmente no estacionamento.' 
         });
       }
 
       const [result] = await db.execute('DELETE FROM tbl_carro WHERE id = ?', [id]);
 
       if (result.affectedRows === 0) {
-        return res.status(404).json({ mensagem: 'VeÃ­culo nÃ£o encontrado.' });
+        return res.status(404).json({ mensagem: 'Veículo não encontrado.' });
       }
 
-      return res.status(200).json({ mensagem: 'VeÃ­culo removido com sucesso!' });
+      return res.status(200).json({ mensagem: 'Veículo removido com sucesso!' });
     } catch (error) {
-      return res.status(500).json({ erro: 'Erro interno ao remover veÃ­culo.', detalhe: error.message });
+      return res.status(500).json({ erro: 'Erro interno ao remover veículo.', detalhe: error.message });
     }
   }
+
 }
 
 module.exports = new CarroController();
+
