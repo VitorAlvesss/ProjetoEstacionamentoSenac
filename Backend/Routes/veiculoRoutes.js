@@ -1,16 +1,12 @@
 const express = require("express");
+const veiculoController = require("../Controllers/veiculoController");
+
 const router = express.Router();
-
-const vagaController = require("../Controllers/vagaController");
-
-// const validacaoVaga = require("../../validacaoVaga/validacao")
-
-router.post("/", vagaController.salvar);
-router.get("/", vagaController.listarTodos);
-router.get("/livres", vagaController.listasVagasLivres);
-router.put("/:id", vagaController.mudarOcupacaoVaga);
-router.get("/total", vagaController.listarQuantidade);
-router.get("/:id", vagaController.buscarVagaId);
-router.get("/registro/:id", vagaController.buscarRegistroOcupacao);
+router.post("/salvar", veiculoController.criar.bind(veiculoController));
+router.get("/", veiculoController.listarTodos.bind(veiculoController));
+router.get("/placa/:placa", veiculoController.buscarPorPlaca.bind(veiculoController));
+router.get("/usuario/:id_usuario", veiculoController.listarPorUsuario.bind(veiculoController));
+router.put("/:id", veiculoController.atualizar.bind(veiculoController));
+router.delete("/:id", veiculoController.deletar.bind(veiculoController));
 
 module.exports = router;

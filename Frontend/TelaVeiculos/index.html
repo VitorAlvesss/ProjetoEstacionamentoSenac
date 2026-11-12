@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="/Frontend/src/styles/TelaVeiculos.css" />
   <title>Goiabinha & CIA - Estacionamento</title>
   <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
+  <script type="module" src="/Frontend/src/fetch/veiculos.js"></script>
+
 </head>
 
 <body>
@@ -89,7 +91,7 @@
 
 
 
-      <!-- Acoes do cabeçalho -->
+      <!-- Ações do cabeçalho -->
       <div class="header-actions">
 
         <!--Alternar o tema -->
@@ -127,7 +129,7 @@
           <div class="card-top">
             <div class="card-icon icon-purple"><i class="fa-solid fa-car"></i></div>
             <div>
-              <div class="card-title">VEÍCULOS / USUÁRIOS</div>
+              <div class="card-title">USUÁRIOS CADASTRADOS</div>
               <div class="card-value" id="cardTotalCount">0</div>
             </div>
           </div>
@@ -149,8 +151,8 @@
           <div class="card-top">
             <div class="card-icon icon-orange"><i class="fa-regular fa-clock"></i></div>
             <div>
-              <div class="card-title">VEÍCULOS ATIVOS HOJE</div>
-              <div class="card-value">0</div>
+              <div class="card-title">VEÍCULOS NO ESTACIONAMENTO</div>
+              <div class="card-value" id="cardAtivos">0</div>
             </div>
           </div>
           <div class="card-subtext">Em circulação</div>
@@ -161,7 +163,7 @@
             <div class="card-icon icon-blue"><i class="fa-solid fa-right-to-bracket"></i></div>
             <div>
               <div class="card-title">ENTRADAS HOJE</div>
-              <div class="card-value">0</div>
+              <div class="card-value" id="cardEntradas">0</div>
             </div>
           </div>
           <div class="card-subtext">Total de entradas</div>
@@ -172,7 +174,7 @@
             <div class="card-icon icon-red"><i class="fa-solid fa-right-from-bracket"></i></div>
             <div>
               <div class="card-title">SAÍDAS HOJE</div>
-              <div class="card-value">0</div>
+              <div class="card-value" id="cardSaidas">0</div>
             </div>
           </div>
           <div class="card-subtext">Total de saídas</div>
@@ -183,7 +185,7 @@
             <div class="card-icon icon-teal"><i class="fa-solid fa-dollar-sign"></i></div>
             <div>
               <div class="card-title">FATURAMENTO HOJE</div>
-              <div class="card-value" style="font-size: 1rem; margin-top: 4px;">R$ 0,00</div>
+              <div class="card-value" id="cardFaturamento" style="font-size: 1rem; margin-top: 4px;">R$ 0,00</div>
             </div>
           </div>
           <div class="card-subtext">Total arrecadado</div>
@@ -195,7 +197,7 @@
 
         <!-- Tabela de dados -->
         <section class="table-section">
-          <div class="section-header">LISTA DE VEÍCULOS / USUÁRIOS</div>
+          <div class="section-header">LISTA DE USUÁRIOS CADASTRADOS</div>
 
           <div class="filter-bar">
             <div class="search-box">
@@ -302,7 +304,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="menu.js"></script>
   <script src="/Frontend/src/assets/js/TelaVeiculos.jS"></script>
 </body>
 
