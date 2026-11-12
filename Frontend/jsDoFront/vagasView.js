@@ -11,13 +11,13 @@ document.addEventListener("DOMContentLoaded", () =>{
         response => response.json()
     )
     .then(dados => {
-        totalVagas.innerText = dados[0].total;
-        vagasLivres.innerText = dados[0].livres;
-        vagasOcupadas.innerText = dados[0].ocupadas;
-        var total = parseInt(dados[0].total);
-        var livres = parseInt(dados[0].livres);
+        totalVagas.innerText = dados.total;
+        vagasLivres.innerText = dados.livres;
+        vagasOcupadas.innerText = dados.ocupadas;
+        var total = parseInt(dados.total);
+        var livres = parseInt(dados.livres);
         var calculo = parseFloat(Math.round((100) -100 * livres / total).toFixed(2))
         taxaOcupacao.innerText = calculo + "%";  
-        taxaOcupacaoComplementar.innerText = dados[0].ocupadas + " de " + total + " vagas"
+        taxaOcupacaoComplementar.innerText = dados.ocupadas + " de " + total + " vagas"
     })
 });

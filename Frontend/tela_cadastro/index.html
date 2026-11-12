@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <script src="/Frontend/src/assets/js/tela_cadastro.js" defer></script>
+    <script src="/Frontend/jsDoFront/adicionarVaga.js" defer></script>
 
     <title>Tela Cadastro</title>
 </head>
@@ -258,7 +259,7 @@
 
                             <h4 class="tituloInput">Código da vaga</h4>
 
-                            <input class="inputTelaCadastro" type="text" placeholder="Ex: A01">
+                            <input id="codigoVaga" class="inputTelaCadastro" type="text" placeholder="Ex: A01">
 
                         </div>
 
@@ -276,7 +277,11 @@
 
                         <h4 class="tituloInput">Tipo de vaga</h4>
 
-                        <input class="inputTelaCadastro" type="text" placeholder="Selecione o tipo de vaga">
+                        <select id="tipoVaga" class="inputTelaCadastro" type="text" placeholder="Selecione o tipo de vaga">
+                            <option value="null">Padrão</option>
+                            <option value="idoso">Idoso</option>
+                            <option value="deficiente">Pessoa com deficiência</option>
+                        </select>
 
                     </div>
 
@@ -296,7 +301,7 @@
                             Cancelar
                         </button>
 
-                        <button type="button" class="botaoSalvarCadVaga">
+                        <button id="btnSalvarVaga" type="button" class="botaoSalvarCadVaga">
                             Salvar
                         </button>
 
