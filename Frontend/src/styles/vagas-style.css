@@ -204,6 +204,10 @@ body {
   font-weight: bold;
 }
 
+#notificacao {
+    color: white;
+}
+
 #usuario-logado {
   display: flex;
   align-items: center;

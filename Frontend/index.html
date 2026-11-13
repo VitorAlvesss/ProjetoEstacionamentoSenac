@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="pt-br">
- 
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,23 +12,23 @@
   <title>Goiabinha & CIA - Estacionamento</title>
   <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
 </head>
- 
+
 <body>
- 
+
   <!-- Menu lateral (sidebar) -->
   <aside id="sidebar" class="sidebar">
     <div class="sidebar-header">
       <i class="fa-solid fa-bars hamburger-icon" id="sidebarToggleBtn" title="Fechar Menu"></i>
- 
+
       <div class="logo-container">
- 
+
         <div>
- 
+
         </div>
       </div>
     </div>
- 
- 
+
+
     <nav class="sidebar-nav">
       <ul>
         <li class="nav-item">
@@ -45,16 +45,16 @@
           <a href="/Frontend/TelaVeiculos/index.html"><i class="fa-solid fa-car"></i> Veículos / Usuários</a>
         </li>
         <li class="nav-item">
-          <a href="/Frontend/entradaSaida/entradaSaida.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
+          <a href="/Frontend/entradaSaida/index.html"><i class="fa-solid fa-right-to-bracket"></i> Entradas e Saídas</a>
         </li>
         <li class="nav-item">
           <a href="/Frontend/pagamento/index.html"><i class="fa-solid fa-dollar-sign"></i> Financeiro</a>
         </li>
-        
-       
+
+
       </ul>
     </nav>
- 
+
     <!-- <div class="quick-summary">
       <div class="quick-summary-title">RESUMO RÁPIDO</div>
       <div class="summary-row"><span>Vagas totais</span><span class="val">20</span></div>
@@ -64,82 +64,77 @@
       <div class="summary-row" style="margin-top: 8px;"><span>Faturamento hoje</span><span class="val green">R$
           0,00</span></div>
     </div> -->
- 
+
     <div class="sidebar-copyright">
       © 2024 Goiabinha&CIA<br>Todos os direitos reservados.
     </div>
   </aside>
- 
+
   <div class="main-wrapper">
- 
+
     <!-- CABEÇALHO -->
     <header class="cabecalho-principal">
- 
-      <!-- Lado Esquerdo: Apenas a Logo -->
       <div class="cabecalho-esquerda">
-        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu">
-        </i>
+        <i class="fa-solid fa-bars hamburger-icon" id="topHeaderToggleBtn" title="Abrir Menu"></i>
         <div class="brand-logo">
           <img src="/Frontend/public/logo.png" alt="Goiabinha & CIA" class="img-logo">
         </div>
       </div>
- 
+
       <!-- Centro: Título e Subtítulo Centralizados -->
       <div class="titulos-cabecalho centralizado">
- 
+
         <h1 id="pageTitle">
           Dashboard
         </h1>
- 
+
         <h2 id="pageSubtitle">
           Visão geral do estacionamento
         </h2>
- 
+
       </div>
- 
+
       <!-------------------------- Lado Direito: Informações e Notificação ------------------->
       <div class="info-cabecalho">
- 
+
         <!--Alternar o tema -->
         <button id="btnTema" class="btn-tema" title="Alternar Tema">
           <span class="material-symbols-outlined">routine</span>
- 
+
         </button>
- 
+
         <!--Data e Hora-->
         <div id="data-hora">
           <span id="hora-atual">--:--:--</span>
           <small id="data-atual">--/--/----</small>
         </div>
- 
+
         <!-- Notificação -->
         <div id="notificacao" class="botao-icone">
           <span class="material-symbols-outlined">notifications</span>
- 
+
           <span class="emblema" id="qtd-notificacoes">0</span>
         </div>
- 
+
         <!-- Ususario -->
         <div id="usuario-logado">
           <i id="avatar" class="fa-solid fa-circle-user avatar"></i>
           <div class="user-details">
- 
+
             <div class="detalhes-usuario">
               <span id="nome-usuario" style="font-weight: 600;">Administrador</span>
-              <!-- <strong id="nome-usuario">----</strong> -->
               <span id="status-usuario" class="status">Online</span>
-              <!-- <span class="status-online" id="status-usuario">--</span> -->
-            </div>
+              </div>
           </div>
         </div>
     </header>
- 
- 
+
+
     <main class="conteiner-dashboard">
- 
+
       <div id="screen-dashboard" class="screen active">
         <section class="grade-card">
- 
+
           <!-- VAGAS TOTAIS -->
           <div class="card">
             <div class="icone-card fundo-azul">
@@ -151,7 +146,7 @@
               <span class="subtitulo-card">Cadastradas</span>
             </div>
           </div>
- 
+
           <!-- VAGAS LIVRES -->
           <div class="card">
             <div class="icone-card fundo-verde">
@@ -163,7 +158,7 @@
               <span class="subtitulo-card">Disponíveis</span>
             </div>
           </div>
- 
+
           <!-- VAGAS OCUPADAS -->
           <div class="card">
             <div class="icone-card fundo-vermelho">
@@ -175,7 +170,7 @@
               <span class="subtitulo-card">Em uso</span>
             </div>
           </div>
- 
+
           <!-- TAXA DE OCUPAÇÃO -->
           <div class="card">
             <div class="icone-card fundo-amarelo">
@@ -187,7 +182,7 @@
               <span class="subtitulo-card" id="detalhe-taxa">-- de -- vagas</span>
             </div>
           </div>
- 
+
           <!-- FATURAMENTO HOJE -->
           <div class="card">
             <div class="icone-card fundo-roxo">
@@ -199,17 +194,17 @@
               <span class="subtitulo-card" id="totalEntradasHoje">--</span>
             </div>
           </div>
- 
+
         </section>
- 
- 
- 
+
+
+
         <!-- GRADE GERAL DO DASHBOARD -->
         <div class="painel-principal">
- 
+
           <!---------------------------- COLUNA DA ESQUERDA ---------------------------->
           <div class="coluna-esquerda">
- 
+
             <!-- Bloco 2: ÚLTIMAS MOVIMENTAÇÕES -->
             <div class="bloco-conteudo card-movimentacoes">
               <div class="header-movimentacoes">
@@ -218,7 +213,7 @@
                   <span class="material-symbols-outlined">refresh</span>
                 </button>
               </div>
- 
+
               <div class="container-tabela">
                 <table class="tabela-movimentacoes">
                   <thead>
@@ -236,21 +231,21 @@
                   </tbody>
                 </table>
               </div>
- 
+
               <div class="rodape-tabela">
                 <a href="#" class="link-ver-todas" id="todasMovimentacoes">Ver todas as movimentações</a>
               </div>
             </div>
- 
+
           </div>
- 
- 
+
+
           <!----------------- COLUNA DA DIREITA ---------------->
           <div class="coluna-direita">
- 
- 
+
+
             <!-- Bloco 1: Financeiro Hoje -->
- 
+
             <div class="bloco-conteudo card-financeiro-painel">
               <div class="header-financeiro">
                 <span id="paid" class="material-symbols-outlined">
@@ -258,7 +253,7 @@
                 </span>
                 <h3>FINANCEIRO HOJE</h3>
               </div>
- 
+
               <div class="corpo-financeiro">
                 <!-- Lado Esquerdo: Valores e Estatísticas -->
                 <div class="dados-financeiro">
@@ -266,24 +261,24 @@
                   <span class="sub-financeiro" id="qtdVeiculosHoje">0 veículos atendidos</span>
                   <small class="ticket-medio">Ticket médio: <span id="ticketMedio">R$ 0,00</span></small>
                 </div>
- 
+
                 <!-- Lado Direito: Gráfico de Tendência -->
                 <div class="container-grafico-linha">
                   <canvas id="graficoFaturamento"></canvas>
                 </div>
               </div>
             </div>
- 
+
             <!-- ================================================================================================ -->
- 
- 
+
+
             <!-- Bloco 2: Tempo / Movimento -->
             <div class="bloco-conteudo card-tempo-movimento">
               <div class="header-bloco">
                 <span class="material-symbols-outlined icone-header">schedule</span>
                 <h3>TEMPO / MOVIMENTO</h3>
               </div>
- 
+
               <div class="lista-metricas-tempo">
                 <!-- Item 1: Tempo médio -->
                 <div class="item-metrica">
@@ -293,7 +288,7 @@
                   </div>
                   <strong class="valor-metrica" id="tempoUso">--</strong>
                 </div>
- 
+
                 <!-- Item 2: Entradas hoje -->
                 <div class="item-metrica">
                   <div class="info-metrica-esquerda">
@@ -302,7 +297,7 @@
                   </div>
                   <strong class="valor-metrica txt-verde" id="entradasHoje">--</strong>
                 </div>
- 
+
                 <!-- Item 3: Saídas hoje -->
                 <div class="item-metrica">
                   <div class="info-metrica-esquerda">
@@ -311,7 +306,7 @@
                   </div>
                   <strong class="valor-metrica txt-azul" id="saidasHoje">--</strong>
                 </div>
- 
+
                 <!-- Item 4: Permanecem no momento -->
                 <div class="item-metrica">
                   <div class="info-metrica-esquerda">
@@ -322,10 +317,10 @@
                 </div>
               </div>
             </div>
-        </div>
+          </div>
     </main>
   </div>
- 
+
   <script type="module" src="./src/assets/js/dashboardJS.js"></script>
   <script>
     if (localStorage.getItem('sidebar-collapsed') === 'true') {
@@ -334,8 +329,7 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="src/fetch/dashboard.js"></script>
- 
+
 </body>
- 
+
 </html>
- 
