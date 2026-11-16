@@ -4,6 +4,7 @@ const vagasRoute = require("../Routes/vagaRoutes");
 const dashboardRoute = require("../Routes/dashboardRoutes");
 const veiculoRoute = require("../Routes/veiculoRoutes");
 const registrosRoutes = require('../Routes/registroOcupacaoRoutes');
+const usuarioRoutes = require('../Routes/usuarioRoutes');
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use("/vagas", vagasRoute);
 app.use("/dashboard", dashboardRoute);
 app.use("/veiculo", veiculoRoute);
 app.use('/registros', registrosRoutes);
+app.use('/usuarios', usuarioRoutes);    
 
 app.listen(3000, () => {
     console.log("Servidor rodando em http://localhost:3000");
