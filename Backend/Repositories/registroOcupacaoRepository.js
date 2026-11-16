@@ -29,6 +29,7 @@ async function listarRegistros() {  // totalmente funcional... provavelmente, va
 		vaga.codigo_vaga as vaga_codigo,
 		r.data_entrada,
 		r.data_saida,
+		r.status_pagamento,
 		r.total_pago
     from tbl_registro_ocupacao as r
     inner join tbl_carro carro on r.id_carro = carro.id
