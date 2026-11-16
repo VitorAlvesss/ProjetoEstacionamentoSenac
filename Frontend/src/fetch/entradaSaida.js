@@ -23,13 +23,11 @@ async function carregarTabela() {
 			TABELA.innerHTML = RESULTADO.map(d => `
 			<tr data-id="${d.id}" data-id-vaga="${d.vaga_id}">
 				<td>${d.placa}</td>
+				<td>${d.vaga_codigo}</td>
 				<td>${d.data_entrada}</td>
 				<td>${d.data_saida === null ? `---` : d.data_saida}</td>
 				<td>---</td>
 				<td>${d.total_pago}</td>
-				<td>
-					${d.data_saida === null ? `<button class="btn-saida-acao" onclick="darSaida(${d.id})"><i class="fa-solid fa-right-from-bracket"></i> Dar Saída</button>` : `<i class="fa-solid fa-check-double" style="color:#00e676;"></i> Concluído`}
-				</td>
 			</tr>
 			`).join('');
 			} else {
