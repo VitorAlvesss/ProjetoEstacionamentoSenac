@@ -14,11 +14,11 @@
 
   <div class="login-container">
     
+    <!-- Banner azul/escuro na esquerda -->
     <aside class="hero-section">
       <header class="brand">
         <img src="/Frontend/public/logo.png" alt="Logo Goiabinha" class="brand-logo-img">
-        <div class="brand-text">
-          </div>
+        <div class="brand-text"></div>
       </header>
 
       <main class="hero-content">
@@ -56,6 +56,7 @@
       <small class="copyright">&copy; 2024 Goiabinha&CIA - Todos os direitos reservados.</small>
     </aside>
 
+    <!-- Formulário de Login na direita -->
     <main class="login-section">
       <div class="login-card">
         
@@ -80,7 +81,7 @@
             <div class="input-wrapper">
               <span class="input-icon">🔒</span>
               <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-              <button type="button" class="toggle-password" aria-label="Mostrar senha">👁️</button>
+              <button type="button" class="toggle-password" data-target="password" aria-label="Mostrar senha">👁️</button>
             </div>
           </div>
 
@@ -100,9 +101,11 @@
             <span>ou</span>
           </div>
 
-          <button type="button" class="btn-secondary">
-            <span>🛡️</span> Login com código de acesso
-          </button>
+          <!-- Botão que leva para a tela de cadastro -->
+          <a href="Tela.html" class="btn-secondary" style="display: block; text-align: center; text-decoration: none;">
+            <span>📝</span> Criar cadastro
+          </a>
+
         </form>
 
         <div class="security-footer">
@@ -118,3 +121,17 @@
 
       </div>
     </main>
+
+  </div>
+
+  <script>
+    document.querySelectorAll(".toggle-password").forEach(botao => {
+      botao.addEventListener("click", () => {
+        const campo = document.getElementById(botao.dataset.target);
+        campo.type = campo.type === "password" ? "text" : "password";
+      });
+    });
+  </script>
+
+</body>
+</html>
