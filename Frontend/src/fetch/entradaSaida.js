@@ -24,10 +24,10 @@ async function carregarTabela() {
 			<tr data-id="${d.id}" data-id-vaga="${d.vaga_id}">
 				<td>${d.placa}</td>
 				<td>${d.vaga_codigo}</td>
-				<td>${d.data_entrada}</td>
-				<td>${d.data_saida === null ? `---` : d.data_saida}</td>
-				<td>---</td>
-				<td>${d.total_pago}</td>
+				<td>${new Date(d.data_entrada).toLocaleString('pt-BR')}</td>
+				<td>${d.data_saida === null ? '---' : new Date(d.data_saida).toLocaleString('pt-BR')}</td>
+				<td>${d.status_pagamento}</td>
+				<td>${d.total_pago === null ? '---' : `R$ ${Number(d.total_pago).toFixed(2)}`}</td>
 			</tr>
 			`).join('');
 			} else {
