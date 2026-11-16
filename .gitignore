@@ -3,3 +3,9 @@ node_modules/
 
 # Variáveis de ambiente
 .env
+
+# Chave do Firebase (conta de serviço): NUNCA enviar para o GitHub
+.env.*
+!.env.example
+projectparkingtoken*.json
+*firebase-adminsdk*.json

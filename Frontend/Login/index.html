@@ -8,7 +8,6 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="/Frontend/src/styles/estacionamento.css">
   <link rel="icon" type="image/x-icon" href="/Frontend/public/icon-guia.png">
-  <script type="module" src="/Frontend/src/fetch/login.js"></script>
 </head>
 <body>
 
@@ -65,13 +64,14 @@
           <p>Faça login para acessar o sistema</p>
         </div>
 
-        <form class="login-form">
-          
+        <form class="login-form" id="form-login" novalidate>
+          <div id="login-msg" class="form-msg" role="alert" hidden></div>
+
           <div class="input-group">
-            <label for="username">Usuário ou e-mail</label>
+            <label for="username">E-mail ou telefone</label>
             <div class="input-wrapper">
               <span class="input-icon">👤</span>
-              <input type="text" id="username" name="username" placeholder="Digite seu usuário ou e-mail" required>
+              <input type="text" id="username" name="username" placeholder="Digite seu e-mail ou telefone" autocomplete="username" required>
             </div>
           </div>
 
@@ -79,7 +79,7 @@
             <label for="password">Senha</label>
             <div class="input-wrapper">
               <span class="input-icon">🔒</span>
-              <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+              <input type="password" id="password" name="password" placeholder="Digite sua senha" autocomplete="current-password" required>
               <button type="button" class="toggle-password" aria-label="Mostrar senha">👁️</button>
             </div>
           </div>
@@ -92,16 +92,8 @@
             <a href="../esqueciSenha/index.html" class="forgot-link">Esqueci minha senha</a>
           </div>
 
-          <button type="submit" class="btn-primary">
+          <button type="submit" class="btn-primary" id="btn-submit">
             <span>➡️</span> Entrar no sistema
-          </button>
-
-          <div class="divider">
-            <span>ou</span>
-          </div>
-
-          <button type="button" class="btn-secondary">
-            <span>🛡️</span> Login com código de acesso
           </button>
         </form>
 
@@ -118,3 +110,10 @@
 
       </div>
     </main>
+  </div>
+
+  <!-- Login: confere e-mail/senha no backend e guarda a sessão (token do Firebase) -->
+  <script src="/Frontend/src/assets/js/auth.js"></script>
+  <script src="/Frontend/src/assets/js/login.js" defer></script>
+</body>
+</html>

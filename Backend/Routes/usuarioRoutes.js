@@ -1,9 +1,14 @@
-﻿const express = require("express");
-const usuarioController = require("../Controllers/usuarioController");
+//usuarioRoutes.js
 
+const express = require('express');
 const router = express.Router();
-router.post("/login", usuarioController.login.bind(usuarioController));
-router.post("/esqueci-senha", usuarioController.solicitarRecuperacao.bind(usuarioController));
-router.post("/redefinir-senha", usuarioController.redefinirSenha.bind(usuarioController));
+const perfilController = require('../Controllers/perfilController');
+const { verificarToken } = require('../middlewares/authMiddleware');
+
+router.use(verificarToken);
+
+// Perfil do usuário logado (nome, e-mail, telefone, cargo e carros)
+router.get('/perfil', perfilController.getPerfil);
+router.put('/perfil', perfilController.atualizarPerfil);
 
 module.exports = router;

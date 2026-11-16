@@ -1,19 +1,9 @@
-﻿const API_URL = window.location.origin;
-
-async function postPublico(caminho, corpo) {
-    const resposta = await fetch(`${API_URL}/usuario${caminho}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(corpo)
-    });
-
-    const dados = await resposta.json().catch(() => ({}));
-    if (!resposta.ok && !dados.erro) {
-        dados.erro = dados.mensagem || 'Não foi possível concluir a solicitação.';
-    }
-
-    return { ok: resposta.ok, dados };
-}
+// =========================================================
+// esqueciSenha.js - RECUPERAÇÃO DE SENHA
+// Dois jeitos de recuperar (os dois chegam no mesmo e-mail):
+//   1. Clicar no link   -> abre esta tela com ?token=... e pede só a nova senha
+//   2. Digitar o código -> código de 6 dígitos + nova senha
+// =========================================================
 
 const parametros = new URLSearchParams(location.search);
 let tokenDoLink = parametros.get('token');
@@ -82,7 +72,7 @@ formEmail.addEventListener('submit', async (e) => {
 
     travarBotao(formEmail, true);
     try {
-        const { ok, dados } = await postPublico('/esqueci-senha', { email });
+        const { ok, dados } = await Auth.postPublico('/auth/esqueci-senha', { email });
         if (!ok) {
             mostrarMensagem(dados.erro || 'Não foi possível enviar agora.', 'erro');
             return;
@@ -131,7 +121,7 @@ formNovaSenha.addEventListener('submit', async (e) => {
         return;
     }
     if (novaSenha !== confirmar) {
-        mostrarMensagem('A confirmação não é igual Ã  nova senha.', 'erro');
+        mostrarMensagem('A confirmação não é igual à nova senha.', 'erro');
         return;
     }
 
@@ -141,7 +131,7 @@ formNovaSenha.addEventListener('submit', async (e) => {
 
     travarBotao(formNovaSenha, true);
     try {
-        const { ok, dados } = await postPublico('/redefinir-senha', corpo);
+        const { ok, dados } = await Auth.postPublico('/auth/redefinir-senha', corpo);
         if (!ok) {
             mostrarMensagem(dados.erro || 'Não foi possível redefinir a senha.', 'erro');
             // Link vencido ou já usado: mostra o botão para pedir outro e-mail (o endereço já fica preenchido)
@@ -158,5 +148,3 @@ formNovaSenha.addEventListener('submit', async (e) => {
         travarBotao(formNovaSenha, false);
     }
 });
-
-

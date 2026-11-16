@@ -110,15 +110,15 @@
           <small id="data-atual">--/--/----</small>
         </div>
 
-        <div class="notification-btn">
+        <div class="notification-btn" id="notificacao">
           <span class="material-symbols-outlined">notifications</span>
-          <span class="notification-badge">0</span>
+          <span class="notification-badge" id="qtd-notificacoes">0</span>
         </div>
 
-        <div class="user-profile-top">
+        <div class="user-profile-top" id="usuario-logado">
           <i class="fa-solid fa-circle-user avatar"></i>
           <div class="user-details">
-            <span style="font-weight: 600;">Administrador</span>
+            <span id="nome-usuario" style="font-weight: 600;">Administrador</span>
             <span class="status">Online</span>
           </div>
           <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem; color: var(--text-muted);"></i>
@@ -310,6 +310,9 @@
 
   <!-- Scripts -->
   <script src="/Frontend/src/assets/js/TelaVeiculos.jS"></script>
+  <!-- Login: bloqueia quem não está logado, mostra o usuário, o perfil e o sino -->
+  <script src="/Frontend/src/assets/js/auth.js"></script>
+  <script src="/Frontend/src/assets/js/sessao.js" defer></script>
 </body>
 
 </html>
