@@ -38,7 +38,7 @@ async function listarRegistros() {  // totalmente funcional... provavelmente, va
 	limit 50;
     `
     
-    const [linhas] = await db.query('select * from tbl_registro_ocupacao');
+    const [linhas] = await db.query(SQL);
     return linhas;
 }
 /* comentado, mas vai ser apagado
