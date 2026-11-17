@@ -357,7 +357,7 @@ body {
    BOTÕES DE CANCELAR E SALVAR 
 ============================================================ */
 .botoesCadVaga {
-  margin-top: auto;
+  margin-top: 50px;
   display: flex;
   gap: 10px;
   padding-top: 20px;
