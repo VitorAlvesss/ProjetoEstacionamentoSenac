@@ -144,10 +144,13 @@ if (ctxFaturamento) {
 
 
 // ==================================================
-// MODAL DE EDIÇÃO DA TARIFA
+// MODAL DE EDIÇÃO DA TARIFA (INTEGRADA COM O BANCO)
 // ==================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  const API_URL = 'http://localhost:3000/api';
+  let tarifaAtualId = null;
 
   // ELEMENTOS DA MODAL
 
@@ -199,7 +202,38 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
+  // BUSCAR TARIFA ATIVA DO BANCO AO CARREGAR A TELA
+
+  async function carregarTarifaDoBanco() {
+    try {
+      const response = await fetch(`${API_URL}/tarifas/ativa`);
+      if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+
+      const tarifa = await response.json();
+      tarifaAtualId = tarifa.id;
+
+      nomeTarifa.value = Number(tarifa.valor_primeira_hora).toFixed(2).replace('.', ',');
+      valorTarifa.value = Number(tarifa.valor_hora_adicional).toFixed(2).replace('.', ',');
+      toleranciaTarifa.value = tarifa.tolerancia_minutos;
+    } catch (erro) {
+      console.error('Erro ao buscar tarifa do banco:', erro);
+    }
+  }
+
+  carregarTarifaDoBanco();
+
+
   // MÁSCARA DE MOEDA
+
+  editarNomeTarifa.addEventListener('input', () => {
+    let valor = editarNomeTarifa.value.replace(/\D/g, '');
+    if (valor === '') {
+      editarNomeTarifa.value = '';
+      return;
+    }
+    valor = (Number(valor) / 100).toFixed(2);
+    editarNomeTarifa.value = valor.replace('.', ',');
+  });
 
   editarValorTarifa.addEventListener('input', () => {
 
@@ -236,7 +270,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function abrirModalTarifa() {
 
     // Copia os valores atuais do cadastro para a modal
-    editarNomeTarifa.value = nomeTarifa.value;
+    const primeiraHoraAtual = nomeTarifa.value.replace(/\D/g, '');
+    if (primeiraHoraAtual !== '') {
+      editarNomeTarifa.value = (Number(primeiraHoraAtual) / 100).toFixed(2).replace('.', ',');
+    } else {
+      editarNomeTarifa.value = '';
+    }
 
     // Converte o valor para o formato da máscara
     const valorAtual = valorTarifa.value.replace(/\D/g, '');
@@ -311,9 +350,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // BOTÃO SALVAR
+  // BOTÃO SALVAR (ENVIA PUT PARA O BANCO DE DADOS)
 
-  btnSalvarEdicao.addEventListener('click', () => {
+  btnSalvarEdicao.addEventListener('click', async () => {
 
     const novoNome = editarNomeTarifa.value.trim();
 
@@ -337,18 +376,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // CONVERTE O VALOR DA MÁSCARA PARA NÚMERO
+    // CONVERTE OS VALORES DA MÁSCARA PARA NÚMERO
 
+    const primeiraHoraNumerica = Number(novoNome.replace(',', '.'));
     const valorNumerico = Number(novoValor.replace(',', '.'));
+    const toleranciaNumerica = Number(novaTolerancia);
 
 
     // VALIDAÇÃO DOS VALORES NUMÉRICOS
 
     if (
+      !Number.isFinite(primeiraHoraNumerica) ||
       !Number.isFinite(valorNumerico) ||
-      !Number.isFinite(Number(novaTolerancia)) ||
+      !Number.isInteger(toleranciaNumerica) ||
+      primeiraHoraNumerica < 0 ||
       valorNumerico < 0 ||
-      Number(novaTolerancia) < 0
+      toleranciaNumerica < 0
     ) {
 
       alert('Informe valores numéricos válidos.');
@@ -357,26 +400,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    if (!tarifaAtualId) {
+      alert('Erro: Nenhuma tarifa ativa foi carregada do banco.');
+      return;
+    }
 
-    // ATUALIZA OS CAMPOS DO CADASTRO
+    try {
+      const response = await fetch(`${API_URL}/tarifas/${tarifaAtualId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          valor_primeira_hora: primeiraHoraNumerica,
+          valor_hora_adicional: valorNumerico,
+          tolerancia_minutos: toleranciaNumerica,
+          ativo: 1
+        })
+      });
 
-    nomeTarifa.value = novoNome;
+      const resultado = await response.json();
 
-    valorTarifa.value = valorNumerico.toFixed(2).replace('.', ',');
+      if (!response.ok) {
+        throw new Error(resultado.erro || 'Erro ao atualizar tarifa no banco.');
+      }
 
-    toleranciaTarifa.value = novaTolerancia;
+      // ATUALIZA OS CAMPOS DO CADASTRO NA TELA
+      nomeTarifa.value = primeiraHoraNumerica.toFixed(2).replace('.', ',');
+      valorTarifa.value = valorNumerico.toFixed(2).replace('.', ',');
+      toleranciaTarifa.value = toleranciaNumerica;
 
+      // LIMPA OS CAMPOS DA MODAL
+      editarNomeTarifa.value = '';
+      editarValorTarifa.value = '';
+      editarToleranciaTarifa.value = '';
 
-    // LIMPA OS CAMPOS DA MODAL
+      // FECHA A MODAL
+      fecharModal();
+      alert('Tarifa atualizada com sucesso!');
 
-    editarNomeTarifa.value = '';
-    editarValorTarifa.value = '';
-    editarToleranciaTarifa.value = '';
-
-    // FECHA A MODAL
-
-    fecharModal();
-    alert('Tarifa atualizada com sucesso!');
+    } catch (erro) {
+      console.error('Erro ao salvar tarifa no banco:', erro);
+      alert(erro.message || 'Erro ao salvar tarifa no banco de dados.');
+    }
 
   });
 
