@@ -23,15 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const dados = await resposta.json();
 
             if (!resposta.ok) {
-                console.log('Erro retornado pelo backend:', dados);
-                 alert(dados.mensagem || dados.erro);
-                return;
                 throw new Error("Erro ao criar usuário");
             }
 
             
             console.log("Usuário criado com sucesso:", dados);
-            formCadastro.reset();
+            window.location.href = 'login.html';
         }
         catch (error) {
             console.error("Erro ao criar usuário:", error);
