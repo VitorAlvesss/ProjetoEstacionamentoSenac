@@ -645,3 +645,138 @@ td p {
     text-align: center;
     margin: 0;
 }
+/* Responsive parking map and vacancy information */
+@media (max-width: 1024px) {
+  #top-horizontal-container {
+    flex-wrap: wrap;
+  }
+
+  #top-horizontal-container > .c {
+    flex: 1 1 calc(50% - 15px);
+    min-width: 0;
+  }
+
+  .mid-horizontal-container {
+    flex-direction: column;
+  }
+
+  #right-side-containers,
+  #left-side-containers,
+  #info-vaga-container {
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #mapa-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #mapa-header > div[style] {
+    display: none;
+  }
+
+  #estacionamento-mapa {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  #vagas-lista-container {
+    overflow-x: auto;
+  }
+
+  #vagas-lista-container .table {
+    min-width: 560px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cabecalho-principal {
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px;
+    padding: 12px;
+  }
+
+  .cabecalho-esquerda,
+  .info-cabecalho {
+    min-width: 0;
+  }
+
+  .info-cabecalho {
+    gap: 10px;
+  }
+
+  .titulos-cabecalho.centralizado {
+    order: 3;
+    flex: 1 0 100%;
+    text-align: left;
+  }
+
+  main {
+    padding: 8px;
+  }
+
+  #top-horizontal-container {
+    padding: 0;
+    gap: 10px;
+  }
+
+  #mapa-header-info {
+    flex-wrap: wrap;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cabecalho-principal {
+    margin: 8px;
+    padding: 9px;
+  }
+
+  .info-cabecalho {
+    flex: 1 1 auto;
+    gap: 8px;
+  }
+
+  .detalhes-usuario,
+  #usuario-logado .user-details {
+    display: none;
+  }
+
+  .titulos-cabecalho h1 {
+    font-size: 1.05rem;
+  }
+
+  .titulos-cabecalho h2 {
+    font-size: 0.68rem;
+  }
+
+  main {
+    padding: 6px;
+  }
+
+  #top-horizontal-container {
+    flex-direction: column;
+  }
+
+  #top-horizontal-container > .c {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  #estacionamento-mapa-container,
+  #vagas-lista-container {
+    padding: 8px;
+  }
+
+  #center-body-text-section {
+    flex-direction: column;
+  }
+
+  #vagas-lista-container .table {
+    min-width: 500px;
+  }
+}

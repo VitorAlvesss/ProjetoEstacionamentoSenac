@@ -26,17 +26,19 @@ async function listarRegistros() {  // totalmente funcional... provavelmente, va
 		vaga.id as vaga_id,
 		r.id,
 		carro.placa,
+		vaga.codigo_vaga as vaga_codigo,
 		r.data_entrada,
 		r.data_saida,
+		r.status_pagamento,
 		r.total_pago
     from tbl_registro_ocupacao as r
     inner join tbl_carro carro on r.id_carro = carro.id
-    inner join tbl_vaga vaga on r.id_vaga = vaga_id
-    where carro.placa = ? and vaga.id = ?
-    order by r.data_entrada desc;
+    inner join tbl_vaga vaga on r.id_vaga = vaga.id
+    order by r.data_entrada desc
+	limit 50;
     `
     
-    const [linhas] = await db.query('select * from tbl_registro_ocupacao');
+    const [linhas] = await db.query(SQL);
     return linhas;
 }
 /* comentado, mas vai ser apagado

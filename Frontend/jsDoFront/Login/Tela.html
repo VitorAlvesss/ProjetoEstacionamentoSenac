@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goiabinha&CIA - Cadastro</title>
+  <link rel="icon" href="/Frontend/public/icon-guia.png">
+  <link rel="stylesheet" href="/Frontend/src/styles/estacionamento.css">
+  <script type="module" src="/Frontend/src/fetch/login.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%) !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-container {
+      width: 100%;
+      min-height: 100vh;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important;
+    }
+
+    .login-section {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent !important;
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <main class="login-section">
+      <div class="login-card">
+        
+        <div class="login-header">
+          <img src="/Frontend/public/icon-guia.png" alt="Goiabinha" class="login-avatar-img">
+          <h2>Crie sua conta!</h2>
+          <p>Preencha seus dados para se cadastrar</p>
+        </div>
+
+        <form class="login-form" id="form-cadastro">
+          
+          <div class="input-group">
+            <label for="nome">Nome completo</label>
+            <div class="input-wrapper">
+              <span class="input-icon">👤</span>
+              <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" autocomplete="name" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="email">E-mail</label>
+            <div class="input-wrapper">
+              <span class="input-icon">📧</span>
+              <input type="email" id="email" name="email" placeholder="Digite seu e-mail" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="celular">Celular</label>
+            <div class="input-wrapper">
+              <span class="input-icon">📱</span>
+              <input type="tel" id="celular" name="celular" placeholder="(11) 99999-9999" autocomplete="tel" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="senha-cadastro">Senha</label>
+            <div class="input-wrapper">
+              <span class="input-icon">🔒</span>
+              <input type="password" id="senha-cadastro" name="senha" placeholder="Crie uma senha" autocomplete="new-password" minlength="6" required>
+              <button type="button" class="toggle-password" data-target="senha-cadastro" aria-label="Mostrar senha">👁️</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="btn-cadastro">
+            <span>✅</span> Criar minha conta
+          </button>
+
+          <div class="divider">
+            <span>ou</span>
+          </div>
+
+          <!-- Botão que volta para a tela de login -->
+          <a href="index.html" class="btn-secondary" style="display: block; text-align: center; text-decoration: none;">
+            <span>⬅️</span> Voltar para login
+          </a>
+
+        </form>
+
+        <div class="security-footer">
+          <div class="security-info">
+            <span class="shield-icon">🛡️</span>
+            <div>
+              <strong>Acesso seguro</strong>
+              <p>Todas as conexões são criptografadas</p>
+            </div>
+          </div>
+          <span class="lock-icon">🔒</span>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.querySelectorAll(".toggle-password").forEach(botao => {
+      botao.addEventListener("click", () => {
+        const campo = document.getElementById(botao.dataset.target);
+        campo.type = campo.type === "password" ? "text" : "password";
+      });
+    });
+  </script>
+  <script src="../../src/assets/js/telaCadastro.js"></script>
+</body>
+</html>

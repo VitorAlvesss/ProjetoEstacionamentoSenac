@@ -580,3 +580,193 @@ body {
   height: 8px;
   border-radius: 50%;
 }
+/* Layout responsivo para tablet e celular */
+@media (max-width: 1024px) {
+  .top-header {
+    gap: 12px;
+    padding: 10px 14px;
+  }
+
+  .header-left,
+  .page-title,
+  .header-actions {
+    min-width: 0;
+  }
+
+  .header-actions {
+    gap: 12px;
+  }
+
+  #topHeaderToggleBtn {
+    margin-right: 8px;
+  }
+
+  .content-area {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: min(260px, 85vw);
+    height: 100vh;
+    height: 100dvh;
+    margin-top: 0;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+
+  .sidebar.collapsed {
+    margin-left: -270px;
+  }
+
+  .main-wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .top-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 12px 0;
+    padding: 10px 12px;
+  }
+
+  .header-left {
+    flex: 1 1 40%;
+    min-width: 120px;
+  }
+
+  .header-actions {
+    flex: 1 1 50%;
+    gap: 10px;
+  }
+
+  .page-title {
+    order: 3;
+    flex: 1 0 100%;
+    text-align: left;
+    padding: 4px 8px 0;
+  }
+
+  .page-title h1 {
+    font-size: 1.15rem;
+  }
+
+  .content-area {
+    padding: 12px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .metric-card {
+    min-width: 0;
+    padding: 14px;
+  }
+
+  .table-section {
+    padding: 14px;
+  }
+
+  .table-responsive {
+    overscroll-behavior-x: contain;
+  }
+
+  .data-table {
+    min-width: 640px;
+  }
+
+  .pagination-bar {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-header {
+    margin: 8px 8px 0;
+    padding: 9px;
+  }
+
+  .header-left {
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .img-logo {
+    max-width: 140px;
+    height: auto;
+  }
+
+  .header-actions {
+    flex: 1 1 auto;
+    gap: 8px;
+  }
+
+  #data-hora {
+    font-size: 0.68rem;
+  }
+
+  .notification-btn {
+    display: none;
+  }
+
+  .user-details,
+  .user-profile-top > .fa-chevron-down {
+    display: none;
+  }
+
+  .page-title h1 {
+    font-size: 1.05rem;
+  }
+
+  .page-title p {
+    font-size: 0.7rem;
+  }
+
+  .content-area {
+    padding: 8px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .metric-card {
+    min-height: 78px;
+    padding: 12px 14px;
+  }
+
+  .table-section {
+    padding: 12px;
+  }
+
+  .section-header {
+    font-size: 0.78rem;
+  }
+
+  .filter-bar,
+  .pagination-bar {
+    width: 100%;
+  }
+
+  .pagination-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .pagination-controls {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .pagination-bar .filter-select {
+    width: 100%;
+  }
+}

@@ -5,5 +5,6 @@ const router = express.Router();
 router.post("/login", usuarioController.login.bind(usuarioController));
 router.post("/esqueci-senha", usuarioController.solicitarRecuperacao.bind(usuarioController));
 router.post("/redefinir-senha", usuarioController.redefinirSenha.bind(usuarioController));
+router.post("/", usuarioController.criar);
 
 module.exports = router;
